@@ -33,20 +33,6 @@ font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   margin-top: 70px;
 }
 
-
-.uk-navbar-nav>li>a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-    height: 80px;
-    padding: 0 15px;
-    font-size: .875rem;
-    font-family: system-ui;
-    text-decoration: none;
-}
-
-
 iframe {
   display: block;
   margin-left: auto;
@@ -66,34 +52,34 @@ iframe {
 
 # Getting Started
 
-<br>
+<br> 
 
 <iframe src="https://player.vimeo.com/video/180644880" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 
 <br>
 
-# The Three Parts of R
+# The Three Parts of R 
 
 ## Core R [ [video](https://player.vimeo.com/video/180644880) ]
-* What is R?
-* How do Packages Work?
-* Navigation (working directories, list objects, create folders)
-* Scripts 
-
+* What is R? 
+* How do Packages Work? 
+* Navigation (working directories, list objects, create folders) 
+* Scripts  
+ 
 ## R Studio
-* Tour of R Studio 
-* Navigation in R Studio 
-* [Style Guides](https://jef.works/R-style-guide/) 
-
-## Data-Driven Docs [ [splainer](https://ds4ps.org/docs/) ] 
-* Data-Driven Documents
-* The Importance of Reproducibility 
-* [Markdown](https://ds4ps.org/cpp-526-fall-2019/markdown/)
-* RMD in RStudio 
-  - Headers 
-  - Chunks 
-  - Knitting 
-* [Pimp my RMD](https://holtzy.github.io/Pimp-my-rmd/)
+* Tour of R Studio  
+* Navigation in R Studio  
+* [Style Guides](https://jef.works/R-style-guide/)  
+ 
+## Data-Driven Docs [ [splainer](https://ds4ps.org/docs/) ]  
+* Data-Driven Documents  
+* The Importance of Reproducibility   
+* [Markdown](https://ds4ps.org/cpp-526-fall-2019/markdown/)  
+* RMD in RStudio   
+  - Headers   
+  - Chunks   
+  - Knitting   
+* [Pimp my RMD](https://holtzy.github.io/Pimp-my-rmd/)  
  
 
 # Basic Programming in R 
