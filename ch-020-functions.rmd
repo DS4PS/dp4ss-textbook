@@ -1,0 +1,315 @@
+---
+title: "Introduction to Functions"
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: custom.css
+---
+
+
+## Key Concepts
+
+A function is a basic data recipe. It is also an input-output machine. It accepts arguments, and returns the final product of the recipe.
+
+* The function `function()`
+* arguments 
+* argument values
+* argument default values
+* explicit vs implicit argument calls 
+* return values 
+* arrow vs. equal sign 
+
+
+
+
+## Loan Calculator
+
+
+Let's create a mortgage calculator as a simple example. A mortgage calculator considers the total loan amount (the principal), the interest rate or APR (annual percentage rate), and the period of the loan in order to determine how much needs to be paid each month so that payments are distributed equally across the loan term.
+
+![](https://res.cloudinary.com/value-penguin/image/upload/c_limit,dpr_1.0,f_auto,h_1600,q_auto,w_1600/v1/mortgages/amort-30-yr)
+
+If we look up an amortization (repayment schedule) formula, we see it is calculated as follows: 
+
+$$
+monthly \ payments = \frac{principal \cdot interest \ rate}{1-(1+interest \ rate)^{- \ loan \ duration}}
+$$
+
+When we translate this mathematical formula into R code, the new function will look like this:
+
+```{r eval=FALSE}
+ calcMortgage <- function( principal, years, APR )
+ {
+   
+    months <- years * 12   # covert years to months
+    int.rate <- APR / 12   # convert annual rate to monthly
+    
+    # amortization formula
+    monthly.payment <- ( principal * int.rate ) / 
+                       (1 - (1 + int.rate)^(-months) )
+    
+    monthly.payment <- round( monthly.payment, 2 )
+    
+    return( monthly.payment )
+ 
+ }
+```
+
+
+
+```{r, include=FALSE}
+tutorial::go_interactive( greedy=FALSE )
+```
+
+```{r ex="example-01", type="pre-exercise-code", tut=TRUE}
+ calcMortgage <- function( principal, years, APR )
+ {
+    months <- years * 12
+    int.rate <- APR / 12
+    
+    # amortization formula
+    monthly.payment <- ( principal * int.rate ) / 
+                       (1 - (1 + int.rate)^(-months) )
+    
+    monthly.payment <- round( monthly.payment, 2 )
+    
+    return( monthly.payment )
+ 
+ }
+```
+
+
+
+
+```{r ex="example-01", type="sample-code", tut=TRUE}
+# Check the function's arguments:
+args( calcMortgage )
+
+# Calculate a mortgage for a $100,000 house for 30 years with a 4.5 percent interest rate (0.045 APR)
+calcMortgage( principal=100000, years=30, APR=0.045 ) 
+
+# Try: calcMortgage( principal=100000 )
+calcMortgage( principal=100000, APR=0.045 )
+```
+
+
+<div class="question">
+
+What happens if you omit an argument from the function?  Why?
+
+</div>
+
+
+
+# Default Arguments
+
+We can add default values for arguments. These defaults allow us to utilize the function without specifying values for those arguments.
+
+```{r eval=FALSE}
+ calcMortgage <- function( principal, years=30, APR=0.05 )
+ {
+   
+    months <- years * 12   # covert years to months
+    int.rate <- APR / 12   # convert annual rate to monthly
+    
+    # amortization formula
+    monthly.payment <- ( principal * int.rate ) / 
+                       (1 - (1 + int.rate)^(-months) )
+    
+    monthly.payment <- round( monthly.payment, 2 )
+    
+    return( monthly.payment )
+ 
+ }
+```
+
+
+```{r ex="example-02", type="pre-exercise-code", tut=TRUE}
+ calcMortgage <- function( principal, years=30, APR=0.05 )
+ {
+    months <- years * 12
+    int.rate <- APR / 12
+    
+    # amortization formula
+    monthly.payment <- ( principal * int.rate ) / 
+                       (1 - (1 + int.rate)^(-months) )
+    
+    monthly.payment <- round( monthly.payment, 2 )
+    
+    return( monthly.payment )
+ 
+ }
+```
+
+
+
+
+```{r ex="example-02", type="sample-code", tut=TRUE}
+# Notice the new default arguments:
+args( calcMortgage )
+
+# Calculate a mortgage for a $100,000 house for 30 years with a 4.5 percent APR
+calcMortgage( principal=100000, years=30, APR=0.045 )
+
+# Now try: calcMortgage( principal=100000 )
+calcMortgage( principal=100000 )
+```
+
+<div class="question">
+
+Note that **calcMortgage( principal=100000 )** now works because the function uses the default values for years and APR. 
+
+</div>
+
+
+## Defaults
+
+```{r ex="example-03", type="pre-exercise-code", tut=TRUE}
+ calcMortgage <- function( principal, years=30, APR=0.045 )
+ {
+    months <- years * 12
+    int.rate <- APR / 12
+    
+    # amortization formula
+    monthly.payment <- ( principal * int.rate ) / 
+                       (1 - (1 + int.rate)^(-months) )
+    
+    monthly.payment <- round( monthly.payment, 2 )
+    
+    return( monthly.payment )
+ 
+ }
+```
+
+```{r ex="example-03", type="sample-code", tut=TRUE}
+args( calcMortgage )
+
+# Calculate a mortgage for a $100,000 house for 15 years with a 3 percent APR
+
+calcMortgage( principal=100000, years=15, APR=0.03 )
+```
+
+<div class="question">
+
+Can you still use custom values for those arguments after defaults are set? 
+
+</div>
+
+
+
+
+# Implicit Argument Calls
+
+An explicit call to arguments always uses the formal argument name such as `principal=100000`.
+
+You can, however, also use implicit argument calls. These rely on the order arguments are specified in the function, and the order of your values in your call.
+
+Implicit arguments calls can be risky, however, because it is very easy to mix them up. 
+
+
+```{r ex="example-04", type="pre-exercise-code", tut=TRUE}
+ calcMortgage <- function( principal, years=30, APR=0.045 )
+ {
+    months <- years * 12
+    int.rate <- APR / 12
+    
+    # amortization formula
+    monthly.payment <- ( principal * int.rate ) / 
+                       (1 - (1 + int.rate)^(-months) )
+    
+    monthly.payment <- round( monthly.payment, 2 )
+    
+    return( monthly.payment )
+ 
+ }
+```
+
+```{r ex="example-04", type="sample-code", tut=TRUE}
+# Try these:
+
+calcMortgage( 100000, 30, 0.05 )
+
+calcMortgage( 30, 100000, 0.05 )
+```
+
+
+<div class="question">
+
+Which of these calculations is correct? 
+
+Explain why. 
+
+</div>
+
+
+# Object Assignment vs Argument Assignment
+
+```{r, eval=F}
+principal <- 100000               # never use equals here
+calcMortgage( principal=100000 )  # never use arrows here
+```
+
+
+
+<br>
+
+----
+
+
+
+
+# Your Turn
+
+
+
+<div class="quiz">
+
+Create a function to convert Fahrenheit temperatures to Celsius.
+
+* What arguments do you need?
+* How many decimals do you need? Consider using the `round( number, decimals )` function to simplify output.
+* Don't forget a return statement!
+
+</div>
+
+
+$$
+celsius = ( \ fahrenheit − 32 \ ) × \frac{5}{9}
+$$
+
+If you want to check your work, **212 degees Fahrenheit** is equivalent to **100 degrees Celsius**.
+
+
+<br>
+
+
+
+```{r ex="example-05", type="sample-code", tut=TRUE}
+convertToCelsius <- function()  # arguments here
+{
+    # your code here
+}
+
+temp.in.fahrenheit <- 212
+convertToCelsius( temp.in.fahrenheit )
+```
+
+
+
+<div class="question">
+
+Can you use this function to convert from Celsius to Fahrenheit?
+
+</div>
+
+
+<br>
+
+----
+
+<br>
+<br>
+
+
