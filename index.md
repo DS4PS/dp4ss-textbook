@@ -2,7 +2,7 @@
 title: Data Programming for Social Scientists 
 ---
 
-
+[back to GitHub](https://github.com/DS4PS/dp4ss-textbook)
 
 
 ## The Three Parts of R 
