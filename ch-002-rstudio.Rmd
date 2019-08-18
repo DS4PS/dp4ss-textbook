@@ -1,0 +1,653 @@
+---
+title: "RStudio"
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: custom.css
+---
+
+## Key Concepts
+
+This chapter defines RStudio, provides a tour of the RStudio environment, and overviews some helpful shortcuts on getting started in RStudio. Lastly, it introduces common practices in writing clean, understandable, and helpful code. 
+
+* Integrated Development Environment (IDE)
+* Graphical User Interface (GUI)
+* RStudio Panes:
+    1. Console
+    2. Source
+    3. Plots
+    4. Viewer
+    5. Environment
+    6. History
+* Macros
+* Workspace & Global Environment
+* Conventions
+* Verbosity
+* Case
+* Annotation
+* Style Guides
+
+<br>
+
+## What is RStudio?
+
+Recall that R is both a language and an environment. **RStudio** is an **Integrated Development Environment**, or **IDE**, which is an enhanced, feature-rich programming environment with an easy-to-use **graphical user interface**, or **GUI**. While the base R environment is mostly text, RStudio has intuitive icons (hence, "graphical") for point-and-click, automated operations.
+
+<br>
+
+RStudio's layout is comprised of a menu, console, and a series of **panes**, or windows in the RStudio interface. Most panes are feature-rich and all panes serve a key purpose, but we'll only focus on the most critical panes for getting started in RStudio.
+
+<br>
+
+```{r 002.a, echo=F, fig.align="center", fig.cap="*The RStudio environment with four open panes: The Source, Console, Environment, and Viewer panes.*", out.width="95%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_rstudio.jpg")
+
+```
+
+<br>
+
+## Downloading & Installing RStudio
+
+RStudio is free, open source, and easy to install. You can download the *Desktop* edition [here](https://www.rstudio.com/products/rstudio/download/) by clicking the link appropriate to your operating system and following the default steps in the installation wizard.
+
+<br>
+
+## A Tour of RStudio
+
+RStudio is comprised of a main menu and a series of panes, each with their own purpose and features. We focus on the following:
+
+1. Console Pane
+2. Source Pane
+3. Plots Pane
+4. Viewer Pane
+5. Environment Pane
+6. History Pane
+
+<br>
+
+## The Console Pane
+
+The **console pane** is where R expressions are evaluated. In other words, this is where your code is executed. Recall that working in-console is also known as working *interactively* and, typically, working in-console is more often for "quick and dirty" tasks, like printing contents of your working directory.
+
+<center>
+
+**The Console Pane**
+
+</center>
+
+```{r 002.b, echo=F, fig.align="center", fig.cap='*The console is where code is executed and is typically used for "quick and dirty" tasks.*', out.width="75%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_console.jpg")
+
+```
+
+<br>
+
+The console panel lists your current working directory. Notably, even when using point-and-click mechanics to, e.g. import data or change directories, the code for such tasks will still execute in the console. Such click-to-code operations are called **macros**.
+
+<br>
+
+**Pro Tip:** When writing a script, especially when writing out new directory paths, it's sometimes quicker to use use a click-to-code operation and simply copy and paste the macro code from the console to your script.
+
+<br>
+
+## The Source Pane
+
+The **source pane** contains any opened scripts. In starting a new R session, this pane isn't visible until you've opened a new or preexisting script. Multiple scripts may be opened at one time and are navigable using tabs along the top of the source pane.
+
+<center>
+
+**The Source Pane**
+
+</center>
+
+```{r 002.c, echo=F, fig.align="center", fig.cap="*The source pane contains opened scripts. It won't appear until you've opened at least one.*", out.width="75%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_script.jpg")
+
+```
+
+<br>
+
+Depending on the type of script, e.g. plain text scripts (`.R`), publications (`.Rmd`), presentations (`.Rpres`), and apps, each script provides different options in the pane's toolbar. Common options include:
+
+* **Show in New Window:** Open the script in a separate window; valuable for two or more monitors
+* **Save Current Document:** Update an existing script or title and save a new script
+* **Find/Replace:** Both conventional and advanced options to find and replace code
+* **Run:** Run the line of code where the cursor is, or multiple lines if highlighted
+* **Show Document Outline:** View (and jump to) script's table of contents
+
+<br>
+
+## Plots, Viewer, & Help Panes
+
+The **Plots**, **Viewer**, and **Help panes** are used to viewing data visualizations, HTML output, and helpful documentation. 
+
+<br>
+
+### The Plots Pane
+
+The **Plots pane** allows users to view, export, and publish non-interactive data visualizations. R uses the built-in `graphics` package by default, but a variety of packages exist such as `lattice` and `ggplot2`. While the output displayed is not interactive, it is *responsive*, i.e it will re-render its scales appropriately if you change the height or width of a plot. Notably, the "Zoom" option opens visualizations in a new window, while the "Export" option allows you to save the image with user-defined dimensions and in a variety of formats.
+
+<br>
+
+### The Viewer Pane
+
+The **Viewer pane** renders interactive graphics in HTML with the same options as the **Plots pane**. Brevity aside, it's awesome.
+
+<br>
+
+<center>
+
+**The Plots & Viewer Panes**
+
+</center>
+
+```{r 002.e, echo=F, fig.align="center", fig.cap="*The Plots and Viewer panes visualize non-interactive and interactive graphics, respectively.*", out.width="95%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_plot_viewer.jpg")
+
+```
+
+<br>
+
+### The Help Pane
+
+The **Help pane** is one of the most valuable panes for any R user. By calling function `help()` with a dataset, package, or bare function name (i.e. a function name without `()`), its documentation, if available, appears here.
+
+<br>
+
+**Note:** Unless you're using external data or custom functions, there's almost always documentation. Whether it's the unit of measurement for a variable in a dataset or the limits you can specify for a function argument, this little nook in RStudio is invaluable to new and advanced users, alike. 
+
+<br>
+
+**Pro Tip:** Instead of the `help()` function, you can use the `?` function before an object name, e.g. `?install.packages`.
+
+<br>
+
+<center>
+
+**The Help Pane**
+
+</center>
+
+```{r 002.f, echo=F, fig.align="center", fig.cap="*The invaluable Help pane displays documentation for packages, functions, and datasets.*", out.width="75%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_help.jpg")
+
+```
+
+<br>
+
+## The Environment and History Panes
+
+The **Environment** and **History panes** display the objects in your environment and the history of your in-console commands. 
+
+<br>
+
+### The Environment Pane
+
+Again, R is both a language and an environment. The **Environment pane** displays objects that are stored within your session's **workspace**, or **global environment**, which must be recreated or reloaded with each new session. Note the following options:
+
+* **Environment:** Opens a dropdown menu to select different environments, e.g. package environments
+* **Load Workspace:** Opens a file explorer to load previously saved workspaces and their objects
+* **Import Datasets:** Opens a dropdown menu to read in datasets that you can store in objects
+* **Clear Objects from Workspace:** Removes all objects stored in the global environment
+
+<br>
+
+<center>
+
+**The Environment Pane**
+
+</center>
+
+```{r 002.g, echo=F, fig.align="center", fig.cap="*The environment pane displays any objects you've imported, loaded, or stored in your global environment.*", out.width="95%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_environment1.jpg")
+
+```
+
+<br>
+
+### The History Pane
+
+The **History pane** documents every command you've executed in your session. When you select a line, you can paste it directly into the console pane with "To Console" or directly into the source pane with "To Source".
+
+<br>
+
+<center>
+
+**The History Pane**
+
+</center>
+
+```{r 002.h, echo=F, fig.align="center", fig.cap="*The history pane records every command you've run in your session.*", out.width="75%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_history.jpg")
+
+```
+
+<br>
+
+## Customizing Your Pane Layout
+
+In RStudio, you can customize both where panes are displayed as well as which panes to show by default.
+
+<br>
+
+### Layouts for Beginners: Taking Great Panes
+
+Panes cannot be removed entirely from the RStudio interface, you but can shuffle them by order of importance. Click the "Tools" dropdown in themenu, "Global Options...", and "Pane Layout". We recommend focusing on those discussed in this chapter.
+
+<br>
+
+<center>
+
+**Customizing Pane Layout**
+
+</center>
+
+```{r 002.x, echo=F, fig.align="center", fig.cap="*You can customize which panes appear, and where, in Global Options' Pane Layout.*", out.width="95%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_panes.jpg")
+
+```
+
+<br>
+
+### Less Important Panes, or Panes in the Rear
+
+There are a couple of panes worth mentioning for new users. However, they are seldom used by advanced users:
+
+* **Files:** Set working directories and create, copy, rename, and delete folders
+* **Packages:** Install, load, update, unload, and uninstall added ("User Library") and built-in ("System Library") packages
+
+<br>
+
+**Pro Tip:** You probably won't use these panes often. One of the benefits of scripted languages is that they can be reproduced by other users. As a rule, since much of your work will require loading packages, you should include the `library()` function with script-dependent packages at the start of every work. The same applies to working directories with the `setwd()` function. 
+
+<br>
+
+### Expanding to Fullscreen: Focus on the Pane
+
+If you want to expand a pane, or "zoom", to fullscreen mode, select "View" in the RStudio menu and "Panes".
+
+<br>
+
+<center>
+
+**Toggling Fullscreen Panes**
+
+</center>
+
+```{r 002.y, echo=F, fig.align="center", fig.cap='*You can expand any pane to fullscreen mode in the "View" dropdown of the RStudio menu.*', out.width="75%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_zoom.jpg")
+
+```
+
+<br>
+
+## The RStudio Menu: File, Session, & Help
+
+The RStudio menu allows you to do virtually everythign we've seen in each pane and more. The following tours a few key menu sections we've not yet seen, including how to open new scripts, handle sessions, and access R-related cheat sheets.
+
+<br>
+
+### The File Submenu: Saving & Loading
+
+The **File** submenu is the start of every scripted data product in RStudio. Just select "New File" and a litany of possible data products, about which we'll learn more over time, are available to open. Remaining options relate to the saving and loading of scripts, projects, and datasets.
+
+<br>
+
+<center>
+
+**The File Submenu**
+
+</center>
+
+```{r 002.z, echo=F, fig.align="center", fig.cap='*"File" handles all new, saving, and loading operations.*', out.width="50%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_files.jpg")
+
+```
+
+<br>
+
+### The Session Submenu: Sessions, Directories, & Restarting R
+
+The **Session** submenu is a critical part of any R session. While you can always recreate a session by recreating objects, you can save computing time by loading saved session file. This submenu also allows you to set your working directory.
+
+<br>
+
+**Note:** There are times when you just have to restart R - maybe you started an infinite recursion loop or maybe you attempted to read in the data from a month's worth of Harrier Jet landings to local memory - if so, the "Restart R" option is here for you.
+
+<br>
+
+<center>
+
+**The Session Submenu**
+
+</center>
+
+```{r 002.j, echo=F, fig.align="center", fig.cap='*Save and load sessions, restart R, or handle directories in the session submenu.*', out.width="75%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_menu2.jpg")
+
+```
+
+<br>
+
+### The Help Submenu: Cheat Sheets
+
+The **help menu** has one main draw (for now): **cheat sheets**. Selecting a cheat sheet will automatically download a cheat sheet on an R-related topic of your choosing. Typically, cheat sheets summarize RStudio related packages and data products, but there is one for base R. For example, you can find the RStudio IDE cheat sheet [here](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf).
+
+<br>
+
+<center>
+
+**The Help Submenu**
+
+</center>
+
+```{r 002.k, echo=F, fig.align="center", fig.cap='*Grab cheat sheets on the fly from the Help submenu.*', out.width="75%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_cheat_sheets.jpg")
+
+```
+
+<br>
+
+## Global Options: Aesthetic & Functional Preferences
+
+**Global options** are accessed in the "Tools" submenu and allow users to modify their RStudio interface in myriad ways, both aesthetically and functionally. We recommend new users experiment with these options and visit a few notable modifications.
+
+<br>
+
+<center>
+
+**Accessing Global Options**
+
+</center>
+
+```{r 002.m, echo=F, fig.align="center", fig.cap='*Access "Global Options" in the "Tools" submenu.*', out.width="75%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_globaloptions.jpg")
+
+```
+
+<br>
+
+### Code: Autoformatting & Behavior
+
+The "Code" section affects the way R automatically formats your code and how you choose to write and run it. It has sensible defaults, many of which you may not be prepared to appreciate quite yet. For now, consider the following:
+
+* **Indentating:** In the "Editing" tab, consider a "tab width" that works best for you. When indenting, would you prefer two characters (i.e. spaces), or four? The former allows more compact code. The latter allows for more intepretable code.
+* **Guide Margin:** In the "Display" tab, consider applying a "margin column" of 80 or 100 characters (i.e. spaces). This creates a subtle guide in your scripts that helps keep code concise and readable. Even basic code within basic code can create, what RStudio's Chief Scientist Hadley Wickham refers to as, ["Dagwood sandwich" code](https://en.wikipedia.org/wiki/Dagwood_sandwich).
+
+<br>
+
+### Appearance: Express Yourself Intepretably
+
+The **Appearance** section allow you to customize the size, font, and color of your text as well as the "theme" colors of your RStudio interface. Here, "theme" is both functional and aesthetic. For example, darker themes are more conducive to night owls. For all themes, certain syntax uses different colors to make your code more interpretable - keep this in mind for each theme!
+
+<br>
+
+<center>
+
+**Notable Global Options: Code & Appearance**
+
+</center>
+
+```{r 002.l, echo=F, fig.align="center", fig.cap='*Global options allow you to set preferences that can significantly impact your experience with RStudio.*', out.width="95%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_options2.jpg")
+
+```
+
+<br>
+
+## Coding Conventions: Best Practices in Formatting & Annotation
+
+> “Any fool can write code that a computer can understand. Good programmers write code that humans can understand.” (Martin Fowler)
+
+**Conventions** describe the ways in which R users format, comment, and name objects in their code. There are several best practices that can help keep your code clean, organized, consistent, and interpretable. For whom do we use conventions?
+
+* Present You
+* Future You
+* Consumers
+* Collaborators
+
+<br>
+
+### Indentation
+
+In the same way we use indentation to indicate the start of a new paragraph, indentation in code is a powerful cue that a command is comprised of more than one line. Observe the following - what arguments are passed in function `read.csv()`?
+
+<br>
+
+```{r eval=F}
+
+read.csv(file = "~/Projects/DS4PS/my_data.csv", header = TRUE, stringsAsFactors = FALSE)
+
+```
+
+<br>
+
+In the above example, function `read.csv()`, arguments `file =`, `header =`, and `stringsAsFactors =` are passed to function `read.csv()`. It's a bit crowded, but we can make it much more interpretable:
+
+<br>
+
+```{r eval=F}
+
+read.csv(file = "~/Projects/DS4PS/my_data.csv", 
+         header = TRUE, 
+         stringsAsFactors = FALSE)
+
+```
+
+<br>
+
+In the second example, each argument in the `read.csv()` function uses a new line. When pressing the "return" key in the middle of a function call, R automatically indents ensuing lines at the beinning of the `(`, making the code much more legible.
+
+<br>
+
+### Spacing
+
+Let's view a similar example with function `read.csv()`, properly indented, but, this time, we won't use spaces:
+
+<br>
+
+```{r eval=F}
+
+read.csv(file="~/Projects/DS4PS/my_data.csv", 
+         col.names=c("ID","name","Gender","Weight","Dosage"),
+         row.names=1:25,
+         sep=",",   
+         header=TRUE, 
+         stringsAsFactors=FALSE)
+
+```
+
+<br>
+
+In the above call to function `read.csv()`, while indentation is helpful, it's difficult to parse what exactly we're telling each argument to do. We can clean this up considerably with consistent spacing:
+
+<br>
+
+```{r eval=F}
+
+read.csv(file = "~/Projects/DS4PS/my_data.csv", 
+         col.names = c("ID", "name", "Gender", "Weight", "Dosage"),
+         row.names = 1:25,
+         sep = ",",   
+         header = TRUE, 
+         stringsAsFactors = FALSE)
+
+```
+
+<br>
+
+While the code may still be difficult to interpret for beginners, it's at least more visually navigable. What's more, we can use spacing to great effect not only within function calls, but between them, like so:
+
+<br>
+
+```{r eval=F}
+
+data_2017 <- read.csv(file = "~/Projects/DS4PS/2017_data.csv", 
+                      header = TRUE, 
+                      stringsAsFactors = FALSE)
+
+data_2018 <- read.csv(file = "~/Projects/DS4PS/2018_data.csv", 
+                      header = TRUE, 
+                      stringsAsFactors = FALSE)
+
+data_2019 <- read.csv(file = "~/Projects/DS4PS/2019_data.csv", 
+                      header = TRUE, 
+                      stringsAsFactors = FALSE)
+
+```
+
+<br>
+
+Not all R codes use the same spacing techniques, but what's most important is that they're sensible and consistent.
+
+<br>
+
+### Annotation
+
+> “Your closest collaborator is you six months ago, but you don’t reply to emails.” (Karl Broman)
+
+Code **annotation** is the practice of including headers, comments, and other signposting that explains what your code is doing:
+
+* The hashtag, or `#`, is used to create comments and headers
+* Comments can be placed in the middle of a command without interference
+* The `#` can also be used as a header to indicate a new section of code
+* Multiline annotation is possible by including an apostrophe, i.e. `#'`
+
+<br>
+
+```{r eval=F}
+
+# IMPORT PATIENT RECORDS
+
+    #' The following imports patient records for
+    #' experiment x and the current dosages
+    #' administered to each.
+
+dat <- read.csv(file = "~/Projects/DS4PS/my_data.csv",        # Import "my_data.csv"
+                col.names = c("ID", "name", 
+                              "Gender", "Weight", "Dosage"),  # Rename columns
+                row.names = 1:25,                             # Label rows as 1-25
+                header = TRUE,                                # First row = variable name
+                stringsAsFactors = FALSE)                     # Don't convert to categorical
+
+```
+
+<br>
+
+### Verbosity
+
+> “Good code is its own best documentation. As you’re about to add a comment, ask yourself, ‘How can I improve the code so that this comment isn’t needed?’” (Steve McConnell)
+
+**Verbosity** describes the degree to which your code is human-readable. Verbose code avoids abbreviations and uses full argument names. For example, the following function calls to `read.csv()` perform the exact same tasks:
+
+<br>
+
+```{r eval=F}
+
+read.csv("~/Projects/DS4PS/my_data.csv",           # Not verbose
+         T,
+         ",", 
+         "", 
+         ".")
+
+read.csv(file = "~/Projects/DS4PS/my_data.csv",    # Verbose
+         header = TRUE,
+         sep = ",", 
+         quote = "", 
+         dec = ".")
+
+```
+
+<br>
+
+When in doubt, err on the side of verbosity. *No one will ever complain that your code is too legible.*
+
+<br>
+
+### Naming Conventions & Case
+
+**Naming conventions** describe consistently used guidelines when naming new objects and, in particular, the use of **case**. Like uppercase and lowercase letters in human language, case refers to the use of capitalization and separating characters when joining two or more words (e.g. `-`, `_`, and `.`). Here are a few examples of case in naming conventions:
+
+<br>
+
+```{r eval=F}
+
+newDataset     # Lower camel caps
+NewDataset     # Upper camel caps
+
+new.dataset    # Lower leopard case
+New.Dataset    # Upper leopard case
+
+new_dataset    # Lower snake case
+New_Dataset    # Upper snake case
+
+new-dataset    # Lower kebab case
+New-Dataset    # Upper kebab case
+
+```
+
+<br>
+
+While "Camel Caps" is near-universally recognized, the remaining case categories are somewhat informal. Nomenclature aside, so long as you use case consistently and sensibly, you can call it whatever animal you wish!
+
+<br>
+
+**Pro Tip:** Packages and functions used in base R consistently use `lower.leopard` case, separated with `.`, while those created by RStudio use `lower_snake` case. If you see frequent `_` separators, it's safe to assume you're not seeing base R.
+
+<br>
+
+### Style Guides
+
+Many organizations that frequently use scripting languages employ a **style guide**. Style guides codify conventions for all employees. Per Google's own style guide, its goal is to "make our R code easier to read, share, and verify." 
+
+<br>
+
+View their style guide [here](http://web.stanford.edu/class/cs109l/unrestricted/resources/google-style.html) to see how conventions are standardized across an organization.
+
+<br>
+
+```{r 002.n, echo=F, fig.align="center", out.width="75%"}
+
+knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002-image-code_quality.png")
+
+```
+<center> *Don't be this person. Source: [XKCD](https://xkcd.com/1513/)* </center>
+
+<br>
+
+## Further Resources
+
+The following resources are helpful in learning more about RStudio and coding conventions:
+
+<br>
+
+**I) Full Introductions to RStudio**
+
+* ["What are R and RStudio?"](https://moderndive.com/2-getting-started.html#r-rstudio) (Ismay & Kim, 2019)
+* ["Intro to R: Nuts & Bolts"](https://rpubs.com/jamisoncrawford/nutsandbolts) (Crawford, 2018)
+
+**II) About RStudio**
+
+* [RStudio Homepage](https://www.rstudio.com/) (RStudio, 2019)
+* [RStudio About Page](https://www.rstudio.com/about/) (RStudio, 2019)
+* [RStudio Product Page](https://www.rstudio.com/products/rstudio/) (RStudio, 2019)
+
+**III) Conventions **
+
+* ["The State of Naming Conventions in R"](https://journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf) (Baath, 2012)

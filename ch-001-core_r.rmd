@@ -1,0 +1,360 @@
+---
+title: "Core R"
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: custom.css
+---
+
+## Key Concepts
+
+R is a language for data analysis and visualization. It is also a software application for evaluating and compiling that language into meaningful output. 
+
+* Statistical Computing
+* Open Source
+* Programming Language & Programming Environment
+* Command-Line Interface (CLI) & R Console
+* Comprehensive R Archive Network (CRAN)
+* Base R & Packages
+* Directories
+* Scripts
+* Objects & Object-oriented programming (OOP)
+
+<br>
+
+## R: An Open Source Language for Statistical Computing
+
+R is an language for **statistical computing**, or the combination of statistics and computer science. Statistical computing begins with raw, unaltered data and turns them into useful, actionable insights.
+
+<br>
+
+<center>
+
+<iframe src="https://player.vimeo.com/video/180644880" width="640" height="360" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe> 
+
+</center>
+
+<br>
+
+Importantly, R is an **open source** language. While *freeware* allows users to download and use proprietary software, **open source** applications are not only free, but users are allowed to access and modify the *source code*. This is a major strength in R, as users have increasingly expanded the power and functionality of R for nearly a quarter century. 
+
+<br>
+
+**Pro Tip:** Informally, freeware is known as "free as in beer" or *gratis*. Open source is known as "free as in speech" or *libre*. 
+
+<br>
+
+## All-in-One: Language, Environment, & Interface
+
+R is a **programming language**. These languages are made up of letters, numbers, and other characters that, when following specific rules, create some kind of output. We can think of a programming languages as instructions that are evaluated and carried out by a computer. R, then, is simply one way to give instructions to computers.
+
+<br>
+
+R is also a **programming environment**. Environments are software applications that evaluate and compile code to create desired output. If we think of R as human-readable language, just like the English you're reading now, we can imagine an environment as being similar to word processors like Google Docs or Microsoft Word. We know the language (i.e. English) and the rules (i.e. grammar), but we need an environment (e.g. Word) to create the desired output (e.g. a document). 
+
+<br>
+
+```{r 000.a, echo=F, fig.align="center", fig.cap="*R is both a programming language and programming environment.*", out.width="75%"}
+
+knitr::include_graphics("ch-001-image1.jpg")
+
+```
+
+<br>
+
+Lastly, R has a **command-line interface**, or **CLI**. When we use the CLI in R (a.k.a the **console**), we can write one *command line* after another and each expression is evaluated by the environment - this is known as working *interactively*. While this is practice is "quick and dirty", a more organized way to issue commands in R is through **scripting**, which we address below.
+
+<br>
+
+## Downloading & Installing R
+
+You can download and install R quickly and easily from the [**Comprehensive R Archive Network**](https://cran.r-project.org/), or **CRAN**. It is a decentralized website that's hosted and updated by academic institutions all over the world. In other words, R would survive a semi-global catastrophic event. It contains:
+
+* The latest version and past versions of R
+* Extensions, also called **packages**, for R
+* Package and version documentation
+* Books, blogs, conferences, news, etc.
+
+<br>
+
+## Extending R's Functionality: Packages
+
+**Packages** are collections of new commands, a.k.a. **functions**, that are developed and shared by the worldwide R userbase. Packages greatly expand the power and functionality of **base R**, the "vanilla" or unmodified version of R. While [CRAN](https://cran.r-project.org/) is the most popular package archive, others include [Bioconductor](http://www.bioconductor.org/) and [GitHub](https://cran.r-project.org/web/packages/githubinstall/vignettes/githubinstall.html).
+
+<br>
+
+If R were the Constitution of a nation, packages would be its amendments - they not only provide more freedom for the user, they address new ideas and practices that were unforeseen by R's founders. More on packages:
+
+* Functions and packages are developed in response to identified needs
+* If your needs are unmet by base R, there's likely a package for it
+* Altogether, there are over 10,000 packages on CRAN, alone 
+* There are tens of thousands of unpublished packages
+* Entire ecosystems of packages exist, e.g, *Tidyverse*
+* In other languages, packages are called "libraries"
+
+<br>
+
+```{r 000.b, echo=F, fig.align="center", fig.cap="*Packages give users more freedom and resolve issues unforeseen by R's founders.*", out.width="75%"}
+
+knitr::include_graphics("ch-001-image2.jpg")
+
+```
+
+<br>
+
+You can **install packages** in R by calling the `install.packages()` function, *with the package name in quotations*: 
+
+```{r 000.1, eval=F}
+
+install.packages("my_package")
+
+```
+
+<br>
+
+Once installed, you can **load packages** by calling the `library()` function, *without quotations*.
+
+**Note:** You only need to install a package *once*. However, you must load each package *every time you start R*:
+
+```{r 000.2, eval=F}
+
+library(my_package)
+
+```
+
+<br>
+
+**Pro Tip:** A number of packages are **wrapper packages** for pre-existing packages. Wrapper packages build off of **package dependencies** to make them more consistent, organized, and user-friendly. 
+
+<br>
+
+**Fun Fact:** R is an implementation of an older programming language, **S**. John Chambers first developed S in 1976 to make statistical analysis a point-and-click, interactive, and user-friendly process. However, Chambers' underlying philosophy reflects the use of R packages to this day. When deploying **S3**, Chambers wrote:
+
+> “We wanted users to be able to be in in an interactive environment, where they did not consciously think of themselves as programming. Then as their needs became clearer and their sophistication increases, they should be able to slide gradually into programming, when the language and system aspects would become more important.”
+
+<br>
+
+## Understanding Directories
+
+A **directory** is the technical term for a *folder* and the *path* to that folder. A basic understanding of working with directories is critical to importing and exporting from R, as well as saving your code.
+
+* Directory paths exist in a hierarchy, e.g. `"~/Projects/DS4PS"`
+* These hierarchical paths exist in terms of "parent" and "child"
+* The uppermost directory is known as the "root" directory
+* The **working directory** is where R imports and exports files
+
+<br>
+
+**Determine the Working Directory:** You can find out your working directory by calling the `getwd()` function:
+
+```{r 000.3, eval=F}
+
+getwd()
+
+```
+
+<br>
+
+**Set the Working Directory:** You can specify your working directory by calling function `setwd()` and specifying the path:
+
+```{r 000.4, eval=T}
+
+setwd("~/Projects/DS4PS")
+
+```
+
+<br>
+
+**Listing Files:** Print the contents of your working directory by calling functions `dir()` or `list.files()`:
+
+```{r 000.5, eval=T}
+
+dir()
+
+```
+
+<br>
+
+**Determine Existence:** Find out whether a directory exists by calling function `dir.exists()` with a path:
+
+```{r 000.6, eval=T}
+
+dir.exists("~/Projects/DS4PS/nonexistent_dir")
+
+```
+
+
+<br>
+
+**Create Directories:** Make a new directory by calling function `dir.create()` with a path:
+
+```{r 000.7, eval=F}
+
+dir.create("~/Projects/DS4PS/my_new_directory")
+
+```
+
+<br>
+
+## Scripting
+
+R is a **scripting language**. As opposed to working interactively or in-console, scripting is the process of recording and saving your commands in a particular order, organizational style, and (optionally) with annotation (i.e. comments). This allows:
+
+* Precisely reproducing data processing tasks and analyses
+* Recording assumptions or summary decisions in analysis
+* Sharing your work with others or publishing it online
+* Creating new functions and packages
+* Preventing or mitigating errors
+
+<br>
+
+```{r 000.c, echo=F, fig.align="center", fig.cap="*Left: A script in base R. Right: A script in RStudio.*", out.width="100%"}
+
+knitr::include_graphics("ch-001-image3.jpg")
+
+```
+
+<br>
+
+To **open a new script** in R, click `File` > `New script`. To open one in *RStudio*, click `File` > `New File` > `R Script`.
+
+<br>
+
+## Object-Oriented Programming
+
+R is an **object-oriented programming**, or **OOP**, language. In short, pretty much everything is an **object**, including:
+
+* Built-in and external datasets
+* Stored sequences of values
+* Functions (i.e. commands)
+* Built in constants, e.g. `pi`
+* Packages (i.e. libraries)
+
+<br>
+
+```{r 000.8, eval=T, echo=F, message=F, warning=F}
+
+my_sequence <- 1:10
+
+logical_object <- c(T, F, T, F, T)
+numeric_object <- c(3, 1, 4, 1, 5)
+character_object <- c("This", "is", "a", "character", "object")
+dataset_object <- data.frame(logical = logical_object,
+                             numeric = numeric_object,
+                             character = character_object)
+
+```
+
+**Print Object Contents:** You can view object contents simply be typing the object name - this is called **autoprinting**:
+
+```{r 000.9, eval=T}
+
+my_sequence
+
+```
+
+<br>
+
+**Explicitly Print Contents:** We can explicitly tell R to print an object's contents by calling function `print()`:
+
+```{r 000.10, eval=T}
+
+print(my_sequence)
+
+```
+
+<br>
+
+**Listing Objects:** Objects are stored in the local environment. You can print them by calling function `ls()` by itself:
+
+```{r 000.11, eval=T}
+
+ls()
+
+```
+
+<br>
+
+**Removing Objects:** In order to remove an object from your environment, call function `rm()` with the object name:
+
+```{r 000.12, eval=T}
+
+rm(my_sequence)
+
+```
+
+<br>
+
+**Interacting Objects:** Objects work similarly to algebra. For example: 
+
+<br>
+
+<center>
+
+<div class="quiz">
+
+Observe the following and solve for variable `x`
+
+</div>
+
+<br>
+
+$$ x + 2 = 4 $$
+
+</center>
+
+<br>
+
+**Discussion:** You may have surmised that variable `x` equals 2. Algebra derives from the Arabic *al jabr*, which translates literally to "the reunion of broken parts". In OOP, we practice the *reunion of objects*. The following assigns the value 2 to object `x`:
+
+```{r 000.13, eval=T}
+
+x <- 2
+
+```
+
+<br>
+
+We can evaluate the expression now that `x` contains the correct value.
+
+```{r 000.14, eval=T}
+
+x + 2
+
+```
+
+<br>
+
+**Conclusion:** Every object in OOP is a building block. You're well on your way to building data analytic palaces.
+
+<br>
+
+## Further Resources
+
+There's a litany of online and print resources introducing the R language. Here are a few that we find instructive:
+
+<br>
+
+**I) Full-Length Introductions to R:**
+
+* ["Part I: Foundations, Introduction to R"](https://ds4ps.org/Data-Science-Class/TEXTBOOK/docs/introduction-to-r.html) (Lecy, 2018)
+* ["Intro to R: Nuts * Bolts"](https://rpubs.com/jamisoncrawford/nutsandbolts) (Crawford, 2018)
+
+**II) Publications & Articles:**
+
+* ["What is R? Introduction to R and the R Environment"](https://www.r-project.org/about.html) (CRAN, 2001)
+* ["R: A Language for Data Analysis and Graphics"](http://srv2.lemig.umontreal.ca/donnees/geo1512/IHAKA_JCGS_1996_R_concepts_implementation.pdf) (Ihaka & Gentleman, 1996)
+
+**III) Handouts & Cheat Sheets:**
+
+* ["R: Some Helpful Vocabulary"](https://github.com/jamisoncrawford/dp4ss-textbook/raw/master/ch-001-core_r_files/ch-001_handout1_r_vocabulary.pdf) (Lecy, 2017)
+* ["Base R Cheat Sheet"](https://www.rstudio.com/wp-content/uploads/2016/05/base-r.pdf) (RStudio, 2016)
+
+**IV) Videos:**
+
+* ["R in 60 Seconds"](https://player.vimeo.com/video/180644880) (Lecy, 2018)
+* ["John Chambers Interview [On the History of S & R]"](https://www.youtube.com/watch?time_continue=135&v=jk9S3RTAl38) (Statistical Learning, 2013)
+
+<br>
