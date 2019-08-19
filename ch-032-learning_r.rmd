@@ -5,7 +5,7 @@ output:
     theme: readable
     highlight: tango
     self_contained: false
-    css: custom.css
+    css: textbook.css
 ---
 
 <div class="tip">
@@ -18,6 +18,9 @@ Like any new skill, some ways of learning R are better than others. In this brie
 * Warning messages
 * Documentation
 * Vignettes
+
+<br>
+<br>
 
 </div>
 
@@ -56,7 +59,7 @@ Why is this important? *You become fluent in R in the same way you would a forei
 
 <br>
 
-<div class="tip">
+<div class="note">
 
 **Fun Fact:** There are many examples in R that compare human and machine language. RStudio's [ggplot2](https://ggplot2.tidyverse.org/) is a popular R package for data visualization based on Leland Wilkinson's framework, "The Grammar of Graphics" (1999), i.e. the `gg` in `ggplot2`. Similarly, the [dplyr](https://dplyr.tidyverse.org/) package is described as a "grammar of data manipulation", in which functions are described as "verbs".
 
@@ -109,6 +112,8 @@ The ultimate measure of having learned R is to *learn how to learn it*. This is 
 knitr::include_graphics("https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png")
 
 ```
+
+![](https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png)
 
 <center> *The struggle is real. Source: [XKCD](https://xkcd.com/979/)* </center>
 

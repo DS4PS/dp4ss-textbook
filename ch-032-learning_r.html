@@ -23,7 +23,7 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css" data-origin="pandoc">
+<style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -41,7 +41,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(title);
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -84,29 +84,7 @@ code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
 code span.vs { color: #4e9a06; } /* VerbatimString */
 code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-
 </style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
-</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -141,9 +119,11 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="custom.css" type="text/css" />
+<link rel="stylesheet" href="textbook.css" type="text/css" />
 
+</head>
 
+<body>
 
 <style type = "text/css">
 .main-container {
@@ -168,92 +148,22 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
-summary {
-  display: list-item;
-}
 </style>
 
 
+
+<div class="container-fluid main-container">
 
 <!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
 });
 </script>
 
 <!-- code folding -->
 
 
-
-
-</head>
-
-<body>
-
-
-<div class="container-fluid main-container">
 
 
 
@@ -276,6 +186,7 @@ $(document).ready(function () {
 <li>Documentation</li>
 <li>Vignettes</li>
 </ul>
+<p><br> <br></p>
 </div>
 <p><br></p>
 <div id="the-objective-learning-how-to-learn" class="section level2">
@@ -306,7 +217,7 @@ $(document).ready(function () {
 <li><strong>Immersion:</strong> Professional and volunteer work, podcasts, articles</li>
 </ul>
 <p><br></p>
-<div class="tip">
+<div class="note">
 <p><strong>Fun Fact:</strong> There are many examples in R that compare human and machine language. RStudio’s <a href="https://ggplot2.tidyverse.org/">ggplot2</a> is a popular R package for data visualization based on Leland Wilkinson’s framework, “The Grammar of Graphics” (1999), i.e. the <code>gg</code> in <code>ggplot2</code>. Similarly, the <a href="https://dplyr.tidyverse.org/">dplyr</a> package is described as a “grammar of data manipulation”, in which functions are described as “verbs”.</p>
 </div>
 <p><br></p>
@@ -349,6 +260,7 @@ $(document).ready(function () {
 </ul>
 <p><br></p>
 <p><img src="https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png" width="60%" style="display: block; margin: auto;" /></p>
+<p><img src="https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png" /></p>
 <center>
 <em>The struggle is real. Source: <a href="https://xkcd.com/979/">XKCD</a></em>
 </center>
@@ -389,8 +301,8 @@ $(document).ready(function () {
 <p>All base R functions, as well as packages, functions, and datasets downloaded from CRAN (Comprehensive R Archie Network) contain documentation that can be accessed via the <code>help()</code> or <code>?</code> functions.</p>
 <p>When called, the <strong>Help</strong> pane displays built-in documentation, which typically contains names, descriptions, templates, arguments, values, references, related objects, and examples.</p>
 <p>Observe the following calls to <code>help()</code> on function <code>median()</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">help</span>(median)</a>
-<a class="sourceLine" id="cb1-2" title="2">?median</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">help</span>(median)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">?median</a></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/figures/helpdoc_med.jpg" alt="*Built-in documentation is displayed with function* `help()` *and an object name.*" width="75%" />
 <p class="caption">
@@ -430,7 +342,7 @@ $(document).ready(function () {
 <p>“A vignette is like a book chapter or an academic paper: It can describe the problem that your package is designed to solve, and then show the reader how to solve it.” (Hadley Wickham)</p>
 </blockquote>
 <p>Some R packages have <strong>vignettes</strong>, or more comprehensive and thorough overviews than typical documentation. Vignettes are written for the express purpose of learning how to use a package. While vignettes are easy to find in a conventional search engine, you can open a vignette from within R by calling function <code>browseVignettes()</code> and a quotes package name. For example:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">browseVignettes</span>(<span class="st">&quot;tidyr&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">browseVignettes</span>(<span class="st">&quot;tidyr&quot;</span>)</a></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/figures/browse_vignettes.jpg" alt="*Available vignettes appear in your browser with* `browseVignettes()`" width="75%" />
 <p class="caption">
@@ -481,7 +393,7 @@ $(document).ready(function () {
 <ul>
 <li>Mailing lists like “R-help” and forums like Stack Overflow</li>
 <li>Message boards in universities and MOOCs (massive open online classes)</li>
-<li>R user communities, e.g. <a href="https://www.reddit.com/r/rstats/">Reddit’s r/Rstats</a></li>
+<li>R user communities, e.g. <a href="https://www.reddit.com/r/rstats/">Reddit’s r/Rstats</a></li>
 <li>Email and in-person inquiries</li>
 </ul>
 <p><br></p>
