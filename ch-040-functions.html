@@ -197,6 +197,57 @@ $(document).ready(function () {
 </ul>
 <p><br> <br></p>
 </div>
+<div id="computer-programs-as-recipes" class="section level2">
+<h2>Computer Programs as Recipes</h2>
+<p>Computer programs are powerful because they allow us to codify recipes for complex tasks, save them, share them, and build upon them.</p>
+<p>In the simplest form, a computer program is like a recipe. We have inputs, steps, and outputs.</p>
+<p>Ingredients:</p>
+<ul>
+<li>1/3 cup butter<br />
+</li>
+<li>1/2 cup sugar<br />
+</li>
+<li>1/4 cup brown sugar<br />
+</li>
+<li>2 teaspoons vanilla extract<br />
+</li>
+<li>1 large egg<br />
+</li>
+<li>2 cups all-purpose flour<br />
+</li>
+<li>1/2 teaspoon baking soda<br />
+</li>
+<li>1/2 teaspoon kosher salt<br />
+</li>
+<li>1 cup chocolate chips</li>
+</ul>
+<p>Instructions:</p>
+<ol style="list-style-type: decimal">
+<li>Preheat the oven to 375 degrees F.</li>
+<li>In a large bowl, mix butter with the sugars until well-combined.</li>
+<li>Stir in vanilla and egg until incorporated.</li>
+<li>Addflour, baking soda, and salt.<br />
+</li>
+<li>Stir in chocolate chips.</li>
+<li>Bake for 10 minutes.</li>
+</ol>
+<p>In R, the recipe would look something like this:</p>
+<pre><code>function( butter=0.33, sugar=0.5, eggs=1, flour=2, temp=375 )
+{
+   dry.goods &lt;- combine( flour, sugar )
+   batter &lt;- mix( dry.goods, butter, eggs )
+   cookies &lt;- bake( batter, temp, time=10 )
+   return( cookies )
+}</code></pre>
+<p>Note that this function to make cookies relies on other functions for each step, combine(), mix(), and bake(). Each of these functions would have to be defined as well, or more likely someone else in the open source community has already written a package called “baking” that contains simple functions for cooking so that you can use them for more complicated recipes.</p>
+<p>You will find that R allows you to conduct powerful analysis primarily because you can build on top of and extend a lot of existing functionality.</p>
+<div class="figure">
+<img src="figures/assignment.png" alt="Assignment of output values" width="590" />
+<p class="caption">
+Assignment of output values
+</p>
+</div>
+</div>
 <div id="loan-calculator" class="section level2">
 <h2>Loan Calculator</h2>
 <p>Let’s look at a slightly more comlicated example by creating an amortization calculator to determine monthly payments that would be required from a home mortgage loan.</p>
@@ -224,32 +275,7 @@ PAYMENTS = \frac{principal \cdot interest \ rate}{1-(1+interest \ rate)^{- \ mon
 <li>interest rate (monthly) = annual interest rate <strong>R</strong> / 12 months</li>
 </ul>
 <p>When we translate this mathematical formula into R code, the new function will look like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"> calcMortgage &lt;-<span class="st"> </span><span class="cf">function</span>( principal, years, APR )</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"> {</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">   </a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">    months &lt;-<span class="st"> </span>years <span class="op">*</span><span class="st"> </span><span class="dv">12</span>   <span class="co"># covert years to months</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">    int.rate &lt;-<span class="st"> </span>APR <span class="op">/</span><span class="st"> </span><span class="dv">12</span>   <span class="co"># convert annual rate to monthly</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">    </a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">    <span class="co"># amortization formula</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">    monthly.payment &lt;-<span class="st"> </span>( principal <span class="op">*</span><span class="st"> </span>int.rate ) <span class="op">/</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="st">                       </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>int.rate)<span class="op">^</span>(<span class="op">-</span>months) )</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">    </a>
-<a class="sourceLine" id="cb1-11" data-line-number="11">    monthly.payment &lt;-<span class="st"> </span><span class="kw">round</span>( monthly.payment, <span class="dv">2</span> )</a>
-<a class="sourceLine" id="cb1-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="kw">return</span>( monthly.payment )</a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"> </a>
-<a class="sourceLine" id="cb1-15" data-line-number="15"> }</a></code></pre></div>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rpb24oIHByaW5jaXBhbCwgeWVhcnMsIEFQUiApXG4ge1xuICAgIG1vbnRocyA8LSB5ZWFycyAqIDEyXG4gICAgaW50LnJhdGUgPC0gQVBSIC8gMTJcbiAgICBcbiAgICAjIGFtb3J0aXphdGlvbiBmb3JtdWxhXG4gICAgbW9udGhseS5wYXltZW50IDwtICggcHJpbmNpcGFsICogaW50LnJhdGUgKSAvIFxuICAgICAgICAgICAgICAgICAgICAgICAoMSAtICgxICsgaW50LnJhdGUpXigtbW9udGhzKSApXG4gICAgXG4gICAgbW9udGhseS5wYXltZW50IDwtIHJvdW5kKCBtb250aGx5LnBheW1lbnQsIDIgKVxuICAgIFxuICAgIHJldHVybiggbW9udGhseS5wYXltZW50IClcbiBcbiB9Iiwic2FtcGxlIjoiIyBDaGVjayB0aGUgZnVuY3Rpb24ncyBhcmd1bWVudHM6XG5hcmdzKCBjYWxjTW9ydGdhZ2UgKVxuXG4jIENhbGN1bGF0ZSBhIG1vcnRnYWdlIGZvciBhICQxMDAsMDAwIGhvdXNlIGZvciAzMCB5ZWFycyB3aXRoIGEgNC41IHBlcmNlbnQgaW50ZXJlc3QgcmF0ZSAoMC4wNDUgQVBSKVxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwLCB5ZWFycz0zMCwgQVBSPTAuMDQ1ICkgXG5cbiMgVHJ5OiBjYWxjTW9ydGdhZ2UoIHByaW5jaXBhbD0xMDAwMDAgKVxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwLCBBUFI9MC4wNDUgKSJ9
-</div>
-<div class="question">
-<p>What happens if you omit an argument from the function? Why?</p>
-</div>
-</div>
-<div id="default-arguments" class="section level1">
-<h1>Default Arguments</h1>
-<p>We can add default values for arguments. These defaults allow us to utilize the function without specifying values for those arguments.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"> calcMortgage &lt;-<span class="st"> </span><span class="cf">function</span>( principal, <span class="dt">years=</span><span class="dv">30</span>, <span class="dt">APR=</span><span class="fl">0.05</span> )</a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"> calcMortgage &lt;-<span class="st"> </span><span class="cf">function</span>( principal, years, APR )</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"> {</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">   </a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">    months &lt;-<span class="st"> </span>years <span class="op">*</span><span class="st"> </span><span class="dv">12</span>   <span class="co"># covert years to months</span></a>
@@ -264,6 +290,31 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rp
 <a class="sourceLine" id="cb2-13" data-line-number="13">    <span class="kw">return</span>( monthly.payment )</a>
 <a class="sourceLine" id="cb2-14" data-line-number="14"> </a>
 <a class="sourceLine" id="cb2-15" data-line-number="15"> }</a></code></pre></div>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rpb24oIHByaW5jaXBhbCwgeWVhcnMsIEFQUiApXG4ge1xuICAgIG1vbnRocyA8LSB5ZWFycyAqIDEyXG4gICAgaW50LnJhdGUgPC0gQVBSIC8gMTJcbiAgICBcbiAgICAjIGFtb3J0aXphdGlvbiBmb3JtdWxhXG4gICAgbW9udGhseS5wYXltZW50IDwtICggcHJpbmNpcGFsICogaW50LnJhdGUgKSAvIFxuICAgICAgICAgICAgICAgICAgICAgICAoMSAtICgxICsgaW50LnJhdGUpXigtbW9udGhzKSApXG4gICAgXG4gICAgbW9udGhseS5wYXltZW50IDwtIHJvdW5kKCBtb250aGx5LnBheW1lbnQsIDIgKVxuICAgIFxuICAgIHJldHVybiggbW9udGhseS5wYXltZW50IClcbiBcbiB9Iiwic2FtcGxlIjoiIyBDaGVjayB0aGUgZnVuY3Rpb24ncyBhcmd1bWVudHM6XG5hcmdzKCBjYWxjTW9ydGdhZ2UgKVxuXG4jIENhbGN1bGF0ZSBhIG1vcnRnYWdlIGZvciBhICQxMDAsMDAwIGhvdXNlIGZvciAzMCB5ZWFycyB3aXRoIGEgNC41IHBlcmNlbnQgaW50ZXJlc3QgcmF0ZSAoMC4wNDUgQVBSKVxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwLCB5ZWFycz0zMCwgQVBSPTAuMDQ1ICkgXG5cbiMgVHJ5OiBjYWxjTW9ydGdhZ2UoIHByaW5jaXBhbD0xMDAwMDAgKVxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwLCBBUFI9MC4wNDUgKSJ9
+</div>
+<div class="question">
+<p>What happens if you omit an argument from the function? Why?</p>
+</div>
+</div>
+<div id="default-arguments" class="section level1">
+<h1>Default Arguments</h1>
+<p>We can add default values for arguments. These defaults allow us to utilize the function without specifying values for those arguments.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"> calcMortgage &lt;-<span class="st"> </span><span class="cf">function</span>( principal, <span class="dt">years=</span><span class="dv">30</span>, <span class="dt">APR=</span><span class="fl">0.05</span> )</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"> {</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">   </a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">    months &lt;-<span class="st"> </span>years <span class="op">*</span><span class="st"> </span><span class="dv">12</span>   <span class="co"># covert years to months</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">    int.rate &lt;-<span class="st"> </span>APR <span class="op">/</span><span class="st"> </span><span class="dv">12</span>   <span class="co"># convert annual rate to monthly</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">    <span class="co"># amortization formula</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    monthly.payment &lt;-<span class="st"> </span>( principal <span class="op">*</span><span class="st"> </span>int.rate ) <span class="op">/</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="st">                       </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>int.rate)<span class="op">^</span>(<span class="op">-</span>months) )</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    </a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    monthly.payment &lt;-<span class="st"> </span><span class="kw">round</span>( monthly.payment, <span class="dv">2</span> )</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">    </a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">    <span class="kw">return</span>( monthly.payment )</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"> </a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"> }</a></code></pre></div>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rpb24oIHByaW5jaXBhbCwgeWVhcnM9MzAsIEFQUj0wLjA1IClcbiB7XG4gICAgbW9udGhzIDwtIHllYXJzICogMTJcbiAgICBpbnQucmF0ZSA8LSBBUFIgLyAxMlxuICAgIFxuICAgICMgYW1vcnRpemF0aW9uIGZvcm11bGFcbiAgICBtb250aGx5LnBheW1lbnQgPC0gKCBwcmluY2lwYWwgKiBpbnQucmF0ZSApIC8gXG4gICAgICAgICAgICAgICAgICAgICAgICgxIC0gKDEgKyBpbnQucmF0ZSleKC1tb250aHMpIClcbiAgICBcbiAgICBtb250aGx5LnBheW1lbnQgPC0gcm91bmQoIG1vbnRobHkucGF5bWVudCwgMiApXG4gICAgXG4gICAgcmV0dXJuKCBtb250aGx5LnBheW1lbnQgKVxuIFxuIH0iLCJzYW1wbGUiOiIjIE5vdGljZSB0aGUgbmV3IGRlZmF1bHQgYXJndW1lbnRzOlxuYXJncyggY2FsY01vcnRnYWdlIClcblxuIyBDYWxjdWxhdGUgYSBtb3J0Z2FnZSBmb3IgYSAkMTAwLDAwMCBob3VzZSBmb3IgMzAgeWVhcnMgd2l0aCBhIDQuNSBwZXJjZW50IEFQUlxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwLCB5ZWFycz0zMCwgQVBSPTAuMDQ1IClcblxuIyBOb3cgdHJ5OiBjYWxjTW9ydGdhZ2UoIHByaW5jaXBhbD0xMDAwMDAgKVxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwICkifQ==
 </div>
@@ -296,13 +347,19 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rp
 <div id="object-assignment-vs-argument-assignment" class="section level1">
 <h1>Object Assignment vs Argument Assignment</h1>
 <p>Assignment is the process of assigning a name to an object or value in order to store the data for future use and allow it to be referenced later.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">3</span></a></code></pre></div>
 <p>We use assignment in data recipes (scripts) to save values, and in functions to assign values to specific arguments. Note that we use different assignment operators in each case.</p>
 <p>Object assignment uses the <strong>arrow operator</strong>.</p>
 <p>Argument assignment inside a function uses the <strong>equal sign</strong>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">principal &lt;-<span class="st"> </span><span class="dv">100000</span>               <span class="co"># never use equals here</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">calcMortgage</span>( <span class="dt">principal=</span><span class="dv">100000</span> )  <span class="co"># never use arrows here</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">principal &lt;-<span class="st"> </span><span class="dv">100000</span>               <span class="co"># never use equals here</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">calcMortgage</span>( <span class="dt">principal=</span><span class="dv">100000</span> )  <span class="co"># never use arrows here</span></a></code></pre></div>
 <p><br></p>
+<div class="figure">
+<img src="figures/assignment.png" alt="Assignment of output values" width="590" />
+<p class="caption">
+Assignment of output values
+</p>
+</div>
 <hr />
 </div>
 <div id="your-turn" class="section level1">

@@ -1,0 +1,93 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: textbook.css
+---
+
+
+# Assignment
+
+
+<div class="tip">
+
+## Key Concepts
+
+
+After reading this chapter you should be able to define the following:
+
+* operators 
+* objects
+* assignment
+ 
+
+<br>
+<br>
+
+</div>
+
+
+
+
+
+```{r, echo=F }
+
+knitr::opts_chunk$set( echo = TRUE, message=F, warning=F, fig.width=8 )
+
+```
+
+
+```{r, echo=F}
+   calcMortgage <- function( principal, years=30, APR=0.05 )
+   {
+
+      months <- years * 12
+      int.rate <- APR / 12
+      
+      # amortization formula
+      monthly.payment <- ( principal * int.rate ) / 
+                         (1 - (1 + int.rate)^(-months) )
+      
+      monthly.payment <- round( monthly.payment, 2 )
+      
+      return( monthly.payment )
+   
+   }
+```
+
+
+
+
+```{r, fig.cap="Assignment of output values", echo=F }
+knitr::include_graphics( "figures/assignment.png" )
+```
+
+
+
+## Assignment
+
+When we call a function in R, the default behavior of the function is typically to print the results on the screen:
+
+```{r}
+calcMortgage( principal=100000  )
+```
+
+If we are creating a script, however, we often need to save the function outputs at each step. We can do this by assigning output to a new variable.
+
+```{r}
+payments.15.year <- calcMortgage( years=15, principal=100000  )
+payments.30.year <- calcMortgage( years=30, principal=100000  )
+```
+
+These values are then stored, and can be used later or printed by typing the object name:
+
+```{r}
+payments.15.year
+payments.30.year
+```
+
+Note that variable names can include periods or underscores. They can also include numbers, but they cannot start with a number. Like everything in R, they will be case sensitive. 
+
+
