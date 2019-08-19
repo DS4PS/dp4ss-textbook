@@ -8,11 +8,22 @@ output:
 ---
 
 
+
+
+```{r, eval=F, echo=F}
 ![](https://writingdragonsblog.files.wordpress.com/2016/01/htbd.jpg?w=700)
+```
+
+
+# *Here There be Dragons*
+
+
+![](figures/keyboard-dragon.jpg)
 
 
 
 # HELP! 
+
 
 <div class="tip">
 
@@ -20,7 +31,12 @@ output:
 
 You will get stuck while learning to code. 
 
-![](https://i0.wp.com/thecrucialvoice.com/wp-content/uploads/2012/11/title-screen_go_web1-960x650.png?ssl=1)
+
+```{r, echo=F, fig.align="left", out.width="50%"}
+
+knitr::include_graphics("https://i0.wp.com/thecrucialvoice.com/wp-content/uploads/2012/11/title-screen_go_web1-960x650.png?ssl=1")
+
+```
 
 What are the best strategies for gettting out of a jam? Key concepts include:
 
@@ -372,3 +388,7 @@ The following resources may prove valuable for both learning how to learn R and 
 * ["Hot to Ask Questions the Smart Way"](http://www.catb.org/esr/faqs/smart-questions.html) (Raymond, 2014)
 * ["How to Make a Great R Reproducible Example"](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example) (Stack Overflow, 2018)
 * ["Posting Guide: Hot to Ask Good Questions that Prompt Useful Answers"](https://www.r-project.org/posting-guide.html) (Plate, 2013)
+
+**V) Dragon Credits
+
+* [danadaldoss](https://danadaldos.wordpress.com/2015/02/06/padded-with-%E2%88%8F/)
