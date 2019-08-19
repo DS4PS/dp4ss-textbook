@@ -9,33 +9,71 @@ output:
 ---
 
 
+
+<div class="tip">
+
 ## Key Concepts
 
-A function is a basic data recipe. It is also an input-output machine. It accepts arguments, and returns the final product of the recipe.
+A function is the building block of a data recipe (a script). 
+
+You can think of functions as input-output machines that take raw data and transform it into useful statistics. 
+
+They accepts **arguments** (data or parameters), and **return** the requested calculation or transformation. 
+
+For example, the **mean()** function requires a vector of measurements as the input and return the average measure for the group as the output. 
+
+
+### VOCABULARY:
 
 * The function `function()`
 * arguments 
 * argument values
-* argument default values
+* default values
 * explicit vs implicit argument calls 
 * return values 
 * arrow vs. equal sign 
 
+<br>
+<br>
+
+</div>
 
 
 
 ## Loan Calculator
 
+Let's look at a slightly more comlicated example by creating an amortization calculator to determine monthly payments that would be required from a home mortgage loan.
 
-Let's create a mortgage calculator as a simple example. A mortgage calculator considers the total loan amount (the principal), the interest rate or APR (annual percentage rate), and the period of the loan in order to determine how much needs to be paid each month so that payments are distributed equally across the loan term.
+```{r, echo=F, fig.align="center", fig.cap="Example monthly payment based upon loan amount (P), interest rate (R), and time period of repayment (T).", out.width="50%"}
 
-![](https://res.cloudinary.com/value-penguin/image/upload/c_limit,dpr_1.0,f_auto,h_1600,q_auto,w_1600/v1/mortgages/amort-30-yr)
+knitr::include_graphics("figures/calculate-amortization.jpg")
 
-If we look up an amortization (repayment schedule) formula, we see it is calculated as follows: 
+```
+
+Where:
+
+* T = time of loan period
+* P = loan principal, or total amount borrowed 
+* R = annual interest rate, or annual percentage rate (APR)
+
+
+A mortgage calculator considers the total loan amount (the principal), the interest rate or APR (annual percentage rate), and the period of the loan in order to determine how much needs to be paid each month so that payments are distributed equally across the loan term. If we look up a formula, we will find:
+
+
+![](figures/amortization-formula.jpg)
+
+
+We can simplify this formula a bit by putting everything in monthly periods:
+
 
 $$
-monthly \ payments = \frac{principal \cdot interest \ rate}{1-(1+interest \ rate)^{- \ loan \ duration}}
+PAYMENTS = \frac{principal \cdot interest \ rate}{1-(1+interest \ rate)^{- \ months}}
 $$
+
+Where: 
+
+* months = years **T** x 12 months
+* interest rate (monthly) = annual interest rate **R** / 12 months 
 
 When we translate this mathematical formula into R code, the new function will look like this:
 
@@ -95,7 +133,7 @@ calcMortgage( principal=100000, APR=0.045 )
 ```
 
 
-<div class="tip">
+<div class="question">
 
 What happens if you omit an argument from the function?  Why?
 
@@ -157,7 +195,7 @@ calcMortgage( principal=100000, years=30, APR=0.045 )
 calcMortgage( principal=100000 )
 ```
 
-<div class="caution">
+<div class="question">
 
 Note that **calcMortgage( principal=100000 )** now works because the function uses the default values for years and APR. 
 
@@ -191,7 +229,7 @@ args( calcMortgage )
 calcMortgage( principal=100000, years=15, APR=0.03 )
 ```
 
-<div class="note">
+<div class="question">
 
 Can you still use custom values for those arguments after defaults are set? 
 
@@ -245,6 +283,20 @@ Explain why.
 
 
 # Object Assignment vs Argument Assignment
+
+Assignment is the process of assigning a name to an object or value in order to store the data for future use and allow it to be referenced later. 
+
+
+```{r, eval=F}
+x <- 3
+```
+
+We use assignment in data recipes (scripts) to save values, and in functions to assign values to specific arguments. Note that we use different assignment operators in each case.
+
+
+Object assignment uses the **arrow operator**.
+
+Argument assignment inside a function uses the **equal sign**.
 
 ```{r, eval=F}
 principal <- 100000               # never use equals here
