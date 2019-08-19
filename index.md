@@ -5,27 +5,26 @@ title: Data Programming for Social Scientists
 [back to GitHub](https://github.com/DS4PS/dp4ss-textbook)
 
 
+[Div Styles](div-styles.html)
+
+
 # Introducing R
 
 ## [Core R](ch-010-core-r.html)
-* What is R? [ [video](https://player.vimeo.com/video/180644880) ]
-* How do Packages Work? 
- 
- 
 ## [R Studio](ch-020-rstudio.html)
-* Tour of R Studio  
-* Navigation in R Studio  
-* [Style Guides](https://jef.works/R-style-guide/)  
- 
-## Data-Driven Docs  
-* Data-Driven Documents [ [splainer](https://ds4ps.org/docs/) ]   
-* The Importance of Reproducibility   
-* [Markdown](https://ds4ps.org/cpp-526-fall-2019/markdown/)  
-* RMD in RStudio   
-  - Headers   
-  - Chunks   
-  - Knitting   
+## [Markdown](ch-031-markdown.html) 
+   
 * [Pimp my RMD](https://holtzy.github.io/Pimp-my-rmd/)  
+ 
+ 
+ 
+ <br>
+ <br>
+ 
+  --------------
+  
+ <br><br>
+ 
  
 
 # Getting Started
