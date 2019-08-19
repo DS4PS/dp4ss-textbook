@@ -9,12 +9,14 @@ output:
 ---
 
 
+![](figures/function.png)
+
 
 <div class="tip">
 
 ## Key Concepts
 
-A function is the building block of a data recipe (a script). 
+A function is a data recipe, and a building block of longer scripts. 
 
 You can think of functions as input-output machines that take raw data and transform it into useful statistics. 
 

@@ -134,7 +134,6 @@ knitr::include_graphics("https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png
 
 ```
 
-![](https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png)
 
 <center> *The struggle is real. Source: [XKCD](https://xkcd.com/979/)* </center>
 
