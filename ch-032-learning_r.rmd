@@ -1,5 +1,4 @@
 ---
-title: "The Learning Curve"
 output:
   html_document:
     theme: readable
@@ -8,15 +7,26 @@ output:
     css: textbook.css
 ---
 
+
+![](https://writingdragonsblog.files.wordpress.com/2016/01/htbd.jpg?w=700)
+
+
+
+# HELP! 
+
 <div class="tip">
 
 ## Key Concepts
 
-Like any new skill, some ways of learning R are better than others. In this brief chapter, we review best practices in learning R and common strategies for gettting out of a jam. Key concepts include:
+You will get stuck while learning to code. 
+
+![](https://i0.wp.com/thecrucialvoice.com/wp-content/uploads/2012/11/title-screen_go_web1-960x650.png?ssl=1)
+
+What are the best strategies for gettting out of a jam? Key concepts include:
 
 * Error messages
-* Warning messages
-* Documentation
+* Documentation 
+* Discussion boards 
 * Vignettes
 
 <br>
@@ -26,13 +36,24 @@ Like any new skill, some ways of learning R are better than others. In this brie
 
 <br>
 
-## The Objective: Learning How to Learn
+## Learning How to Learn
+
+
+
+  *When I was younger, so much younger than today*  
+  *I never needed anybody's help in any way*  
+  *But now these days are gone, I'm not so self assured*  
+  *Now I find I've changed my mind and opened up the doors*  
+
+---
 
 Let's begin this chapter by stating and unpacking four assertions: 
 
 1. **Similarity to Human Language:** Learning R is very similar to learning another human language. 
 2. **Limitations & Prioritizations:** You will never learn everything there is to know in R.
 3. **Lifelong Learning:** The ultimate end to learning R is to *learn how to learn it*.
+
+---
 
 <br>
 
