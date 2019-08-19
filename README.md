@@ -1,34 +1,23 @@
-# dp4ss-textbook
-
-Data Programming for Social Scientists intro to R programming textbook. 
-
-
----
-
-
-
----
-title: Data Programming for Social Scientists 
----
+# Data Programming for Social Scientists 
 
 
 
 
-# The Three Parts of R 
 
-## Core R [ [video](https://player.vimeo.com/video/180644880) ]
-* What is R? 
+# Introducing R
+
+## [Core R](ch-010-core-r.html)
+* What is R? [ [video](https://player.vimeo.com/video/180644880) ]
 * How do Packages Work? 
-* Navigation (working directories, list objects, create folders) 
-* Scripts  
  
-## R Studio
+ 
+## [R Studio](ch-020-rstudio.html)
 * Tour of R Studio  
 * Navigation in R Studio  
 * [Style Guides](https://jef.works/R-style-guide/)  
  
-## Data-Driven Docs [ [splainer](https://ds4ps.org/docs/) ]  
-* Data-Driven Documents  
+## Data-Driven Docs  
+* Data-Driven Documents [ [splainer](https://ds4ps.org/docs/) ]   
 * The Importance of Reproducibility   
 * [Markdown](https://ds4ps.org/cpp-526-fall-2019/markdown/)  
 * RMD in RStudio   
@@ -38,18 +27,24 @@ title: Data Programming for Social Scientists
 * [Pimp my RMD](https://holtzy.github.io/Pimp-my-rmd/)  
  
 
-# Basic Programming in R 
+# Getting Started
 
-## CH 01 - R as a Calculator
+## R as a Calculator
 * Assignment 
 * Mathematical Operators 
- 
-## CH 02 - Functions [ [chapter](http://ds4ps.org/datacamp-light-demo-for-rmd/calc-mortgage.html) ] 
+
+## Functions [ [chapter](http://ds4ps.org/datacamp-light-demo-for-rmd/calc-mortgage.html) ] 
 * Input-Output Devices 
 * Object-Oriented Coding 
 * Arguments 
 * Values 
-* Returns 
+* Return 
+
+## Data Recipes
+* Scripts 
+
+## Navigating R
+* Navigation (working directories, list objects, create folders) 
 * Reading Help Files 
 
 
@@ -84,7 +79,7 @@ title: Data Programming for Social Scientists
 * Implicit Casting (coercion)
 
 
-## CH 06 ñIdentifying Groups within Data 
+## CH 06 ‚ÄìIdentifying Groups within Data 
 * Set theory as categories and membership 
 * Logical Operators 
   - equal
@@ -103,7 +98,7 @@ title: Data Programming for Social Scientists
 
 # Two-Dimensional Datasets
 
-## CH 07 ñ Dataframes
+## CH 07 ‚Äì Dataframes
 * Creating data frames from vectors
 * the $ operator
 * Checking and changing class types
@@ -111,7 +106,7 @@ title: Data Programming for Social Scientists
 * Reorder rows or columns 
 * CSV vs RDS formats
 
-## CH 08 ñ Matrices and Lists
+## CH 08 ‚Äì Matrices and Lists
 * Matrix
 * Lists
 * Building data objects: 
@@ -126,7 +121,7 @@ Data wrangling is the process of preparing data for analysis, which includes rea
 
 The goal of data wrangling is to create a **rodeo dataset** (clean and well-structured) that is ready for modeling and visualization. 
 
-## CH 09 ñ Getting Data into R [ [tutorial](https://www.datacamp.com/community/tutorials/r-data-import-tutorial) ]
+## CH 09 ‚Äì Getting Data into R [ [tutorial](https://www.datacamp.com/community/tutorials/r-data-import-tutorial) ]
 * Read options   
 * Copy and paste from Excel 
 * Using rdata format 
@@ -156,7 +151,7 @@ The goal of data wrangling is to create a **rodeo dataset** (clean and well-stru
 
 # Tidy Functions
 
-## CH 11 ñ Slicing Datasets ñ Base R and dplyr
+## CH 11 ‚Äì Slicing Datasets ‚Äì Base R and dplyr
 * Subset operator
 * By index, including order / match
 * By logical
@@ -166,14 +161,14 @@ The goal of data wrangling is to create a **rodeo dataset** (clean and well-stru
 * Selector Vectors
 * Subset by column  ---  dplyr::select()
 
-## CH 12 ñ Combining Datasets
+## CH 12 ‚Äì Combining Datasets
 * merge and match
 * join in dplyr
 * inner, outer, right, left
 
 # Explore and Describe
 
-## CH 13 ñ Summarizing Vectors
+## CH 13 ‚Äì Summarizing Vectors
 * Counting things:  sum( logical statement )
 * Categorical data:  tables
 * Missing values
@@ -183,8 +178,8 @@ The goal of data wrangling is to create a **rodeo dataset** (clean and well-stru
 * All at once:  summary + data.frame / matrix
 * Creating tables of descriptives: factors vs numeric
 
-## CH 14ñ Summarizing Groups of Vectors
-* Table ( f1, f2 ), ftable( row.vars=c(ìf1î,îf2î), col.vars=îf3î )
+## CH 14‚Äì Summarizing Groups of Vectors
+* Table ( f1, f2 ), ftable( row.vars=c(‚Äúf1‚Äù,‚Äùf2‚Äù), col.vars=‚Äùf3‚Äù )
 * Function over groups:  tapply( v1, f1 )  or dplyr:: group_by() + summarise()
 * Functions over levels of numeric data:  tapply( v1, cut(v2) )
 * tapply( v1, INDEX=list(f1,f2)  or dplyr:: group_by() + summarise()
@@ -194,12 +189,12 @@ The goal of data wrangling is to create a **rodeo dataset** (clean and well-stru
 
 # Visualize 
 
-## CH 15 ñ Principles of Visual Communication
+## CH 15 ‚Äì Principles of Visual Communication
 * Ground, figure, narrative (context, subject, action)
-* Tufteís rules 
+* Tufte‚Äôs rules 
 * Visual tragedies 
 
-## CH 16 ñ Core Graphics Engine
+## CH 16 ‚Äì Core Graphics Engine
 * Defining a canvas: xlim, ylim
 * Adding data
 * Type (point, line, both)
@@ -212,14 +207,14 @@ The goal of data wrangling is to create a **rodeo dataset** (clean and well-stru
 * Adding data labels:  text()
 * Margins
 
-## CH 17 ñ Advanced Graphics
+## CH 17 ‚Äì Advanced Graphics
 * Colors and color functions
 * Custom fonts / math symbols
 * Multiple Plots (core graphics)
   - Incorrect:  https://en.wikipedia.org/wiki/File:Smallmult.png#/media/File:Smallmult.png
 * Custom graph layouts
 
-## CH 18 ñ ggplot2
+## CH 18 ‚Äì ggplot2
 * Grammar of graphics concept
 * ggplot overview
 
