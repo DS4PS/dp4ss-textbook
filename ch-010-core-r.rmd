@@ -8,13 +8,24 @@ output:
 ---
 
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/724px-R_logo.svg.png)
-
-
-
-
-
 # The **R** Language
+
+```{r, echo=F, fig.align="left", out.width="30%"}
+
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/724px-R_logo.svg.png")
+
+```
+
+
+<br>
+<br>
+
+
+
+
+
+
+
 
 
 

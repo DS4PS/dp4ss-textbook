@@ -5,6 +5,9 @@ output:
     highlight: tango
     self_contained: false
     css: textbook.css
+    toc: false
+    toc_float: false
+    number_sections: false
 ---
 
 
@@ -68,17 +71,20 @@ knitr::include_graphics("figures/ch-002_image_rstudio.jpg")
 
 ## Downloading & Installing RStudio
 
+RStudio requires R 3.0.1+. If you don't already have R, download it here.
+
+
+<button onclick="location.href='https://cran.rstudio.com/'" type="button">
+         DOWNLOAD R</button>
+         
+<br>
+
 RStudio is free, open source, and easy to install. Select the *Desktop* edition on their download page:
 
-<br>
 
 <button onclick="location.href='https://www.rstudio.com/products/rstudio/download/'" type="button">
          DOWNLOAD R STUDIO</button>
          
-<br>
-
-Note that you should install Core R from the CRAN before installing R Studio. 
-
 <br>
 
 ## A Tour of RStudio

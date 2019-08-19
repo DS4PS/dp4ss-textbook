@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Markdown Guide</title>
+
+<script src="ch-031-markdown_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="ch-031-markdown_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="ch-031-markdown_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="ch-031-markdown_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="ch-031-markdown_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="ch-031-markdown_files/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Markdown Guide</h1>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#headers"><span class="toc-section-number">1</span> Headers</a></li>
+<li><a href="#text-style"><span class="toc-section-number">2</span> Text Style</a></li>
+<li><a href="#lists"><span class="toc-section-number">3</span> Lists</a><ul>
+<li><a href="#unordered"><span class="toc-section-number">3.1</span> Unordered</a></li>
+<li><a href="#ordered"><span class="toc-section-number">3.2</span> Ordered</a></li>
+</ul></li>
+<li><a href="#hyperlinks"><span class="toc-section-number">4</span> Hyperlinks</a></li>
+<li><a href="#images"><span class="toc-section-number">5</span> Images</a></li>
+<li><a href="#tables"><span class="toc-section-number">6</span> Tables</a></li>
+<li><a href="#videos"><span class="toc-section-number">7</span> Videos</a></li>
+<li><a href="#blockquotes"><span class="toc-section-number">8</span> Blockquotes</a><ul>
+<li><a href="#single-line"><span class="toc-section-number">8.1</span> Single line</a></li>
+<li><a href="#multiline"><span class="toc-section-number">8.2</span> Multiline</a></li>
+</ul></li>
+<li><a href="#horizontal-rule"><span class="toc-section-number">9</span> Horizontal Rule</a></li>
+</ul>
+</div>
+
+<p>Markdown is a set of simple conventions for formatting text in R Markdown (RMD) files.</p>
+<p>It makes it easy to create professional documents with minimal effort.</p>
+<p>Here are the basic formatting rules for Markdown:</p>
+<hr />
+<div id="headers" class="section level1">
+<h1><span class="header-section-number">1</span> Headers</h1>
+<pre><code># Heading One (h1)
+
+## Heading Two (h2)
+
+### Heading Three (h3)
+
+#### Heading Four (h4)
+
+##### Heading Five (h5)
+
+###### Heading Six (h6)</code></pre>
+<p><img src="figures/heading_formats.png" /></p>
+<hr />
+</div>
+<div id="text-style" class="section level1">
+<h1><span class="header-section-number">2</span> Text Style</h1>
+<pre><code>With Markdown, it is possible to emphasize words by making them *italicized*, using *astericks* or _underscores_, or making them **bold**, using **double astericks** or __double underscores__. 
+
+Of course, you can combine those two formats, with both _**bold and italicized**_ text, using any combination of the above syntax. 
+
+You can also add a strikethrough to text using a ~~double tilde~~.</code></pre>
+<p>With Markdown, it is possible to emphasize words by making them <em>italicized</em>, using <em>astericks</em> or <em>underscores</em>, or making them <strong>bold</strong>, using <strong>double astericks</strong> or <strong>double underscores</strong>.</p>
+<p>Of course, you can combine those two formats, with both <em><strong>bold and italicized</strong></em> text, using any combination of the above syntax.</p>
+<p>You can also add a strikethrough to text using a <del>double tilde</del>.</p>
+<hr />
+</div>
+<div id="lists" class="section level1">
+<h1><span class="header-section-number">3</span> Lists</h1>
+<div id="unordered" class="section level2">
+<h2><span class="header-section-number">3.1</span> Unordered</h2>
+<pre><code>* First item
+* Second item
+* Third item
+    * First nested item
+    * Second nested item</code></pre>
+<ul>
+<li>First item</li>
+<li>Second item</li>
+<li>Third item
+<ul>
+<li>First nested item</li>
+<li>Second nested item</li>
+</ul></li>
+</ul>
+</div>
+<div id="ordered" class="section level2">
+<h2><span class="header-section-number">3.2</span> Ordered</h2>
+<pre><code>1. First item
+2. Second item
+3. Third item
+    1. First nested item
+    2. Second nested item</code></pre>
+<ol style="list-style-type: decimal">
+<li>First item</li>
+<li>Second item</li>
+<li>Third item
+<ol style="list-style-type: decimal">
+<li>First nested item</li>
+<li>Second nested item</li>
+</ol></li>
+</ol>
+<hr />
+</div>
+</div>
+<div id="hyperlinks" class="section level1">
+<h1><span class="header-section-number">4</span> Hyperlinks</h1>
+<p>Create links by wrapping the link text in square brackets [ ], and the URL in adjacent parentheses ( ).</p>
+<pre><code>[Google News](https://news.google.com)</code></pre>
+<p><a href="https://news.google.com">Google News</a></p>
+<hr />
+</div>
+<div id="images" class="section level1">
+<h1><span class="header-section-number">5</span> Images</h1>
+<p>Insert images in a similar way, but add an exclamation mark in front of square brackets [ ], and the image file name goes in the parentheses ( ).</p>
+<pre><code>![alt_text_here](image_file.png)</code></pre>
+<p>The <em>alt text</em> appears when the image cannot be located, or is read by devices for the blind when the mouse hovers over the image. It</p>
+<p>It is common practice to place all of the image files in an “assets” or “images” folder to keep your directory tidy. You can reference files inside a folder using the folder name and the forward slash:</p>
+<pre><code>![a flower](images/flower.jpg)</code></pre>
+<div class="figure">
+<img src="figures/flower.jpg" alt="a flower" />
+<p class="caption">a flower</p>
+</div>
+<hr />
+<p>Or you can link directly to an image online using the URL address of the image:</p>
+<pre><code>![](https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/1507062474/hotel-everest-namche-nepal-mountain-lodge-MOUNTAIN1017.jpg)</code></pre>
+<p><img src="https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/1507062474/hotel-everest-namche-nepal-mountain-lodge-MOUNTAIN1017.jpg" /></p>
+<hr />
+<p>If you want to include images you need to add the image file to the <a href="https://github.com/DS4PS/ddm-textbook-summer-2019/tree/master/images">images folder</a> in this repository. Web-friendly formats like PNG, JPEG, or GIF are preferred.</p>
+<p>You can just drag and drop the images into the folder, and GitHub will automatically initiate an upload option. After the upload progress bar is complete, click on the green “Commit changes” icon to complete the upload process.</p>
+<p>You will then reference images in text using markdown syntax (see the Markddown Guide above for more details):</p>
+<hr />
+</div>
+<div id="tables" class="section level1">
+<h1><span class="header-section-number">6</span> Tables</h1>
+<pre><code>| Title 1          | Title 2          | Title 3         | Title 4         |
+|------------------|------------------|-----------------|-----------------|
+| First entry      | Second entry     | Third entry     | Fourth entry    |
+| Fifth entry      | Sixth entry      | Seventh entry   | Eight entry     |
+| Ninth entry      | Tenth entry      | Eleventh entry  | Twelfth entry   |
+| Thirteenth entry | Fourteenth entry | Fifteenth entry | Sixteenth entry |
+</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>Title 1</th>
+<th>Title 2</th>
+<th>Title 3</th>
+<th>Title 4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>First entry</td>
+<td>Second entry</td>
+<td>Third entry</td>
+<td>Fourth entry</td>
+</tr>
+<tr class="even">
+<td>Fifth entry</td>
+<td>Sixth entry</td>
+<td>Seventh entry</td>
+<td>Eight entry</td>
+</tr>
+<tr class="odd">
+<td>Ninth entry</td>
+<td>Tenth entry</td>
+<td>Eleventh entry</td>
+<td>Twelfth entry</td>
+</tr>
+<tr class="even">
+<td>Thirteenth entry</td>
+<td>Fourteenth entry</td>
+<td>Fifteenth entry</td>
+<td>Sixteenth entry</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="videos" class="section level1">
+<h1><span class="header-section-number">7</span> Videos</h1>
+<p>If you would like to post a video:</p>
+<ol style="list-style-type: decimal">
+<li>Upload the video to a video platform like YouTube, and insert an iframe of the video into your document.<br />
+</li>
+<li>In YouTube, you will find iframes by clicking on the Share option, and the “Embed” icon.</li>
+</ol>
+<div class="figure">
+<img src="figures/iframe.png" alt="iframe" />
+<p class="caption">iframe</p>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>Paste this text into your markdown document, and it will add the video to your page:</li>
+</ol>
+<pre><code>&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube-nocookie.com/embed/VVRHTF5Ikro&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen&gt;&lt;/iframe&gt;</code></pre>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/VVRHTF5Ikro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+</iframe>
+<hr />
+</div>
+<div id="blockquotes" class="section level1">
+<h1><span class="header-section-number">8</span> Blockquotes</h1>
+<div id="single-line" class="section level2">
+<h2><span class="header-section-number">8.1</span> Single line</h2>
+<pre><code>&gt; My mom always said life was like a box of chocolates. You never know what you&#39;re gonna get.</code></pre>
+<blockquote>
+<p>My mom always said life was like a box of chocolates. You never know what you’re gonna get.</p>
+</blockquote>
+</div>
+<div id="multiline" class="section level2">
+<h2><span class="header-section-number">8.2</span> Multiline</h2>
+<pre><code>&gt; What do you get when you cross an insomniac, an agnostic and a dyslexic?
+&gt;
+&gt; Someone who stays up all night wondering whether there really is a dog.
+&gt;
+&gt; – _Hal Incandenza_</code></pre>
+<blockquote>
+<p>What do you get when you cross an insomniac, an agnostic and a dyslexic?</p>
+<p>Someone who stays up all night wondering whether there really is a dog.</p>
+<p>– <em>Hal Incandenza</em></p>
+</blockquote>
+<hr />
+</div>
+</div>
+<div id="horizontal-rule" class="section level1">
+<h1><span class="header-section-number">9</span> Horizontal Rule</h1>
+<pre><code>---</code></pre>
+<hr />
+<p><br> <br> <br></p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
