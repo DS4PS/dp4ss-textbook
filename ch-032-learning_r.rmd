@@ -269,6 +269,21 @@ knitr::include_graphics("https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/
 
 <br>
 
+
+
+# Help! Error Messages
+
+*Help me if you can, I'm feeling down*  
+*And I do appreciate you being round*  
+*Help me get my feet back on the ground*  
+*Won't you please, please help me*  
+
+![](http://rex-analytics.com/wp-content/uploads/2018/01/errors-in-R-739x1024.png)
+
+<br>
+
+
+
 ### Troubleshooting: Web Searches & Forums
 
 While documentation tends to require a bit more reading, there's a good chance that someone has run into the same problem you've encounters. The internet has a long memory and the following strategies show how to exploit it.
@@ -314,6 +329,13 @@ knitr::include_graphics("https://github.com/DS4PS/dp4ss-textbook/blob/master/fig
 ```
 
 <br>
+
+# Help! Consulting Humans
+
+*Help, I need somebody*  
+*Help, not just anybody*  
+*Help, you know I need someone, help*  
+
 
 ### Consulting Humans
 
@@ -388,7 +410,13 @@ The following resources may prove valuable for both learning how to learn R and 
 * ["Hot to Ask Questions the Smart Way"](http://www.catb.org/esr/faqs/smart-questions.html) (Raymond, 2014)
 * ["How to Make a Great R Reproducible Example"](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example) (Stack Overflow, 2018)
 * ["Posting Guide: Hot to Ask Good Questions that Prompt Useful Answers"](https://www.r-project.org/posting-guide.html) (Plate, 2013)
+* [Errors vs Warnings](http://rex-analytics.com/decoding-error-messages-r/) (Rex Analytics)
 
-**V) Dragon Credits
+**V) ASCII Dragons**
 
-* [danadaldoss](https://danadaldos.wordpress.com/2015/02/06/padded-with-%E2%88%8F/)
+* [danadaldoss](https://danadaldos.wordpress.com/2015/02/06/padded-with-%E2%88%8F/) 
+* [Doug](https://www.dougsartgallery.com/ascii-art-dragon.html) 
+* [Ahmad](https://www.deviantart.com/ahmadsaifulhakim/art/Dragon-ascii-art-525981480) 
+
+<br>
+<br>
