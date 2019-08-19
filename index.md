@@ -16,7 +16,7 @@ title: Data Programming for Social Scientists
    
 * [Pimp my RMD](https://holtzy.github.io/Pimp-my-rmd/)  
  
- 
+## [The Learning Curve](ch-032-learning_r.html) 
  
  <br>
  <br>
@@ -33,7 +33,7 @@ title: Data Programming for Social Scientists
 * Assignment 
 * Mathematical Operators 
 
-## Functions [ [chapter](http://ds4ps.org/datacamp-light-demo-for-rmd/calc-mortgage.html) ] 
+## Functions [ [chapter](ch-040-functions.html) ] 
 * Input-Output Devices 
 * Object-Oriented Coding 
 * Arguments 
