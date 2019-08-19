@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>ch-020-rstudio.utf8.md</title>
+
+<script src="ch-020-rstudio_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="ch-020-rstudio_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="ch-020-rstudio_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="ch-020-rstudio_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="ch-020-rstudio_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="ch-020-rstudio_files/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<p><img src="http://442r58kc8ke1y38f62ssb208-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/RStudio-Logo-Flat.png" /></p>
+<p><img src="http://rprogramming.net/wp-content/uploads/2012/10/RStudio-Screenshot.png" /></p>
+<p><br> <br></p>
+<div id="r-studio" class="section level1">
+<h1>R Studio</h1>
+<div class="tip">
+<h2 id="key-concepts">Key Concepts</h2>
+<p>This chapter introduces RStudio, a Graphical User Interface (GUI) that makes it easier to use powerful features in R and manage large projects.</p>
+<p>New vocabulary:</p>
+<ul>
+<li>Integrated Development Environment (IDE)</li>
+<li>RStudio Panes:
+<ol style="list-style-type: decimal">
+<li>Console</li>
+<li>Source</li>
+<li>Plots</li>
+<li>Viewer</li>
+<li>Environment</li>
+<li>History</li>
+</ol></li>
+<li>Workspace &amp; Global Environment</li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="what-is-rstudio" class="section level2">
+<h2>What is RStudio?</h2>
+<p>Recall that R is both a language and an environment. <strong>RStudio</strong> is an <strong>Integrated Development Environment</strong>, or <strong>IDE</strong>, which is an enhanced, feature-rich programming environment with an easy-to-use <strong>graphical user interface</strong>, or <strong>GUI</strong>. While the base R environment is mostly text, RStudio has intuitive icons (hence, “graphical”) for point-and-click, automated operations.</p>
+<p><br></p>
+<p>RStudio’s layout is comprised of a menu, console, and a series of <strong>panes</strong>, or windows in the RStudio interface. Most panes are feature-rich and all panes serve a key purpose, but we’ll only focus on the most critical panes for getting started in RStudio.</p>
+<p><br></p>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_rstudio.jpg" alt="*The RStudio environment with four open panes: The Source, Console, Environment, and Viewer panes.*" width="95%" />
+<p class="caption">
+<em>The RStudio environment with four open panes: The Source, Console, Environment, and Viewer panes.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="downloading-installing-rstudio" class="section level2">
+<h2>Downloading &amp; Installing RStudio</h2>
+<p>RStudio is free, open source, and easy to install. Select the <em>Desktop</em> edition on their download page:</p>
+<p><br></p>
+<button onclick="location.href=&#39;https://www.rstudio.com/products/rstudio/download/&#39;" type="button">
+DOWNLOAD R STUDIO
+</button>
+<p><br></p>
+<p>Note that you should install Core R from the CRAN before installing R Studio.</p>
+<p><br></p>
+</div>
+<div id="a-tour-of-rstudio" class="section level2">
+<h2>A Tour of RStudio</h2>
+<p>RStudio is comprised of a main menu and a series of panes, each with their own purpose and features. We focus on the following:</p>
+<ol style="list-style-type: decimal">
+<li>Console Pane</li>
+<li>Source Pane</li>
+<li>Plots Pane</li>
+<li>Viewer Pane</li>
+<li>Environment Pane</li>
+<li>History Pane</li>
+</ol>
+<p><br></p>
+</div>
+<div id="the-console-pane" class="section level2">
+<h2>The Console Pane</h2>
+<p>The <strong>console pane</strong> is where R expressions are evaluated. In other words, this is where your code is executed. Recall that working in-console is also known as working <em>interactively</em> and, typically, working in-console is more often for “quick and dirty” tasks, like printing contents of your working directory.</p>
+<center>
+<p><strong>The Console Pane</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_console.jpg" alt="*The console is where code is executed and is typically used for &quot;quick and dirty&quot; tasks.*" width="75%" />
+<p class="caption">
+<em>The console is where code is executed and is typically used for “quick and dirty” tasks.</em>
+</p>
+</div>
+<p><br></p>
+<p>The console panel lists your current working directory. Notably, even when using point-and-click mechanics to, e.g. import data or change directories, the code for such tasks will still execute in the console. Such click-to-code operations are called <strong>macros</strong>.</p>
+<p><br></p>
+<p><strong>Pro Tip:</strong> When writing a script, especially when writing out new directory paths, it’s sometimes quicker to use use a click-to-code operation and simply copy and paste the macro code from the console to your script.</p>
+<p><br></p>
+</div>
+<div id="the-source-pane" class="section level2">
+<h2>The Source Pane</h2>
+<p>The <strong>source pane</strong> contains any opened scripts. In starting a new R session, this pane isn’t visible until you’ve opened a new or preexisting script. Multiple scripts may be opened at one time and are navigable using tabs along the top of the source pane.</p>
+<center>
+<p><strong>The Source Pane</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_script.jpg" alt="*The source pane contains opened scripts. It won't appear until you've opened at least one.*" width="75%" />
+<p class="caption">
+<em>The source pane contains opened scripts. It won’t appear until you’ve opened at least one.</em>
+</p>
+</div>
+<p><br></p>
+<p>Depending on the type of script, e.g. plain text scripts (<code>.R</code>), publications (<code>.Rmd</code>), presentations (<code>.Rpres</code>), and apps, each script provides different options in the pane’s toolbar. Common options include:</p>
+<ul>
+<li><strong>Show in New Window:</strong> Open the script in a separate window; valuable for two or more monitors</li>
+<li><strong>Save Current Document:</strong> Update an existing script or title and save a new script</li>
+<li><strong>Find/Replace:</strong> Both conventional and advanced options to find and replace code</li>
+<li><strong>Run:</strong> Run the line of code where the cursor is, or multiple lines if highlighted</li>
+<li><strong>Show Document Outline:</strong> View (and jump to) script’s table of contents</li>
+</ul>
+<p><br></p>
+</div>
+<div id="plots-viewer-help-panes" class="section level2">
+<h2>Plots, Viewer, &amp; Help Panes</h2>
+<p>The <strong>Plots</strong>, <strong>Viewer</strong>, and <strong>Help panes</strong> are used to viewing data visualizations, HTML output, and helpful documentation.</p>
+<p><br></p>
+<div id="the-plots-pane" class="section level3">
+<h3>The Plots Pane</h3>
+<p>The <strong>Plots pane</strong> allows users to view, export, and publish non-interactive data visualizations. R uses the built-in <code>graphics</code> package by default, but a variety of packages exist such as <code>lattice</code> and <code>ggplot2</code>. While the output displayed is not interactive, it is <em>responsive</em>, i.e it will re-render its scales appropriately if you change the height or width of a plot. Notably, the “Zoom” option opens visualizations in a new window, while the “Export” option allows you to save the image with user-defined dimensions and in a variety of formats.</p>
+<p><br></p>
+</div>
+<div id="the-viewer-pane" class="section level3">
+<h3>The Viewer Pane</h3>
+<p>The <strong>Viewer pane</strong> renders interactive graphics in HTML with the same options as the <strong>Plots pane</strong>. Brevity aside, it’s awesome.</p>
+<p><br></p>
+<center>
+<p><strong>The Plots &amp; Viewer Panes</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_plot_viewer.jpg" alt="*The Plots and Viewer panes visualize non-interactive and interactive graphics, respectively.*" width="95%" />
+<p class="caption">
+<em>The Plots and Viewer panes visualize non-interactive and interactive graphics, respectively.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="the-help-pane" class="section level3">
+<h3>The Help Pane</h3>
+<p>The <strong>Help pane</strong> is one of the most valuable panes for any R user. By calling function <code>help()</code> with a dataset, package, or bare function name (i.e. a function name without <code>()</code>), its documentation, if available, appears here.</p>
+<p><br></p>
+<p><strong>Note:</strong> Unless you’re using external data or custom functions, there’s almost always documentation. Whether it’s the unit of measurement for a variable in a dataset or the limits you can specify for a function argument, this little nook in RStudio is invaluable to new and advanced users, alike.</p>
+<p><br></p>
+<p><strong>Pro Tip:</strong> Instead of the <code>help()</code> function, you can use the <code>?</code> function before an object name, e.g. <code>?install.packages</code>.</p>
+<p><br></p>
+<center>
+<p><strong>The Help Pane</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_help.jpg" alt="*The invaluable Help pane displays documentation for packages, functions, and datasets.*" width="75%" />
+<p class="caption">
+<em>The invaluable Help pane displays documentation for packages, functions, and datasets.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="the-environment-and-history-panes" class="section level2">
+<h2>The Environment and History Panes</h2>
+<p>The <strong>Environment</strong> and <strong>History panes</strong> display the objects in your environment and the history of your in-console commands.</p>
+<p><br></p>
+<div id="the-environment-pane" class="section level3">
+<h3>The Environment Pane</h3>
+<p>Again, R is both a language and an environment. The <strong>Environment pane</strong> displays objects that are stored within your session’s <strong>workspace</strong>, or <strong>global environment</strong>, which must be recreated or reloaded with each new session. Note the following options:</p>
+<ul>
+<li><strong>Environment:</strong> Opens a dropdown menu to select different environments, e.g. package environments</li>
+<li><strong>Load Workspace:</strong> Opens a file explorer to load previously saved workspaces and their objects</li>
+<li><strong>Import Datasets:</strong> Opens a dropdown menu to read in datasets that you can store in objects</li>
+<li><strong>Clear Objects from Workspace:</strong> Removes all objects stored in the global environment</li>
+</ul>
+<p><br></p>
+<center>
+<p><strong>The Environment Pane</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_environment1.jpg" alt="*The environment pane displays any objects you've imported, loaded, or stored in your global environment.*" width="95%" />
+<p class="caption">
+<em>The environment pane displays any objects you’ve imported, loaded, or stored in your global environment.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="the-history-pane" class="section level3">
+<h3>The History Pane</h3>
+<p>The <strong>History pane</strong> documents every command you’ve executed in your session. When you select a line, you can paste it directly into the console pane with “To Console” or directly into the source pane with “To Source”.</p>
+<p><br></p>
+<center>
+<p><strong>The History Pane</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_history.jpg" alt="*The history pane records every command you've run in your session.*" width="75%" />
+<p class="caption">
+<em>The history pane records every command you’ve run in your session.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="customizing-your-pane-layout" class="section level2">
+<h2>Customizing Your Pane Layout</h2>
+<p>In RStudio, you can customize both where panes are displayed as well as which panes to show by default.</p>
+<p><br></p>
+<div id="layouts-for-beginners-taking-great-panes" class="section level3">
+<h3>Layouts for Beginners: Taking Great Panes</h3>
+<p>Panes cannot be removed entirely from the RStudio interface, you but can shuffle them by order of importance. Click the “Tools” dropdown in themenu, “Global Options…”, and “Pane Layout”. We recommend focusing on those discussed in this chapter.</p>
+<p><br></p>
+<center>
+<p><strong>Customizing Pane Layout</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_panes.jpg" alt="*You can customize which panes appear, and where, in Global Options' Pane Layout.*" width="95%" />
+<p class="caption">
+<em>You can customize which panes appear, and where, in Global Options’ Pane Layout.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="less-important-panes-or-panes-in-the-rear" class="section level3">
+<h3>Less Important Panes, or Panes in the Rear</h3>
+<p>There are a couple of panes worth mentioning for new users. However, they are seldom used by advanced users:</p>
+<ul>
+<li><strong>Files:</strong> Set working directories and create, copy, rename, and delete folders</li>
+<li><strong>Packages:</strong> Install, load, update, unload, and uninstall added (“User Library”) and built-in (“System Library”) packages</li>
+</ul>
+<p><br></p>
+<p><strong>Pro Tip:</strong> You probably won’t use these panes often. One of the benefits of scripted languages is that they can be reproduced by other users. As a rule, since much of your work will require loading packages, you should include the <code>library()</code> function with script-dependent packages at the start of every work. The same applies to working directories with the <code>setwd()</code> function.</p>
+<p><br></p>
+</div>
+<div id="expanding-to-fullscreen-focus-on-the-pane" class="section level3">
+<h3>Expanding to Fullscreen: Focus on the Pane</h3>
+<p>If you want to expand a pane, or “zoom”, to fullscreen mode, select “View” in the RStudio menu and “Panes”.</p>
+<p><br></p>
+<center>
+<p><strong>Toggling Fullscreen Panes</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_zoom.jpg" alt="*You can expand any pane to fullscreen mode in the &quot;View&quot; dropdown of the RStudio menu.*" width="75%" />
+<p class="caption">
+<em>You can expand any pane to fullscreen mode in the “View” dropdown of the RStudio menu.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="the-rstudio-menu-file-session-help" class="section level2">
+<h2>The RStudio Menu: File, Session, &amp; Help</h2>
+<p>The RStudio menu allows you to do virtually everythign we’ve seen in each pane and more. The following tours a few key menu sections we’ve not yet seen, including how to open new scripts, handle sessions, and access R-related cheat sheets.</p>
+<p><br></p>
+<div id="the-file-submenu-saving-loading" class="section level3">
+<h3>The File Submenu: Saving &amp; Loading</h3>
+<p>The <strong>File</strong> submenu is the start of every scripted data product in RStudio. Just select “New File” and a litany of possible data products, about which we’ll learn more over time, are available to open. Remaining options relate to the saving and loading of scripts, projects, and datasets.</p>
+<p><br></p>
+<center>
+<p><strong>The File Submenu</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_files.jpg" alt="*&quot;File&quot; handles all new, saving, and loading operations.*" width="50%" />
+<p class="caption">
+<em>“File” handles all new, saving, and loading operations.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="the-session-submenu-sessions-directories-restarting-r" class="section level3">
+<h3>The Session Submenu: Sessions, Directories, &amp; Restarting R</h3>
+<p>The <strong>Session</strong> submenu is a critical part of any R session. While you can always recreate a session by recreating objects, you can save computing time by loading saved session file. This submenu also allows you to set your working directory.</p>
+<p><br></p>
+<p><strong>Note:</strong> There are times when you just have to restart R - maybe you started an infinite recursion loop or maybe you attempted to read in the data from a month’s worth of Harrier Jet landings to local memory - if so, the “Restart R” option is here for you.</p>
+<p><br></p>
+<center>
+<p><strong>The Session Submenu</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_menu2.jpg" alt="*Save and load sessions, restart R, or handle directories in the session submenu.*" width="75%" />
+<p class="caption">
+<em>Save and load sessions, restart R, or handle directories in the session submenu.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="the-help-submenu-cheat-sheets" class="section level3">
+<h3>The Help Submenu: Cheat Sheets</h3>
+<p>The <strong>help menu</strong> has one main draw (for now): <strong>cheat sheets</strong>. Selecting a cheat sheet will automatically download a cheat sheet on an R-related topic of your choosing. Typically, cheat sheets summarize RStudio related packages and data products, but there is one for base R. For example, you can find the RStudio IDE cheat sheet <a href="https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf">here</a>.</p>
+<p><br></p>
+<center>
+<p><strong>The Help Submenu</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_cheat_sheets.jpg" alt="*Grab cheat sheets on the fly from the Help submenu.*" width="75%" />
+<p class="caption">
+<em>Grab cheat sheets on the fly from the Help submenu.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="global-options-aesthetic-functional-preferences" class="section level2">
+<h2>Global Options: Aesthetic &amp; Functional Preferences</h2>
+<p><strong>Global options</strong> are accessed in the “Tools” submenu and allow users to modify their RStudio interface in myriad ways, both aesthetically and functionally. We recommend new users experiment with these options and visit a few notable modifications.</p>
+<p><br></p>
+<center>
+<p><strong>Accessing Global Options</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_globaloptions.jpg" alt="*Access &quot;Global Options&quot; in the &quot;Tools&quot; submenu.*" width="75%" />
+<p class="caption">
+<em>Access “Global Options” in the “Tools” submenu.</em>
+</p>
+</div>
+<p><br></p>
+<div id="code-autoformatting-behavior" class="section level3">
+<h3>Code: Autoformatting &amp; Behavior</h3>
+<p>The “Code” section affects the way R automatically formats your code and how you choose to write and run it. It has sensible defaults, many of which you may not be prepared to appreciate quite yet. For now, consider the following:</p>
+<ul>
+<li><strong>Indentating:</strong> In the “Editing” tab, consider a “tab width” that works best for you. When indenting, would you prefer two characters (i.e. spaces), or four? The former allows more compact code. The latter allows for more intepretable code.</li>
+<li><strong>Guide Margin:</strong> In the “Display” tab, consider applying a “margin column” of 80 or 100 characters (i.e. spaces). This creates a subtle guide in your scripts that helps keep code concise and readable. Even basic code within basic code can create, what RStudio’s Chief Scientist Hadley Wickham refers to as, <a href="https://en.wikipedia.org/wiki/Dagwood_sandwich">“Dagwood sandwich” code</a>.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="appearance-express-yourself-intepretably" class="section level3">
+<h3>Appearance: Express Yourself Intepretably</h3>
+<p>The <strong>Appearance</strong> section allow you to customize the size, font, and color of your text as well as the “theme” colors of your RStudio interface. Here, “theme” is both functional and aesthetic. For example, darker themes are more conducive to night owls. For all themes, certain syntax uses different colors to make your code more interpretable - keep this in mind for each theme!</p>
+<p><br></p>
+<center>
+<p><strong>Notable Global Options: Code &amp; Appearance</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="figures/ch-002_image_options2.jpg" alt="*Global options allow you to set preferences that can significantly impact your experience with RStudio.*" width="95%" />
+<p class="caption">
+<em>Global options allow you to set preferences that can significantly impact your experience with RStudio.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="further-resources" class="section level2">
+<h2>Further Resources</h2>
+<p>The following resources are helpful in learning more about RStudio and coding conventions:</p>
+<p><br></p>
+<p><strong>I) Full Introductions to RStudio</strong></p>
+<ul>
+<li><a href="https://moderndive.com/2-getting-started.html#r-rstudio">“What are R and RStudio?”</a> (Ismay &amp; Kim, 2019)</li>
+<li><a href="https://rpubs.com/jamisoncrawford/nutsandbolts">“Intro to R: Nuts &amp; Bolts”</a> (Crawford, 2018)</li>
+</ul>
+<p><strong>II) About RStudio</strong></p>
+<ul>
+<li><a href="https://www.rstudio.com/">RStudio Homepage</a> (RStudio, 2019)</li>
+<li><a href="https://www.rstudio.com/about/">RStudio About Page</a> (RStudio, 2019)</li>
+<li><a href="https://www.rstudio.com/products/rstudio/">RStudio Product Page</a> (RStudio, 2019)</li>
+</ul>
+<p><strong>III) Conventions </strong></p>
+<ul>
+<li><a href="https://journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf">“The State of Naming Conventions in R”</a> (Baath, 2012)</li>
+</ul>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

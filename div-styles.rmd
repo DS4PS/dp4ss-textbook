@@ -1,0 +1,184 @@
+---
+output:
+  html_document:
+  theme: readable
+highlight: tango
+self_contained: false
+css: textbook.css
+---
+  
+  
+# Div Styles
+  
+
+
+
+
+
+  
+
+## question
+
+<div class="question">
+  
+Which of these calculations is correct? 
+  
+Explain why. 
+
+</div>
+
+
+**Use:**
+
+```
+<div class="question">
+  
+Which of these calculations is correct? 
+  
+Explain why. 
+
+</div>
+```
+
+```
+.question{
+  background-color: LightSteelBlue;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  padding-top:10px;
+  padding-bottom:10px;
+  font-size: 85%;
+  font-family: Verdana;
+  /* font-weight: bold; */
+  color: #FFFFFF !important;
+  padding-left:05%;
+  padding-right:05%;
+  margin-bottom:40px;
+}
+```
+
+
+
+## quiz 
+
+<div class="quiz">
+  
+  Create a function to convert Fahrenheit temperatures to Celsius.
+
+* What arguments do you need?
+  * How many decimals do you need? Consider using the `round( number, decimals )` function to simplify output.
+* Don't forget a return statement!
+
+</div>
+
+```
+.quiz{
+  background-color: #bcb2a4; 
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  padding-top:10px;
+  padding-bottom:10px;
+  font-size: 87%;
+  font-family: Verdana;
+  /* font-weight: bold; */ 
+  color: #FFFFFF !important;
+  padding-left:05%;
+  padding-right:05%;
+  margin-bottom:40px;
+}
+
+```
+  
+## note
+
+<div class="note">
+  
+**NOTE:**
+
+Can you still use custom values for those arguments after defaults are set? 
+  
+</div>
+
+
+```
+.note{
+  background-color: #E0E0E2;  /* #E0E0E2; PLATINUM  */ 
+  /* border-radius: 10px; */
+  border: 1px solid lightgray; 
+  padding-top:10px;
+  padding-bottom:10px;
+  font-size: 85%;
+  font-family: Verdana;
+  /* font-weight: bold; */
+  color: #3c4859 !important;
+  padding-left:05%;
+  padding-right:05%;
+  margin-bottom:40px;
+}
+```
+
+  
+
+## caution
+
+<div class="caution">
+  
+WARNING:
+  
+Note that **calcMortgage( principal=100000 )** now works because the function uses the default values for years and APR. 
+
+```
+some code here
+y <- x + round(2)
+```
+
+</div>
+  
+
+```
+.caution{
+  background-color: darkred;
+  /* border-radius: 10px; */
+  border: 1px solid lightgray;
+  padding-top:10px;
+  padding-bottom:5px;
+  font-size: 75%;
+  font-family: Verdana;
+  /* font-weight: bold; */
+  color: #FFFFFF !important;
+  padding-left:05%;
+  padding-right:05%;
+  margin-bottom:40px;
+}
+.caution code{
+  font-size: 150% !important;
+}
+```
+  
+## tip
+
+
+<div class="tip">
+  
+What happens if you omit an argument from the function?  Why?
+
+#153243; YANKEES BLUE
+  
+</div>
+
+
+## warning
+
+<div class="warning">
+  
+WARNING:
+  
+Note that **calcMortgage( principal=100000 )** now works because the function uses the default values for years and APR. 
+
+```
+some code here
+y <- x + round(2)
+```
+
+</div>
+  

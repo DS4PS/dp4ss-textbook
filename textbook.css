@@ -1,17 +1,20 @@
-div.powered-by-datacamp{
-   margin-bottom:40px;
-   display: none;
+.powered-by-datacamp{
+   margin-bottom: 40px;
+   display: none !important;
 }
+
 div.datacamp-exercise{
-   margin-bottom:40px;
+   margin-bottom: 40px !important;
 }
-.datacamp-exercise .dcl-btn-primary {
+
+div.datacamp-exercise .dcl-btn-primary {
     /* background-color: #fdc551; */
     /* color: #6d561e; */
     background-color: LightSteelBlue; /* #d9f5ff;  #008B8B; */
     color: white; /* #008B8B; */
 }
-div.question{
+
+.question{
   background-color: LightSteelBlue;
   border-radius: 10px;
   border: 1px solid lightgray;
@@ -20,12 +23,13 @@ div.question{
   font-size: 85%;
   font-family: Verdana;
   /* font-weight: bold; */
-  color: white;
+  color: #FFFFFF !important;
   padding-left:05%;
   padding-right:05%;
   margin-bottom:40px;
 }
-div.quiz{
+
+.quiz{
   background-color: #bcb2a4; /* #b45959; */
   border-radius: 10px;
   border: 1px solid lightgray;
@@ -34,12 +38,87 @@ div.quiz{
   font-size: 87%;
   font-family: Verdana;
   /* font-weight: bold; */ 
-  color: white;
+  color: #FFFFFF !important;
   padding-left:05%;
   padding-right:05%;
   margin-bottom:40px;
 }
-body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+
+
+/* #153243; YANKEES BLUE  */ 
+/* #DC965A; PUMPKIN */
+
+.tip{
+  background-color: #153243;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  padding-top:10px;
+  padding-bottom:10px;
+  font-size: 85%;
+  font-family: Verdana;
+  /* font-weight: bold; */
+  color: #FFFFFF !important;
+  padding-left:05%;
+  padding-right:05%;
+  margin-bottom:40px;
+}
+
+/* #E0E0E2; PLATINUM  */ 
+
+.note{
+  background-color: #E0E0E2;  /* #E0E0E2; PLATINUM  */ 
+  /* border-radius: 10px; */
+  border: 1px solid lightgray; 
+  padding-top:10px;
+  padding-bottom:10px;
+  font-size: 85%;
+  font-family: Verdana;
+  /* font-weight: bold; */
+  color: #3c4859 !important;
+  padding-left:05%;
+  padding-right:05%;
+  margin-bottom:40px;
+}
+
+.caution{
+  background-color: darkred;
+  /* border-radius: 10px; */
+  border: 1px solid lightgray;
+  padding-top:10px;
+  padding-bottom:5px;
+  font-size: 75%;
+  font-family: Verdana;
+  /* font-weight: bold; */
+  color: #FFFFFF !important;
+  padding-left:05%;
+  padding-right:05%;
+  margin-bottom:40px;
+}
+.caution code{
+  font-size: 150% !important;
+}
+
+
+.warning{
+  background-color: #9D8420;  /* DARK YELLOW */
+  /* border-radius: 10px; */
+  border: 1px solid lightgray;
+  padding-top:10px;
+  padding-bottom:5px;
+  font-size: 75%;
+  font-family: Verdana;
+  /* font-weight: bold; */
+  color: #FFFFFF !important;
+  padding-left:05%;
+  padding-right:05%;
+  margin-bottom:40px;
+}
+.warning code{
+  font-size: 150% !important;
+}
+
+body{
+     font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
      font-size:calc(1.5em + 0.25vw);
      font-weight:300;line-height:1.65;
      -webkit-font-smoothing:antialiased;
@@ -54,15 +133,14 @@ blockquote,figure{margin:0}
   margin-top:30px;
   margin-bottom:80px }
 img {
-  padding:5px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  /* width: 80%; */
-  max-width:80%;
-  margin-top:60px;
-  margin-bottom:60px }
-  
+    max-width: 90% !important;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top:30px;
+    margin-bottom:40px;
+}
+ 
 a{
   /* color:inherit; */
   color:darkred;
@@ -116,6 +194,7 @@ pre{
   margin-left: auto;
   margin-right: auto;
   max-width:80%;} */
+
 p code{
   /* background:rgba(148,148,148,0.2); 
   background:#cccccc; */
@@ -245,63 +324,4 @@ body>header h1{width:100%;line-height:1.8;margin-bottom:.5em}
 {
     color: black;
     background-color: #f7f7f7;
-}
-```
-
-
-
-
-```{r, eval=F, echo=F}
-p {
-color: black;
-margin: 0 0 20px 0;
-}
-td {
-    padding: 3px 10px 3px 10px;
-    text-align: center;
-}
-table
-{ 
-    margin-left: auto;
-    margin-right: auto;
-    margin-top:80px;
-    margin-bottom:100px;
-}
-h1, h2{
-  margin-top:100px;
-  margin-bottom:40px;
-}
-H5{
-    text-align: center;
-    color: gray;
-    font-size:0.8em;
-}
-img {
-    max-width: 90%;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top:30px;
-    margin-bottom:40px;
-}
-div.powered-by-datacamp{
-   margin-bottom:40px;
-   display: none;
-}
-div.datacamp-exercise{
-   margin-bottom:40px;
-}
-div.sourceCode {
-   margin-bottom:40px;
-   margin-bottom:60px;
-}
-pre.code {
-   display: block; 
-   margin-bottom:20px;
-   margin-bottom:20px;
-}
-code {
-  font-size: 92%;
-  margin-bottom: 10px;
-  margin-top: 10px;
 }

@@ -1,19 +1,35 @@
 ---
-title: "RStudio"
 output:
   html_document:
     theme: readable
     highlight: tango
     self_contained: false
-    css: custom.css
+    css: textbook.css
 ---
 
+
+
+
+![](http://442r58kc8ke1y38f62ssb208-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/RStudio-Logo-Flat.png)
+
+![](http://rprogramming.net/wp-content/uploads/2012/10/RStudio-Screenshot.png)
+
+
+
+<br>
+<br>
+
+
+# R Studio
+
+<div class="tip">
 ## Key Concepts
 
-This chapter defines RStudio, provides a tour of the RStudio environment, and overviews some helpful shortcuts on getting started in RStudio. Lastly, it introduces common practices in writing clean, understandable, and helpful code. 
+This chapter introduces RStudio, a Graphical User Interface (GUI) that makes it easier to use powerful features in R and manage large projects. 
+
+New vocabulary: 
 
 * Integrated Development Environment (IDE)
-* Graphical User Interface (GUI)
 * RStudio Panes:
     1. Console
     2. Source
@@ -21,15 +37,16 @@ This chapter defines RStudio, provides a tour of the RStudio environment, and ov
     4. Viewer
     5. Environment
     6. History
-* Macros
 * Workspace & Global Environment
-* Conventions
-* Verbosity
-* Case
-* Annotation
-* Style Guides
 
 <br>
+<br>
+
+</div>
+
+
+
+
 
 ## What is RStudio?
 
@@ -43,7 +60,7 @@ RStudio's layout is comprised of a menu, console, and a series of **panes**, or 
 
 ```{r 002.a, echo=F, fig.align="center", fig.cap="*The RStudio environment with four open panes: The Source, Console, Environment, and Viewer panes.*", out.width="95%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_rstudio.jpg")
+knitr::include_graphics("figures/ch-002_image_rstudio.jpg")
 
 ```
 
@@ -51,7 +68,16 @@ knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_fi
 
 ## Downloading & Installing RStudio
 
-RStudio is free, open source, and easy to install. You can download the *Desktop* edition [here](https://www.rstudio.com/products/rstudio/download/) by clicking the link appropriate to your operating system and following the default steps in the installation wizard.
+RStudio is free, open source, and easy to install. Select the *Desktop* edition on their download page:
+
+<br>
+
+<button onclick="location.href='https://www.rstudio.com/products/rstudio/download/'" type="button">
+         DOWNLOAD R STUDIO</button>
+         
+<br>
+
+Note that you should install Core R from the CRAN before installing R Studio. 
 
 <br>
 
@@ -80,7 +106,7 @@ The **console pane** is where R expressions are evaluated. In other words, this 
 
 ```{r 002.b, echo=F, fig.align="center", fig.cap='*The console is where code is executed and is typically used for "quick and dirty" tasks.*', out.width="75%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_console.jpg")
+knitr::include_graphics("figures/ch-002_image_console.jpg")
 
 ```
 
@@ -106,7 +132,7 @@ The **source pane** contains any opened scripts. In starting a new R session, th
 
 ```{r 002.c, echo=F, fig.align="center", fig.cap="*The source pane contains opened scripts. It won't appear until you've opened at least one.*", out.width="75%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_script.jpg")
+knitr::include_graphics("figures/ch-002_image_script.jpg")
 
 ```
 
@@ -148,7 +174,7 @@ The **Viewer pane** renders interactive graphics in HTML with the same options a
 
 ```{r 002.e, echo=F, fig.align="center", fig.cap="*The Plots and Viewer panes visualize non-interactive and interactive graphics, respectively.*", out.width="95%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_plot_viewer.jpg")
+knitr::include_graphics("figures/ch-002_image_plot_viewer.jpg")
 
 ```
 
@@ -176,7 +202,7 @@ The **Help pane** is one of the most valuable panes for any R user. By calling f
 
 ```{r 002.f, echo=F, fig.align="center", fig.cap="*The invaluable Help pane displays documentation for packages, functions, and datasets.*", out.width="75%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_help.jpg")
+knitr::include_graphics("figures/ch-002_image_help.jpg")
 
 ```
 
@@ -207,7 +233,7 @@ Again, R is both a language and an environment. The **Environment pane** display
 
 ```{r 002.g, echo=F, fig.align="center", fig.cap="*The environment pane displays any objects you've imported, loaded, or stored in your global environment.*", out.width="95%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_environment1.jpg")
+knitr::include_graphics("figures/ch-002_image_environment1.jpg")
 
 ```
 
@@ -227,7 +253,7 @@ The **History pane** documents every command you've executed in your session. Wh
 
 ```{r 002.h, echo=F, fig.align="center", fig.cap="*The history pane records every command you've run in your session.*", out.width="75%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_history.jpg")
+knitr::include_graphics("figures/ch-002_image_history.jpg")
 
 ```
 
@@ -253,7 +279,7 @@ Panes cannot be removed entirely from the RStudio interface, you but can shuffle
 
 ```{r 002.x, echo=F, fig.align="center", fig.cap="*You can customize which panes appear, and where, in Global Options' Pane Layout.*", out.width="95%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_panes.jpg")
+knitr::include_graphics("figures/ch-002_image_panes.jpg")
 
 ```
 
@@ -286,7 +312,7 @@ If you want to expand a pane, or "zoom", to fullscreen mode, select "View" in th
 
 ```{r 002.y, echo=F, fig.align="center", fig.cap='*You can expand any pane to fullscreen mode in the "View" dropdown of the RStudio menu.*', out.width="75%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_zoom.jpg")
+knitr::include_graphics("figures/ch-002_image_zoom.jpg")
 
 ```
 
@@ -312,7 +338,7 @@ The **File** submenu is the start of every scripted data product in RStudio. Jus
 
 ```{r 002.z, echo=F, fig.align="center", fig.cap='*"File" handles all new, saving, and loading operations.*', out.width="50%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_files.jpg")
+knitr::include_graphics("figures/ch-002_image_files.jpg")
 
 ```
 
@@ -336,7 +362,7 @@ The **Session** submenu is a critical part of any R session. While you can alway
 
 ```{r 002.j, echo=F, fig.align="center", fig.cap='*Save and load sessions, restart R, or handle directories in the session submenu.*', out.width="75%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_menu2.jpg")
+knitr::include_graphics("figures/ch-002_image_menu2.jpg")
 
 ```
 
@@ -356,7 +382,7 @@ The **help menu** has one main draw (for now): **cheat sheets**. Selecting a che
 
 ```{r 002.k, echo=F, fig.align="center", fig.cap='*Grab cheat sheets on the fly from the Help submenu.*', out.width="75%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_cheat_sheets.jpg")
+knitr::include_graphics("figures/ch-002_image_cheat_sheets.jpg")
 
 ```
 
@@ -376,7 +402,7 @@ knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_fi
 
 ```{r 002.m, echo=F, fig.align="center", fig.cap='*Access "Global Options" in the "Tools" submenu.*', out.width="75%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_globaloptions.jpg")
+knitr::include_graphics("figures/ch-002_image_globaloptions.jpg")
 
 ```
 
@@ -405,231 +431,11 @@ The **Appearance** section allow you to customize the size, font, and color of y
 
 ```{r 002.l, echo=F, fig.align="center", fig.cap='*Global options allow you to set preferences that can significantly impact your experience with RStudio.*', out.width="95%"}
 
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002_image_options2.jpg")
+knitr::include_graphics("figures/ch-002_image_options2.jpg")
 
 ```
 
-<br>
-
-## Coding Conventions: Best Practices in Formatting & Annotation
-
-> “Any fool can write code that a computer can understand. Good programmers write code that humans can understand.” (Martin Fowler)
-
-**Conventions** describe the ways in which R users format, comment, and name objects in their code. There are several best practices that can help keep your code clean, organized, consistent, and interpretable. For whom do we use conventions?
-
-* Present You
-* Future You
-* Consumers
-* Collaborators
-
-<br>
-
-### Indentation
-
-In the same way we use indentation to indicate the start of a new paragraph, indentation in code is a powerful cue that a command is comprised of more than one line. Observe the following - what arguments are passed in function `read.csv()`?
-
-<br>
-
-```{r eval=F}
-
-read.csv(file = "~/Projects/DS4PS/my_data.csv", header = TRUE, stringsAsFactors = FALSE)
-
-```
-
-<br>
-
-In the above example, function `read.csv()`, arguments `file =`, `header =`, and `stringsAsFactors =` are passed to function `read.csv()`. It's a bit crowded, but we can make it much more interpretable:
-
-<br>
-
-```{r eval=F}
-
-read.csv(file = "~/Projects/DS4PS/my_data.csv", 
-         header = TRUE, 
-         stringsAsFactors = FALSE)
-
-```
-
-<br>
-
-In the second example, each argument in the `read.csv()` function uses a new line. When pressing the "return" key in the middle of a function call, R automatically indents ensuing lines at the beinning of the `(`, making the code much more legible.
-
-<br>
-
-### Spacing
-
-Let's view a similar example with function `read.csv()`, properly indented, but, this time, we won't use spaces:
-
-<br>
-
-```{r eval=F}
-
-read.csv(file="~/Projects/DS4PS/my_data.csv", 
-         col.names=c("ID","name","Gender","Weight","Dosage"),
-         row.names=1:25,
-         sep=",",   
-         header=TRUE, 
-         stringsAsFactors=FALSE)
-
-```
-
-<br>
-
-In the above call to function `read.csv()`, while indentation is helpful, it's difficult to parse what exactly we're telling each argument to do. We can clean this up considerably with consistent spacing:
-
-<br>
-
-```{r eval=F}
-
-read.csv(file = "~/Projects/DS4PS/my_data.csv", 
-         col.names = c("ID", "name", "Gender", "Weight", "Dosage"),
-         row.names = 1:25,
-         sep = ",",   
-         header = TRUE, 
-         stringsAsFactors = FALSE)
-
-```
-
-<br>
-
-While the code may still be difficult to interpret for beginners, it's at least more visually navigable. What's more, we can use spacing to great effect not only within function calls, but between them, like so:
-
-<br>
-
-```{r eval=F}
-
-data_2017 <- read.csv(file = "~/Projects/DS4PS/2017_data.csv", 
-                      header = TRUE, 
-                      stringsAsFactors = FALSE)
-
-data_2018 <- read.csv(file = "~/Projects/DS4PS/2018_data.csv", 
-                      header = TRUE, 
-                      stringsAsFactors = FALSE)
-
-data_2019 <- read.csv(file = "~/Projects/DS4PS/2019_data.csv", 
-                      header = TRUE, 
-                      stringsAsFactors = FALSE)
-
-```
-
-<br>
-
-Not all R codes use the same spacing techniques, but what's most important is that they're sensible and consistent.
-
-<br>
-
-### Annotation
-
-> “Your closest collaborator is you six months ago, but you don’t reply to emails.” (Karl Broman)
-
-Code **annotation** is the practice of including headers, comments, and other signposting that explains what your code is doing:
-
-* The hashtag, or `#`, is used to create comments and headers
-* Comments can be placed in the middle of a command without interference
-* The `#` can also be used as a header to indicate a new section of code
-* Multiline annotation is possible by including an apostrophe, i.e. `#'`
-
-<br>
-
-```{r eval=F}
-
-# IMPORT PATIENT RECORDS
-
-    #' The following imports patient records for
-    #' experiment x and the current dosages
-    #' administered to each.
-
-dat <- read.csv(file = "~/Projects/DS4PS/my_data.csv",        # Import "my_data.csv"
-                col.names = c("ID", "name", 
-                              "Gender", "Weight", "Dosage"),  # Rename columns
-                row.names = 1:25,                             # Label rows as 1-25
-                header = TRUE,                                # First row = variable name
-                stringsAsFactors = FALSE)                     # Don't convert to categorical
-
-```
-
-<br>
-
-### Verbosity
-
-> “Good code is its own best documentation. As you’re about to add a comment, ask yourself, ‘How can I improve the code so that this comment isn’t needed?’” (Steve McConnell)
-
-**Verbosity** describes the degree to which your code is human-readable. Verbose code avoids abbreviations and uses full argument names. For example, the following function calls to `read.csv()` perform the exact same tasks:
-
-<br>
-
-```{r eval=F}
-
-read.csv("~/Projects/DS4PS/my_data.csv",           # Not verbose
-         T,
-         ",", 
-         "", 
-         ".")
-
-read.csv(file = "~/Projects/DS4PS/my_data.csv",    # Verbose
-         header = TRUE,
-         sep = ",", 
-         quote = "", 
-         dec = ".")
-
-```
-
-<br>
-
-When in doubt, err on the side of verbosity. *No one will ever complain that your code is too legible.*
-
-<br>
-
-### Naming Conventions & Case
-
-**Naming conventions** describe consistently used guidelines when naming new objects and, in particular, the use of **case**. Like uppercase and lowercase letters in human language, case refers to the use of capitalization and separating characters when joining two or more words (e.g. `-`, `_`, and `.`). Here are a few examples of case in naming conventions:
-
-<br>
-
-```{r eval=F}
-
-newDataset     # Lower camel caps
-NewDataset     # Upper camel caps
-
-new.dataset    # Lower leopard case
-New.Dataset    # Upper leopard case
-
-new_dataset    # Lower snake case
-New_Dataset    # Upper snake case
-
-new-dataset    # Lower kebab case
-New-Dataset    # Upper kebab case
-
-```
-
-<br>
-
-While "Camel Caps" is near-universally recognized, the remaining case categories are somewhat informal. Nomenclature aside, so long as you use case consistently and sensibly, you can call it whatever animal you wish!
-
-<br>
-
-**Pro Tip:** Packages and functions used in base R consistently use `lower.leopard` case, separated with `.`, while those created by RStudio use `lower_snake` case. If you see frequent `_` separators, it's safe to assume you're not seeing base R.
-
-<br>
-
-### Style Guides
-
-Many organizations that frequently use scripting languages employ a **style guide**. Style guides codify conventions for all employees. Per Google's own style guide, its goal is to "make our R code easier to read, share, and verify." 
-
-<br>
-
-View their style guide [here](http://web.stanford.edu/class/cs109l/unrestricted/resources/google-style.html) to see how conventions are standardized across an organization.
-
-<br>
-
-```{r 002.n, echo=F, fig.align="center", out.width="75%"}
-
-knitr::include_graphics("~/Projects/DS4PS/ch-002-rstudio_files/ch-002-rstudio_files/ch-002-image-code_quality.png")
-
-```
-<center> *Don't be this person. Source: [XKCD](https://xkcd.com/1513/)* </center>
-
-<br>
+<br> 
 
 ## Further Resources
 

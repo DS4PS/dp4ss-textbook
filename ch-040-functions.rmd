@@ -5,7 +5,7 @@ output:
     theme: readable
     highlight: tango
     self_contained: false
-    css: custom.css
+    css: textbook.css
 ---
 
 
@@ -95,7 +95,7 @@ calcMortgage( principal=100000, APR=0.045 )
 ```
 
 
-<div class="question">
+<div class="tip">
 
 What happens if you omit an argument from the function?  Why?
 
@@ -157,7 +157,7 @@ calcMortgage( principal=100000, years=30, APR=0.045 )
 calcMortgage( principal=100000 )
 ```
 
-<div class="question">
+<div class="caution">
 
 Note that **calcMortgage( principal=100000 )** now works because the function uses the default values for years and APR. 
 
@@ -191,7 +191,7 @@ args( calcMortgage )
 calcMortgage( principal=100000, years=15, APR=0.03 )
 ```
 
-<div class="question">
+<div class="note">
 
 Can you still use custom values for those arguments after defaults are set? 
 
@@ -311,5 +311,23 @@ Can you use this function to convert from Celsius to Fahrenheit?
 
 <br>
 <br>
+
+
+```{css, echo=F, eval=F}
+div.powered-by-datacamp{
+   margin-bottom:40px;
+   display: none;
+}
+div.datacamp-exercise{
+   margin-bottom:40px;
+}
+.datacamp-exercise .dcl-btn-primary {
+    /* background-color: #fdc551; */
+    /* color: #6d561e; */
+    background-color: LightSteelBlue; /* #d9f5ff;  #008B8B; */
+    color: white; /* #008B8B; */
+}
+```
+
 
 
