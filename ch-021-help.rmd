@@ -1,0 +1,422 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: textbook.css
+---
+
+
+
+
+```{r, eval=F, echo=F}
+![](https://writingdragonsblog.files.wordpress.com/2016/01/htbd.jpg?w=700)
+```
+
+
+# *Here There be Dragons*
+
+
+![](figures/keyboard-dragon.jpg)
+
+
+
+# HELP! 
+
+
+<div class="tip">
+
+## Key Concepts
+
+You will get stuck while learning to code. 
+
+
+```{r, echo=F, fig.align="left", out.width="50%"}
+
+knitr::include_graphics("https://i0.wp.com/thecrucialvoice.com/wp-content/uploads/2012/11/title-screen_go_web1-960x650.png?ssl=1")
+
+```
+
+What are the best strategies for gettting out of a jam? Key concepts include:
+
+* Error messages
+* Documentation 
+* Discussion boards 
+* Vignettes
+
+<br>
+<br>
+
+</div>
+
+<br>
+
+## Learning How to Learn
+
+
+
+  *When I was younger, so much younger than today*  
+  *I never needed anybody's help in any way*  
+  *But now these days are gone, I'm not so self assured*  
+  *Now I find I've changed my mind and opened up the doors*  
+
+---
+
+Let's begin this chapter by stating and unpacking four assertions: 
+
+1. **Similarity to Human Language:** Learning R is very similar to learning another human language. 
+2. **Limitations & Prioritizations:** You will never learn everything there is to know in R.
+3. **Lifelong Learning:** The ultimate end to learning R is to *learn how to learn it*.
+
+---
+
+<br>
+
+
+
+### Similarities Between Human & Machine Languages 
+
+The similarities between human languages (e.g. English, Arabic, Mandarin) and machine languages (e.g. R, Python, JavaScript) are astounding, but a nuanced discussion as to why is beyond the scope of this introduction. As examples, however, both human and machine languages:
+
+* Live or die depending on use
+* Derive from older languages and have evolved into new languages
+* Differ semantically but are arranged with similar grammatical elements (e.g. nouns, verbs)
+* Contain cognates between languages, i.e. elements that are similar in appearance and meaning
+
+<br>
+
+Why is this important? *You become fluent in R in the same way you would a foreign language*:
+
+* **Reinforcement:** Practice, teaching
+* **Instruction:** Courses, books, documentation
+* **Necessity:** Troubleshooting, resolving issues, deadlines
+* **Interaction:** Collaboration, meetups, forums, conferences
+* **Immersion:** Professional and volunteer work, podcasts, articles
+
+<br>
+
+<div class="note">
+
+**Fun Fact:** There are many examples in R that compare human and machine language. RStudio's [ggplot2](https://ggplot2.tidyverse.org/) is a popular R package for data visualization based on Leland Wilkinson's framework, "The Grammar of Graphics" (1999), i.e. the `gg` in `ggplot2`. Similarly, the [dplyr](https://dplyr.tidyverse.org/) package is described as a "grammar of data manipulation", in which functions are described as "verbs".
+
+</div>
+
+<br>
+
+### You Can't Learn Everything in R (Nor Should You)
+
+The body of knowledge in R is growing exponentially. It's impossible (and unnecessary) to learn (let alone retain) everything the language offers. Why?
+
+* Packages and functions are constantly being updated, replaced, or deprecated
+* Beyond base R, there are tens of thousands of packages; new ones are made every day
+* For every traditional science, there is a complementary computational science
+* In sum, to remain current in R, one must remain current with... everything
+
+<br>
+
+Accepting these limitations is liberating. It allows one to focus on an *ab initio*, or "first principles" approach to learning R. That is, start with the basics, then specialize.
+
+<br>
+
+### The Ultimate Objective: Learning How to Learn R
+
+> "I am always doing that which I cannot do, in order that I may learn how to do it." (Picasso)
+
+There are few telltale signs that you're becoming fluent in R. For example, you may:
+
+* Achieve the same results as your old code with significantly less code
+* Use search engines less frequently or not at all while coding
+* Be approached by others for collaborative work
+* Appraise the quality of code and data products
+* Begin dreaming in R (just kidding)
+
+<br>
+
+The ultimate measure of having learned R is to *learn how to learn it*. This is less empirically evident than the above examples, and requires some introspection and emotional awareness to gauge. For instance, imagine you've reached some impasse that the "first principles" approach to R fails to resolve. Do you:
+
+* Pore over online forums? 
+* Explore documentation and vignettes?
+* Search for packages with potential solutions?
+* Boldly install and learn said package(s) without hesitation?
+* Recover when fail to resolve the issue? Fail and recover again?
+* Remain firm in your conviction that you will resolve the issue?
+
+<br>
+
+```{r img_troubleshooting, echo=F, fig.align="center", out.width="60%"}
+
+knitr::include_graphics("https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png")
+
+```
+
+
+<center> *The struggle is real. Source: [XKCD](https://xkcd.com/979/)* </center>
+
+<br>
+
+This is only one of many hypothetical scenarios. Learning how to learn R is not a matter of learning something new everyday (e.g. a function, package, technique, or theory), but the cyclical process of learning in the face of necessity, shoring up your knowledge over some indefinite period, and learning again when the need arises. Above all, you'll know you've learned how to learn R when you no longer doubt your ability to resolve what once seemed impossible.
+
+<br>
+
+## Troubleshooting in R
+
+> "The first step in fixing a broken program is getting it to fail repeatably." (Tom Duff)
+
+Your code is going to fail. A lot. We encounter errors all the time. The following is a brief overview for recognizing a problem, as well as myriad strategies to overcome one.
+
+<br>
+
+### Recognizing & Understanding Trouble
+
+Two simple criteria must be met in order to recognize trouble with your code ([Peng et al. 2017](https://bookdown.org/rdpeng/RProgDA/)):
+
+1. You expect your code to behave in a certain way
+2. Your code doesn't behave as expected
+
+Oftentimes, the best case scenario is that R will throw an **error message**. Error messages signal that R has encountered some fatal flaw in your code and, in consequence, nothing happens.
+
+The next best scenario is that R will throw a **warning message**. Warning messages signal that R has successfully evaluated and executed code, but something unexpected happened, and R wants you to know about it.
+
+The worst and most pernicious scenario is when your code runs perfectly fine, without error or warning messages, yet the output isn't exactly what you'd wanted. If you recognize this, that's great. If you don't recognize this, errors flow downstream and can be difficult to detect and fix. *Always inspect your output*.
+
+<br>
+
+<div class="tip">
+
+**Pro Tip:** Oftentimes, users place too much emphasis on fixing their expected results and fail to consider their original expectations. *Never neglect revisiting your expectations*, as it's possible that they, not your code, may explain an error (ibid.).
+
+</div>
+
+<br>
+
+### Troubleshooting: Documentation & Vignettes
+
+When you're in a jam, the foremost strategy for resolving said jam is to read any relevant documentation.
+
+<br>
+
+#### Built-In Documentation
+
+All base R functions, as well as packages, functions, and datasets downloaded from CRAN (Comprehensive R Archie Network) contain documentation that can be accessed via the `help()` or `?` functions. 
+
+When called, the **Help** pane displays built-in documentation, which typically contains names, descriptions, templates, arguments, values, references, related objects, and examples.
+
+Observe the following calls to `help()` on function `median()`:
+
+```{r eval=FALSE}
+help(median)
+?median
+```
+
+```{r img_helpdoc, echo=F, fig.align="center", fig.cap='*Built-in documentation is displayed with function* `help()` *and an object name.*', out.width="75%"}
+
+knitr::include_graphics("https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/figures/helpdoc_med.jpg")
+
+```
+
+<br>
+
+#### External Documentation
+
+Datasets found "in the wild" often have documentation containing metadata, variable definitions, and other helpful information, while many functions have external documentation outside of CRAN.
+
+<br>
+
+<center>
+
+**Documentation for the Pheonix Fire Department Data**
+
+</center>
+
+```{r img_ext_doc_pfd, echo=F, fig.align="center", fig.cap="*Documentation on operational statistics data on the City of Phoenix Open Data portal.*", out.width="75%"}
+
+knitr::include_graphics("https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/figures/externaldoc_pazfiredep.jpg")
+
+```
+
+<br>
+
+<center>
+
+**Documentation for RStudio's "dplyr" Package**
+
+</center>
+
+```{r img_ext_doc_dplyr, echo=F, fig.align="center", fig.cap="*More stylized documentation on package* `dplyr`  *from the Tidyverse website.*", out.width="75%"}
+
+knitr::include_graphics("https://github.com/DS4PS/dp4ss-textbook/blob/master/figures/externaldoc_dplyr.jpg?raw=true")
+
+```
+
+<br>
+
+#### Vignettes
+
+> “A vignette is like a book chapter or an academic paper: It can describe the problem that your package is designed to solve, and then show the reader how to solve it.” (Hadley Wickham)
+
+Some R packages have **vignettes**, or more comprehensive and thorough overviews than typical documentation. Vignettes are written for the express purpose of learning how to use a package. While vignettes are easy to find in a conventional search engine, you can open a vignette from within R by calling function `browseVignettes()` and a quotes package name. For example:
+
+```{r eval=FALSE}
+browseVignettes("tidyr")
+```
+
+```{r img_vignettes, echo=F, fig.align="center", fig.cap='*Available vignettes appear in your browser with* `browseVignettes()`', out.width="75%"}
+
+knitr::include_graphics("https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/figures/browse_vignettes.jpg")
+
+```
+
+<br>
+
+
+
+# Help! Error Messages
+
+*Help me if you can, I'm feeling down*  
+*And I do appreciate you being round*  
+*Help me get my feet back on the ground*  
+*Won't you please, please help me*  
+
+![](http://rex-analytics.com/wp-content/uploads/2018/01/errors-in-R-739x1024.png)
+
+<br>
+
+
+
+### Troubleshooting: Web Searches & Forums
+
+While documentation tends to require a bit more reading, there's a good chance that someone has run into the same problem you've encounters. The internet has a long memory and the following strategies show how to exploit it.
+
+<br>
+
+#### Quoting Your Console
+
+You can take advantage of error and warning messages by copying them from your console and pasting them directly into an online search engine, verbatim and quoted. It often helps to include the function or package name outside of the quoted console message.
+
+<br>
+
+<center>
+
+**Quoting Error Messages in Search Engines**
+
+</center>
+
+```{r img_console_quote, echo=F, fig.align="center", fig.cap="*Quoting your console's error message in a search engine often yields helpful results.*", out.width="75%"}
+
+knitr::include_graphics("https://github.com/DS4PS/dp4ss-textbook/blob/master/figures/console_quote.jpg?raw=true")
+
+```
+
+<br>
+
+#### Forums & Archives
+
+One of the best troubleshooting strategies is to search for answers in online forums like [Stack Overflow](https://stackoverflow.com/) or [Cross Validated](https://stats.stackexchange.com/). Archives like the ["R-help" mailing list](https://www.r-project.org/mail.html) are also searchable. 
+
+<br>
+
+<center>
+
+**Potential Solutions as Seen on Stack Overflow**
+
+</center>
+
+```{r img_stack_overflow, echo=F, fig.align="center", fig.cap="*Stack Overflow often provides multiple potential solutions. The best rise to the top.*", out.width="75%"}
+
+knitr::include_graphics("https://github.com/DS4PS/dp4ss-textbook/blob/master/figures/stack_overflow.jpg?raw=true")
+
+```
+
+<br>
+
+# Help! Consulting Humans
+
+*Help, I need somebody*  
+*Help, not just anybody*  
+*Help, you know I need someone, help*  
+
+
+### Consulting Humans
+
+Asking for help from another human *should always be your last recourse* after exhausted all of the above strategies. That said, if you're still in a jam, there are several sources for human help:
+
+* Mailing lists like "R-help" and forums like Stack Overflow
+* Message boards in universities and MOOCs (massive open online classes)
+* R user communities, e.g. [Reddit's r/Rstats](https://www.reddit.com/r/rstats/)
+* Email and in-person inquiries
+
+<br>
+
+```{r nerd_sniping, echo=F, fig.align="center", fig.cap="*There is an incredible amount of good will in the R community, but try to be respectful.*", out.width="75%"}
+
+knitr::include_graphics("https://imgs.xkcd.com/comics/nerd_sniping.png")
+
+```
+
+<br>
+
+Importantly, there are established best practices in asking R-related questions. Make sure to:
+
+1. Comply with any and all forum, community, and mailing list rules
+2. In email headers or topic threads, label with a succinct but detailed description
+3. Clearly state the expected behavior and unexpected result of your code
+4. Provide a reproducible example, including code and imitation data
+5. Include real or imitation output, e.g. error messages
+6. If using random number generation, include the seed
+7. Ensure your code is legible and organized
+8. Include your R and RStudio versions
+9. Include your operating system
+10. Be polite
+
+<br>
+
+<div class="tip">
+
+**Pro Tip:** While not the best for specific coding problems, consider "tweeting" a question that includes the hashtag "#rstats". Followers of [#rstats](https://twitter.com/hashtag/rstats?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Ehashtag) often respond quickly, accurately, and sometimes in great numbers.
+
+</div>
+
+<br>
+
+### A Brief Note on Language Precision
+
+Whether your poring over documentation, performing web, forum, and archive searches, or asking another human, *language precision is key to troubleshooting*. Hence, building your R vocabulary is critical to learning how to learn R. For example, instead of searching: "How do I combine two tables that share a column?", search "join data frames on key variable r", or something similar. The latter term, with precise R-specific jargon, is much more quick to fructify.
+
+<br>
+
+## Further Resources
+
+The following resources may prove valuable for both learning how to learn R and troubleshooting:
+
+**I) Full-Length Text**
+
+* ["Intro to R: Nuts & Bolts"](https://rpubs.com/jamisoncrawford/nutsandbolts) (Crawford, 2018)
+
+**II) Documentation & Vignettes**
+
+* ["Vignettes: Long-Form Documentation"](http://r-pkgs.had.co.nz/vignettes.html) (Wickham, 2019)
+
+**III) Forums, Email Lists, & Communities**
+
+* [Stack Overflow](https://stackoverflow.com/)
+* [Cross Validated](https://stats.stackexchange.com/)
+* [R Mailing Lists](https://rpubs.com/jamisoncrawford/nutsandbolts)
+* [Reddit's r/Rstats](https://www.reddit.com/r/rstats/)
+* [Twitter's #Rstats](https://twitter.com/hashtag/rstats?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Ehashtag)
+
+**IV) Asking R-Related Questions**
+
+* ["Hot to Ask Questions the Smart Way"](http://www.catb.org/esr/faqs/smart-questions.html) (Raymond, 2014)
+* ["How to Make a Great R Reproducible Example"](https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example) (Stack Overflow, 2018)
+* ["Posting Guide: Hot to Ask Good Questions that Prompt Useful Answers"](https://www.r-project.org/posting-guide.html) (Plate, 2013)
+* [Errors vs Warnings](http://rex-analytics.com/decoding-error-messages-r/) (Rex Analytics)
+
+**V) ASCII Dragons**
+
+* [danadaldoss](https://danadaldos.wordpress.com/2015/02/06/padded-with-%E2%88%8F/) 
+* [Doug](https://www.dougsartgallery.com/ascii-art-dragon.html) 
+* [Ahmad](https://www.deviantart.com/ahmadsaifulhakim/art/Dragon-ascii-art-525981480) 
+
+<br>
+<br>
