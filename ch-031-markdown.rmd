@@ -5,14 +5,25 @@ output:
     theme: readable
     highlight: tango
     toc: true
+    toc_depth: 1
     number_sections: true
     self_contained: false
     css: textbook.css
 ---
 
 
+-------------
 
-![](assets/img/keep-calm-and-markdown.png)
+<br>
+
+
+![](figures/keep-calm-and-markdown.png)
+
+
+<br>
+
+-------------
+
 
 <br>
 <br>
@@ -28,7 +39,6 @@ Here are the basic formatting rules for Markdown:
 
 
 
----
 
 # Headers
 
