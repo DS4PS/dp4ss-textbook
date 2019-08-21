@@ -29,7 +29,7 @@
 
 # Getting Started
 
-## R as a Calculator
+## [R as a Calculator](ch-033-calculator.html)
 * Assignment 
 * Mathematical Operators 
 
