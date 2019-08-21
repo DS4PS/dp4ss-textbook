@@ -11,6 +11,15 @@ output:
 ---
 
 
+
+![](assets/img/keep-calm-and-markdown.png)
+
+<br>
+<br>
+
+
+
+
 Markdown is a set of simple conventions for formatting text in R Markdown (RMD) files. 
 
 It makes it easy to create professional documents with minimal effort. 
