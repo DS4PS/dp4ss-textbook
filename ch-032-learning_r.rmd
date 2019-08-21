@@ -32,21 +32,10 @@ output:
 
 ## Key Concepts
 
-You will get stuck while learning to code. 
-
-
-```{r, echo=F, fig.align="left", out.width="50%"}
-
-knitr::include_graphics("https://i0.wp.com/thecrucialvoice.com/wp-content/uploads/2012/11/title-screen_go_web1-960x650.png?ssl=1")
-
-```
-
-What are the best strategies for gettting out of a jam? Key concepts include:
-
-* Error messages
-* Documentation 
-* Discussion boards 
-* Vignettes
+* As you begin learning a new programming language you need to master nouns and verbs. 
+* Nouns represent the jargon specific to the field (objects, arguments, assignment, etc.).
+* Verbs represent functions.
+* Fluency takes time! Be patient with yourself and find ways to practice "speaking R" productively. 
 
 <br>
 <br>
