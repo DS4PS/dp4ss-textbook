@@ -31,7 +31,7 @@
 * Assignment 
 * Mathematical Operators 
 
-#### Functions [ [chapter](http://ds4ps.org/dp4ss-textbook//calc-mortgage.html) ] 
+#### Functions [ [chapter](http://ds4ps.org/dp4ss-textbook/ch-040-functions.html) ] 
 * Input-Output Devices 
 * Object-Oriented Coding 
 * Arguments 
