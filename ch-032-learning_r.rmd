@@ -35,7 +35,13 @@ output:
 * As you begin learning a new programming language you need to master nouns and verbs. 
 * Nouns represent the jargon specific to the field (objects, arguments, assignment, etc.).
 * Verbs represent functions.
-* Fluency takes time! Be patient with yourself and find ways to practice "speaking R" productively. 
+* Fluency takes time! Find ways to practice "speaking R" productively. 
+
+**Learning to Learn**
+
+* R has thousands of packages and new ones are created daily. There is no way to learn everything about the language. 
+* The goal, rather, is figuring out how to quickly master new functions so you can leverage R for whatever problem you are working on. 
+* This requires learning to read help files and adapt code, and learning how to get help when you are stuck. 
 
 <br>
 <br>
@@ -177,6 +183,9 @@ Technically, for 3-credit class you should be spending about 12 hours per week o
 
 This will vary for everyone depending on background knowledge, speed, and interest! But it's a good rule of thumb to keep in mind, and a good reminder that you are not slow or incapable - there is a reason that they call education "investment in human capital"!
 
+<br>
+<br>
+
 </div>
 
 <br>
@@ -261,6 +270,7 @@ Drafting code from scratch is the equivalent of fluency in programming. This wil
 
 
 
+### A Preview of What's Ahead 
 
 
 ```{r, echo=F, fig.align="center", out.width="90%"}
