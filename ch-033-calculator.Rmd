@@ -40,6 +40,15 @@ In this chapter, we'll learn and practice basic arithmetic functions in R, assig
 * Operator Precedence
 * Assignment
 
+## Key Takeaways
+
+Everything you need to know in a few bullet points:
+
+* Arithmetic operators include: `+`, `-`, `*`, `/`, `^`, `( )`
+* Calculations follow the order of operations, or **PEMDAS**
+* Create **objects** with **assignment**, e.g. `x` contains `3` in `x <- 3`
+* Use numeric objects like variables in algebra, e.g. `x + 2` equals `5`
+
 <br>
 <br>
 
@@ -160,7 +169,7 @@ Arithmetic operations in R are also evaluated in the same order. Press "Run" and
 
 ```{r ex="example-02", type="sample-code", tut=TRUE}
 
-(17 - 7) + 3      # Expressions inside parantheses are evaluated first
+(17 - 7) + 3      # Parantheses are evaluated first
 
 17 - (7 + 3)      # The locations of parantheses matter 
 
@@ -188,11 +197,20 @@ Arithmetic operations in R are also evaluated in the same order. Press "Run" and
 
 # First, subtract 500 from 600, then add 100
 
-# Subtract 1,000 from 10 cubed (raised to the third power)
+# Subtract 1,000 from 10 cubed (raised to third power)
 
 # Multiple 25 times 10, then subtract 500, then add 250
 
 ```
+
+<br>
+
+```{r echo=F, fig.align="center", fig.cap="*A different programming language, but you get the gist.*", out.width="90%"}
+
+knitr::include_graphics("https://prairieworldcomicsblog.files.wordpress.com/2018/02/progelements7operators2.jpg?w=656")
+
+```
+<center> *Source: [Prairie World Comics](https://prairieworldcomicsblog.wordpress.com/2018/02/21/programming-elements-operators/)* </center>
 
 <br>
 <br>
