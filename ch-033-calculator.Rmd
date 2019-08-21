@@ -1,0 +1,339 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: textbook.css
+---
+
+# R: An Overdesigned Calculator
+
+<br>
+
+```{r echo=F, fig.align="center", out.width="100%"}
+
+knitr::include_graphics("https://i.giphy.com/media/3owzW5c1tPq63MPmWk/giphy.webp")
+
+```
+
+<br>
+
+## Introduction
+
+Chief among R's many capabilities are basic mathematical operations, making it a severely overdesigned calculator. The only thing a TI-84 has on R is that you can't play Super Mario Brothers with the latter - *yet* (package developers... if your listening...). 
+
+**So what?**
+
+Arithmetic operations in R are key to transforming your data, whether calculating property code violations *per capita* or converting U.S. dollars to Indian rupees. In short, you use them to make new variables from existing ones. When we combine arithmetic with objects that store one or more values, we're dangerously close to practicing algebra. 
+
+<br>
+<br>
+
+<div class="tip">
+
+## Key Concepts
+
+In this chapter, we'll learn and practice basic arithmetic functions in R, assign calculations and their resulting values to objects, and use those objects in algebraic operations. Key concepts include:
+
+* Arithmetic Operators
+* Operator Precedence
+* Assignment
+
+<br>
+<br>
+
+</div>
+
+<br>
+<br>
+
+## Arithmetic Operators
+
+> "What sort of free will is left when we come to tabulation and arithmetic? When it will all be a case of twice two makes four?
+
+> You don't need free will to determine that twice two is four." 
+> (Dostoyevsky)
+
+<br>
+
+You remember [arithmetic](https://en.wikipedia.org/wiki/Arithmetic), right? That peculiar field of mathematics in which people who admittedly "don't math", for whatever reason, actually use every day? 
+
+**Arithmetic operators** in R work just like they did in primary school, including addition, subtraction, multiplication, division, and exponentiation:
+
+* `+` or **addition**, e.g. `2 + 2`
+* `-` or **subtraction**, e.g. `2 - 2`
+* `*` or **multiplication**, e.g. `2 * 2`
+* `/` or **division**, e.g. `2 / 2`
+* `^` or **exponentiation**, e.g. `2 ^ 2`
+* `( )` for **order of operations**, e.g. `((2 + 2) * 2)`
+
+<br>
+
+The following example has a number of operations. Run the code to see what happens:
+
+```{r, include=FALSE}
+tutorial::go_interactive( greedy=FALSE )
+```
+
+```{r ex="example-01", type="sample-code", tut=TRUE}
+
+7 + 3       # Addition
+
+8 - 12      # Subtraction
+
+9 * 9       # Multiplication
+
+10 / 3      # Division
+
+10 ^ 3      # Exponentiation
+
+```
+
+<br>
+
+Eureka! Forget your mobile phone's calculator app. Install R on it!
+
+(Plus, you can browse Reddit during class, but it looks like you're working). 
+
+<br>
+
+### Your Turn
+
+<div class="quiz">
+
+**Instructions:** Perform the following arithmetic operations in R.
+
+* Add 5, 10, and 15
+* Subtract 12 from 6
+* Divide 1,000 by 300
+* Raise 5 to the fifth power (i.e. exponent)
+
+**Tip:** Remember, numeric values in R *don't use commas*. 
+
+</div>
+
+```{r ex="practice-01", type="sample-code", tut=TRUE}
+
+# Add 5, 10, and 15
+
+# Subtract 12 from 6
+
+# Divide 1,000 by 300
+
+# Raise 5 to the fifth power
+
+```
+
+<br>
+
+```{r echo=F, fig.align="center", fig.cap="*Arithmetic operators are the most atomic functions in R programming.*", out.width="90%"}
+
+knitr::include_graphics("https://imgs.xkcd.com/comics/purity.png")
+
+```
+<center> *Source: [XKCD](https://xkcd.com/435/)* </center>
+
+<br>
+<br>
+
+## Operator Precedence
+
+Here's another blast from the past: **operator precedence**. At least, that's what it's called in programming languages. You probably remember it as the **order of operations**. 
+
+If that doesn't ring a bell, maybe you'll remember the mnemonic devices: **PEMDAS** or **Please Excuse My Dear Aunt Sally**. To this day, we've not the foggiest what social gaffes Aunt Sally actually committed.
+
+What we do know, however, is that Aunt Sally reminds us *in what order arithmetic operations are evaluated*, a.k.a. the **order of operations**. That order is as follows:  
+
+1. **Parenthesis**, or expressions inside `( )`
+2. **Exponents**, or raising one value to the power of another with `^`
+3. **Multiplication**, or multiplying values with `*`
+4. **Division**, or dividing values with `/`
+5. **Addition**, or adding values with `+`
+6. **Subtraction**, or subtracting values with `-`
+
+<br>
+
+### Operator Precedence in R
+
+Arithmetic operations in R are also evaluated in the same order. Press "Run" and observe:
+
+```{r ex="example-02", type="sample-code", tut=TRUE}
+
+(17 - 7) + 3      # Expressions inside parantheses are evaluated first
+
+17 - (7 + 3)      # The locations of parantheses matter 
+
+2 * 2 + 3 * 3
+
+2 * (2 + 3) * 3
+
+```
+
+<br>
+
+### Your Turn
+
+<div class="quiz">
+
+**Instructions:** Use the order of operations to calculate the following in R.
+
+* First, subtract 500 from 600. Then add 100.
+* Subtract 1,000 from 10 cubed (raised to the third power)
+* Multiple 25 times 10, then subtract 500, then add 250
+
+</div>
+
+```{r ex="practice-02", type="sample-code", tut=TRUE}
+
+# First, subtract 500 from 600, then add 100
+
+# Subtract 1,000 from 10 cubed (raised to the third power)
+
+# Multiple 25 times 10, then subtract 500, then add 250
+
+```
+
+<br>
+<br>
+
+## Assignment
+
+> "The philosophical workers... have to fix and formalize some great existing body of valuations - that is to say...
+
+> ...creations of value, which have become prevalent, and are for a time called 'truths'..." (Nietzsche)
+
+<br>
+
+We've talked about **objects** quite a bit in R, and for good reason: They're the meat and potatoes of R. Objects store information like datasets, function code, individual values, and even metadata, e.g. coefficents in linear models.
+
+<br>
+
+**But how can do we create an object?**
+
+In many cases, we may wish to store external data that we import to R. In other instances, we wish to store a value, sequence of values, or dataset we create ourselves. In all cases, we use **assignment**, the method of naming an object and storing data in it. In order to use **assignment**, we use the **assignment operator**, or `<-`.
+
+<br>
+
+Run the following to assign 20 and 480 to objects `x` and `y`, respectively:
+
+```{r ex="example-03", type="sample-code", tut=TRUE}
+
+x <- 20       # Assign 20 to "x"
+
+x             # Autoprint object "x"
+
+y <- 480      # Assign 480 to "y"
+
+y             # Autoprint object "y"
+
+```
+
+<br>
+
+Now find out what happens when we interact with `x` and `y` arithmetically:
+
+```{r ex="example-04", type="sample-code", tut=TRUE}
+
+x <- 20       # Reassign 20 to "x"
+
+y <- 480      # Reassign 480 to "y"
+
+x * 2         # Multiple object "x" by 2
+
+y / 4         # Divide object "y" by 4
+
+x + y         # Add objects "x" and "y"
+
+```
+
+
+<br>
+
+Neat! Like algebra, `x` and `y` are used to *represent* numeric values.
+
+Unlike algebra, we can *store many values* in objects, including other objects!
+
+```{r ex="example-05", type="sample-code", tut=TRUE}
+
+x <- 20       # Reassign 20 to "x"
+
+y <- 480      # Reassign 480 to "y"
+
+z <- x + y    # Assign the sum of "x" and "y" to "z"
+
+z             # Autoprint "z"
+
+```
+
+<br>
+
+<div class="tip">
+
+#### Pro Tip:
+
+You can use the `=` operator for **assignment** instead of using `<-`. **But don't**. 
+
+* The `=` appears so often in scripts that it's important to be able to recognize assignment with `<-` when it occurs
+* Hence, assignment with `<-` makes your code more interpretable
+
+<br>
+<br>
+
+</div>
+
+<br> 
+
+### Your Turn
+
+<div class="quiz">
+
+**Instructions:** Use the assignment operator to create the following objects.
+
+* Assign `2019` to object `present`
+* Assign `1` to object `year`
+* Add objects `now` and `year` together (with `+`); assign to object `future`
+* Print object `future`
+
+</div>
+
+```{r ex="practice-03", type="sample-code", tut=TRUE}
+
+# Assign 2019 to object "present"
+
+# Assign 1 to object "year"
+
+# Add objects "present" and "year" to object "future"
+
+# Print "future"
+
+```
+
+<br>
+
+```{r echo=F, fig.align="center", fig.cap="*You can't do this anymore, sadly.*", out.width="40%"}
+
+knitr::include_graphics("https://imgs.xkcd.com/comics/forgot_algebra.png")
+
+```
+<center> *Source: [XKCD](https://xkcd.com/1050/)* </center>
+
+<br>
+<br>
+
+## Further Resources
+
+The following resources are helpful in learning more about arithmetic operators in R:
+
+* ["Arithmetic Operators"](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html) (CRAN)
+* ["Intro to R: Operators"](http://rpubs.com/JamisonCrawford/operators) (Crawford, 2019)
+* ["Quick-R: Operators"](https://www.statmethods.net/management/operators.html) (Kabacoff, 2017)
+
+<br>
+<br>
+
+## Works Cited
+
+The Hangover (2009)
+
+<br>
