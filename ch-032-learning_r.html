@@ -224,11 +224,13 @@ Nailed it
 <ul>
 <li><strong>Vocabulary:</strong> You need to learn words for things before all else.</li>
 <li><strong>Reinforcement:</strong> You learn by doing and repeating.</li>
-<li><strong>Necessity:</strong> You learn best when success or survival depends on it.</li>
-<li><strong>Languages are Social:</strong> You learn faster through collaboration, meetups, forums, conferences.</li>
 <li><strong>Immersion:</strong> You can’t be fluent without being immersed. Get involved in professional and volunteer work, podcasts, and regular reading about your topic.</li>
+<li><strong>Necessity:</strong> You learn best when success or survival depends on it. Use R in projects that have deadlines as a commitment mechanism.<br />
+</li>
+<li><strong>Languages are Social:</strong> You learn faster through collaboration, meetups, forums, conferences.</li>
 </ul>
-<p>If this is your first programming language, you will get frustrated at times. Take a step back and remember that after a semester of Spanish you can only operate at the level of a three-year old. You only know one verb tense, a few dozen verbs, and several hundred words. You can never quite translate all of the ideas</p>
+<p>If this is your first programming language, you will get frustrated at times. Take a step back and remember that after a semester of Spanish you can only operate at the level of a three-year old. You only know one verb tense, a few dozen verbs, and several hundred words. You have so many emotions that you can’t express in your new language!</p>
+<p>Similarly, you are going to have so many ideas that you want to to translate into code! More realistically you will end up melting down in office hours and then taking a nap.</p>
 <p><br></p>
 <div class="note">
 <p><strong>Fun Fact:</strong> The popular <a href="https://ggplot2.tidyverse.org/">ggplot2</a> data viz package is based on Leland Wilkinson’s framework, “The Grammar of Graphics” (1999), i.e. the <code>gg</code> in <code>ggplot2</code>. Similarly, the <a href="https://dplyr.tidyverse.org/">dplyr</a> package is described as a “grammar of data manipulation”, in which functions are described as “verbs”.</p>
@@ -240,7 +242,7 @@ Nailed it
 <p>There are thousands of R packages. The body of knowledge in the field is growing exponentially. It’s impossible (and unnecessary) to learn (or retain) everything the language offers.</p>
 <p>Data science is a fast-moving field of practice.</p>
 <ul>
-<li>There are tens of thousands of R packages; new ones appear every day.</li>
+<li>New R packages are released every day.</li>
 <li>Packages and functions are constantly being updated, replaced, consolidated, or deprecated.</li>
 <li>There are nuances to every computational science applied to each natural or social science.</li>
 </ul>
@@ -250,19 +252,17 @@ Nailed it
 </div>
 <div id="the-ultimate-objective-learning-how-to-learn-r" class="section level3">
 <h3>The Ultimate Objective: Learning How to Learn R</h3>
-<blockquote>
-<p>“I am always doing that which I cannot do, in order that I may learn how to do it.” (Picasso)</p>
-</blockquote>
 <p>There are few telltale signs that you’re becoming fluent in R. For example, you may:</p>
 <ul>
 <li>Achieve the same results as your old code with significantly less code</li>
 <li>Use search engines less frequently or not at all while coding</li>
 <li>Be approached by others for collaborative work</li>
 <li>Appraise the quality of code and data products</li>
-<li>Begin dreaming in R (just kidding)</li>
+<li>Begin dreaming in R (just kidding, not kidding…)</li>
 </ul>
 <p><br></p>
-<p>The ultimate measure of having learned R is to <em>learn how to learn it</em>. This is less empirically evident than the above examples, and requires some introspection and emotional awareness to gauge. For instance, imagine you’ve reached some impasse that the “first principles” approach to R fails to resolve. Do you:</p>
+<p>The goal of “learning R” is just <em>learning how to learn R</em>. This means knowing when to step on the gas and try to power through a problem, and knowing when to hit the brake in order to take a step back, assess, and make a plan. Knowing when and how to ask for help is a basic level of situational awareness you need to develop.</p>
+<p>For example, imagine you’ve reached some impasse that the “first principles” approach to R fails to resolve. Do you:</p>
 <ul>
 <li>Pore over online forums?</li>
 <li>Explore documentation and vignettes?</li>
@@ -279,17 +279,30 @@ Nailed it
 <p><br></p>
 <p>This is only one of many hypothetical scenarios. Learning how to learn R is not a matter of learning something new everyday (e.g. a function, package, technique, or theory), but the cyclical process of learning in the face of necessity, shoring up your knowledge over some indefinite period, and learning again when the need arises. Above all, you’ll know you’ve learned how to learn R when you no longer doubt your ability to resolve what once seemed impossible.</p>
 <p><br></p>
+<div class="tip">
+<h2 id="you-are-not-alone-in-your-quest">You are not alone in your quest</h2>
+<p><img src="https://media1.tenor.com/images/7b68a2d2ce39aeb58b700a212d736655/tenor.gif?itemid=7237007" /></p>
+<p>When working on labs make sure you have a game plan for success. If you are stuck for more than 20 minutes on the same problem <em>without making progress</em> you should (1) phone a friend, (2) post to the <strong>Get Help</strong> discussion board on the course site, (3) attend a review session, or (4) schedule virtual office hours.</p>
+<p>Your morale is a limited commodity, so spend it wisely! If you are doing the wrong thing over and over while stuck you might actually be reinforcing bad habits.</p>
+<p>The qualifier <em>without making progress</em> is a relative term. You will spend more than 20 minutes on a problem without arriving at a solution. Stuck means you don’t understand the question or you are out of things to try.</p>
+<p>Technically, for 3-credit class you should be spending about 12 hours per week on the class (3 hours of class time, 9 hours on homework/projects). If it’s a condensed semester (7.5 week schedule) that translates to 24 hours per week.</p>
+<p>This will vary for everyone depending on background knowledge, speed, and interest! But it’s a good rule of thumb to keep in mind, and a good reminder that you are not slow or incapable - there is a reason that they call education “investment in human capital”!</p>
+</div>
+<p><br> <br></p>
 </div>
 </div>
 <div id="troubleshooting-in-r" class="section level2">
 <h2>Troubleshooting in R</h2>
-<blockquote>
-<p>“The first step in fixing a broken program is getting it to fail repeatably.” (Tom Duff)</p>
-</blockquote>
-<p>Your code is going to fail. A lot. We encounter errors all the time. The following is a brief overview for recognizing a problem, as well as myriad strategies to overcome one.</p>
+<p>Your code is going to fail. A lot.</p>
+<p><img src="https://media3.giphy.com/media/ZeB4HcMpsyDo4/source.gif" /></p>
+<p>We encounter errors all the time. The following is a brief overview for recognizing a problem, as well as myriad strategies to overcome one.</p>
 <p><br></p>
 <div id="recognizing-understanding-trouble" class="section level3">
 <h3>Recognizing &amp; Understanding Trouble</h3>
+<blockquote>
+<p>“The first step in fixing a broken program is getting it to fail repeatably.” (Tom Duff)</p>
+</blockquote>
+<p><br></p>
 <p>Two simple criteria must be met in order to recognize trouble with your code (<a href="https://bookdown.org/rdpeng/RProgDA/">Peng et al. 2017</a>):</p>
 <ol style="list-style-type: decimal">
 <li>You expect your code to behave in a certain way</li>
@@ -303,13 +316,43 @@ Nailed it
 <p><strong>Pro Tip:</strong> Oftentimes, users place too much emphasis on fixing their expected results and fail to consider their original expectations. <em>Never neglect revisiting your expectations</em>, as it’s possible that they, not your code, may explain an error (ibid.).</p>
 </div>
 <p><br></p>
+</div>
+</div>
+</div>
+<div id="the-learning-curve" class="section level1">
+<h1>The Learning Curve</h1>
+<p>Are you on track? How should you measure progress?</p>
+<p>Again, the language metaphor comes in handy.</p>
+<div id="vocab" class="section level3">
+<h3>Vocab</h3>
+<p>We will emphasize vocabulary the first course. The concepts in programming are not hard, but they require a lot of jargon.</p>
+<p>Most help files were written by computer scientists or statisticians. In other words, weirdos. Don’t be surprised if it takes time to, um, decode their syntax.</p>
+</div>
+<div id="adapting-code" class="section level3">
+<h3>Adapting Code</h3>
+<p>One of the first skills you learn while programming is how to start from existing code and adapting it for a new purpose. It is way more common to do this than to write code from scratch.</p>
+<p>An important milestone is reaching a point where you can read code written by others and understand it without having to run it.</p>
+</div>
+<div id="critical-thinking" class="section level3">
+<h3>Critical Thinking</h3>
+<p>You might think that the most valuable skill you take from this course is knowledge of R. This is not correct.</p>
+<p><strong>The real value in learning to program is learning how to think critically with data and problem-solve.</strong></p>
+<p>Programming languages are rigid and unforgiving.</p>
+<blockquote>
+<p>Did you use a capital letter when I was expecting a lower-case one? I’m sorry, I can’t run your program then.</p>
+</blockquote>
+<p>Although frustrating, it does teach your precision and discipline. You need to think very systematically about the problem in order to design something that works.</p>
+<p>You will learn to value <strong>pseudo-code</strong>, which is a way of sketching out a basic blue-print for a script in plain English before you write any code. Then you can work incrementally and translate each step into R, refining as you go.</p>
+</div>
+<div id="writing-your-own-code" class="section level3">
+<h3>Writing Your Own Code</h3>
+<p>Drafting code from scratch is the equivalent of fluency in programming. This will come in time, but do not expect to jump right into creating elegant scripts. You need to practice the skills above, develop your vocabulary, master some data verbs (functions) before it all comes together. But you are on your way!</p>
 <p><img src="figures/learning-curve-01.png" width="90%" style="display: block; margin: auto;" /></p>
 <p><br></p>
 <p><img src="figures/learning-curve-02.png" width="90%" style="display: block; margin: auto;" /></p>
 <p><br></p>
 <p><img src="figures/learning-curve-03.png" width="90%" style="display: block; margin: auto;" /></p>
 <p><br></p>
-</div>
 </div>
 <div id="further-resources" class="section level2">
 <h2>Further Resources</h2>
