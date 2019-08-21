@@ -44,11 +44,13 @@
 #### Data Recipes
 * Scripts 
 
-## Navigating R
+#### Navigating R
 * Navigation (working directories, list objects, create folders) 
 * Reading Help Files 
 
 
+
+------------
 
 
 # One-Dimensional Datasets
@@ -94,6 +96,11 @@
   - from categorical variables
   - from numeric variables
   - missing values as a group
+
+
+
+
+------------
 
 
 
