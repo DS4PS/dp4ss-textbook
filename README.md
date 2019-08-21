@@ -6,12 +6,12 @@
 
 # Introducing R
 
-## [Core R](ch-010-core-r.html)
+## [Core R](http://ds4ps.org/dp4ss-textbook/ch-010-core-r.html)
 * What is R? [ [video](https://player.vimeo.com/video/180644880) ]
 * How do Packages Work? 
  
  
-## [R Studio](ch-020-rstudio.html)
+## [R Studio](http://ds4ps.org/dp4ss-textbook/ch-020-rstudio.html)
 * Tour of R Studio  
 * Navigation in R Studio  
 * [Style Guides](https://jef.works/R-style-guide/)  
@@ -29,11 +29,11 @@
 
 # Getting Started
 
-## [R as a Calculator](ch-033-calculator.html)
+## [R as a Calculator](http://ds4ps.org/dp4ss-textbook/ch-033-calculator.html)
 * Assignment 
 * Mathematical Operators 
 
-## Functions [ [chapter](http://ds4ps.org/datacamp-light-demo-for-rmd/calc-mortgage.html) ] 
+## Functions [ [chapter](http://ds4ps.org/dp4ss-textbook//calc-mortgage.html) ] 
 * Input-Output Devices 
 * Object-Oriented Coding 
 * Arguments 
