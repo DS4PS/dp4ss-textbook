@@ -6,41 +6,39 @@
 
 # Introducing R
 
-## [Core R](http://ds4ps.org/dp4ss-textbook/ch-010-core-r.html)
-* What is R? [ [video](https://player.vimeo.com/video/180644880) ]
-* How do Packages Work? 
- 
- 
-## [R Studio](http://ds4ps.org/dp4ss-textbook/ch-020-rstudio.html)
-* Tour of R Studio  
-* Navigation in R Studio  
-* [Style Guides](https://jef.works/R-style-guide/)  
- 
-## Data-Driven Docs  
-* Data-Driven Documents [ [splainer](https://ds4ps.org/docs/) ]   
-* The Importance of Reproducibility   
-* [Markdown](https://ds4ps.org/cpp-526-fall-2019/markdown/)  
+* [Core R](http://ds4ps.org/dp4ss-textbook/ch-010-core-r.html)
+  * What is R? [ [video](https://player.vimeo.com/video/180644880) ]
+  * How do Packages Work? 
+* [R Studio](http://ds4ps.org/dp4ss-textbook/ch-020-rstudio.html)
+  * Tour of R Studio  
+  * Navigation in R Studio  
+  * [Style Guides](https://jef.works/R-style-guide/)  
+* Data-Driven Docs  
+  * Data-Driven Documents [ [splainer](https://ds4ps.org/docs/) ]   
+  * The Importance of Reproducibility   
+  * [Markdown](https://ds4ps.org/cpp-526-fall-2019/markdown/)  
 * RMD in RStudio   
   - Headers   
   - Chunks   
   - Knitting   
-* [Pimp my RMD](https://holtzy.github.io/Pimp-my-rmd/)  
+  - [Pimp my RMD](https://holtzy.github.io/Pimp-my-rmd/)  
  
+ [Learning R](http://ds4ps.org/dp4ss-textbook/ch-032-learning_r.html)
 
 # Getting Started
 
-## [R as a Calculator](http://ds4ps.org/dp4ss-textbook/ch-033-calculator.html)
+#### [R as a Calculator](http://ds4ps.org/dp4ss-textbook/ch-033-calculator.html)
 * Assignment 
 * Mathematical Operators 
 
-## Functions [ [chapter](http://ds4ps.org/dp4ss-textbook//calc-mortgage.html) ] 
+#### Functions [ [chapter](http://ds4ps.org/dp4ss-textbook//calc-mortgage.html) ] 
 * Input-Output Devices 
 * Object-Oriented Coding 
 * Arguments 
 * Values 
 * Return 
 
-## Data Recipes
+#### Data Recipes
 * Scripts 
 
 ## Navigating R
