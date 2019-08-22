@@ -157,24 +157,44 @@ PEMDAS reminds us *the order arithmetic operations are evaluated*, a.k.a. the **
 5. **Addition**, or adding values with `+`
 6. **Subtraction**, or subtracting values with `-`
 
-
 Arithmetic operations in R are also evaluated in the same order. Can you guess the results before evaluating the expressions? Press "Run" to execute the code and see the results:
 
 ```{r ex="example-02", type="sample-code", tut=TRUE}
 
-2 + 10 / 5    
+# easy one
+5 + 10 / 5    
 
-2 * 10 / 5      
+# harder
+5 - 10 + 5 
+5 + 10 - 5  
 
+# similarly
+5 * 10 / 5   
+5 / 10 * 5 
+
+# easier
 3 * 2 ^ 2
 
+# hmmm
 2 * (2 + 3) * 3
 
+# huh?
 ( 2 + 3 ) / 5 * 2
+( 2 + 3 ) * 5 / 2
+( 2 + 3 ) / 2 * 5
 
 ```
 
 <br>
+
+<div class="tip">
+
+Note that R is indifferent to order of operations for addition vs subtraction, and multiplication vs division. 
+
+For cases where both occur the code is just executed from left to right.  
+
+</div>
+
 
 ### Your Turn
 
