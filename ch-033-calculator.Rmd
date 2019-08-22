@@ -320,9 +320,11 @@ y   # print the value stored by y
 
 <div class="tip">
 
+<br>
+
 **Why does R use the `<-` for assignment?**
 
-Technically R allows you to use the `=` operator for **assignment** instead of using `<-`. 
+Technically R allows you to use the equals `=` operator for **assignment** instead of using the arrow `<-`. 
 
 **BUT YOU SHOULD NEVER DO IT!**. 
 
@@ -330,7 +332,9 @@ Assignment is important enough that the arrow helps keep your code easy to read.
 
 Also, mind your spaces! 
 
-<br>
+* x <- y  is assignment
+* x < - y is less than negative y
+
 <br>
 
 </div>
