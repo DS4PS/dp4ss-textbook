@@ -320,7 +320,7 @@ y   # print the value stored by y
 
 <div class="tip">
 
-#### Why does R use the `<-` for assignment?
+**Why does R use the `<-` for assignment?**
 
 Technically R allows you to use the `=` operator for **assignment** instead of using `<-`. 
 
@@ -341,7 +341,7 @@ Also, mind your spaces!
 
 <div class="quiz">
 
-What will the following will return? 
+What will the following statements return? 
 
 </div>
 
