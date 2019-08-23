@@ -530,9 +530,10 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKDEsMiwzKSAgICAgICAgICAgICAgICAgICAg
 <a class="sourceLine" id="cb62-8" data-line-number="8"><span class="kw">plot</span>( sex, strength )              <span class="co"># factor + numeric: box and whisker plot       </span></a></code></pre></div>
 <p><img src="ch-050-vectors_files/figure-html/unnamed-chunk-28-1.png" width="768" /></p>
 <div class="tip">
-<p>Note in this example the <strong>plot()</strong> function produced two different types of graphs.</p>
-<p>R uses the object type to determine behavior. This is called object-oriented programming. It makes the process of creating data recipes much faster!</p>
-<p>We will revisit this concept more later.</p>
+<p>Note in this example the same <strong>plot()</strong> function produced two different types of graphs, a scatterplot and a box and whisker plot. How does this work?</p>
+<p>R uses the object type to determine behavior: * If input vectors are both numeric, then produce scatterplot * If input vectors are factor + numeric, then produce a box and whisker.</p>
+<p>This is called object-oriented programming - the functions adapt based upon the type of object they are working with.</p>
+<p>It makes the process of creating data recipes much faster! We will revisit this concept later.</p>
 </div>
 <p><br> <br></p>
 <p>Factors are more memory efficient than character vectors because they store the underlying data as a numeric vector instead of a categorical (text) vector. Each group in the data is assigned a number, and when printing items the program only has to remember which group corresponds to which number:</p>
@@ -544,18 +545,18 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKDEsMiwzKSAgICAgICAgICAgICAgICAgICAg
 <p>In some instances a categorical variable might be represented by numbers. For example, grades 9-12 for high school kids. These can be tricky to re-cast.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">grades &lt;-<span class="st"> </span><span class="kw">sample</span>( <span class="dt">x=</span><span class="dv">9</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">replace=</span>T )</a>
 <a class="sourceLine" id="cb66-2" data-line-number="2">grades</a></code></pre></div>
-<pre><code>##  [1] 10 11  9 12 10 10 10 10  9 11</code></pre>
+<pre><code>##  [1] 10 12 10  9 12 10  9 12 10  9</code></pre>
 <div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">grades &lt;-<span class="st"> </span><span class="kw">as.factor</span>( grades )</a>
 <a class="sourceLine" id="cb68-2" data-line-number="2">grades</a></code></pre></div>
-<pre><code>##  [1] 10 11 9  12 10 10 10 10 9  11
-## Levels: 9 10 11 12</code></pre>
+<pre><code>##  [1] 10 12 10 9  12 10 9  12 10 9 
+## Levels: 9 10 12</code></pre>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">as.numeric</span>( grades )</a></code></pre></div>
-<pre><code>##  [1] 2 3 1 4 2 2 2 2 1 3</code></pre>
+<pre><code>##  [1] 2 3 2 1 3 2 1 3 2 1</code></pre>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="kw">as.character</span>( grades )</a></code></pre></div>
-<pre><code>##  [1] &quot;10&quot; &quot;11&quot; &quot;9&quot;  &quot;12&quot; &quot;10&quot; &quot;10&quot; &quot;10&quot; &quot;10&quot; &quot;9&quot;  &quot;11&quot;</code></pre>
+<pre><code>##  [1] &quot;10&quot; &quot;12&quot; &quot;10&quot; &quot;9&quot;  &quot;12&quot; &quot;10&quot; &quot;9&quot;  &quot;12&quot; &quot;10&quot; &quot;9&quot;</code></pre>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co"># proper way to get back to the original numeric vector</span></a>
 <a class="sourceLine" id="cb74-2" data-line-number="2"><span class="kw">as.numeric</span>( <span class="kw">as.character</span>( grades ))</a></code></pre></div>
-<pre><code>##  [1] 10 11  9 12 10 10 10 10  9 11</code></pre>
+<pre><code>##  [1] 10 12 10  9 12 10  9 12 10  9</code></pre>
 <p><br></p>
 <div class="tip">
 <p>The <strong>very important</strong> rule to remember with factors is you can’t move directly from the factor to numeric using the <strong>as.numeric()</strong> casting function. This will give you the underlying data structure, but will not give you the category names. To get these, you need the <strong>as.character</strong> casting function.</p>
@@ -635,13 +636,13 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKDEsMiwzKSAgICAgICAgICAgICAgICAgICAg
 <div id="repeated-values" class="section level3">
 <h3><span class="header-section-number">3.8.1</span> Repeated Values</h3>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHJlcGVhdCBhIG51bWJlciwgb3Igc2VyaWVzIG9mIG51bWJlcnNcbnJlcCggeD05LCB0aW1lcz01IClcbnJlcCggeD1jKDUsNyksIHRpbWVzPTUgKVxucmVwKCB4PWMoNSw3KSwgZWFjaD01IClcbnJlcCggeD1jKFwidHJlYXRtZW50XCIsXCJjb250cm9sXCIpLCBlYWNoPTUgKSAgIyBhbHNvIHdvcmtzIHRvIGNyZWF0ZSBjYXRlZ29yaWVzIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHJlcGVhdCBhIG51bWJlciwgb3Igc2VyaWVzIG9mIG51bWJlcnNcbnJlcCggeD05LCB0aW1lcz01IClcbnJlcCggeD1jKDUsNyksIHRpbWVzPTUgKVxucmVwKCB4PWMoNSw3KSwgZWFjaD01IClcblxuIyBhbHNvIHdvcmtzIHRvIGNyZWF0ZSBjYXRlZ29yaWVzXG5yZXAoIHg9YyhcInRyZWF0bWVudFwiLFwiY29udHJvbFwiKSwgZWFjaD01ICkgICJ9
 </div>
 </div>
 <div id="sequence-of-values" class="section level3">
 <h3><span class="header-section-number">3.8.2</span> Sequence of Values</h3>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBhIHNlcXVlbmNlIG9mIG51bWJlcnNcbnNlcSggZnJvbT0xLCB0bz0xNSwgYnk9MSApXG5zZXEoIGZyb209MSwgdG89MTUsIGJ5PTMgKVxuMToxNSAgICMgc2hvcnRoYW5kIGlmIGJ5PTEifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBhIHNlcXVlbmNlIG9mIG51bWJlcnNcbnNlcSggZnJvbT0xLCB0bz0xNSwgYnk9MSApXG5zZXEoIGZyb209MSwgdG89MTUsIGJ5PTMgKVxuXG4jIHNob3J0aGFuZCBpZiBieT0xXG4xOjE1ICAgXG4zOjYifQ==
 </div>
 </div>
 <div id="random-sample" class="section level3">
@@ -653,7 +654,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBhIHJhbmRvbSBzYW1wbGVcbmJhZy5vZi5s
 <div id="draw-from-a-normal-distribution" class="section level3">
 <h3><span class="header-section-number">3.8.4</span> Draw From a Normal Distribution</h3>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBkYXRhIHRoYXQgZm9sbG93cyBhIG5vcm1hbCBjdXJ2ZVxuIyBJUSBmb2xsb3dzIGEgbm9ybWFsIGRpc3RyaWJ1dGlvblxuIyB3aXRoIGEgbWVhbiBvZiAxMDAgYW5kIHNkIG9mIDE1XG5cbmlxIDwtIHJub3JtKCBuPTEwMDAsIG1lYW49MTAwLCBzZD0xNSApXG5oaXN0KCBpcSwgY29sPVwiZ3JheVwiICkifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBkYXRhIHRoYXQgZm9sbG93cyBhIG5vcm1hbCBjdXJ2ZVxuIyBJUSBmb2xsb3dzIGEgbm9ybWFsIGRpc3RyaWJ1dGlvblxuIyB3aXRoIGEgbWVhbiBvZiAxMDAgYW5kIHNkIG9mIDE1XG5cbmlxIDwtIHJub3JtKCBuPTEwMDAsIG1lYW49MTAwLCBzZD0xNSApXG5oaXN0KCBpcSwgY29sPVwiZ3JheVwiIClcbmFibGluZSggaD1tZWFuKGlxKSwgY29sPVwiZGFya3JlZFwiICkifQ==
 </div>
 </div>
 </div>

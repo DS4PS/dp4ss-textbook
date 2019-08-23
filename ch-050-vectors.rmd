@@ -305,6 +305,9 @@ case1 <- c( x1, x3 )
 case2 <- c( x2, x3 )
 case3 <- c( x1, x4 )
 case4 <- c( x2, x4 )
+
+
+# type the case name to see results
 ```
 
 The answers to *case1* and *case2* are somewhat intuitive. 
@@ -483,11 +486,15 @@ plot( sex, strength )              # factor + numeric: box and whisker plot
 
 <div class="tip">
 
-Note in this example the **plot()** function produced two different types of graphs.
+Note in this example the same **plot()** function produced two different types of graphs, a scatterplot and a box and whisker plot. How does this work?
 
-R uses the object type to determine behavior. This is called object-oriented programming. It makes the process of creating data recipes much faster!
+R uses the object type to determine behavior:
+* If input vectors are both numeric, then produce scatterplot
+* If input vectors are factor + numeric, then produce a box and whisker.
 
-We will revisit this concept more later. 
+This is called object-oriented programming - the functions adapt based upon the type of object they are working with. 
+
+It makes the process of creating data recipes much faster! We will revisit this concept later. 
 
 </div>
 
@@ -605,7 +612,9 @@ tutorial::go_interactive( greedy=FALSE )
 rep( x=9, times=5 )
 rep( x=c(5,7), times=5 )
 rep( x=c(5,7), each=5 )
-rep( x=c("treatment","control"), each=5 )  # also works to create categories
+
+# also works to create categories
+rep( x=c("treatment","control"), each=5 )  
 ```
 
 
@@ -621,8 +630,10 @@ tutorial::go_interactive( greedy=FALSE )
 # create a sequence of numbers
 seq( from=1, to=15, by=1 )
 seq( from=1, to=15, by=3 )
-1:15   # shorthand if by=1
 
+# shorthand if by=1
+1:15   
+3:6
 ```
 
 
@@ -661,6 +672,7 @@ tutorial::go_interactive( greedy=FALSE )
 
 iq <- rnorm( n=1000, mean=100, sd=15 )
 hist( iq, col="gray" )
+abline( h=mean(iq), col="darkred" )
 ```
 
 
