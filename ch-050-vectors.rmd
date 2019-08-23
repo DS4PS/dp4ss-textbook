@@ -475,10 +475,26 @@ height <- c( 70, 68, 69, 74, 72, 69, 68, 73  )
 strength <- c(167,185,119,142,175,204,124,117)
 sex <- factor( c("male","male","female","female","male","male","female","female" ) )
 
+par( mfrow=c(1,2) )
 plot( height, strength,            # two numeric vectors: scatter plot
       pch=19, cex=3, bty="n" )   
 plot( sex, strength )              # factor + numeric: box and whisker plot       
 ```
+
+<div class="tip">
+
+Note in this example the **plot()** function produced two different types of graphs.
+
+R uses the object type to determine behavior. This is called object-oriented programming. It makes the process of creating data recipes much faster!
+
+We will revisit this concept more later. 
+
+</div>
+
+<br>
+<br>
+
+
 
 Factors are more memory efficient than character vectors because they store the underlying data as a numeric vector instead of a categorical (text) vector. Each group in the data is assigned a number, and when printing items the program only has to remember which group corresponds to which number:
 

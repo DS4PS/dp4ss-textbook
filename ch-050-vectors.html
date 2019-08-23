@@ -524,39 +524,45 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKDEsMiwzKSAgICAgICAgICAgICAgICAgICAg
 <a class="sourceLine" id="cb62-2" data-line-number="2">strength &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">167</span>,<span class="dv">185</span>,<span class="dv">119</span>,<span class="dv">142</span>,<span class="dv">175</span>,<span class="dv">204</span>,<span class="dv">124</span>,<span class="dv">117</span>)</a>
 <a class="sourceLine" id="cb62-3" data-line-number="3">sex &lt;-<span class="st"> </span><span class="kw">factor</span>( <span class="kw">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>,<span class="st">&quot;female&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>,<span class="st">&quot;female&quot;</span> ) )</a>
 <a class="sourceLine" id="cb62-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb62-5" data-line-number="5"><span class="kw">plot</span>( height, strength,            <span class="co"># two numeric vectors: scatter plot</span></a>
-<a class="sourceLine" id="cb62-6" data-line-number="6">      <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span><span class="dv">3</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span> )   </a></code></pre></div>
+<a class="sourceLine" id="cb62-5" data-line-number="5"><span class="kw">par</span>( <span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>) )</a>
+<a class="sourceLine" id="cb62-6" data-line-number="6"><span class="kw">plot</span>( height, strength,            <span class="co"># two numeric vectors: scatter plot</span></a>
+<a class="sourceLine" id="cb62-7" data-line-number="7">      <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span><span class="dv">3</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span> )   </a>
+<a class="sourceLine" id="cb62-8" data-line-number="8"><span class="kw">plot</span>( sex, strength )              <span class="co"># factor + numeric: box and whisker plot       </span></a></code></pre></div>
 <p><img src="ch-050-vectors_files/figure-html/unnamed-chunk-28-1.png" width="768" /></p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">plot</span>( sex, strength )              <span class="co"># factor + numeric: box and whisker plot       </span></a></code></pre></div>
-<p><img src="ch-050-vectors_files/figure-html/unnamed-chunk-28-2.png" width="768" /></p>
+<div class="tip">
+<p>Note in this example the <strong>plot()</strong> function produced two different types of graphs.</p>
+<p>R uses the object type to determine behavior. This is called object-oriented programming. It makes the process of creating data recipes much faster!</p>
+<p>We will revisit this concept more later.</p>
+</div>
+<p><br> <br></p>
 <p>Factors are more memory efficient than character vectors because they store the underlying data as a numeric vector instead of a categorical (text) vector. Each group in the data is assigned a number, and when printing items the program only has to remember which group corresponds to which number:</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">as.numeric</span>( sex )</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">as.numeric</span>( sex )</a></code></pre></div>
 <pre><code>## [1] 2 2 1 1 2 2 1 1</code></pre>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co">#  male = 2</span></a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="co">#  female = 1</span></a></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="co">#  male = 2</span></a>
+<a class="sourceLine" id="cb65-2" data-line-number="2"><span class="co">#  female = 1</span></a></code></pre></div>
 <p>If you print a factor, the computer just replaces each category designation with its name (2 would be replaced with “male” in this example). These replacements can be done in real time without clogging the memory of your computer as they don’t need to be saved.</p>
 <p>In some instances a categorical variable might be represented by numbers. For example, grades 9-12 for high school kids. These can be tricky to re-cast.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">grades &lt;-<span class="st"> </span><span class="kw">sample</span>( <span class="dt">x=</span><span class="dv">9</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">replace=</span>T )</a>
-<a class="sourceLine" id="cb67-2" data-line-number="2">grades</a></code></pre></div>
-<pre><code>##  [1] 11 12 10 10 10 11 10 11 11 10</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">grades &lt;-<span class="st"> </span><span class="kw">as.factor</span>( grades )</a>
-<a class="sourceLine" id="cb69-2" data-line-number="2">grades</a></code></pre></div>
-<pre><code>##  [1] 11 12 10 10 10 11 10 11 11 10
-## Levels: 10 11 12</code></pre>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">as.numeric</span>( grades )</a></code></pre></div>
-<pre><code>##  [1] 2 3 1 1 1 2 1 2 2 1</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">as.character</span>( grades )</a></code></pre></div>
-<pre><code>##  [1] &quot;11&quot; &quot;12&quot; &quot;10&quot; &quot;10&quot; &quot;10&quot; &quot;11&quot; &quot;10&quot; &quot;11&quot; &quot;11&quot; &quot;10&quot;</code></pre>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># proper way to get back to the original numeric vector</span></a>
-<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="kw">as.numeric</span>( <span class="kw">as.character</span>( grades ))</a></code></pre></div>
-<pre><code>##  [1] 11 12 10 10 10 11 10 11 11 10</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1">grades &lt;-<span class="st"> </span><span class="kw">sample</span>( <span class="dt">x=</span><span class="dv">9</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">replace=</span>T )</a>
+<a class="sourceLine" id="cb66-2" data-line-number="2">grades</a></code></pre></div>
+<pre><code>##  [1] 10 11  9 12 10 10 10 10  9 11</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1">grades &lt;-<span class="st"> </span><span class="kw">as.factor</span>( grades )</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2">grades</a></code></pre></div>
+<pre><code>##  [1] 10 11 9  12 10 10 10 10 9  11
+## Levels: 9 10 11 12</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1"><span class="kw">as.numeric</span>( grades )</a></code></pre></div>
+<pre><code>##  [1] 2 3 1 4 2 2 2 2 1 3</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="kw">as.character</span>( grades )</a></code></pre></div>
+<pre><code>##  [1] &quot;10&quot; &quot;11&quot; &quot;9&quot;  &quot;12&quot; &quot;10&quot; &quot;10&quot; &quot;10&quot; &quot;10&quot; &quot;9&quot;  &quot;11&quot;</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1"><span class="co"># proper way to get back to the original numeric vector</span></a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"><span class="kw">as.numeric</span>( <span class="kw">as.character</span>( grades ))</a></code></pre></div>
+<pre><code>##  [1] 10 11  9 12 10 10 10 10  9 11</code></pre>
 <p><br></p>
 <div class="tip">
 <p>The <strong>very important</strong> rule to remember with factors is you can’t move directly from the factor to numeric using the <strong>as.numeric()</strong> casting function. This will give you the underlying data structure, but will not give you the category names. To get these, you need the <strong>as.character</strong> casting function.</p>
 </div>
 <p><br> <br></p>
 <p>TIP: When reading data from Excel spreadsheets (usually saved in the comma separated value or CSV format), remember to include the following argument to prevent the creation of factors, which can produce some annoying behaviors.</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>( <span class="st">&quot;filename.csv&quot;</span>, <span class="dt">stringsAsFactors=</span>F )</a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>( <span class="st">&quot;filename.csv&quot;</span>, <span class="dt">stringsAsFactors=</span>F )</a></code></pre></div>
 </div>
 <div id="logical-vectors" class="section level2">
 <h2><span class="header-section-number">3.7</span> Logical Vectors</h2>
@@ -605,19 +611,19 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKDEsMiwzKSAgICAgICAgICAgICAgICAgICAg
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">dat<span class="op">$</span>name <span class="op">==</span><span class="st"> &quot;sriti&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">dat<span class="op">$</span>name <span class="op">==</span><span class="st"> &quot;sriti&quot;</span></a></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE  TRUE</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;male&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" data-line-number="1">dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;male&quot;</span></a></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">dat<span class="op">$</span>strength <span class="op">&gt;</span><span class="st"> </span><span class="dv">180</span></a></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" data-line-number="1">dat<span class="op">$</span>strength <span class="op">&gt;</span><span class="st"> </span><span class="dv">180</span></a></code></pre></div>
 <pre><code>## [1] FALSE  TRUE FALSE FALSE</code></pre>
 <p>When defining logical vectors, you can use the abbreviated versions of T for TRUE and F for FALSE.</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">z1 &lt;-<span class="st"> </span><span class="kw">c</span>(T,T,F,T,F,F)</a>
-<a class="sourceLine" id="cb84-2" data-line-number="2">z1</a></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb83-1" data-line-number="1">z1 &lt;-<span class="st"> </span><span class="kw">c</span>(T,T,F,T,F,F)</a>
+<a class="sourceLine" id="cb83-2" data-line-number="2">z1</a></code></pre></div>
 <pre><code>## [1]  TRUE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
 <p>Typically logical vectors are used in combination with subset operators to identify specific groups in the data.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co"># isolate data on all of the females in the dataset</span></a>
-<a class="sourceLine" id="cb86-2" data-line-number="2">dat[ dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span> , ]</a></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" data-line-number="1"><span class="co"># isolate data on all of the females in the dataset</span></a>
+<a class="sourceLine" id="cb85-2" data-line-number="2">dat[ dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span> , ]</a></code></pre></div>
 <pre><code>##    name    sex     treat strength
 ## 3 linda female treatment      119
 ## 4 sriti female   control      142</code></pre>
@@ -655,21 +661,21 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBkYXRhIHRoYXQgZm9sbG93cyBhIG5vcm1h
 <h2><span class="header-section-number">3.9</span> Recycling</h2>
 <p>When we create a new variable from existing variables, it is called a ‘transformation’. This is very common in data science. Crime is measures by the number of assaults <em>per 100,000 people</em>, for example (crime / pop). A batting average is the number of hits divided by the number of at bats.</p>
 <p>In R, mathematical operations are <em>vectorized</em>, which means that operations are performed on the entire vector all at once. This makes transformations fast and easy.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb88-2" data-line-number="2">x <span class="op">+</span><span class="st"> </span><span class="dv">5</span></a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb87-2" data-line-number="2">x <span class="op">+</span><span class="st"> </span><span class="dv">5</span></a></code></pre></div>
 <pre><code>##  [1]  6  7  8  9 10 11 12 13 14 15</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">x <span class="op">*</span><span class="st"> </span><span class="dv">5</span></a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" data-line-number="1">x <span class="op">*</span><span class="st"> </span><span class="dv">5</span></a></code></pre></div>
 <pre><code>##  [1]  5 10 15 20 25 30 35 40 45 50</code></pre>
 <p>R uses a convention called “recycling”, which means that it will re-use elements of a vector if necessary. In the example below the x vector has 10 elements, but the y vector only has 5 elements. When we run out of y, we just start over from the beginning. This is powerful in some instances, but can be dangerous in others if you don’t realize that that it is happening.</p>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
-<a class="sourceLine" id="cb92-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb92-3" data-line-number="3">x <span class="op">+</span><span class="st"> </span>y</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb91-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb91-3" data-line-number="3">x <span class="op">+</span><span class="st"> </span>y</a></code></pre></div>
 <pre><code>##  [1]  2  4  6  8 10  7  9 11 13 15</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">x <span class="op">*</span><span class="st"> </span>y</a></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb93-1" data-line-number="1">x <span class="op">*</span><span class="st"> </span>y</a></code></pre></div>
 <pre><code>##  [1]  1  4  9 16 25  6 14 24 36 50</code></pre>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="co"># the colors are recycled</span></a>
-<a class="sourceLine" id="cb96-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb96-3" data-line-number="3"><span class="kw">plot</span>( <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>), <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span><span class="dv">3</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb95-1" data-line-number="1"><span class="co"># the colors are recycled</span></a>
+<a class="sourceLine" id="cb95-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb95-3" data-line-number="3"><span class="kw">plot</span>( <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>), <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span><span class="dv">3</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span> )</a></code></pre></div>
 <p><img src="ch-050-vectors_files/figure-html/unnamed-chunk-45-1.png" width="768" /></p>
 <p>Here is an example of recycling gone wrong:</p>
 <table style="width:57%;">
@@ -714,23 +720,23 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBkYXRhIHRoYXQgZm9sbG93cyBhIG5vcm1h
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="co"># create a subset of data of all female study participants</span></a>
-<a class="sourceLine" id="cb97-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb97-3" data-line-number="3">dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="co"># create a subset of data of all female study participants</span></a>
+<a class="sourceLine" id="cb96-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb96-3" data-line-number="3">dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span></a></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE  TRUE</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">these &lt;-<span class="st"> </span>dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span></a>
-<a class="sourceLine" id="cb99-2" data-line-number="2">dat[ these, ]  <span class="co"># correct subset</span></a></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb98-1" data-line-number="1">these &lt;-<span class="st"> </span>dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span></a>
+<a class="sourceLine" id="cb98-2" data-line-number="2">dat[ these, ]  <span class="co"># correct subset</span></a></code></pre></div>
 <pre><code>##    name    sex     treat strength
 ## 3 linda female treatment      119
 ## 4 sriti female   control      142</code></pre>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="co"># same thing with a mistake</span></a>
-<a class="sourceLine" id="cb101-2" data-line-number="2"><span class="co"># whoops! should be double equal for a logical statement</span></a>
-<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="co"># the female element is recycled </span></a>
-<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="co"># just wrote over my raw data! </span></a>
-<a class="sourceLine" id="cb101-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb101-6" data-line-number="6">dat<span class="op">$</span>sex =<span class="st"> &quot;female&quot;</span>    </a>
-<a class="sourceLine" id="cb101-7" data-line-number="7">these &lt;-<span class="st"> </span>dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span> </a>
-<a class="sourceLine" id="cb101-8" data-line-number="8">dat[ these , ]</a></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb100-1" data-line-number="1"><span class="co"># same thing with a mistake</span></a>
+<a class="sourceLine" id="cb100-2" data-line-number="2"><span class="co"># whoops! should be double equal for a logical statement</span></a>
+<a class="sourceLine" id="cb100-3" data-line-number="3"><span class="co"># the female element is recycled </span></a>
+<a class="sourceLine" id="cb100-4" data-line-number="4"><span class="co"># just wrote over my raw data! </span></a>
+<a class="sourceLine" id="cb100-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb100-6" data-line-number="6">dat<span class="op">$</span>sex =<span class="st"> &quot;female&quot;</span>    </a>
+<a class="sourceLine" id="cb100-7" data-line-number="7">these &lt;-<span class="st"> </span>dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span> </a>
+<a class="sourceLine" id="cb100-8" data-line-number="8">dat[ these , ]</a></code></pre></div>
 <pre><code>##    name    sex     treat strength
 ## 1  adam female treatment      167
 ## 2 jamal female   control      185
