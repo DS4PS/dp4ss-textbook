@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>ch-050-vectors.utf8.md</title>
+
+<script src="ch-050-vectors_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="ch-050-vectors_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="ch-050-vectors_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="ch-050-vectors_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="ch-050-vectors_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="ch-050-vectors_files/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<div id="vectors-and-data-types" class="section level1">
+<h1><span class="header-section-number">1</span> VECTORS AND DATA TYPES</h1>
+<p>Vectors are the building blocks of data programming in R, so they are extremely important concepts.</p>
+<p>This section will cover basic principles of working with vectors in the R language, including the different types of vectors (data types or “classes”), and common functions used on vectors.</p>
+<p><br><br></p>
+<div class="figure">
+<img src="figures/vectors.png" alt="Components of a Vector" width="40%" />
+<p class="caption">
+Components of a Vector
+</p>
+</div>
+<p><br> <br> <br> <br></p>
+<div class="tip">
+<h2 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h2>
+<p>In this chapter, we’ll learn about the four main types of vectors:</p>
+<ul>
+<li>numeric</li>
+<li>character</li>
+<li>factor</li>
+<li>logical</li>
+</ul>
+<h2 id="key-takeaways"><span class="header-section-number">1</span> Key Takeaways</h2>
+<ul>
+<li>All data in R is an <strong>object</strong></li>
+<li>Objects have <strong>classes</strong> that specify what type of object it is</li>
+<li>Vectors can be numerica, character, factor or logical</li>
+<li>Vectors are the building blocks of data frames - the columns of a dataset</li>
+<li>They are created using constructors like the combine function <strong>c()</strong></li>
+<li>You can change data types using <strong>casting</strong></li>
+</ul>
+<p><br> <br></p>
+</div>
+<p><br> <br></p>
+<div id="key-concepts-1" class="section level2">
+<h2><span class="header-section-number">1.1</span> Key Concepts</h2>
+<div class="figure">
+<img src="figures/vectors.png" alt="Components of a Vector" width="60%" />
+<p class="caption">
+Components of a Vector
+</p>
+</div>
+<div class="figure">
+<img src="figures/data_types.png" alt="Basic data types in R" width="836" />
+<p class="caption">
+Basic data types in R
+</p>
+</div>
+</div>
+</div>
+<div id="vectors" class="section level1">
+<h1><span class="header-section-number">2</span> Vectors</h1>
+<p>Generally speaking a vector is a set of numbers, words, or other values stored sequentially:</p>
+<ul>
+<li>[ 1, 2, 3]</li>
+<li>[ apple, orange, pear ]</li>
+<li>[ TRUE, FALSE, FALSE ]</li>
+</ul>
+<p>In social sciences, a vector usually represents a variable in a dataset, often as a column in a spreadsheet.</p>
+<p>We might manually build a dataset by entering data as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">strength &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="dv">167</span>, <span class="dv">185</span>, <span class="dv">119</span>, <span class="dv">142</span> )</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">name &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="st">&quot;adam&quot;</span>, <span class="st">&quot;jamal&quot;</span>, <span class="st">&quot;linda&quot;</span>, <span class="st">&quot;sriti&quot;</span> )</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">sex &lt;-<span class="st"> </span><span class="kw">factor</span>( <span class="kw">c</span>( <span class="st">&quot;male&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;female&quot;</span> ) )</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">study.group &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;control&quot;</span>, <span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;control&quot;</span> )</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">is.treated &lt;-<span class="st"> </span>study.group <span class="op">==</span><span class="st"> &quot;treatment&quot;</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">dat &lt;-<span class="st"> </span><span class="kw">data.frame</span>( name, sex, study.group, is.treated, strength )</a></code></pre></div>
+<table style="width:79%;">
+<colgroup>
+<col width="11%" />
+<col width="12%" />
+<col width="19%" />
+<col width="18%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">sex</th>
+<th align="center">study.group</th>
+<th align="center">is.treated</th>
+<th align="center">strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">adam</td>
+<td align="center">male</td>
+<td align="center">treatment</td>
+<td align="center">TRUE</td>
+<td align="center">167</td>
+</tr>
+<tr class="even">
+<td align="center">jamal</td>
+<td align="center">male</td>
+<td align="center">control</td>
+<td align="center">FALSE</td>
+<td align="center">185</td>
+</tr>
+<tr class="odd">
+<td align="center">linda</td>
+<td align="center">female</td>
+<td align="center">treatment</td>
+<td align="center">TRUE</td>
+<td align="center">119</td>
+</tr>
+<tr class="even">
+<td align="center">sriti</td>
+<td align="center">female</td>
+<td align="center">control</td>
+<td align="center">FALSE</td>
+<td align="center">142</td>
+</tr>
+</tbody>
+</table>
+<p>Here are the important things to pay attention to:</p>
+<ul>
+<li>Each vector was created with the combine <strong>c()</strong> function.</li>
+<li>Numbers do not require quotation marks around elements.</li>
+<li>Characters require quotation marks.</li>
+<li>The <em>is.treated</em> vector represents membership in a group.</li>
+</ul>
+</div>
+<div id="data-types" class="section level1">
+<h1><span class="header-section-number">3</span> Data Types</h1>
+<p>There are four primary vector types (“classes”) in R:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>numeric</td>
+<td>Only numbers</td>
+</tr>
+<tr class="even">
+<td>character</td>
+<td>A vector of letters or words, always enclosed with quotes</td>
+</tr>
+<tr class="odd">
+<td>factor</td>
+<td>Categorical variables</td>
+</tr>
+<tr class="even">
+<td>logical</td>
+<td>TRUE or FALSE values</td>
+</tr>
+</tbody>
+</table>
+<p>Each type of vector serves different purposes:</p>
+<ul>
+<li><strong>numeric</strong>: keep track of quantitative measures, counts, or orders of things</li>
+<li><strong>character</strong>: store non-numeric data, typically unstructured text</li>
+<li><strong>factor</strong>: represent distinct and mutually-exclusive categories</li>
+<li><strong>logical</strong>: disignate cases that meet some criteria, usually group inclusion</li>
+</ul>
+<p>Each vector in R is stored as an <strong>object</strong>, a technical term in computer science that we will discuss more later. For now know that each object has a <strong>class</strong> that represents the data type. We can ask R for the data types using the <strong>class()</strong> function:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">class</span>( name )</a></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">class</span>( strength )</a></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">class</span>( study.group )</a></code></pre></div>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">class</span>( is.treated )</a></code></pre></div>
+<pre><code>## [1] &quot;logical&quot;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">class</span>( dat )</a></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<div id="common-vectors-functions" class="section level2">
+<h2><span class="header-section-number">3.1</span> Common Vectors Functions</h2>
+<p>You will spend a lot of time creating data vectors, transforming variables, generating subsets, cleaning data, and adding new observations. These are all accomplished through <strong>functions</strong> that act on vectors.</p>
+<p>Here are some common vector functions:</p>
+<div id="vector-length" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> vector length</h3>
+<p>We often need to know how many elements belong to a vector, which we find with the <strong>length()</strong> function.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">length</span>( strength )</a></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+</div>
+<div id="combine" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> combine</h3>
+<p>To combine several elements into a single vector, or combine two vectors to form one, use the <strong>c()</strong> function.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">c</span>( <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span> )        <span class="co"># create a numeric vector</span></a></code></pre></div>
+<pre><code>## [1] 1 2 3</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">c</span>( <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span> )  <span class="co"># create a character vector</span></a></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<p>Combining two vectors:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">10</span><span class="op">:</span><span class="dv">15</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw">c</span>( x, y )</a></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5 10 11 12 13 14 15</code></pre>
+<p>Combining two vectors of different data types:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="dv">1</span>, <span class="dv">2</span>,<span class="dv">3</span> )</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span> )</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="kw">c</span>( x, y )</a></code></pre></div>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<div class="quiz">
+<p>What happened to the numeric elements here?</p>
+</div>
+</div>
+</div>
+<div id="casting" class="section level2">
+<h2><span class="header-section-number">3.2</span> Casting</h2>
+<p>You can easily move from one data type to another by <strong>casting</strong> a specific type as another type:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># character casting</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">x</a></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">as.character</span>(x)  <span class="co"># numbers stored as text</span></a></code></pre></div>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
+<p>The rules for casting vary by data type. Take logical vectors, for example. Re-casting them as character vectors produces an expected result. What about as a numeric vector?</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">y &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="ot">TRUE</span>, <span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span> )</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">y</a></code></pre></div>
+<pre><code>## [1]  TRUE FALSE  TRUE  TRUE FALSE</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">as.character</span>( y )</a></code></pre></div>
+<pre><code>## [1] &quot;TRUE&quot;  &quot;FALSE&quot; &quot;TRUE&quot;  &quot;TRUE&quot;  &quot;FALSE&quot;</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">as.numeric</span>( y )</a></code></pre></div>
+<pre><code>## [1] 1 0 1 1 0</code></pre>
+<p>If you are familiar with boolean logic or dummy variables in statistics, it actually makes sense that TRUE would be represented as <strong>1</strong> in numeric form, and FALSE as <strong>0</strong>.</p>
+<p>But in some cases it might not make sense to cast one variable type as another and we can get unexpected or unwanted behavior.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">z &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span> )</a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">z</a></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">as.numeric</span>( z )</a></code></pre></div>
+<pre><code>## [1] NA NA NA</code></pre>
+<div class="tip">
+<p>The element <strong>NA</strong> is read as <strong>NOT AVAILABLE</strong> or <strong>NOT APPLICABLE</strong>, and is the value R uses to represent missing or deleted data.</p>
+<p>NA’s are really important (and somewhat annoying). We will discuss missing values more in-depth later.</p>
+</div>
+</div>
+<div id="care-when-casting" class="section level2">
+<h2><span class="header-section-number">3.3</span> Care When Casting</h2>
+<p>Casting will often be induced automatically when you try to combine different types of data. For example, when you add a character element to a numeric vector, the whole vector will be cast as a character vector.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">x1 &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">x1</a></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">x1 &lt;-<span class="st"> </span><span class="kw">c</span>( x1, <span class="st">&quot;a&quot;</span> )   <span class="co"># a vector can only have one data type</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">x1                   <span class="co"># all numbers silently recast as characters</span></a></code></pre></div>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot; &quot;a&quot;</code></pre>
+<p>If you consider the example above, when a numeric and character vector are combined all elements are re-cast as strings because numbers can be represented as characters but not vice-versa.</p>
+<p>R tries to select a reasonable default type, but sometimes casting will create some strange and unexpected behaviors. Consider some of these examples.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKDEsMiwzKSAgICAgICAgICAgICAgICAgICAgIyBudW1lcmljXG54MiA8LSBjKFwiYVwiLFwiYlwiLFwiY1wiKSAgICAgICAgICAgICAgIyBjaGFyYWN0ZXJcbngzIDwtIGMoVFJVRSxGQUxTRSxUUlVFKSAgICAgICAgICAjIGxvZ2ljYWxcbng0IDwtIGZhY3RvciggYyhcImFcIixcImJcIixcImNcIikgKSAgICAjIGZhY3RvclxuY2FzZTEgPC0gYyggeDEsIHgzIClcbmNhc2UyIDwtIGMoIHgyLCB4MyApXG5jYXNlMyA8LSBjKCB4MSwgeDQgKVxuY2FzZTQgPC0gYyggeDIsIHg0ICkifQ==
+</div>
+<div class="question">
+<p>Which data type will each step produce?</p>
+</div>
+<p><br></p>
+<p>The answers to <em>case1</em> and <em>case2</em> are somewhat intuitive.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">case1  <span class="co"># combine a numeric and logical vector</span></a></code></pre></div>
+<pre><code>## [1] 1 2 3 1 0 1</code></pre>
+<p>Recall that TRUE and FALSE are often represented as 1 and 0 in datasets, so they can be recast as numeric elements. The numbers 2 and 3 have no meaning in a logical vector, so we can’t cast a numeric vector as a logical vector. This will default to numeric because we do not lose any information - the one’s and zero’s can always be re-cast back to logical vectors later if necessary.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">case2  <span class="co"># combine a character and logical vector</span></a></code></pre></div>
+<pre><code>## [1] &quot;a&quot;     &quot;b&quot;     &quot;c&quot;     &quot;TRUE&quot;  &quot;FALSE&quot; &quot;TRUE&quot;</code></pre>
+<p>Similarly characters have no meaning in the logical format, so we would have to replace them with NA’s if we converted the character vector to a logical vector.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">as.logical</span>( x2 )</a></code></pre></div>
+<pre><code>## [1] NA NA NA</code></pre>
+<p>So converting the logical vector to characters allows us to retain all of the information in both vectors.</p>
+<p><em>case3</em> and <em>case4</em> are a little more nuanced. See the section on factors below to make sense of them.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">case3  <span class="co"># combine a numeric and factor vector</span></a></code></pre></div>
+<pre><code>## [1] 1 2 3 1 2 3</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1">case4  <span class="co"># combine a character and factor vector</span></a></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
+<div class="tip">
+<p>TIP: When you read data in from outside sources, R will sometimes try to guess the data types and store numeric or character vectors as factors. To avoid corrupting your data see the section below on factors for special instructions on re-casting factors as numeric vectors.</p>
+</div>
+</div>
+<div id="numeric-vectors" class="section level2">
+<h2><span class="header-section-number">3.4</span> Numeric Vectors</h2>
+<p>There are some specific things to note about each vector type.</p>
+<p>Math operators will only work on numeric vectors.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKDEsMiwzKSAgICAgICAgICAgICAgICAgICAgIyBudW1lcmljXG54MiA8LSBjKFwiYVwiLFwiYlwiLFwiY1wiKSAgICAgICAgICAgICAgIyBjaGFyYWN0ZXJcbngzIDwtIGMoVFJVRSxGQUxTRSxUUlVFKSAgICAgICAgICAjIGxvZ2ljYWxcbng0IDwtIGZhY3RvciggYyhcImFcIixcImJcIixcImNcIikgKSAgICAjIGZhY3RvclxuXG5cbiMgYWRkIGFsbCBlbGVtZW50cyBpbiB0aGUgdmVjdG9yOlxuc3VtKCB4MSApXG4jIHRoZSBzdW1tYXJ5KCkgZnVuY3Rpb24gcmV0dXJucyBzdW1tYXJ5IHN0YXRzXG5zdW1tYXJ5KCB4MSApXG5cbnN1bSggeDIgKSJ9
+</div>
+<div class="question">
+<p>Note that if we try to run this mathematical function we get an error:</p>
+</div>
+<p><br></p>
+<p>Many functions in R are sensitive to the data type of vectors. Mathematical functions, for example, do not make sense when applied to text (character vectors). In many cases R will give an error.</p>
+<p>In some cases R will silently re-cast the variable, then perform the operation. Be watchful for when silent re-casting occurs because it might have unwanted side effects, such as deleting data or re-coding group levels in the wrong way.</p>
+<div id="integers" class="section level3">
+<h3><span class="header-section-number">3.4.1</span> Integers</h3>
+<p>Integers are simple numeric vectors. The integer class is used to save memory since integers require less RAM space than numbers that contain decimals points (you need to allocate space for the numbers to the left and the numbers to the right of the decimal). Google “computer memory allocation” if you are interested in the specifics.</p>
+<p>If you are doing advanced programming you will be more sensitive to memory allocation and the speed of your code, but in the intro class we will not differentiate between the two types of number vectors. In <strong>most</strong> cases they result in the same results, unless you are doing advanced numerical analysis where rounding errors matter!</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">n &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb50-2" data-line-number="2">n</a></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="kw">class</span>( n )</a></code></pre></div>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1">n[ <span class="dv">2</span> ] &lt;-<span class="st"> </span><span class="fl">2.01</span>   <span class="co"># replace the second element with &quot;2.01&quot;</span></a>
+<a class="sourceLine" id="cb54-2" data-line-number="2">n                <span class="co"># all elements converted to decimals</span></a></code></pre></div>
+<pre><code>## [1] 1.00 2.01 3.00 4.00 5.00</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">class</span>( n )</a></code></pre></div>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+</div>
+</div>
+<div id="character-vectors" class="section level2">
+<h2><span class="header-section-number">3.5</span> Character Vectors</h2>
+<p>The most important rule to remember with this data type: when creating character vectors, all text must be enclosed by quotation marks.</p>
+<p>This one works:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1"><span class="kw">c</span>( <span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span> )   <span class="co"># this works</span></a></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<p>This one will not:</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">c</span>( a, b, c )  </a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="co"># Error: object &#39;a&#39; not found</span></a></code></pre></div>
+<p>When you type characters surrounded by quotes then R knows you are creating new text (<strong>“strings”</strong> of letters in programming speak).</p>
+<p>When you type characters that are not surrounded by quotes, R thinks that you are looking for an object in the environment, like the variables we have already created. It gets confused when it doesn’t find the object that you typed.</p>
+<p>In generate, you will use quotes when you are creating character vectors, and for arguments in functions. You do not use quotes when you are referencing an active object.</p>
+<p>An active object is typically a dataset or vector that you have imported or created. You can print a list of all active objects with the <code>ls()</code> function.</p>
+<div id="quotes-in-arguments" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Quotes in Arguments</h3>
+<p>When you first start using R it can be confusing about when quotes are needed around arguments. Take the following example of the color argument (<code>col=</code>) in the <code>plot()</code> function.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1">group &lt;-<span class="st"> </span><span class="kw">factor</span>( <span class="kw">sample</span>( <span class="kw">c</span>(<span class="st">&quot;treatment&quot;</span>,<span class="st">&quot;control&quot;</span>), <span class="dv">100</span>, <span class="dt">replace=</span><span class="ot">TRUE</span> ) )</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2">strength &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">100</span>,<span class="dv">100</span>,<span class="dv">30</span>) <span class="op">+</span><span class="st"> </span><span class="dv">50</span> <span class="op">*</span><span class="st"> </span><span class="kw">as.numeric</span>( group<span class="op">==</span><span class="st">&quot;treatment&quot;</span> )</a>
+<a class="sourceLine" id="cb61-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="kw">par</span>( <span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>) )</a>
+<a class="sourceLine" id="cb61-5" data-line-number="5"><span class="kw">plot</span>( strength, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span> )</a>
+<a class="sourceLine" id="cb61-6" data-line-number="6"><span class="kw">plot</span>( strength, <span class="dt">col=</span>group,  <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span>, <span class="dt">cex=</span><span class="dv">2</span> )</a></code></pre></div>
+<p><img src="ch-050-vectors_files/figure-html/unnamed-chunk-27-1.png" width="960" /></p>
+<p><em>These graphs show patterns in the strength measures from our study. The first plots all subjects as blue, and the second plots subjects in the treatment group as red, control group as black.</em></p>
+<p>In the first plot we are using a <strong>text argument</strong> to specify a color (<code>col=&quot;blue&quot;</code>), so it must be enclosed by quotes.</p>
+<p>In the second example R selects the color based upon group membership specified by the <strong>factor called ‘group’</strong>. Since the argument is now referencing an object (<code>col=group</code>), we do not use quotes.</p>
+<p>The exception here is when your argument requires a number. <strong>Numbers are not passed with quotes, or they would be cast as text.</strong> For example, (<code>bty=&quot;n&quot;</code>) tells the plot to not draw a box around the graph, and the <strong>cex</strong> argument controls the dot size: (<code>cex=2</code>).</p>
+<p><img src="https://media2.giphy.com/media/kaq6GnxDlJaBq/giphy.gif" /></p>
+<p>I know. I’m with you.</p>
+</div>
+</div>
+<div id="factors" class="section level2">
+<h2><span class="header-section-number">3.6</span> Factors</h2>
+<p>When there are categorical variables within our data, or groups, then we use a special vector to keep track of these groups. We could just use numbers (1=female, 0=male) or characters (“male”,“female”), but factors are useful for two reasons.</p>
+<p>First, it saves memory. Text is very “expensive” in terms of memory allocation and processing speed, so using simpler data structure makes R faster.</p>
+<p>Second, when a variable is set as a factor, R recognizes that it represents a group and it can deploy object-oriented functionality. When you use a factor in analysis, R knows that you want to split the analysis up by groups.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">height &lt;-<span class="st"> </span><span class="kw">c</span>( <span class="dv">70</span>, <span class="dv">68</span>, <span class="dv">69</span>, <span class="dv">74</span>, <span class="dv">72</span>, <span class="dv">69</span>, <span class="dv">68</span>, <span class="dv">73</span>  )</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2">strength &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">167</span>,<span class="dv">185</span>,<span class="dv">119</span>,<span class="dv">142</span>,<span class="dv">175</span>,<span class="dv">204</span>,<span class="dv">124</span>,<span class="dv">117</span>)</a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">sex &lt;-<span class="st"> </span><span class="kw">factor</span>( <span class="kw">c</span>(<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>,<span class="st">&quot;female&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;male&quot;</span>,<span class="st">&quot;female&quot;</span>,<span class="st">&quot;female&quot;</span> ) )</a>
+<a class="sourceLine" id="cb62-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb62-5" data-line-number="5"><span class="kw">plot</span>( height, strength,            <span class="co"># two numeric vectors: scatter plot</span></a>
+<a class="sourceLine" id="cb62-6" data-line-number="6">      <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span><span class="dv">3</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span> )   </a></code></pre></div>
+<p><img src="ch-050-vectors_files/figure-html/unnamed-chunk-28-1.png" width="768" /></p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="kw">plot</span>( sex, strength )              <span class="co"># factor + numeric: box and whisker plot       </span></a></code></pre></div>
+<p><img src="ch-050-vectors_files/figure-html/unnamed-chunk-28-2.png" width="768" /></p>
+<p>Factors are more memory efficient than character vectors because they store the underlying data as a numeric vector instead of a categorical (text) vector. Each group in the data is assigned a number, and when printing items the program only has to remember which group corresponds to which number:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">as.numeric</span>( sex )</a></code></pre></div>
+<pre><code>## [1] 2 2 1 1 2 2 1 1</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co">#  male = 2</span></a>
+<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="co">#  female = 1</span></a></code></pre></div>
+<p>If you print a factor, the computer just replaces each category designation with its name (2 would be replaced with “male” in this example). These replacements can be done in real time without clogging the memory of your computer as they don’t need to be saved.</p>
+<p>In some instances a categorical variable might be represented by numbers. For example, grades 9-12 for high school kids. These can be tricky to re-cast.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1">grades &lt;-<span class="st"> </span><span class="kw">sample</span>( <span class="dt">x=</span><span class="dv">9</span><span class="op">:</span><span class="dv">12</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">replace=</span>T )</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2">grades</a></code></pre></div>
+<pre><code>##  [1] 11 12 10 10 10 11 10 11 11 10</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">grades &lt;-<span class="st"> </span><span class="kw">as.factor</span>( grades )</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">grades</a></code></pre></div>
+<pre><code>##  [1] 11 12 10 10 10 11 10 11 11 10
+## Levels: 10 11 12</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" data-line-number="1"><span class="kw">as.numeric</span>( grades )</a></code></pre></div>
+<pre><code>##  [1] 2 3 1 1 1 2 1 2 2 1</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" data-line-number="1"><span class="kw">as.character</span>( grades )</a></code></pre></div>
+<pre><code>##  [1] &quot;11&quot; &quot;12&quot; &quot;10&quot; &quot;10&quot; &quot;10&quot; &quot;11&quot; &quot;10&quot; &quot;11&quot; &quot;11&quot; &quot;10&quot;</code></pre>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" data-line-number="1"><span class="co"># proper way to get back to the original numeric vector</span></a>
+<a class="sourceLine" id="cb75-2" data-line-number="2"><span class="kw">as.numeric</span>( <span class="kw">as.character</span>( grades ))</a></code></pre></div>
+<pre><code>##  [1] 11 12 10 10 10 11 10 11 11 10</code></pre>
+<p><br></p>
+<div class="tip">
+<p>The <strong>very important</strong> rule to remember with factors is you can’t move directly from the factor to numeric using the <strong>as.numeric()</strong> casting function. This will give you the underlying data structure, but will not give you the category names. To get these, you need the <strong>as.character</strong> casting function.</p>
+</div>
+<p><br> <br></p>
+<p>TIP: When reading data from Excel spreadsheets (usually saved in the comma separated value or CSV format), remember to include the following argument to prevent the creation of factors, which can produce some annoying behaviors.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" data-line-number="1">dat &lt;-<span class="st"> </span><span class="kw">read.csv</span>( <span class="st">&quot;filename.csv&quot;</span>, <span class="dt">stringsAsFactors=</span>F )</a></code></pre></div>
+</div>
+<div id="logical-vectors" class="section level2">
+<h2><span class="header-section-number">3.7</span> Logical Vectors</h2>
+<p>Logical vectors are collections of a set of TRUE and FALSE statements.</p>
+<p>Logical statements allow us to define groups based upon criteria, then decide whether observations belong to the group. A logical statement is one that contains a logical operator, and returns only TRUE, FALSE, or NA values.</p>
+<p>Logical vectors are important because organizing data into these sets is what drives all of the advanced data analytics (set theory is at the basis of mathematics and computer science).</p>
+<table style="width:57%;">
+<colgroup>
+<col width="11%" />
+<col width="12%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">sex</th>
+<th align="center">treat</th>
+<th align="center">strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">adam</td>
+<td align="center">male</td>
+<td align="center">treatment</td>
+<td align="center">167</td>
+</tr>
+<tr class="even">
+<td align="center">jamal</td>
+<td align="center">male</td>
+<td align="center">control</td>
+<td align="center">185</td>
+</tr>
+<tr class="odd">
+<td align="center">linda</td>
+<td align="center">female</td>
+<td align="center">treatment</td>
+<td align="center">119</td>
+</tr>
+<tr class="even">
+<td align="center">sriti</td>
+<td align="center">female</td>
+<td align="center">control</td>
+<td align="center">142</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" data-line-number="1">dat<span class="op">$</span>name <span class="op">==</span><span class="st"> &quot;sriti&quot;</span></a></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb80-1" data-line-number="1">dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;male&quot;</span></a></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" data-line-number="1">dat<span class="op">$</span>strength <span class="op">&gt;</span><span class="st"> </span><span class="dv">180</span></a></code></pre></div>
+<pre><code>## [1] FALSE  TRUE FALSE FALSE</code></pre>
+<p>When defining logical vectors, you can use the abbreviated versions of T for TRUE and F for FALSE.</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" data-line-number="1">z1 &lt;-<span class="st"> </span><span class="kw">c</span>(T,T,F,T,F,F)</a>
+<a class="sourceLine" id="cb84-2" data-line-number="2">z1</a></code></pre></div>
+<pre><code>## [1]  TRUE  TRUE FALSE  TRUE FALSE FALSE</code></pre>
+<p>Typically logical vectors are used in combination with subset operators to identify specific groups in the data.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" data-line-number="1"><span class="co"># isolate data on all of the females in the dataset</span></a>
+<a class="sourceLine" id="cb86-2" data-line-number="2">dat[ dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span> , ]</a></code></pre></div>
+<pre><code>##    name    sex     treat strength
+## 3 linda female treatment      119
+## 4 sriti female   control      142</code></pre>
+<p>See the next chapter for more details on subsets.</p>
+</div>
+<div id="generating-vectors" class="section level2">
+<h2><span class="header-section-number">3.8</span> Generating Vectors</h2>
+<p>You will often need to generate vectors for data transformations or simulations. Here are the most common functions that will be helpful.</p>
+<div id="repeated-values" class="section level3">
+<h3><span class="header-section-number">3.8.1</span> Repeated Values</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHJlcGVhdCBhIG51bWJlciwgb3Igc2VyaWVzIG9mIG51bWJlcnNcbnJlcCggeD05LCB0aW1lcz01IClcbnJlcCggeD1jKDUsNyksIHRpbWVzPTUgKVxucmVwKCB4PWMoNSw3KSwgZWFjaD01IClcbnJlcCggeD1jKFwidHJlYXRtZW50XCIsXCJjb250cm9sXCIpLCBlYWNoPTUgKSAgIyBhbHNvIHdvcmtzIHRvIGNyZWF0ZSBjYXRlZ29yaWVzIn0=
+</div>
+</div>
+<div id="sequence-of-values" class="section level3">
+<h3><span class="header-section-number">3.8.2</span> Sequence of Values</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBhIHNlcXVlbmNlIG9mIG51bWJlcnNcbnNlcSggZnJvbT0xLCB0bz0xNSwgYnk9MSApXG5zZXEoIGZyb209MSwgdG89MTUsIGJ5PTMgKVxuMToxNSAgICMgc2hvcnRoYW5kIGlmIGJ5PTEifQ==
+</div>
+</div>
+<div id="random-sample" class="section level3">
+<h3><span class="header-section-number">3.8.3</span> Random Sample</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBhIHJhbmRvbSBzYW1wbGVcbmJhZy5vZi5sZXR0ZXJzIDwtIGMoXCJhXCIsXCJiXCIsXCJjXCIsXCJiXCIsXCJmXCIpXG5zYW1wbGUoIHg9YmFnLm9mLmxldHRlcnMsIHNpemU9MywgcmVwbGFjZT1GQUxTRSApXG5zYW1wbGUoIHg9YmFnLm9mLmxldHRlcnMsIHNpemU9MywgcmVwbGFjZT1GQUxTRSApXG5zYW1wbGUoIHg9YmFnLm9mLmxldHRlcnMsIHNpemU9MywgcmVwbGFjZT1GQUxTRSApXG5cbiMgZm9yIG11bHRpcGxlIHNhbXBsZXMgdXNlIHJlcGxhY2VtZW50XG5zYW1wbGUoIHg9YmFnLm9mLmxldHRlcnMsIHNpemU9MTAsIHJlcGxhY2U9VFJVRSApIn0=
+</div>
+</div>
+<div id="draw-from-a-normal-distribution" class="section level3">
+<h3><span class="header-section-number">3.8.4</span> Draw From a Normal Distribution</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBkYXRhIHRoYXQgZm9sbG93cyBhIG5vcm1hbCBjdXJ2ZVxuIyBJUSBmb2xsb3dzIGEgbm9ybWFsIGRpc3RyaWJ1dGlvblxuIyB3aXRoIGEgbWVhbiBvZiAxMDAgYW5kIHNkIG9mIDE1XG5cbmlxIDwtIHJub3JtKCBuPTEwMDAsIG1lYW49MTAwLCBzZD0xNSApXG5oaXN0KCBpcSwgY29sPVwiZ3JheVwiICkifQ==
+</div>
+</div>
+</div>
+<div id="recycling" class="section level2">
+<h2><span class="header-section-number">3.9</span> Recycling</h2>
+<p>When we create a new variable from existing variables, it is called a ‘transformation’. This is very common in data science. Crime is measures by the number of assaults <em>per 100,000 people</em>, for example (crime / pop). A batting average is the number of hits divided by the number of at bats.</p>
+<p>In R, mathematical operations are <em>vectorized</em>, which means that operations are performed on the entire vector all at once. This makes transformations fast and easy.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb88-2" data-line-number="2">x <span class="op">+</span><span class="st"> </span><span class="dv">5</span></a></code></pre></div>
+<pre><code>##  [1]  6  7  8  9 10 11 12 13 14 15</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" data-line-number="1">x <span class="op">*</span><span class="st"> </span><span class="dv">5</span></a></code></pre></div>
+<pre><code>##  [1]  5 10 15 20 25 30 35 40 45 50</code></pre>
+<p>R uses a convention called “recycling”, which means that it will re-use elements of a vector if necessary. In the example below the x vector has 10 elements, but the y vector only has 5 elements. When we run out of y, we just start over from the beginning. This is powerful in some instances, but can be dangerous in others if you don’t realize that that it is happening.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span></a>
+<a class="sourceLine" id="cb92-2" data-line-number="2">y &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb92-3" data-line-number="3">x <span class="op">+</span><span class="st"> </span>y</a></code></pre></div>
+<pre><code>##  [1]  2  4  6  8 10  7  9 11 13 15</code></pre>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb94-1" data-line-number="1">x <span class="op">*</span><span class="st"> </span>y</a></code></pre></div>
+<pre><code>##  [1]  1  4  9 16 25  6 14 24 36 50</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb96-1" data-line-number="1"><span class="co"># the colors are recycled</span></a>
+<a class="sourceLine" id="cb96-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb96-3" data-line-number="3"><span class="kw">plot</span>( <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>,<span class="st">&quot;blue&quot;</span>), <span class="dt">pch=</span><span class="dv">19</span>, <span class="dt">cex=</span><span class="dv">3</span>, <span class="dt">bty=</span><span class="st">&quot;n&quot;</span> )</a></code></pre></div>
+<p><img src="ch-050-vectors_files/figure-html/unnamed-chunk-45-1.png" width="768" /></p>
+<p>Here is an example of recycling gone wrong:</p>
+<table style="width:57%;">
+<colgroup>
+<col width="11%" />
+<col width="12%" />
+<col width="16%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">sex</th>
+<th align="center">treat</th>
+<th align="center">strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">adam</td>
+<td align="center">male</td>
+<td align="center">treatment</td>
+<td align="center">167</td>
+</tr>
+<tr class="even">
+<td align="center">jamal</td>
+<td align="center">male</td>
+<td align="center">control</td>
+<td align="center">185</td>
+</tr>
+<tr class="odd">
+<td align="center">linda</td>
+<td align="center">female</td>
+<td align="center">treatment</td>
+<td align="center">119</td>
+</tr>
+<tr class="even">
+<td align="center">sriti</td>
+<td align="center">female</td>
+<td align="center">control</td>
+<td align="center">142</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb97-1" data-line-number="1"><span class="co"># create a subset of data of all female study participants</span></a>
+<a class="sourceLine" id="cb97-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb97-3" data-line-number="3">dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span></a></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE  TRUE</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb99-1" data-line-number="1">these &lt;-<span class="st"> </span>dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span></a>
+<a class="sourceLine" id="cb99-2" data-line-number="2">dat[ these, ]  <span class="co"># correct subset</span></a></code></pre></div>
+<pre><code>##    name    sex     treat strength
+## 3 linda female treatment      119
+## 4 sriti female   control      142</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb101-1" data-line-number="1"><span class="co"># same thing with a mistake</span></a>
+<a class="sourceLine" id="cb101-2" data-line-number="2"><span class="co"># whoops! should be double equal for a logical statement</span></a>
+<a class="sourceLine" id="cb101-3" data-line-number="3"><span class="co"># the female element is recycled </span></a>
+<a class="sourceLine" id="cb101-4" data-line-number="4"><span class="co"># just wrote over my raw data! </span></a>
+<a class="sourceLine" id="cb101-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb101-6" data-line-number="6">dat<span class="op">$</span>sex =<span class="st"> &quot;female&quot;</span>    </a>
+<a class="sourceLine" id="cb101-7" data-line-number="7">these &lt;-<span class="st"> </span>dat<span class="op">$</span>sex <span class="op">==</span><span class="st"> &quot;female&quot;</span> </a>
+<a class="sourceLine" id="cb101-8" data-line-number="8">dat[ these , ]</a></code></pre></div>
+<pre><code>##    name    sex     treat strength
+## 1  adam female treatment      167
+## 2 jamal female   control      185
+## 3 linda female treatment      119
+## 4 sriti female   control      142</code></pre>
+</div>
+<div id="missing-values-nas" class="section level2">
+<h2><span class="header-section-number">3.10</span> Missing Values: NA’s</h2>
+<p>Missing values are coded differently in each data analysis program. SPSS uses a period, for example. In R, missing values are coded as “NA”.</p>
+<p>The important thing to note is that R wants to make sure you know there are missing values if you are conducting analysis. As a result, it will give you the answer of “NA” when you try to do math with a vector that includes a missing value. You have to ask it explicitly to ignore the missing value.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4NSA8LSBjKCAxLCAyLCAzLCA0IClcbng1XG5zdW0oIHg1IClcbm1lYW4oIHg1IClcblxuXG54NSA8LSBjKCAxLCAyLCBOQSwgNCApXG54NVxuXG4jIHNob3VsZCBtaXNzaW5nIHZhbHVlcyBiZSB0cmVhdGVkIGFzIHplcm9zIG9yIGRyb3BwZWQ/IFxuXG5zdW0oIHg1IClcbm1lYW4oIHg1IClcbnN1bSggeDUsIG5hLnJtPVQgKSAgICMgbmEucm09VCBhcmd1bWVudCBkcm9wcyBtaXNzaW5nIHZhbHVlc1xubWVhbiggeDUsIG5hLnJtPVQgKSAgIyBuYS5ybT1UIGFyZ3VtZW50IGRyb3BzIG1pc3NpbmcgdmFsdWVzIn0=
+</div>
+<p>You cannot use the <em>==</em> operator to identify missing values in a dataset. There is a special <strong>is.na()</strong> function to locate all of the missing values in a vector.</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4NSA8LSBjKCAxLCAyLCBOQSwgNCApXG5cbiMgd2hpY2ggZWxlbWVudHMgYXJlIG1pc3Npbmc/XG54NSA9PSBOQSAgICAgICAjIHRoaXMgZG9lcyBub3QgZG8gd2hhdCB5b3Ugd2FudFxuaXMubmEoIHg1ICkgICAgIyBtdWNoIGJldHRlclxuXG4hIGlzLm5hKCB4NSApICAjIGlmIHlvdSB3YW50IHRvIGNyZWF0ZSBhIHNlbGVjdG9yIHZlY3RvciB0byBkcm9wIG1pc3NpbmcgdmFsdWVzIFxueDVbICEgaXMubmEoeDUpIF1cblxueDVbIGlzLm5hKHg1KSBdIDwtIDAgICMgcmVwbGFjZSBtaXNzaW5nIHZhbHVlcyB3aXRoIHplcm9cbng1In0=
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
