@@ -280,16 +280,20 @@ x1 <- c(1,2,3)                    # numeric
 x2 <- c("a","b","c")              # character
 x3 <- c(TRUE,FALSE,TRUE)          # logical
 x4 <- factor( c("a","b","c") )    # factor
+# combine a numeric and logical vector
 case1 <- c( x1, x3 )
+# combine a character and logical vector
 case2 <- c( x2, x3 )
+# combine a numeric and factor vector
 case3 <- c( x1, x4 )
+# combine a character and factor vector
 case4 <- c( x2, x4 )
 ```
 
 
 <div class="question">
 
-Which data type will each step produce? 
+Which data type will each step produce? Type the case# to see the results. 
 
 </div>
 
@@ -305,9 +309,6 @@ case1 <- c( x1, x3 )
 case2 <- c( x2, x3 )
 case3 <- c( x1, x4 )
 case4 <- c( x2, x4 )
-
-
-# type the case name to see results
 ```
 
 The answers to *case1* and *case2* are somewhat intuitive. 
