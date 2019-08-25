@@ -38,7 +38,7 @@ knitr::include_graphics( "figures/vectors.png" )
 
 <div class="tip">
 
-## Key Concepts
+**KEY CONCEPTS:**
 
 In this chapter, we'll learn about the four main types of vectors:
 
@@ -48,7 +48,7 @@ In this chapter, we'll learn about the four main types of vectors:
 * logical
 
 
-## Key Takeaways
+**TAKEAWAYS:**
 
 
 * All data in R is an **object**

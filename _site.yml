@@ -17,7 +17,6 @@ output:
   bookdown::html_document2:
     toc: yes
     toc_depth: 2
-    code_folding: hide
     css: textbook.css
     includes:
       after_body: footer.html

@@ -20,7 +20,6 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
@@ -167,14 +166,6 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
-<style type="text/css">
-.code-folding-btn { margin-bottom: 4px; }
-</style>
-<script>
-$(document).ready(function () {
-  window.initializeCodeFolding("hide" === "show");
-});
-</script>
 
 
 
@@ -209,14 +200,6 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
-<div class="btn-group pull-right">
-<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
-<ul class="dropdown-menu" style="min-width: 50px;">
-<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
-<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
-</ul>
-</div>
-
 
 
 
@@ -225,7 +208,7 @@ $(document).ready(function () {
 <div id="TOC">
 <ul>
 <li><a href="#vectors-and-data-types"><span class="toc-section-number">1</span> VECTORS AND DATA TYPES</a><ul>
-<li><a href="#key-concepts-1"><span class="toc-section-number">1.1</span> Key Concepts</a></li>
+<li><a href="#key-concepts"><span class="toc-section-number">1.1</span> Key Concepts</a></li>
 </ul></li>
 <li><a href="#vectors"><span class="toc-section-number">2</span> Vectors</a></li>
 <li><a href="#data-types"><span class="toc-section-number">3</span> Data Types</a><ul>
@@ -267,7 +250,7 @@ Figure 1.1: Components of a Vector
 <br>
 <br></p>
 <div class="tip">
-<h2 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h2>
+<p><strong>KEY CONCEPTS:</strong></p>
 <p>In this chapter, we’ll learn about the four main types of vectors:</p>
 <ul>
 <li>numeric</li>
@@ -275,7 +258,7 @@ Figure 1.1: Components of a Vector
 <li>factor</li>
 <li>logical</li>
 </ul>
-<h2 id="key-takeaways"><span class="header-section-number">1</span> Key Takeaways</h2>
+<p><strong>TAKEAWAYS:</strong></p>
 <ul>
 <li>All data in R is an <strong>object</strong></li>
 <li>Objects have <strong>classes</strong> that specify what type of object it is</li>
@@ -289,7 +272,7 @@ Figure 1.1: Components of a Vector
 </div>
 <p><br>
 <br></p>
-<div id="key-concepts-1" class="section level2">
+<div id="key-concepts" class="section level2">
 <h2><span class="header-section-number">1.1</span> Key Concepts</h2>
 <div class="figure"><span id="fig:unnamed-chunk-2"></span>
 <img src="figures/vectors.png" alt="Components of a Vector" width="60%" />
@@ -620,18 +603,18 @@ plot( sex, strength )              # factor + numeric: box and whisker plot     
 <p>In some instances a categorical variable might be represented by numbers. For example, grades 9-12 for high school kids. These can be tricky to re-cast.</p>
 <pre class="r"><code>grades &lt;- sample( x=9:12, size=10, replace=T )
 grades</code></pre>
-<pre><code>##  [1] 10 10  9 11 10  9 10  9  9 12</code></pre>
+<pre><code>##  [1]  9 12 11 12  9 10 11 12 12  9</code></pre>
 <pre class="r"><code>grades &lt;- as.factor( grades )
 grades</code></pre>
-<pre><code>##  [1] 10 10 9  11 10 9  10 9  9  12
+<pre><code>##  [1] 9  12 11 12 9  10 11 12 12 9 
 ## Levels: 9 10 11 12</code></pre>
 <pre class="r"><code>as.numeric( grades )</code></pre>
-<pre><code>##  [1] 2 2 1 3 2 1 2 1 1 4</code></pre>
+<pre><code>##  [1] 1 4 3 4 1 2 3 4 4 1</code></pre>
 <pre class="r"><code>as.character( grades )</code></pre>
-<pre><code>##  [1] &quot;10&quot; &quot;10&quot; &quot;9&quot;  &quot;11&quot; &quot;10&quot; &quot;9&quot;  &quot;10&quot; &quot;9&quot;  &quot;9&quot;  &quot;12&quot;</code></pre>
+<pre><code>##  [1] &quot;9&quot;  &quot;12&quot; &quot;11&quot; &quot;12&quot; &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;12&quot; &quot;9&quot;</code></pre>
 <pre class="r"><code># proper way to get back to the original numeric vector
 as.numeric( as.character( grades ))</code></pre>
-<pre><code>##  [1] 10 10  9 11 10  9 10  9  9 12</code></pre>
+<pre><code>##  [1]  9 12 11 12  9 10 11 12 12  9</code></pre>
 <p><br></p>
 <div class="tip">
 <p>The <strong>very important</strong> rule to remember with factors is you can’t move directly from the factor to numeric using the <strong>as.numeric()</strong> casting function. This will give you the underlying data structure, but will not give you the category names. To get these, you need the <strong>as.character</strong> casting function.</p>
