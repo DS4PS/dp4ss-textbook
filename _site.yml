@@ -4,15 +4,15 @@ navbar:
   title: "DATA SCIENCE I"
   type: inverse
   left:
-    - text: "CoreR"
-      href: ch-010-core-r.html
-    - text: "RStudio"
-      href: ch-020-rstudio.html
-    - text: "LearningR"
-      href: ch-032-learning_r.html     
+    # - text: "CoreR"
+    #   href: ch-010-core-r.html
+    # - text: "RStudio"
+    #   href: ch-020-rstudio.html
+    # - text: "LearningR"
+    #  href: ch-032-learning_r.html     
   right:
     - icon: fa-github fa-2x
-      href: https://ds4ps.org/cpp-523-fall-2019/
+      href: https://ds4ps.org/cpp-526-fall-2019/
 output:
   bookdown::html_document2:
     toc: yes

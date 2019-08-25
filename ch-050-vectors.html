@@ -193,19 +193,11 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="ch-010-core-r.html">CoreR</a>
-</li>
-<li>
-  <a href="ch-020-rstudio.html">RStudio</a>
-</li>
-<li>
-  <a href="ch-032-learning_r.html">LearningR</a>
-</li>
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-523-fall-2019/">
+  <a href="https://ds4ps.org/cpp-526-fall-2019/">
     <span class="fa fa-github fa-2x"></span>
      
   </a>
@@ -628,18 +620,18 @@ plot( sex, strength )              # factor + numeric: box and whisker plot     
 <p>In some instances a categorical variable might be represented by numbers. For example, grades 9-12 for high school kids. These can be tricky to re-cast.</p>
 <pre class="r"><code>grades &lt;- sample( x=9:12, size=10, replace=T )
 grades</code></pre>
-<pre><code>##  [1] 10  9  9  9  9  9 11 10 10  9</code></pre>
+<pre><code>##  [1] 10 10  9 11 10  9 10  9  9 12</code></pre>
 <pre class="r"><code>grades &lt;- as.factor( grades )
 grades</code></pre>
-<pre><code>##  [1] 10 9  9  9  9  9  11 10 10 9 
-## Levels: 9 10 11</code></pre>
+<pre><code>##  [1] 10 10 9  11 10 9  10 9  9  12
+## Levels: 9 10 11 12</code></pre>
 <pre class="r"><code>as.numeric( grades )</code></pre>
-<pre><code>##  [1] 2 1 1 1 1 1 3 2 2 1</code></pre>
+<pre><code>##  [1] 2 2 1 3 2 1 2 1 1 4</code></pre>
 <pre class="r"><code>as.character( grades )</code></pre>
-<pre><code>##  [1] &quot;10&quot; &quot;9&quot;  &quot;9&quot;  &quot;9&quot;  &quot;9&quot;  &quot;9&quot;  &quot;11&quot; &quot;10&quot; &quot;10&quot; &quot;9&quot;</code></pre>
+<pre><code>##  [1] &quot;10&quot; &quot;10&quot; &quot;9&quot;  &quot;11&quot; &quot;10&quot; &quot;9&quot;  &quot;10&quot; &quot;9&quot;  &quot;9&quot;  &quot;12&quot;</code></pre>
 <pre class="r"><code># proper way to get back to the original numeric vector
 as.numeric( as.character( grades ))</code></pre>
-<pre><code>##  [1] 10  9  9  9  9  9 11 10 10  9</code></pre>
+<pre><code>##  [1] 10 10  9 11 10  9 10  9  9 12</code></pre>
 <p><br></p>
 <div class="tip">
 <p>The <strong>very important</strong> rule to remember with factors is you can’t move directly from the factor to numeric using the <strong>as.numeric()</strong> casting function. This will give you the underlying data structure, but will not give you the category names. To get these, you need the <strong>as.character</strong> casting function.</p>
