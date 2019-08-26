@@ -13,83 +13,35 @@
 
 <title>Introduction to Functions</title>
 
-<script src="ch-040-functions_files/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="ch-040-functions_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
-<script src="ch-040-functions_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="ch-040-functions_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="ch-040-functions_files/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="ch-040-functions_files/navigation-1.1/tabsets.js"></script>
-
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  { background-color: #f8f8f8; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
   }
 </style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
 
 
 <style type="text/css">
@@ -151,6 +103,58 @@ button.code-folding-btn:focus {
 </style>
 
 
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
 
 <div class="container-fluid main-container">
 
@@ -168,6 +172,32 @@ $(document).ready(function () {
 
 
 
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
 <div class="fluid-row" id="header">
 
 
@@ -176,6 +206,18 @@ $(document).ready(function () {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#computer-programs-as-recipes"><span class="toc-section-number">0.1</span> Computer Programs as Recipes</a></li>
+<li><a href="#loan-calculator"><span class="toc-section-number">0.2</span> Loan Calculator</a></li>
+<li><a href="#default-arguments"><span class="toc-section-number">1</span> Default Arguments</a><ul>
+<li><a href="#defaults"><span class="toc-section-number">1.1</span> Defaults</a></li>
+</ul></li>
+<li><a href="#implicit-argument-calls"><span class="toc-section-number">2</span> Implicit Argument Calls</a></li>
+<li><a href="#object-assignment-vs-argument-assignment"><span class="toc-section-number">3</span> Object Assignment vs Argument Assignment</a></li>
+<li><a href="#your-turn"><span class="toc-section-number">4</span> Your Turn</a></li>
+</ul>
+</div>
 
 <script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
 <p><img src="figures/function.png" /></p>
@@ -195,10 +237,11 @@ $(document).ready(function () {
 <li>return values</li>
 <li>arrow vs. equal sign</li>
 </ul>
-<p><br> <br></p>
+<p><br>
+<br></p>
 </div>
 <div id="computer-programs-as-recipes" class="section level2">
-<h2>Computer Programs as Recipes</h2>
+<h2><span class="header-section-number">0.1</span> Computer Programs as Recipes</h2>
 <p>Computer programs are powerful because they allow us to codify recipes for complex tasks, save them, share them, and build upon them.</p>
 <p>In the simplest form, a computer program is like a recipe. We have inputs, steps, and outputs.</p>
 <p>Ingredients:</p>
@@ -241,20 +284,20 @@ $(document).ready(function () {
 }</code></pre>
 <p>Note that this function to make cookies relies on other functions for each step, combine(), mix(), and bake(). Each of these functions would have to be defined as well, or more likely someone else in the open source community has already written a package called “baking” that contains simple functions for cooking so that you can use them for more complicated recipes.</p>
 <p>You will find that R allows you to conduct powerful analysis primarily because you can build on top of and extend a lot of existing functionality.</p>
-<div class="figure">
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
 <img src="figures/assignment.png" alt="Assignment of output values" width="590" />
 <p class="caption">
-Assignment of output values
+Figure .: Assignment of output values
 </p>
 </div>
 </div>
 <div id="loan-calculator" class="section level2">
-<h2>Loan Calculator</h2>
+<h2><span class="header-section-number">0.2</span> Loan Calculator</h2>
 <p>Let’s look at a slightly more comlicated example by creating an amortization calculator to determine monthly payments that would be required from a home mortgage loan.</p>
-<div class="figure" style="text-align: center">
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="figures/calculate-amortization.jpg" alt="Example monthly payment based upon loan amount (P), interest rate (R), and time period of repayment (T)." width="50%" />
 <p class="caption">
-Example monthly payment based upon loan amount (P), interest rate (R), and time period of repayment (T).
+Figure .: Example monthly payment based upon loan amount (P), interest rate (R), and time period of repayment (T).
 </p>
 </div>
 <p>Where:</p>
@@ -275,21 +318,21 @@ PAYMENTS = \frac{principal \cdot interest \ rate}{1-(1+interest \ rate)^{- \ mon
 <li>interest rate (monthly) = annual interest rate <strong>R</strong> / 12 months</li>
 </ul>
 <p>When we translate this mathematical formula into R code, the new function will look like this:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"> calcMortgage &lt;-<span class="st"> </span><span class="cf">function</span>( principal, years, APR )</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"> {</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">   </a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">    months &lt;-<span class="st"> </span>years <span class="op">*</span><span class="st"> </span><span class="dv">12</span>   <span class="co"># covert years to months</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">    int.rate &lt;-<span class="st"> </span>APR <span class="op">/</span><span class="st"> </span><span class="dv">12</span>   <span class="co"># convert annual rate to monthly</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">    </a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="co"># amortization formula</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">    monthly.payment &lt;-<span class="st"> </span>( principal <span class="op">*</span><span class="st"> </span>int.rate ) <span class="op">/</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">                       </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>int.rate)<span class="op">^</span>(<span class="op">-</span>months) )</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">    </a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">    monthly.payment &lt;-<span class="st"> </span><span class="kw">round</span>( monthly.payment, <span class="dv">2</span> )</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">    <span class="kw">return</span>( monthly.payment )</a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"> </a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"> }</a></code></pre></div>
+<pre class="r"><code> calcMortgage &lt;- function( principal, years, APR )
+ {
+   
+    months &lt;- years * 12   # covert years to months
+    int.rate &lt;- APR / 12   # convert annual rate to monthly
+    
+    # amortization formula
+    monthly.payment &lt;- ( principal * int.rate ) / 
+                       (1 - (1 + int.rate)^(-months) )
+    
+    monthly.payment &lt;- round( monthly.payment, 2 )
+    
+    return( monthly.payment )
+ 
+ }</code></pre>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rpb24oIHByaW5jaXBhbCwgeWVhcnMsIEFQUiApXG4ge1xuICAgIG1vbnRocyA8LSB5ZWFycyAqIDEyXG4gICAgaW50LnJhdGUgPC0gQVBSIC8gMTJcbiAgICBcbiAgICAjIGFtb3J0aXphdGlvbiBmb3JtdWxhXG4gICAgbW9udGhseS5wYXltZW50IDwtICggcHJpbmNpcGFsICogaW50LnJhdGUgKSAvIFxuICAgICAgICAgICAgICAgICAgICAgICAoMSAtICgxICsgaW50LnJhdGUpXigtbW9udGhzKSApXG4gICAgXG4gICAgbW9udGhseS5wYXltZW50IDwtIHJvdW5kKCBtb250aGx5LnBheW1lbnQsIDIgKVxuICAgIFxuICAgIHJldHVybiggbW9udGhseS5wYXltZW50IClcbiBcbiB9Iiwic2FtcGxlIjoiIyBDaGVjayB0aGUgZnVuY3Rpb24ncyBhcmd1bWVudHM6XG5hcmdzKCBjYWxjTW9ydGdhZ2UgKVxuXG4jIENhbGN1bGF0ZSBhIG1vcnRnYWdlIGZvciBhICQxMDAsMDAwIGhvdXNlIGZvciAzMCB5ZWFycyB3aXRoIGEgNC41IHBlcmNlbnQgaW50ZXJlc3QgcmF0ZSAoMC4wNDUgQVBSKVxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwLCB5ZWFycz0zMCwgQVBSPTAuMDQ1ICkgXG5cbiMgVHJ5OiBjYWxjTW9ydGdhZ2UoIHByaW5jaXBhbD0xMDAwMDAgKVxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwLCBBUFI9MC4wNDUgKSJ9
 </div>
@@ -298,23 +341,23 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rp
 </div>
 </div>
 <div id="default-arguments" class="section level1">
-<h1>Default Arguments</h1>
+<h1><span class="header-section-number">1</span> Default Arguments</h1>
 <p>We can add default values for arguments. These defaults allow us to utilize the function without specifying values for those arguments.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"> calcMortgage &lt;-<span class="st"> </span><span class="cf">function</span>( principal, <span class="dt">years=</span><span class="dv">30</span>, <span class="dt">APR=</span><span class="fl">0.05</span> )</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"> {</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">   </a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">    months &lt;-<span class="st"> </span>years <span class="op">*</span><span class="st"> </span><span class="dv">12</span>   <span class="co"># covert years to months</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">    int.rate &lt;-<span class="st"> </span>APR <span class="op">/</span><span class="st"> </span><span class="dv">12</span>   <span class="co"># convert annual rate to monthly</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">    </a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">    <span class="co"># amortization formula</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">    monthly.payment &lt;-<span class="st"> </span>( principal <span class="op">*</span><span class="st"> </span>int.rate ) <span class="op">/</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="st">                       </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>int.rate)<span class="op">^</span>(<span class="op">-</span>months) )</a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">    </a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">    monthly.payment &lt;-<span class="st"> </span><span class="kw">round</span>( monthly.payment, <span class="dv">2</span> )</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">    </a>
-<a class="sourceLine" id="cb3-13" data-line-number="13">    <span class="kw">return</span>( monthly.payment )</a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"> </a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"> }</a></code></pre></div>
+<pre class="r"><code> calcMortgage &lt;- function( principal, years=30, APR=0.05 )
+ {
+   
+    months &lt;- years * 12   # covert years to months
+    int.rate &lt;- APR / 12   # convert annual rate to monthly
+    
+    # amortization formula
+    monthly.payment &lt;- ( principal * int.rate ) / 
+                       (1 - (1 + int.rate)^(-months) )
+    
+    monthly.payment &lt;- round( monthly.payment, 2 )
+    
+    return( monthly.payment )
+ 
+ }</code></pre>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rpb24oIHByaW5jaXBhbCwgeWVhcnM9MzAsIEFQUj0wLjA1IClcbiB7XG4gICAgbW9udGhzIDwtIHllYXJzICogMTJcbiAgICBpbnQucmF0ZSA8LSBBUFIgLyAxMlxuICAgIFxuICAgICMgYW1vcnRpemF0aW9uIGZvcm11bGFcbiAgICBtb250aGx5LnBheW1lbnQgPC0gKCBwcmluY2lwYWwgKiBpbnQucmF0ZSApIC8gXG4gICAgICAgICAgICAgICAgICAgICAgICgxIC0gKDEgKyBpbnQucmF0ZSleKC1tb250aHMpIClcbiAgICBcbiAgICBtb250aGx5LnBheW1lbnQgPC0gcm91bmQoIG1vbnRobHkucGF5bWVudCwgMiApXG4gICAgXG4gICAgcmV0dXJuKCBtb250aGx5LnBheW1lbnQgKVxuIFxuIH0iLCJzYW1wbGUiOiIjIE5vdGljZSB0aGUgbmV3IGRlZmF1bHQgYXJndW1lbnRzOlxuYXJncyggY2FsY01vcnRnYWdlIClcblxuIyBDYWxjdWxhdGUgYSBtb3J0Z2FnZSBmb3IgYSAkMTAwLDAwMCBob3VzZSBmb3IgMzAgeWVhcnMgd2l0aCBhIDQuNSBwZXJjZW50IEFQUlxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwLCB5ZWFycz0zMCwgQVBSPTAuMDQ1IClcblxuIyBOb3cgdHJ5OiBjYWxjTW9ydGdhZ2UoIHByaW5jaXBhbD0xMDAwMDAgKVxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwICkifQ==
 </div>
@@ -322,7 +365,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rp
 <p>Note that <strong>calcMortgage( principal=100000 )</strong> now works because the function uses the default values for years and APR.</p>
 </div>
 <div id="defaults" class="section level2">
-<h2>Defaults</h2>
+<h2><span class="header-section-number">1.1</span> Defaults</h2>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rpb24oIHByaW5jaXBhbCwgeWVhcnM9MzAsIEFQUj0wLjA0NSApXG4ge1xuICAgIG1vbnRocyA8LSB5ZWFycyAqIDEyXG4gICAgaW50LnJhdGUgPC0gQVBSIC8gMTJcbiAgICBcbiAgICAjIGFtb3J0aXphdGlvbiBmb3JtdWxhXG4gICAgbW9udGhseS5wYXltZW50IDwtICggcHJpbmNpcGFsICogaW50LnJhdGUgKSAvIFxuICAgICAgICAgICAgICAgICAgICAgICAoMSAtICgxICsgaW50LnJhdGUpXigtbW9udGhzKSApXG4gICAgXG4gICAgbW9udGhseS5wYXltZW50IDwtIHJvdW5kKCBtb250aGx5LnBheW1lbnQsIDIgKVxuICAgIFxuICAgIHJldHVybiggbW9udGhseS5wYXltZW50IClcbiBcbiB9Iiwic2FtcGxlIjoiYXJncyggY2FsY01vcnRnYWdlIClcblxuIyBDYWxjdWxhdGUgYSBtb3J0Z2FnZSBmb3IgYSAkMTAwLDAwMCBob3VzZSBmb3IgMTUgeWVhcnMgd2l0aCBhIDMgcGVyY2VudCBBUFJcblxuY2FsY01vcnRnYWdlKCBwcmluY2lwYWw9MTAwMDAwLCB5ZWFycz0xNSwgQVBSPTAuMDMgKSJ9
 </div>
@@ -332,7 +375,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rp
 </div>
 </div>
 <div id="implicit-argument-calls" class="section level1">
-<h1>Implicit Argument Calls</h1>
+<h1><span class="header-section-number">2</span> Implicit Argument Calls</h1>
 <p>An explicit call to arguments always uses the formal argument name such as <code>principal=100000</code>.</p>
 <p>You can, however, also use implicit argument calls. These rely on the order arguments are specified in the function, and the order of your values in your call.</p>
 <p>Implicit arguments calls can be risky, however, because it is very easy to mix them up.</p>
@@ -345,25 +388,25 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6IiBjYWxjTW9ydGdhZ2UgPC0gZnVuY3Rp
 </div>
 </div>
 <div id="object-assignment-vs-argument-assignment" class="section level1">
-<h1>Object Assignment vs Argument Assignment</h1>
+<h1><span class="header-section-number">3</span> Object Assignment vs Argument Assignment</h1>
 <p>Assignment is the process of assigning a name to an object or value in order to store the data for future use and allow it to be referenced later.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="dv">3</span></a></code></pre></div>
+<pre class="r"><code>x &lt;- 3</code></pre>
 <p>We use assignment in data recipes (scripts) to save values, and in functions to assign values to specific arguments. Note that we use different assignment operators in each case.</p>
 <p>Object assignment uses the <strong>arrow operator</strong>.</p>
 <p>Argument assignment inside a function uses the <strong>equal sign</strong>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">principal &lt;-<span class="st"> </span><span class="dv">100000</span>               <span class="co"># never use equals here</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">calcMortgage</span>( <span class="dt">principal=</span><span class="dv">100000</span> )  <span class="co"># never use arrows here</span></a></code></pre></div>
+<pre class="r"><code>principal &lt;- 100000               # never use equals here
+calcMortgage( principal=100000 )  # never use arrows here</code></pre>
 <p><br></p>
-<div class="figure">
+<div class="figure"><span id="fig:unnamed-chunk-16"></span>
 <img src="figures/assignment.png" alt="Assignment of output values" width="590" />
 <p class="caption">
-Assignment of output values
+Figure 3.1: Assignment of output values
 </p>
 </div>
 <hr />
 </div>
 <div id="your-turn" class="section level1">
-<h1>Your Turn</h1>
+<h1><span class="header-section-number">4</span> Your Turn</h1>
 <div class="quiz">
 <p>Create a function to convert Fahrenheit temperatures to Celsius.</p>
 <ul>
@@ -385,9 +428,22 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJjb252ZXJ0VG9DZWxzaXVzIDwtIGZ1bmN0aW9uKCkgICMg
 </div>
 <p><br></p>
 <hr />
-<p><br> <br></p>
+<p><br>
+<br></p>
 </div>
 
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
 
 
 

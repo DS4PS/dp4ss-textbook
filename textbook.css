@@ -285,7 +285,7 @@ article header{margin-bottom:1.5em}
 */
 .footer {
   background-color:#726e6e;
-  height:100px;
+  height:180px;
   color:white; 
   padding: 20px 3px 20px 3px;
   position: absolute;
@@ -323,5 +323,10 @@ body>header h1{width:100%;line-height:1.8;margin-bottom:.5em}
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover
 {
     color: black;
-    background-color: #f7f7f7;
+    background-color: orange; /* #f7f7f7; */
+}
+
+.nav.navbar-brand li a:hover {
+  color: black !important;
+  background-color: orange !important;
 }

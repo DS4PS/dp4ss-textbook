@@ -11,8 +11,8 @@ navbar:
     # - text: "LearningR"
     #  href: ch-032-learning_r.html     
   right:
-    - icon: fa-github fa-2x
-      href: https://ds4ps.org/cpp-526-fall-2019/
+    - icon: fa-sun fa-2x
+      href: https://ds4ps.org/cpp-526-fall-2019/textbook/
 output:
   bookdown::html_document2:
     toc: yes

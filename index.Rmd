@@ -5,7 +5,7 @@ title: ""
 
 <center>
 
-<h1> CPP 523:<br>FOUNDATIONS OF PROGRAM EVALUATION I<br>REGRESSION MODELS </h1>
+<h1> CPP 526:<br>FOUNDATIONS OF DATA SCIENCE I<br>DATA PROGRAMMING IN R </h1>
 
 </center>
 
@@ -14,4 +14,74 @@ title: ""
 <br>
 
 
-![](figures/explained-variance.png)
+
+
+<div class="polaroid">
+
+<div class="row">
+  <div class="column">
+
+```{r, echo=F, out.width="100%"}
+knitr::include_graphics("https://thumbs.gfycat.com/FastHorribleBilby-size_restricted.gif")
+```
+
+  </div>
+  <div class="column">
+  
+```{r, echo=F, out.width="100%"}
+knitr::include_graphics("https://algorit.ma/wp-content/uploads/2014/05/line-streaming.gif")
+```
+  
+  </div>
+</div>
+</div>
+
+
+<div class="polaroid">
+![](figures/pitcher-dominance.png)
+</div>
+
+
+<div class="polaroid">
+
+```{r, echo=F, out.width="100%"}
+knitr::include_graphics("https://john-coene.com/post/scrollytell/scrollytell_sg.gif")
+```
+
+</div>
+
+
+
+
+
+
+
+```{css, echo=F}
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+.column {
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+div.polaroid {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+}
+
+div.container {
+  text-align: center;
+  padding: 10px 20px;
+}
+```
+
+

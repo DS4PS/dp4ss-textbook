@@ -188,8 +188,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-526-fall-2019/">
-    <span class="fa fa-github fa-2x"></span>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
      
   </a>
 </li>
@@ -603,18 +603,18 @@ plot( sex, strength )              # factor + numeric: box and whisker plot     
 <p>In some instances a categorical variable might be represented by numbers. For example, grades 9-12 for high school kids. These can be tricky to re-cast.</p>
 <pre class="r"><code>grades &lt;- sample( x=9:12, size=10, replace=T )
 grades</code></pre>
-<pre><code>##  [1]  9 12 11 12  9 10 11 12 12  9</code></pre>
+<pre><code>##  [1] 11 11 12 10 10 12 12 12 11 12</code></pre>
 <pre class="r"><code>grades &lt;- as.factor( grades )
 grades</code></pre>
-<pre><code>##  [1] 9  12 11 12 9  10 11 12 12 9 
-## Levels: 9 10 11 12</code></pre>
+<pre><code>##  [1] 11 11 12 10 10 12 12 12 11 12
+## Levels: 10 11 12</code></pre>
 <pre class="r"><code>as.numeric( grades )</code></pre>
-<pre><code>##  [1] 1 4 3 4 1 2 3 4 4 1</code></pre>
+<pre><code>##  [1] 2 2 3 1 1 3 3 3 2 3</code></pre>
 <pre class="r"><code>as.character( grades )</code></pre>
-<pre><code>##  [1] &quot;9&quot;  &quot;12&quot; &quot;11&quot; &quot;12&quot; &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;12&quot; &quot;12&quot; &quot;9&quot;</code></pre>
+<pre><code>##  [1] &quot;11&quot; &quot;11&quot; &quot;12&quot; &quot;10&quot; &quot;10&quot; &quot;12&quot; &quot;12&quot; &quot;12&quot; &quot;11&quot; &quot;12&quot;</code></pre>
 <pre class="r"><code># proper way to get back to the original numeric vector
 as.numeric( as.character( grades ))</code></pre>
-<pre><code>##  [1]  9 12 11 12  9 10 11 12 12  9</code></pre>
+<pre><code>##  [1] 11 11 12 10 10 12 12 12 11 12</code></pre>
 <p><br></p>
 <div class="tip">
 <p>The <strong>very important</strong> rule to remember with factors is you can’t move directly from the factor to numeric using the <strong>as.numeric()</strong> casting function. This will give you the underlying data structure, but will not give you the category names. To get these, you need the <strong>as.character</strong> casting function.</p>
@@ -820,8 +820,12 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4NSA8LSBjKCAxLCAyLCBOQSwgNCApXG5cbiMgd2hpY2gg
 <div class="footer">
 <div class="row"  align="center">
 
-  Designed by <a href=http://ds4ps.github.io target="_blank">DS4PS</a><br>
-  Powered by <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
 
 </div>
 </div>
