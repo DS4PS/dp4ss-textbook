@@ -2,29 +2,91 @@
 
 
 
-# The Toolkit
+## The Data Programming Toolkit
 
-CH-01 - [Base R](http://ds4ps.org/dp4ss-textbook/ch-010-core-r.html)
-CH-02 - [R Studio](http://ds4ps.org/dp4ss-textbook/ch-020-rstudio.html)
-CH-03 - [Data-Driven Docs](http://ds4ps.org/dp4ss-textbook/ch-030-data-driven-docs.html)  
-CH-04 - [Markdown](https://ds4ps.org/cpp-526-fall-2019/markdown/)  
+CH-01 - [Base R](http://ds4ps.org/dp4ss-textbook/ch-010-core-r.html)  
+CH-02 - [R Studio](http://ds4ps.org/dp4ss-textbook/ch-020-rstudio.html)  
+CH-03 - [Data-Driven Docs](http://ds4ps.org/dp4ss-textbook/ch-030-data-driven-docs.html)    
+CH-04 - [Markdown](https://ds4ps.org/cpp-526-fall-2019/markdown/)   
 
-# Sharpening the Axe
+## Sharpening the Axe
 
-CH-05 - [Learning to Program](http://ds4ps.org/dp4ss-textbook/ch-032-learning_r.html)
-CH-06 - [Getting Help]
-CH-07 - Navigating R
+CH-05 - [Learning to Program](http://ds4ps.org/dp4ss-textbook/ch-032-learning_r.html)  
+CH-06 - [Getting Help]  
+CH-07 - Navigating R  
 
-# Getting Started
+## Getting Started
 
-CH-08 - [TI 2.0](http://ds4ps.org/dp4ss-textbook/ch-033-calculator.html)
-CH-XX - Objects and Assignment?
-CH-09 - [Functions and Disfunctions](http://ds4ps.org/dp4ss-textbook/ch-040-functions.html) ] 
-CH-10 - [Scripts]
+CH-08 - [TI 2.0](http://ds4ps.org/dp4ss-textbook/ch-033-calculator.html)  
+CH-XX - Objects and Assignment?  
+CH-09 - [Functions and Disfunctions](http://ds4ps.org/dp4ss-textbook/ch-040-functions.html) ]   
+CH-10 - [Scripts]  
 
 
 
-# One-Dimensional Datasets
+## One-Dimensional Datasets
+
+CH-11 - Intro to Vectors  
+CH-12 - Data Types  
+CH-13 - Generating Vectors  
+CH-14 - Modifying Vectors  
+
+## Analysis with Vectors 
+
+CH-15 - Logical Statements  
+CH-16 - Descriptive Analysis  
+
+
+## Two-Dimensional Datasets  
+
+CH-16 - Dataframes  
+CH-17 - Matrices and Lists  
+
+
+## Data Ingestion
+
+CH-18 - Inhale  
+CH-19 - Exhale  
+
+
+## Data Wrangling
+
+CH-20 - Choppy chop  
+CH-21 - Joining Datasets  
+
+
+## Describe 
+
+CH-22 - Summarizing Columns   
+CH-23 - Summarizing Groups 
+
+
+## Visaulization 
+
+CH-24 - Principles of Visual Communication 
+CH-25 - Base R Graphics  
+CH-26 - Color
+CH-27 - Customization  
+
+
+## Grammar of Graphics 
+
+CH-28 - ggplot  
+CH-29 - groups  
+CH-30 - themes  
+CH-31 - web graphics 
+
+
+## Dynamic Graphics  
+
+CH-32 - Shiny 
+CH-33 - Dashboards  
+
+
+
+
+
+
 
 
 
@@ -35,7 +97,7 @@ CH-10 - [Scripts]
 
 # One-Dimensional Datasets
 
-## CH 03 - Vectors
+
 * Observations vs Variables (rows vs columns) 
 * Vector Types
   - Numeric
