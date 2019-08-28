@@ -63,9 +63,9 @@ CH-23 - Summarizing Groups
 
 ## Visaulization 
 
-CH-24 - Principles of Visual Communication 
+CH-24 - Principles of Visual Communication  
 CH-25 - Base R Graphics  
-CH-26 - Color
+CH-26 - Color  
 CH-27 - Customization  
 
 
