@@ -58,7 +58,7 @@ CH-21 - Joining Datasets
 ## Describe 
 
 CH-22 - Summarizing Columns   
-CH-23 - Summarizing Groups 
+CH-23 - Summarizing Groups  
 
 
 ## Visaulization 
@@ -74,12 +74,12 @@ CH-27 - Customization
 CH-28 - ggplot  
 CH-29 - groups  
 CH-30 - themes  
-CH-31 - web graphics 
+CH-31 - web graphics  
 
 
 ## Dynamic Graphics  
 
-CH-32 - Shiny 
+CH-32 - Shiny  
 CH-33 - Dashboards  
 
 
