@@ -23,7 +23,6 @@ CH-09 - [Functions and Disfunctions](http://ds4ps.org/dp4ss-textbook/ch-040-func
 CH-10 - [Scripts]  
 
 
-
 ## One-Dimensional Datasets
 
 CH-11 - Intro to Vectors  
@@ -31,10 +30,11 @@ CH-12 - Data Types
 CH-13 - Generating Vectors  
 CH-14 - Modifying Vectors  
 
+
 ## Analysis with Vectors 
 
 CH-15 - Logical Statements  
-CH-16 - Descriptive Analysis  
+CH-16 - Summarizing Vectors 
 
 
 ## Two-Dimensional Datasets  
@@ -52,7 +52,7 @@ CH-19 - Exhale
 ## Data Wrangling
 
 CH-20 - Choppy chop  
-CH-21 - Joining Datasets  
+CH-21 - Joiny join   
 
 
 ## Describe 
