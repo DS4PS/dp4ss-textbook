@@ -69,12 +69,6 @@ We use these vectors to:
 
 
 
-Logical statements translate human languages into computer code. 
-
-
-```{r, fig.cap="Logical statements define group membership", out.width='70%', echo=F }
-knitr::include_graphics( "figures/group_selection.png" )
-```
 
 
 
@@ -94,10 +88,17 @@ To be an effective data analyst we need to know how to translate question from o
 * age over 30 
 * graduate degree 
  
-**Translated to R as a logical statement:**
+**In R as a logical statement:**
 
 ```r
 gender == "female" & age > 30 & grad.degree == FALSE
+```
+
+Logical statements help us translate our research questions from human languages into computer code. 
+
+
+```{r, fig.cap="Logical statements define group membership", out.width='70%', echo=F }
+knitr::include_graphics( "figures/group_selection.png" )
 ```
 
 
@@ -131,7 +132,7 @@ Logical operators create logical vectors, a vector that contains only TRUE or FA
 
 ```{r, eval=F}
 x1 <- c( 7, 9, 1, 2 )
-x1 > 7
+x1 > 5
 ```
 
 ```{r, echo=F}
@@ -452,7 +453,7 @@ dat[ these , ]
 
 
 
-## Care With Logical Statements
+# Care With Logical Statements
 
 
 A common mistake you will make when you first start constructing logical statements is define a group, and then since you are in a hurry you flip the logic and think you are making a valid comparison. 

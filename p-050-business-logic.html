@@ -215,13 +215,13 @@ $(document).ready(function () {
 <li><a href="#subsets"><span class="toc-section-number">2</span> Subsets</a><ul>
 <li><a href="#compound-logical-statements"><span class="toc-section-number">2.1</span> Compound Logical Statements</a></li>
 <li><a href="#the-opposite-of-operator"><span class="toc-section-number">2.2</span> The Opposite-Of Operator</a></li>
-<li><a href="#care-with-logical-statements"><span class="toc-section-number">2.3</span> Care With Logical Statements</a></li>
 </ul></li>
-<li><a href="#advanced-operations-with-logical-vectors"><span class="toc-section-number">3</span> Advanced Operations with Logical Vectors</a><ul>
-<li><a href="#find-and-replace"><span class="toc-section-number">3.1</span> Find and Replace</a></li>
-<li><a href="#nas-in-logical-statements"><span class="toc-section-number">3.2</span> NAs in Logical Statements</a></li>
+<li><a href="#care-with-logical-statements"><span class="toc-section-number">3</span> Care With Logical Statements</a></li>
+<li><a href="#advanced-operations-with-logical-vectors"><span class="toc-section-number">4</span> Advanced Operations with Logical Vectors</a><ul>
+<li><a href="#find-and-replace"><span class="toc-section-number">4.1</span> Find and Replace</a></li>
+<li><a href="#nas-in-logical-statements"><span class="toc-section-number">4.2</span> NAs in Logical Statements</a></li>
 </ul></li>
-<li><a href="#subsets-with-factors"><span class="toc-section-number">4</span> Subsets with Factors</a></li>
+<li><a href="#subsets-with-factors"><span class="toc-section-number">5</span> Subsets with Factors</a></li>
 </ul>
 </div>
 
@@ -254,13 +254,6 @@ td {
 <p><br>
 <br></p>
 </div>
-<p>Logical statements translate human languages into computer code.</p>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
-<img src="figures/group_selection.png" alt="Logical statements define group membership" width="70%" />
-<p class="caption">
-Figure 1.1: Logical statements define group membership
-</p>
-</div>
 <p>Most data analysis require us to split our data into groups or segments so that we can look for trends or compare outcomes across various subpopulations.</p>
 <p><br></p>
 <blockquote>
@@ -274,8 +267,15 @@ Figure 1.1: Logical statements define group membership
 <li>age over 30</li>
 <li>graduate degree</li>
 </ul>
-<p><strong>Translated to R as a logical statement:</strong></p>
+<p><strong>In R as a logical statement:</strong></p>
 <pre class="r"><code>gender == &quot;female&quot; &amp; age &gt; 30 &amp; grad.degree == FALSE</code></pre>
+<p>Logical statements help us translate our research questions from human languages into computer code.</p>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="figures/group_selection.png" alt="Logical statements define group membership" width="70%" />
+<p class="caption">
+Figure 1.1: Logical statements define group membership
+</p>
+</div>
 <div id="logical-operators" class="section level2">
 <h2><span class="header-section-number">1.1</span> Logical Operators</h2>
 <p>Similar to mathematical operators, logical operators are a basic building block of data programming. Most often when working with data we are not creating complicated statistical models. We are identifying members of a group (print all of the females from the study), and describing a subset of the data (compare the average price of houses with a pool to houses without a pool).</p>
@@ -335,7 +335,7 @@ Figure 1.1: Logical statements define group membership
 </table>
 <p>Logical operators create logical vectors, a vector that contains only TRUE or FALSE. The TRUE means that the observation belongs to a group, FALSE means it does not.</p>
 <pre class="r"><code>x1 &lt;- c( 7, 9, 1, 2 )
-x1 &gt; 7</code></pre>
+x1 &gt; 5</code></pre>
 <p><em>TRUE</em>, <em>TRUE</em>, <em>FALSE</em> and <em>FALSE</em></p>
 <pre class="r"><code>gender &lt;- c(&quot;male&quot;,&quot;male&quot;,&quot;female&quot;,&quot;female&quot;)
 gender == &quot;female&quot;</code></pre>
@@ -756,8 +756,9 @@ dat[ these , ]</code></pre>
 <pre><code>##     group gender
 ## 4 control female</code></pre>
 </div>
-<div id="care-with-logical-statements" class="section level2">
-<h2><span class="header-section-number">2.3</span> Care With Logical Statements</h2>
+</div>
+<div id="care-with-logical-statements" class="section level1">
+<h1><span class="header-section-number">3</span> Care With Logical Statements</h1>
 <p>A common mistake you will make when you first start constructing logical statements is define a group, and then since you are in a hurry you flip the logic and think you are making a valid comparison.</p>
 <blockquote>
 <p>Do bearded men earn more than men without beards?</p>
@@ -766,7 +767,7 @@ dat[ these , ]</code></pre>
 <div class="figure"><span id="fig:unnamed-chunk-35"></span>
 <img src="figures/bearded_men.png" alt="Compound statements can be tricky" width="60%" />
 <p class="caption">
-Figure 2.1: Compound statements can be tricky
+Figure 3.1: Compound statements can be tricky
 </p>
 </div>
 <p>In the example above, the statement “NOT bearded men” means all people outside of the category of men without beards (the “complement”), which includes women with or without beards as well.</p>
@@ -776,7 +777,7 @@ Figure 2.1: Compound statements can be tricky
 <div class="figure"><span id="fig:unnamed-chunk-36"></span>
 <img src="figures/compound_logical_statements.png" alt="Examples of group construction with compound statements" width="90%" />
 <p class="caption">
-Figure 2.2: Examples of group construction with compound statements
+Figure 3.2: Examples of group construction with compound statements
 </p>
 </div>
 <p>It’s important to note that the <strong>opposite-of</strong> operator does not flip the LOGIC of the question, it only flips TRUES and FALSE in the produced vector.</p>
@@ -873,11 +874,10 @@ dat[ these , ]</code></pre>
 </tbody>
 </table>
 </div>
-</div>
 <div id="advanced-operations-with-logical-vectors" class="section level1">
-<h1><span class="header-section-number">3</span> Advanced Operations with Logical Vectors</h1>
+<h1><span class="header-section-number">4</span> Advanced Operations with Logical Vectors</h1>
 <div id="find-and-replace" class="section level2">
-<h2><span class="header-section-number">3.1</span> Find and Replace</h2>
+<h2><span class="header-section-number">4.1</span> Find and Replace</h2>
 <p>We can use selector variables to replace observations with new values using the assignment operator. This is similar to a find and replace operation.</p>
 <pre class="r"><code>animals &lt;- c( &quot;mole&quot;, &quot;mouse&quot;, &quot;shrew&quot;, &quot;mouse&quot;, &quot;rat&quot;, &quot;shrew&quot; )
 
@@ -927,7 +927,7 @@ study.group</code></pre>
 <pre><code>## [1] &quot;treatment&quot; &quot;control&quot;   NA          &quot;control&quot;</code></pre>
 </div>
 <div id="nas-in-logical-statements" class="section level2">
-<h2><span class="header-section-number">3.2</span> NAs in Logical Statements</h2>
+<h2><span class="header-section-number">4.2</span> NAs in Logical Statements</h2>
 <p>Recall that missing values are an extremely important concept in statistics. If one-third of our survey sample reports that they never smoked pot, one-third reports they have smoked pot, and one-third did not answer the question, then what do we report for the proportion of the population that has smoked pot?</p>
 <p>We might prefer to be cautious and count only the people that have confirmed they have smoked pot, resulting in an estimate of 33.3%.</p>
 <p>If we throw out the missing data, then 50% of respondents have smoked pot.</p>
@@ -988,7 +988,7 @@ dat[ keep.these , ]</code></pre>
 </div>
 </div>
 <div id="subsets-with-factors" class="section level1">
-<h1><span class="header-section-number">4</span> Subsets with Factors</h1>
+<h1><span class="header-section-number">5</span> Subsets with Factors</h1>
 <p>Note the rules listed above about subsetting factors. After applying a subset, they will retain all of the original levels, even when they are not longer useful. You need to drop the unused levels if you would like them to be omitted from functions that use the factor levels for analysis.</p>
 <pre class="r"><code>df &lt;- data.frame( letters=LETTERS[1:5], numbers=seq(1:5) )
 
