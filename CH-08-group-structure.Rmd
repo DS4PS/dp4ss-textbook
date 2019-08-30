@@ -1,0 +1,515 @@
+# Analysis with Groups
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, warning=F, message=F, fig.width=8)
+
+```
+
+
+
+## Packages Used in this Chapter
+
+```{r}
+
+library( pander )
+library( dplyr )
+library( tidyr )
+library( reshape2 )
+library( scales )
+library( ggplot2 )
+library( Lahman )
+
+```
+
+
+```{r, echo=F}
+
+race <- factor( sample( c("black","black","white","white","white","asian"), size=1000, replace=T ) )
+blood.type <- factor( sample( c("A","B"), 1000, replace=T ) )
+gender <- factor( sample( c("male","male","female","female","female"), size=1000, replace=T ) )
+age <- round( 30 - abs(rnorm(1000,0,5)) + 2*abs(rnorm(1000,0,10)), 0 )
+study.group <- factor( rep(c("treatment","control"), each=500 ) )
+
+speed <- 100 + 150*as.numeric(study.group=="treatment") - 
+               100*as.numeric(gender=="male") +
+               15*age - 0.02*(age^2.5) + rnorm(1000,0,50)
+
+speed[ speed < 10 ] <- 10
+
+d <- data.frame( id=1:1000, race, blood.type, gender, age, study.group, speed=round(speed,2) )
+d$gender <- factor( gender, levels=c("male","female"))
+
+# head( d ) %>% pander
+
+```
+
+
+## Hypothetical Experimental Data
+
+We will demonstrate some functions using this hypothetical dataset:
+
+```{r}
+head( d ) %>% pander
+```
+
+
+## Group Structure
+
+The two most important skills as you first learn a data programming language are:
+
+1. Translating English phrases into computer code using logical statements  
+2. Organizing your data into groups  
+
+This lecture focuses on efficienty splitting your data into groups, and then analyzing your data by group.
+
+
+### What Are Groups?
+
+A group represents a set of elements with identical characteristics - mice all belong to one group and elephants belong to another. Easy enough, right?
+
+In data analysis, it is a little more complicated because a group is defined by a set of features. Each group still represents a set of elements with identical characteristics, but when we have multiple features there is a unique group for each combination of features. 
+
+The simple way to think about this is that the cross-tab of features generates a grid (table), and each cell represents a unique group:
+
+```{r, eval=F, echo=F}
+
+nf <- layout( matrix( rep( 1:16 ), nrow=4 ) )
+layout.show( nf )
+
+```
+
+
+
+```{r, fig.width=3, fig.height=3, echo=F}
+
+# expand.grid( race=c("orange","blue","green"),
+#              gender=c("male","female"),
+#              study_group=c("treatment","control") ) %>% table()
+
+
+# gg <- expand.grid( race=c("white","black","asian"),
+#              gender=c("male","female"),
+#              study_group=c("treatment","control") )
+# 
+# lb <- apply( gg[ , names(gg) ] , 1 , paste , collapse = "\n" )
+# 
+# layout( matrix( rep( 1:12 ), nrow=4 ) )
+# par( mar=c(0,0,0,0) )
+# for( i in 1:length(lb) )
+# {
+#   
+#   plot( x=c(0,1), y=c(0,1), type="n", xlab="", ylab="", axes=F )
+#   text( x=0.5, y=0.5, lb[i] )
+#   box()
+#   
+# }
+
+
+gg <- expand.grid( # race=c("white","black","asian"),
+             gender=c("Male","Female"),
+             study_group=c("Treatment","Control") )
+
+lb <- apply( gg[ , names(gg) ] , 1 , paste , collapse = "\n" )
+
+layout( matrix( rep( 1:4 ), nrow=2 ) )
+par( mar=c(0,0,0,0) )
+for( i in 1:length(lb) )
+{
+  
+  plot( x=c(0,1), y=c(0,1), type="n", xlab="", ylab="", axes=F )
+  text( x=0.5, y=0.5, lb[i], cex=2 )
+  box()
+  
+}
+
+dat <- d
+
+```
+
+We might be interested in simple groups (treatment cases versus control cases), or complex groups (does the treatment effect women and men differently?). 
+
+In previous lectures you have learned to identify a group with a logical statement, and analyze that group discretely.
+
+```{r}
+
+mean( speed[ study.group == "treatment" & gender=="female" ] )
+
+
+```
+
+
+In this lecture you will learn to define a group structure, then analyze all of your data using that structure. 
+
+```{r, eval=F}
+
+tapply( speed, INDEX = list( study.group, gender ), FUN = mean )
+
+```
+
+```{r, echo=F}
+
+tapply( speed, INDEX = list( study.group, gender ), FUN = mean ) %>% pander
+
+```
+
+
+
+
+### Main Take-Away
+
+R has been designed to do efficient data analysis by defining a group structure, then quickly applying a function to all unique members. 
+
+<img src="figures/group_plus_function.png" width="300">
+
+The base R packages do this with a set of functions in the **apply()** family. The **tapply()** function allows you to specify an outcome to analyze and a group, then ask for results from a function. 
+
+```{r, eval=F}
+
+tapply( X=speed, INDEX=list( study.group, gender ), FUN=mean ) 
+
+```
+
+```{r, echo=F}
+
+tapply( X=speed, INDEX=list( study.group, gender ), FUN=mean ) %>% pander
+
+
+```
+
+
+The **dplyr** package makes this process easier using some simple verbs and the "pipe" operator.
+
+```{r, eval=F}
+
+dat  %>%  group_by( study.group, gender )  %>%  summarize( ave.speed = mean(speed) )
+
+```
+
+```{r, echo=F}
+
+dat %>% 
+  group_by( study.group, gender ) %>%
+  summarize( ave.speed=mean(speed) ) %>%
+  pander
+
+```
+
+
+### Example
+
+Let's think about a study looking at reading speed. The treatment is a workshop that teaches some speed-reading techniques. In this study we have data on:
+
+* gender (male,female)
+* race (black,white,asian)
+* blood.type (A,B)
+* age (from 18 to 93)
+
+```{r, echo=F}
+# head( d ) %>% pander
+```
+
+
+Examining descriptive statistics we can see that reading speed varies by gender and the treatment group, but not by race or blood type:
+
+```{r, echo=F}
+
+par( mfrow=c(2,2) )
+plot( gender, speed, frame.plot=F, outline=F, main="Gender" )
+plot( race, speed, frame.plot=F, outline=F, main="Race" )
+plot( blood.type, speed, frame.plot=F, outline=F, main="Blood Type" )
+plot( study.group, speed, frame.plot=F, outline=F, main="Study Group" )
+
+```
+
+The question is, how many unique groups can we create with these four factors? 
+
+Each individual factor contains a small number of levels (only 2 or 3 in this case), which makes the group structure look deceptively simple at first glance. When we start to examine combinations of factors we see that group structure can get complicated pretty quickly.
+
+If we look at gender alone, we have two levels: male and female. So we have two groups. If we look at our study groups alone we have two groups: treatment and control.
+
+If we look at gender and the study groups together, we now have a 2 x 2 grid, or four unique groups. 
+
+If the race factor has three levels, how many unique groups will we have considering the study design, gender, and race together?  
+
+```{r, echo=F}
+
+
+p <- ggplot( d, aes(x="", y=speed) ) + 
+     geom_violin( fill="steelblue") + 
+     theme_minimal()
+
+p + facet_grid( race ~ study.group + gender) + 
+    # theme( strip.background = element_blank() ) + 
+    labs( x="" ) # + ggtitle( "Speed by Group" )
+
+```
+
+We can calculate the size of the grid by multiplying number of levels for each factor. We see here we have 12 unique groups:
+
+```{r}
+
+nlevels( gender ) * nlevels( study.group ) * nlevels( race )
+
+```
+
+If we add blood type, a factor with two levels (A and B), we now have 24 unique groups:
+
+```{r}
+
+p + facet_grid( race + study.group ~ gender + blood.type) 
+
+```
+
+
+
+
+What about age? It is a continuous variable, so it's a little more tricky.
+
+We can certainly analyze the relationship between age and speed using correlation tools. 
+
+```{r}
+plot( age, speed, bty="n", main="Age" )
+```
+
+But we can also incorporate this independent variable into a group structure. We can treat each distinct age as a separate group. The ages in this study range from 18 to 93, so we have 65 distinct ages represented. 
+
+```{r}
+
+plot( factor(age), speed, las=2, frame.plot=F, outline=F, main="Age", xaxt="n"  )
+
+```
+
+If we think about the overall group structure, then, we have unique groups defined by gender, race, blood type, and study design, and another 65 age groups. So in total we now have 24 x 65 = 1,560 groups! That is getting complicated.
+
+This group design is problematic for two reasons. From a pragmatic standpoint, we can't report results from 1,500 groups in a table. From a more substantive perspective, we although we have 1,500 distinct cells in our grid, many may not include observations that represent the unique combination of all factors. So this group design is not very practical.
+
+A similar problem arises if our data includes time. If our data includes the time of events recorded by hours, days of the week, months, and years, we can have generate complicated group structures if we try to analyze every unique combination.
+
+We can simplify our analysis by thinking about age ranges instead of ages, or in other words by binning our continuous data. If we split it into five-year ranges, for example, we have gone from 65 distinct ages to 12 distinct age groups. 
+
+
+
+```{r}
+
+age.group <- cut( age, 
+                  breaks=seq(from=20,to=80,by=5),
+                  labels=paste( seq(from=20,to=75,by=5), 
+                                "to", seq(from=25,to=80,by=5) ) )
+
+group.structure <- formula( speed ~ age.group )
+
+boxplot( group.structure, las=2, frame.plot=F, outline=F, main="Age Group"  )
+
+
+
+```
+
+
+We have now simplified our analysis from 1,560 to 288 possible groups. Combinations of groups will also be easier:
+
+
+```{r}
+
+group.structure <- formula( speed ~ gender * age.group )
+
+boxplot( group.structure, 
+         las=2, frame.plot=F, outline=F, main="Age Group by Gender",
+         col=c("firebrick","steelblue"), xaxt="n" )
+
+```
+
+
+## Analysis by Group
+
+Let's demonstrate some analysis of groups using the Lahman package and some **dplyr** verbs. Let's do some analysis of player salaries (*Salaries* dataset), and start with a simple group structure - teams in the National League and time. 
+
+1. Which team has the highest average player salary?
+2. Which team has the most players paid over $5 million a season? 
+3. Which team has raised it's pay the most over the past decade? 
+
+Let's start by thinking about group structure. We have teams, and we have seasons. Teams is stored as a factor, and seasons as a numeric value, so we can consider group for each by counting levels and unique values:
+
+```{r}
+nlevels( Salaries$teamID )
+length( unique( Salaries$yearID ) )
+```
+So we can potentially calculate 32 x 46 = 1,472 average player salaries. 
+
+### Highest Ave Player Salary
+
+For our first question, we will select only teams from the National League. Let's use the most recent year of data to calculate average pay.
+
+```{r}
+
+Salaries %>% filter( lgID == "NL", yearID == 2016 ) %>% 
+             group_by( teamID) %>% 
+             summarize( Ave_Salary = mean(salary) )
+
+```
+
+Since the salaries are large, they are a little hard to read. Let's clean up the table a bit.
+
+```{r}
+
+
+Salaries  %>% 
+             filter( lgID == "NL", yearID == 2016 ) %>% 
+             group_by( teamID ) %>% 
+             summarize( Ave_Salary=dollar( mean(salary,na.rm=T) ) ) %>%
+             arrange( desc(Ave_Salary) ) %>%
+             pander()
+
+```
+
+
+### Most Players Paid Over $5 Million
+
+This question requires you to utilize a logical statement in order to translate from the question to code. We need to inspect each salary, determine whether it is over the $5m threshold, then count all of the cases. The operation will look something like this:
+
+```{r}
+sum( Salaries$salary > 5000000 )
+```
+
+It gets a little trickier when we want to do the operation simultaneously across groups. Our team group structure is already defined, so let's define our logical vector and count cases that match:
+
+```{r}
+
+dat.NL <- filter( Salaries, yearID == 2010 & lgID == "NL" ) %>% droplevels()
+
+gt.5m <- dat.NL$salary > 5000000
+
+table( dat.NL$teamID, gt.5m )
+
+```
+
+This solution works, but the table provides too much information. We can use dply to simplify and format the table nicely for our report:
+
+```{r}
+
+Salaries %>% 
+   filter( yearID == 2010 & lgID == "NL" ) %>%
+   group_by( teamID ) %>% 
+   summarise( gt_five_million = sum( salary > 5000000 ) ) %>% 
+   arrange( desc(gt_five_million) ) %>%
+   pander
+
+```
+
+### Fielding Positions
+
+Which fielding position is the highest paid?
+
+```{r}
+
+merge( Salaries, Fielding ) %>%
+  filter( yearID == 2016 ) %>%
+  group_by( POS ) %>%
+  summarize( Mean_Salary = dollar( mean(salary) ) ) %>%
+  pander
+
+
+
+```
+
+### Country of Birth
+
+Which country has produced the highest paid baseball players? 
+
+```{r}
+
+merge( Salaries, Master ) %>%
+  filter( yearID == 2016 ) %>%
+  group_by( birthCountry ) %>%
+  summarize( Mean_Salary = dollar( mean(salary) ) ) %>% 
+  pander
+
+```
+
+
+
+
+
+
+
+
+
+### Pay Raises
+
+To examine pay raises, we will now use more than one year of data. Since the question asks about pay raises over the past decade, we will filter the last ten years of data.
+
+And how since we are looking at patterns over teams and over time, we need to define a group structure with two variables:
+
+```{r}
+
+Salaries %>% filter( yearID > 2006 & lgID == "NL" ) %>% 
+             group_by( teamID, yearID ) %>% 
+             summarize( mean= dollar(mean(salary)) ) %>%
+             head( 20 ) %>% pander
+
+```
+This might seem like an odd format. We might expect something that looks more like our grid structure:
+
+```{r}
+
+dat.NL <- filter( Salaries, yearID > 2010 & lgID == "NL" ) %>% droplevels()
+
+tapply( dat.NL$salary, 
+        INDEX=list(dat.NL$teamID, dat.NL$yearID), 
+        FUN=mean, na.rm=T ) %>% pander()
+
+```
+
+
+Later on we will look at the benefits of "tidy data", but the basic idea is that you can "facet" your analysis easily when your groups are represented as factors instead of arranged as a table. For example, here is a time series graph that is faceted by teams:
+
+
+```{r}
+
+Salaries %>% filter( yearID > 2000 & lgID == "AL" ) %>% 
+             group_by( teamID, yearID ) %>% 
+             summarize( Mean_Player_Salary=mean(salary) ) -> t1
+
+qplot( data=t1, x=yearID, y=Mean_Player_Salary, 
+       geom=c("point", "smooth")  ) + 
+       facet_wrap( ~ teamID, ncol=5 )
+
+```
+
+Now you can quickly see that Detroit is the team that has raised salaries most aggressively.
+
+
+If we need to, we can easily convert a tidy dataset into something that looks like a table using the **spread()** function:
+
+```{r}
+
+Salaries %>% filter( yearID > 2006 & lgID == "NL" ) %>% 
+             group_by( teamID, yearID ) %>% 
+             summarize( mean = dollar(mean(salary)) ) %>%
+             spread( key=yearID, value=mean, sep="_" ) %>% 
+             select( 1:6 ) %>% na.omit() %>%
+             pander
+
+
+Salaries %>% filter( yearID > 2006 & lgID == "NL" ) %>% 
+             group_by( teamID, yearID ) %>% 
+             summarize( mean = dollar(mean(salary)) ) %>%
+             spread( key=teamID, value=mean, sep="_" ) %>% 
+             select( 1:6 ) %>% 
+             pander
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
