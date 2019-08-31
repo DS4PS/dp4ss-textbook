@@ -659,11 +659,7 @@ these</code></pre>
 <pre><code>## [1]  TRUE  TRUE FALSE FALSE</code></pre>
 <pre class="r"><code>! these</code></pre>
 <pre><code>## [1] FALSE FALSE  TRUE  TRUE</code></pre>
-<p>Be careful with the order of operations though!</p>
-<pre class="r"><code>group &lt;- c(&quot;treat&quot;,&quot;treat&quot;,&quot;control&quot;,&quot;control&quot;)
-gender &lt;- c(&quot;male&quot;,&quot;female&quot;,&quot;male&quot;,&quot;female&quot;)
-dat &lt;- data.frame( group, gender )
-dat %&gt;% pander()</code></pre>
+<p>Be careful with the order of operations though! If we are working with this data, for example:</p>
 <table style="width:28%;">
 <colgroup>
 <col width="13%" />
@@ -694,7 +690,7 @@ dat %&gt;% pander()</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Men in the treatment group:</p>
+<p>And we define men in the treatment group:</p>
 <pre class="r"><code>these &lt;- group == &quot;treat&quot; &amp; gender == &quot;male&quot; 
 dat[ these , ] %&gt;% pander</code></pre>
 <table style="width:24%;">
@@ -715,7 +711,7 @@ dat[ these , ] %&gt;% pander</code></pre>
 </tr>
 </tbody>
 </table>
-<p>Note that this is NOT women in the control group:</p>
+<p>Note that the opposite of men in the treatment group is <strong>NOT</strong> women in the control group:</p>
 <pre class="r"><code>these &lt;- ! ( group == &quot;treat&quot; &amp; gender == &quot;male&quot; )
 dat[ these , ] %&gt;% pander</code></pre>
 <table style="width:40%;">
