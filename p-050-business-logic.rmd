@@ -91,7 +91,7 @@ To be an effective data analyst we need to know how to translate question from o
 **In R as a logical statement:**
 
 ```r
-gender == "female" & age > 30 & grad.degree == FALSE
+gender == "female" & age > 30 & grad.degree == TRUE
 ```
 
 Logical statements help us translate our research questions from human languages into computer code. 
