@@ -418,9 +418,9 @@ these
 ```
 
 
-Be careful with the order of operations though!
+Be careful with the order of operations though! If we are working with this data, for example:
 
-```{r}
+```{r, echo=F}
 group <- c("treat","treat","control","control")
 gender <- c("male","female","male","female")
 dat <- data.frame( group, gender )
@@ -428,14 +428,14 @@ dat %>% pander()
 ```
 
 
-Men in the treatment group:
+And we define men in the treatment group:
 
 ```{r, eval=T}
 these <- group == "treat" & gender == "male" 
 dat[ these , ] %>% pander
 ```
 
-Note that this is NOT women in the control group:
+Note that the opposite of men in the treatment group is **NOT** women in the control group:
 
 ```{r, eval=T}
 these <- ! ( group == "treat" & gender == "male" )
