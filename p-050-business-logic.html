@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>p-050-business-logic.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#constructing-groups"><span class="toc-section-number">1</span> Constructing Groups</a><ul>
+<li><a href="#logical-operators"><span class="toc-section-number">1.1</span> Logical Operators</a></li>
+<li><a href="#selector-vectors"><span class="toc-section-number">1.2</span> Selector Vectors</a></li>
+<li><a href="#usefulness-of-selector-vectors"><span class="toc-section-number">1.3</span> Usefulness of Selector Vectors</a></li>
+</ul></li>
+<li><a href="#subsets"><span class="toc-section-number">2</span> Subsets</a><ul>
+<li><a href="#compound-logical-statements"><span class="toc-section-number">2.1</span> Compound Logical Statements</a></li>
+<li><a href="#the-opposite-of-operator"><span class="toc-section-number">2.2</span> The Opposite-Of Operator</a></li>
+</ul></li>
+<li><a href="#care-with-logical-statements"><span class="toc-section-number">3</span> Care With Logical Statements</a></li>
+<li><a href="#advanced-operations-with-logical-vectors"><span class="toc-section-number">4</span> Advanced Operations with Logical Vectors</a><ul>
+<li><a href="#find-and-replace"><span class="toc-section-number">4.1</span> Find and Replace</a></li>
+<li><a href="#nas-in-logical-statements"><span class="toc-section-number">4.2</span> NAs in Logical Statements</a></li>
+</ul></li>
+<li><a href="#subsets-with-factors"><span class="toc-section-number">5</span> Subsets with Factors</a></li>
+</ul>
+</div>
+
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<style>
+th {
+    text-align: left;
+}
+td {
+    text-align: left;
+}
+</style>
+<div id="constructing-groups" class="section level1">
+<h1><span class="header-section-number">1</span> Constructing Groups</h1>
+<div class="tip">
+<h2 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h2>
+<p>We translate questions from plain English into computer code using <strong>logical statements</strong>.</p>
+<p>Logical statements generate logical vectors or “selector vectors” where:</p>
+<ul>
+<li>TRUE signifies an observation belongs to our defined group</li>
+<li>FALSE signifies an observation does not</li>
+</ul>
+<p>We use these vectors to:</p>
+<ul>
+<li>count group membership</li>
+<li>determine the proportion of the population belonging to the group</li>
+<li>create subsets of data belonging to the group</li>
+</ul>
+<p><br>
+<br></p>
+</div>
+<p>Most data analysis require us to split our data into groups or segments so that we can look for trends or compare outcomes across various subpopulations.</p>
+<p><br></p>
+<blockquote>
+<p>What percentage of women over 30 have graduate degrees?</p>
+</blockquote>
+<p><br></p>
+<p>To be an effective data analyst we need to know how to translate question from our native human language into phrases a computer will understand.</p>
+<p><strong>Group of Interest:</strong></p>
+<ul>
+<li>female</li>
+<li>age over 30</li>
+<li>graduate degree</li>
+</ul>
+<p><strong>In R as a logical statement:</strong></p>
+<pre class="r"><code>gender == &quot;female&quot; &amp; age &gt; 30 &amp; grad.degree == TRUE</code></pre>
+<p>Logical statements help us translate our research questions from human languages into computer code.</p>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="figures/group_selection.png" alt="Logical statements define group membership" width="70%" />
+<p class="caption">
+Figure 1.1: Logical statements define group membership
+</p>
+</div>
+<div id="logical-operators" class="section level2">
+<h2><span class="header-section-number">1.1</span> Logical Operators</h2>
+<p>Similar to mathematical operators, logical operators are a basic building block of data programming. Most often when working with data we are not creating complicated statistical models. We are identifying members of a group (print all of the females from the study), and describing a subset of the data (compare the average price of houses with a pool to houses without a pool).</p>
+<p>In order to accomplish these simple tasks we need to use logic statements. A logic statement answers the question, does an observation belong to our group?</p>
+<p>Many times groups are simple: identify all professions that have average salaries over $100k a year, for example.</p>
+<p>Groups can be complex: identify the African American children from a specific zip code in Chicago that live in households with single mothers.</p>
+<p>In this chapter we will use nine basic logical operators:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>&lt;</strong></td>
+<td>less than</td>
+</tr>
+<tr class="even">
+<td><strong>&lt;=</strong></td>
+<td>less than or equal to</td>
+</tr>
+<tr class="odd">
+<td><strong>&gt;</strong></td>
+<td>greater than</td>
+</tr>
+<tr class="even">
+<td><strong>&gt;=</strong></td>
+<td>greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td><strong>==</strong></td>
+<td>exactly equal to</td>
+</tr>
+<tr class="even">
+<td><strong>!=</strong></td>
+<td>not equal to</td>
+</tr>
+<tr class="odd">
+<td><strong>x | y</strong></td>
+<td>x OR y</td>
+</tr>
+<tr class="even">
+<td><strong>x &amp; y</strong></td>
+<td>x AND y</td>
+</tr>
+<tr class="odd">
+<td><strong>!</strong></td>
+<td>opposite of</td>
+</tr>
+<tr class="even">
+<td><strong>[ ]</strong></td>
+<td>subset</td>
+</tr>
+</tbody>
+</table>
+<p>Logical operators create logical vectors, a vector that contains only TRUE or FALSE. The TRUE means that the observation belongs to a group, FALSE means it does not.</p>
+<pre class="r"><code>x1 &lt;- c( 7, 9, 1, 2 )
+x1 &gt; 5</code></pre>
+<p><em>TRUE</em>, <em>TRUE</em>, <em>FALSE</em> and <em>FALSE</em></p>
+<pre class="r"><code>gender &lt;- c(&quot;male&quot;,&quot;male&quot;,&quot;female&quot;,&quot;female&quot;)
+gender == &quot;female&quot;</code></pre>
+<p><em>FALSE</em>, <em>FALSE</em>, <em>TRUE</em> and <em>TRUE</em></p>
+<p><br>
+<br></p>
+<div class="question">
+<p>Try it yourself:</p>
+</div>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKCA3LCA5LCAxLCAyIClcbiMgd2hhdCB3aWxsIHRoZSByZXR1cm4gdmVjdG9yIGJlIGZvciBlYWNoP1xueDEgPiA3XG54MSA+PSA3XG54MSA9PSA5IHwgeDEgPT0gMVxuXG5cbmdlbmRlciA8LSBjKFwibWFsZVwiLFwibWFsZVwiLFwiZmVtYWxlXCIsXCJmZW1hbGVcIilcbiMgd2hhdCB3aWxsIHRoZSByZXR1cm4gdmVjdG9yIGJlIGZvciBlYWNoP1xuZ2VuZGVyID09IFwiZmVtYWxlXCJcbmdlbmRlciAhPSBcImZlbWFsZVwiXG5nZW5kZXIgPT0gXCJtYWxlXCJcbmdlbmRlciA9PSBcIk1BTEVcIiJ9
+</div>
+<p>Note that the logical statement for “equals” is written with two equal signs. This is important to remember, because using a single equal sign can introduce subtle errors into your analysis.</p>
+<pre class="r"><code>x1 &lt;- c( 7, 9, 1, 2 )
+x1 == 9</code></pre>
+<pre><code>## [1] FALSE  TRUE FALSE FALSE</code></pre>
+<pre class="r"><code>x1 = 9  # single equal overwrites your data
+x1</code></pre>
+<pre><code>## [1] 9</code></pre>
+<p>We can write compound logical statements using the <strong>AND</strong> <code>&amp;</code> and <strong>OR</strong> <code>|</code> operators:</p>
+<table style="width:39%;">
+<colgroup>
+<col width="6%" />
+<col width="12%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">gender</th>
+<th align="center">study.group</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">male</td>
+<td align="center">treatment</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">male</td>
+<td align="center">control</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">female</td>
+<td align="center">treatment</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">female</td>
+<td align="center">control</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>gender == &quot;female&quot;  &amp;  study.group == &quot;treatment&quot;</code></pre>
+<p><em>FALSE</em>, <em>FALSE</em>, <em>TRUE</em> and <em>FALSE</em></p>
+<pre class="r"><code>gender == &quot;female&quot;  |  study.group == &quot;treatment&quot;</code></pre>
+<p><em>TRUE</em>, <em>FALSE</em>, <em>TRUE</em> and <em>TRUE</em></p>
+</div>
+<div id="selector-vectors" class="section level2">
+<h2><span class="header-section-number">1.2</span> Selector Vectors</h2>
+<p>Note that we use operators to create logical vectors where TRUE designates observation that belong to the defined group, and FALSE designates observations outside the group. The term <strong>“selector vector”</strong> is a useful way to remember this purpose.</p>
+<p>After you have defined a group by composing a logical statement, then the vector can be used to count group members and take subsets of other variables to calculate group statistics.</p>
+<table style="width:54%;">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">gender</th>
+<th align="center">group</th>
+<th align="center">strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">frank</td>
+<td align="center">male</td>
+<td align="center">treat</td>
+<td align="center">27</td>
+</tr>
+<tr class="even">
+<td align="center">wanda</td>
+<td align="center">female</td>
+<td align="center">treat</td>
+<td align="center">43</td>
+</tr>
+<tr class="odd">
+<td align="center">sanjay</td>
+<td align="center">male</td>
+<td align="center">control</td>
+<td align="center">19</td>
+</tr>
+<tr class="even">
+<td align="center">nancy</td>
+<td align="center">female</td>
+<td align="center">control</td>
+<td align="center">58</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>these.female &lt;- dat$gender == &quot;female&quot;
+
+sum( these.female )                   # number of women in the study</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>mean( these.female )                  # proportion of the study that is women</code></pre>
+<pre><code>## [1] 0.5</code></pre>
+<pre class="r"><code>dat[ these.female , ]                 # all data belonging to women</code></pre>
+<pre><code>##    name gender   group strength
+## 2 wanda female   treat       43
+## 4 nancy female control       58</code></pre>
+<pre class="r"><code>mean( dat$strength[ these.female ] )  # average outcome for women in the study</code></pre>
+<pre><code>## [1] 50.5</code></pre>
+<p>I will consistently name my logical vectors “these.GROUP” throughout the chapters, where GROUP represents the group label. For example, I selected women above, so the selector vector is called “these.female”.</p>
+</div>
+<div id="usefulness-of-selector-vectors" class="section level2">
+<h2><span class="header-section-number">1.3</span> Usefulness of Selector Vectors</h2>
+<p>Selector vectors, i.e. logical vectors that were created by defining a group, have three main uses in our analysis.</p>
+<p><strong>ONE</strong>: Logical vectors give us an easy way to count things within defined groups.</p>
+<p>We can apply a <strong>sum()</strong> function to a logical vector, and the result will be a tally of all of the TRUE cases. The <strong>mean()</strong> function will give us the proportion of the sample that belongs to our defined group.</p>
+<pre class="r"><code># how many females do we have in our study?
+
+sum( gender == &quot;female&quot; )</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code># how many females do we have in our treatment group?
+
+sum( gender == &quot;female&quot; &amp; group == &quot;treat&quot; )</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code># what proportion of our study are men? 
+
+mean( gender == &quot;male&quot; )</code></pre>
+<pre><code>## [1] 0.5</code></pre>
+<p><strong>TWO:</strong> We can create a selector variable that is used for subsets. A selector vector used in a subset operator will drop all observations that are FALSE, isolating data belonging to the group:</p>
+<pre class="r"><code>these.female &lt;- gender == &quot;female&quot;
+name[ these.female ]</code></pre>
+<pre><code>## [1] &quot;wanda&quot; &quot;nancy&quot;</code></pre>
+<pre class="r"><code>strength[ these.female ]</code></pre>
+<pre><code>## [1] 43 58</code></pre>
+<p>Or we can create a subset of the full dataset:</p>
+<pre class="r"><code>dat[ these.female , ]</code></pre>
+<table style="width:65%;">
+<colgroup>
+<col width="12%" />
+<col width="11%" />
+<col width="12%" />
+<col width="13%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">name</th>
+<th align="center">gender</th>
+<th align="center">group</th>
+<th align="center">strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">wanda</td>
+<td align="center">female</td>
+<td align="center">treat</td>
+<td align="center">43</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>4</strong></td>
+<td align="center">nancy</td>
+<td align="center">female</td>
+<td align="center">control</td>
+<td align="center">58</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="subsets" class="section level1">
+<h1><span class="header-section-number">2</span> Subsets</h1>
+<p>The subset operators <strong>[ ]</strong> are one of the most common you will use in R.</p>
+<p>The primary rule of subsets is to use a data operator to create a logical selector vector, and use that to generate subsets. Any observation that corresponds to TRUE will be retained, any observation that corresponds to FALSE will be dropped.</p>
+<p>Consider this data:</p>
+<table style="width:54%;">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">gender</th>
+<th align="center">group</th>
+<th align="center">strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">frank</td>
+<td align="center">male</td>
+<td align="center">treat</td>
+<td align="center">27</td>
+</tr>
+<tr class="even">
+<td align="center">wanda</td>
+<td align="center">female</td>
+<td align="center">treat</td>
+<td align="center">43</td>
+</tr>
+<tr class="odd">
+<td align="center">sanjay</td>
+<td align="center">male</td>
+<td align="center">control</td>
+<td align="center">19</td>
+</tr>
+<tr class="even">
+<td align="center">nancy</td>
+<td align="center">female</td>
+<td align="center">control</td>
+<td align="center">58</td>
+</tr>
+</tbody>
+</table>
+<p>Vectors are only one dimension (a single column), so you only provide one argument to the subset operator:</p>
+<pre class="r"><code>these.treated &lt;- dat$group == &quot;treat&quot;
+name[ these.treated ]</code></pre>
+<pre><code>## [1] &quot;frank&quot; &quot;wanda&quot;</code></pre>
+<pre class="r"><code>strength[ these.treated ]</code></pre>
+<pre><code>## [1] 27 43</code></pre>
+<p>Data frames are two dimensions (rows and columns). Thus we need to provide two arguments to the subset operator, one to control which rows we select, and one to control which columns we select.</p>
+<p>The two dimensions are seperated by a comma, and if you leave one blank it will not drop anything in the row or column.</p>
+<blockquote>
+<p><strong><code>dat[  ROW POSITION ,  COLUMN POSITION  ]</code></strong></p>
+</blockquote>
+<pre class="r"><code>these.control &lt;- dat$group == &quot;control&quot;
+dat[ these.control , ]          # all data in the control group</code></pre>
+<pre><code>##     name gender   group strength
+## 3 sanjay   male control       19
+## 4  nancy female control       58</code></pre>
+<pre class="r"><code>dat[ , c(&quot;name&quot;,&quot;gender&quot;) ]    # select two columns of data</code></pre>
+<pre><code>##     name gender
+## 1  frank   male
+## 2  wanda female
+## 3 sanjay   male
+## 4  nancy female</code></pre>
+<pre class="r"><code># create a subset
+dat.women &lt;- dat[ dat$gender == &quot;female&quot; , ]
+dat.women</code></pre>
+<pre><code>##    name gender   group strength
+## 2 wanda female   treat       43
+## 4 nancy female control       58</code></pre>
+<div class="question">
+<p>Specify the following desired selections from the table:</p>
+<table style="width:54%;">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="13%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">gender</th>
+<th align="center">group</th>
+<th align="center">strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">frank</td>
+<td align="center">male</td>
+<td align="center">treat</td>
+<td align="center">27</td>
+</tr>
+<tr class="even">
+<td align="center">wanda</td>
+<td align="center">female</td>
+<td align="center">treat</td>
+<td align="center">43</td>
+</tr>
+<tr class="odd">
+<td align="center">sanjay</td>
+<td align="center">male</td>
+<td align="center">control</td>
+<td align="center">19</td>
+</tr>
+<tr class="even">
+<td align="center">nancy</td>
+<td align="center">female</td>
+<td align="center">control</td>
+<td align="center">58</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Im5hbWUgPC0gYyhcImZyYW5rXCIsXCJ3YW5kYVwiLFwic2FuamF5XCIsXCJuYW5jeVwiKVxuZ3JvdXAgPC0gYyhcInRyZWF0XCIsXCJ0cmVhdFwiLFwiY29udHJvbFwiLFwiY29udHJvbFwiKVxuZ2VuZGVyIDwtIGMoXCJtYWxlXCIsXCJmZW1hbGVcIixcIm1hbGVcIixcImZlbWFsZVwiKVxuc3RyZW5ndGggPC0gYygyNyw0MywxOSw1OClcbmRhdCA8LSBkYXRhLmZyYW1lKCBuYW1lLCBnZW5kZXIsIGdyb3VwLCBzdHJlbmd0aCApIiwic2FtcGxlIjoiIyBhbGwgd29tZW5cbnRoZXNlLndvbWVuIDwtIGRhdCRnZW5kZXIgPT0gXCJmZW1hbGVcIlxuZGF0WyB0aGVzZS53b21lbiAsIF1cblxuIyBhbGwgd29tZW4gaW4gdGhlIGNvbnRyb2wgZ3JvdXBcblxuIyBldmVyeW9uZSB0aGF0IHNjb3JlZCBvdmVyIDIwIG9uIHRoZSBzdHJlbmd0aCB0ZXN0XG5cbiMgb25seSB0aGUgc3R1ZHkgZ3JvdXAgYW5kIHN0cmVuZ3RoIGNvbHVtbnMgZnJvbSB0aGUgZGF0YXNldCJ9
+</div>
+<div id="compound-logical-statements" class="section level2">
+<h2><span class="header-section-number">2.1</span> Compound Logical Statements</h2>
+<p>We can combine multiple logical statements using the AND, OR, and NOT operators ( &amp;, |, ! ). This functionality gives us an incredible ability to specify very granular groups within our analysis. This will be important as we begin to construct analysis in a way that we search for apples to apples comparisons within our data in order to make inferences about program effectiveness.</p>
+<p>These statements require some precision, however. Use care when applying that AND, OR, and NOT operators as to not include unintended data in your sample.</p>
+</div>
+<div id="the-opposite-of-operator" class="section level2">
+<h2><span class="header-section-number">2.2</span> The Opposite-Of Operator</h2>
+<p>The <strong>!</strong> operator is a special case, where it is not used to define a new logical vector, but rather it swaps the values of an existing logical vector.</p>
+<pre class="r"><code>! TRUE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>! FALSE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>x1 &lt;- c(7,9,1,2)
+these &lt;- x1 &gt; 5
+these</code></pre>
+<pre><code>## [1]  TRUE  TRUE FALSE FALSE</code></pre>
+<pre class="r"><code>! these</code></pre>
+<pre><code>## [1] FALSE FALSE  TRUE  TRUE</code></pre>
+<p>Be careful with the order of operations though! If we are working with this data, for example:</p>
+<table style="width:28%;">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">group</th>
+<th align="center">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">treat</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">treat</td>
+<td align="center">female</td>
+</tr>
+<tr class="odd">
+<td align="center">control</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">control</td>
+<td align="center">female</td>
+</tr>
+</tbody>
+</table>
+<p>And we define men in the treatment group:</p>
+<pre class="r"><code>these &lt;- group == &quot;treat&quot; &amp; gender == &quot;male&quot; 
+dat[ these , ] %&gt;% pander</code></pre>
+<table style="width:24%;">
+<colgroup>
+<col width="11%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">group</th>
+<th align="center">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">treat</td>
+<td align="center">male</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the opposite of men in the treatment group is <strong>NOT</strong> women in the control group:</p>
+<pre class="r"><code>these &lt;- ! ( group == &quot;treat&quot; &amp; gender == &quot;male&quot; )
+dat[ these , ] %&gt;% pander</code></pre>
+<table style="width:40%;">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">group</th>
+<th align="center">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">treat</td>
+<td align="center">female</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">control</td>
+<td align="center">male</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>4</strong></td>
+<td align="center">control</td>
+<td align="center">female</td>
+</tr>
+</tbody>
+</table>
+<p>Women in the control group would be:</p>
+<pre class="r"><code># not treatment group &amp; not men
+these &lt;- ! ( group == &quot;treat&quot; ) &amp;  ! ( gender == &quot;male&quot; ) 
+dat[ these , ]</code></pre>
+<pre><code>##     group gender
+## 4 control female</code></pre>
+</div>
+</div>
+<div id="care-with-logical-statements" class="section level1">
+<h1><span class="header-section-number">3</span> Care With Logical Statements</h1>
+<p>A common mistake you will make when you first start constructing logical statements is define a group, and then since you are in a hurry you flip the logic and think you are making a valid comparison.</p>
+<blockquote>
+<p>Do bearded men earn more than men without beards?</p>
+</blockquote>
+<p>The <strong>opposite-of</strong> “men with beards” (“male” &amp; “beards”) is not men without beards, it is men without beards OR women (with or without beards).</p>
+<div class="figure"><span id="fig:unnamed-chunk-35"></span>
+<img src="figures/bearded_men.png" alt="Compound statements can be tricky" width="60%" />
+<p class="caption">
+Figure 3.1: Compound statements can be tricky
+</p>
+</div>
+<p>In the example above, the statement “NOT bearded men” means all people outside of the category of men without beards (the “complement”), which includes women with or without beards as well.</p>
+<p>Also note that parentheses matter. Compare this statement to the statement above:</p>
+<pre><code>! gender == &quot;male&quot; &amp; beard == TRUE</code></pre>
+<p>Because we excluded the parentheses this statement now defines the group “NOT men AND with beards”, or bearded women.</p>
+<div class="figure"><span id="fig:unnamed-chunk-36"></span>
+<img src="figures/compound_logical_statements.png" alt="Examples of group construction with compound statements" width="90%" />
+<p class="caption">
+Figure 3.2: Examples of group construction with compound statements
+</p>
+</div>
+<p>It’s important to note that the <strong>opposite-of</strong> operator does not flip the LOGIC of the question, it only flips TRUES and FALSE in the produced vector.</p>
+<pre class="r"><code>group == &quot;treat&quot; &amp; gender == &quot;male&quot; </code></pre>
+<pre><code>## [1]  TRUE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>! ( group == &quot;treat&quot; &amp; gender == &quot;male&quot;  )</code></pre>
+<pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
+<p>Pay close attention to the order of operations when constructing logical statements.</p>
+<p>Since all logical operators have the same precedence, the <strong>opposite-of</strong> operator will be applied first here, then the **and* operator. Thus these are not the same:</p>
+<table style="width:28%;">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">group</th>
+<th align="center">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">treat</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">treat</td>
+<td align="center">female</td>
+</tr>
+<tr class="odd">
+<td align="center">control</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">control</td>
+<td align="center">female</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>these &lt;- ! ( group == &quot;treat&quot; &amp; gender == &quot;male&quot; )
+dat[ these , ] </code></pre>
+<table style="width:40%;">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">group</th>
+<th align="center">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>2</strong></td>
+<td align="center">treat</td>
+<td align="center">female</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>3</strong></td>
+<td align="center">control</td>
+<td align="center">male</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>4</strong></td>
+<td align="center">control</td>
+<td align="center">female</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>these &lt;- ! group == &quot;treat&quot; &amp; gender == &quot;male&quot; 
+dat[ these , ]</code></pre>
+<table style="width:40%;">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">group</th>
+<th align="center">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>3</strong></td>
+<td align="center">control</td>
+<td align="center">male</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="advanced-operations-with-logical-vectors" class="section level1">
+<h1><span class="header-section-number">4</span> Advanced Operations with Logical Vectors</h1>
+<div id="find-and-replace" class="section level2">
+<h2><span class="header-section-number">4.1</span> Find and Replace</h2>
+<p>We can use selector variables to replace observations with new values using the assignment operator. This is similar to a find and replace operation.</p>
+<pre class="r"><code>animals &lt;- c( &quot;mole&quot;, &quot;mouse&quot;, &quot;shrew&quot;, &quot;mouse&quot;, &quot;rat&quot;, &quot;shrew&quot; )
+
+# the lab assistant incorrectly identified the shrews
+
+animals</code></pre>
+<pre><code>## [1] &quot;mole&quot;  &quot;mouse&quot; &quot;shrew&quot; &quot;mouse&quot; &quot;rat&quot;   &quot;shrew&quot;</code></pre>
+<pre class="r"><code>animals[ animals == &quot;shrew&quot; ] &lt;- &quot;possum&quot;
+
+animals</code></pre>
+<pre><code>## [1] &quot;mole&quot;   &quot;mouse&quot;  &quot;possum&quot; &quot;mouse&quot;  &quot;rat&quot;    &quot;possum&quot;</code></pre>
+<p>We don’t know if linda received the treatment:</p>
+<table style="width:31%;">
+<colgroup>
+<col width="11%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">study.group</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">adam</td>
+<td align="center">treatment</td>
+</tr>
+<tr class="even">
+<td align="center">jamal</td>
+<td align="center">control</td>
+</tr>
+<tr class="odd">
+<td align="center">linda</td>
+<td align="center">treatment</td>
+</tr>
+<tr class="even">
+<td align="center">sriti</td>
+<td align="center">control</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># replace 
+study.group[ name == &quot;linda&quot; ] &lt;- NA
+
+study.group</code></pre>
+<pre><code>## [1] &quot;treatment&quot; &quot;control&quot;   NA          &quot;control&quot;</code></pre>
+</div>
+<div id="nas-in-logical-statements" class="section level2">
+<h2><span class="header-section-number">4.2</span> NAs in Logical Statements</h2>
+<p>Recall that missing values are an extremely important concept in statistics. If one-third of our survey sample reports that they never smoked pot, one-third reports they have smoked pot, and one-third did not answer the question, then what do we report for the proportion of the population that has smoked pot?</p>
+<p>We might prefer to be cautious and count only the people that have confirmed they have smoked pot, resulting in an estimate of 33.3%.</p>
+<p>If we throw out the missing data, then 50% of respondents have smoked pot.</p>
+<p>If we assume those that refuse to answer have likely smoked pot, our estimate might be 66.6% of the sample.</p>
+<p>These different results are a function of how we treat the missing data in our survey, so it is important that we can keep track of missing values, especially during subset operations.</p>
+<p>Note how NAs effect compound logical statements:</p>
+<pre class="r"><code>TRUE &amp; TRUE</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>TRUE &amp; FALSE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>TRUE &amp; NA</code></pre>
+<pre><code>## [1] NA</code></pre>
+<pre class="r"><code>FALSE &amp; NA</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<p>To make sense of these rules consider the following:</p>
+<p>If one condition is already FALSE, the missing value does not matter because under the &amp; condition BOTH must be TRUE for the observation to belong to our defined group. After we know that one of the conditions is FALSE the missing value is irrelevant. For example, if we want to select all women in the treatment group, and we have a man with an unclear treatment group status, he is still excluded from the group because he is a man.</p>
+<p>On the other hand, if one condition is TRUE, and another is NA, R does not want to throw out the data because the state of the missing value is unclear. As a result, it will preserve the observation, but it will replace all of the data with missing values to signal the lack of certainty associated with that observation.</p>
+<table style="width:28%;">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">group</th>
+<th align="center">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">treat</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">treat</td>
+<td align="center">female</td>
+</tr>
+<tr class="odd">
+<td align="center">control</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">control</td>
+<td align="center">female</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>keep.these &lt;- c(T,F,NA,F)
+dat[ keep.these , ]</code></pre>
+<pre><code>##    group gender
+## 1  treat   male
+## NA  &lt;NA&gt;   &lt;NA&gt;</code></pre>
+<p>To remove these rows with missing values in your selector vector, replace all NAs with FALSE:</p>
+<pre class="r"><code>keep.these[ is.na(keep.these) ] &lt;- FALSE
+dat[ keep.these , ]</code></pre>
+<pre><code>##   group gender
+## 1 treat   male</code></pre>
+</div>
+</div>
+<div id="subsets-with-factors" class="section level1">
+<h1><span class="header-section-number">5</span> Subsets with Factors</h1>
+<p>Note the rules listed above about subsetting factors. After applying a subset, they will retain all of the original levels, even when they are not longer useful. You need to drop the unused levels if you would like them to be omitted from functions that use the factor levels for analysis.</p>
+<pre class="r"><code>df &lt;- data.frame( letters=LETTERS[1:5], numbers=seq(1:5) )
+
+levels( df$letters )</code></pre>
+<pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot;</code></pre>
+<pre class="r"><code>sub.df &lt;- df[ 1:3, ]
+
+sub.df$letters</code></pre>
+<pre><code>## [1] A B C
+## Levels: A B C D E</code></pre>
+<pre class="r"><code>levels( sub.df$letters )</code></pre>
+<pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot;</code></pre>
+<pre class="r"><code>droplevels( sub.df$letters )</code></pre>
+<pre><code>## [1] A B C
+## Levels: A B C</code></pre>
+<pre class="r"><code>sub.df$letters &lt;- droplevels( sub.df$letters )</code></pre>
+</div>
+
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

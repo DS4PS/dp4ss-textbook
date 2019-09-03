@@ -22,6 +22,74 @@
 <script src="ch-033-calculator_files/navigation-1.1/tabsets.js"></script>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -53,7 +121,9 @@ h6 {
 
 <link rel="stylesheet" href="textbook.css" type="text/css" />
 
+</head>
 
+<body>
 
 <style type = "text/css">
 .main-container {
@@ -78,92 +148,22 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
-summary {
-  display: list-item;
-}
 </style>
 
 
+
+<div class="container-fluid main-container">
 
 <!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
 });
 </script>
 
 <!-- code folding -->
 
 
-
-
-</head>
-
-<body>
-
-
-<div class="container-fluid main-container">
 
 
 
@@ -178,54 +178,58 @@ $(document).ready(function () {
 
 <script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
 <div id="r-an-overdesigned-calculator" class="section level1">
-<h1>R: An Overdesigned Calculator</h1>
+<h1><span class="header-section-number">1</span> R: An Overdesigned Calculator</h1>
 <p><br></p>
 <p><img src="https://i.giphy.com/media/3owzW5c1tPq63MPmWk/giphy.webp" width="100%" style="display: block; margin: auto;" /></p>
 <p><br></p>
 <div id="introduction" class="section level2">
-<h2>Introduction</h2>
+<h2><span class="header-section-number">1.1</span> Introduction</h2>
 <p>Chief among R’s many capabilities are basic mathematical operations, making it a severely overdesigned calculator. The only thing a TI-84 has on R is that you can’t play Super Mario Brothers with the latter - <em>yet</em> (package developers… if your listening…).</p>
 <p><strong>So what?</strong></p>
 <p>Arithmetic operations in R are key to transforming your data, whether calculating property code violations <em>per capita</em> or converting U.S. dollars to Indian rupees. In short, you use them to make new variables from existing ones. When we combine arithmetic with objects that store one or more values, we’re dangerously close to practicing algebra.</p>
 <p><br> <br></p>
 <div class="tip">
-<h2 id="key-concepts">Key Concepts</h2>
+<h2 id="key-concepts"><span class="header-section-number">1.1</span> Key Concepts</h2>
 <p>In this chapter, we’ll learn and practice basic arithmetic functions in R, assign calculations and their resulting values to objects, and use those objects in algebraic operations. Key concepts include:</p>
 <ul>
 <li>Arithmetic Operators</li>
 <li>Operator Precedence</li>
 <li>Assignment</li>
 </ul>
-<h2 id="key-takeaways">Key Takeaways</h2>
+<h2 id="key-takeaways"><span class="header-section-number">1.1</span> Key Takeaways</h2>
 <p>Everything you need to know in a few bullet points:</p>
 <ul>
 <li>Arithmetic operators include: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>^</code>, <code>( )</code></li>
-<li>Calculations follow the order of operations, or <strong>PEMDAS</strong></li>
-<li>Create <strong>objects</strong> with <strong>assignment</strong>, e.g. <code>x</code> contains <code>3</code> in <code>x &lt;- 3</code></li>
-<li>Use numeric objects like variables in algebra, e.g. <code>x + 2</code> equals <code>5</code></li>
+<li>Calculations follow the <strong>order of operations</strong></li>
+<li>Create <strong>objects</strong> with <strong>assignment</strong>:
+<ul>
+<li><code>x</code> stores the value <code>3</code> after calling <code>x &lt;- 3</code></li>
+</ul></li>
+<li>Numeric bjects act like variables in algebra:
+<ul>
+<li><code>x + 2</code> equals <code>5</code></li>
+</ul></li>
 </ul>
 <p><br> <br></p>
 </div>
 <p><br> <br></p>
 </div>
 <div id="arithmetic-operators" class="section level2">
-<h2>Arithmetic Operators</h2>
+<h2><span class="header-section-number">1.2</span> Arithmetic Operators</h2>
 <blockquote>
-<p>"What sort of free will is left when we come to tabulation and arithmetic? When it will all be a case of twice two makes four?</p>
-</blockquote>
-<blockquote>
-<p>You don’t need free will to determine that twice two is four." (Dostoyevsky)</p>
+<p>&quot;What sort of free will is left when we come to tabulation and arithmetic? When it will all be a case of twice two makes four?</p>
+<p>You don’t need free will to determine that twice two is four.&quot; (Dostoyevsky)</p>
 </blockquote>
 <p><br></p>
 <p>You remember <a href="https://en.wikipedia.org/wiki/Arithmetic">arithmetic</a>, right? That peculiar field of mathematics in which people who admittedly “don’t math”, for whatever reason, actually use every day?</p>
 <p><strong>Arithmetic operators</strong> in R work just like they did in primary school, including addition, subtraction, multiplication, division, and exponentiation:</p>
 <ul>
-<li><code>+</code> or <strong>addition</strong>, e.g. <code>2 + 2</code></li>
-<li><code>-</code> or <strong>subtraction</strong>, e.g. <code>2 - 2</code></li>
-<li><code>*</code> or <strong>multiplication</strong>, e.g. <code>2 * 2</code></li>
-<li><code>/</code> or <strong>division</strong>, e.g. <code>2 / 2</code></li>
-<li><code>^</code> or <strong>exponentiation</strong>, e.g. <code>2 ^ 2</code></li>
-<li><code>( )</code> for <strong>order of operations</strong>, e.g. <code>((2 + 2) * 2)</code></li>
+<li><code>+</code> or <strong>addition</strong>, e.g. <code>2 + 2</code></li>
+<li><code>-</code> or <strong>subtraction</strong>, e.g. <code>2 - 2</code></li>
+<li><code>*</code> or <strong>multiplication</strong>, e.g. <code>2 * 2</code></li>
+<li><code>/</code> or <strong>division</strong>, e.g. <code>2 / 2</code></li>
+<li><code>^</code> or <strong>exponentiation</strong>, e.g. <code>2 ^ 2</code></li>
+<li><code>( )</code> for <strong>order of operations</strong>, e.g. <code>((2 + 2) * 2)</code></li>
 </ul>
 <p><br></p>
 <p>The following example has a number of operations. Run the code to see what happens:</p>
@@ -237,19 +241,13 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiI3ICsgMyAgICAgICAjIEFkZGl0aW9uXG5cbjggLSAxMiAg
 <p>(Plus, you can browse Reddit during class, but it looks like you’re working).</p>
 <p><br></p>
 <div id="your-turn" class="section level3">
-<h3>Your Turn</h3>
+<h3><span class="header-section-number">1.2.1</span> Your Turn</h3>
 <div class="quiz">
-<p><strong>Instructions:</strong> Perform the following arithmetic operations in R.</p>
-<ul>
-<li>Add 5, 10, and 15</li>
-<li>Subtract 12 from 6</li>
-<li>Divide 1,000 by 300</li>
-<li>Raise 5 to the fifth power (i.e. exponent)</li>
-</ul>
-<p><strong>Tip:</strong> Remember, numeric values in R <em>don’t use commas</em>.</p>
+<p><strong>Instructions:</strong> Perform the following arithmetic operation in R.</p>
+<p><strong>Tip:</strong> Numeric values in R <em>don’t use commas</em>.</p>
 </div>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEFkZCA1LCAxMCwgYW5kIDE1XG5cbiMgU3VidHJhY3QgMTIgZnJvbSA2XG5cbiMgRGl2aWRlIDEsMDAwIGJ5IDMwMFxuXG4jIFJhaXNlIDUgdG8gdGhlIGZpZnRoIHBvd2VyIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIFJhaXNlIDUgdG8gdGhlIGZpZnRoIHBvd2VyXG5cbiMgU3VidHJhY3QgMzAgZnJvbSAxMDBcblxuIyBEaXZpZGUgMSwwMDAgYnkgMzAwIn0=
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center">
@@ -264,11 +262,11 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEFkZCA1LCAxMCwgYW5kIDE1XG5cbiMgU3VidHJhY3Qg
 <p><br> <br></p>
 </div>
 </div>
-<div id="operator-precedence" class="section level2">
-<h2>Operator Precedence</h2>
-<p>Here’s another blast from the past: <strong>operator precedence</strong>. At least, that’s what it’s called in programming languages. You probably remember it as the <strong>order of operations</strong>.</p>
-<p>If that doesn’t ring a bell, maybe you’ll remember the mnemonic devices: <strong>PEMDAS</strong> or <strong>Please Excuse My Dear Aunt Sally</strong>. To this day, we’ve not the foggiest what social gaffes Aunt Sally actually committed.</p>
-<p>What we do know, however, is that Aunt Sally reminds us <em>in what order arithmetic operations are evaluated</em>, a.k.a. the <strong>order of operations</strong>. That order is as follows:</p>
+<div id="order-of-operations" class="section level2">
+<h2><span class="header-section-number">1.3</span> Order of Operations</h2>
+<p>Here’s another blast from the past: the <strong>operator precedence</strong>. At least, that’s what it’s called in programming languages. You probably remember it as the <strong>order of operations</strong>.</p>
+<p>If you don’t recall the specific rules, perhaps you remember the mnemonic devices: <strong>PEMDAS</strong> or <strong>Please Excuse My Dear Aunt Sally</strong>. We are not sure know what Aunt Sally did, but we are pretty sure she deserves whatever punshinment she received.</p>
+<p>PEMDAS reminds us <em>the order arithmetic operations are evaluated</em>, a.k.a. the <strong>order of operations</strong>:</p>
 <ol style="list-style-type: decimal">
 <li><strong>Parenthesis</strong>, or expressions inside <code>( )</code></li>
 <li><strong>Exponents</strong>, or raising one value to the power of another with <code>^</code></li>
@@ -277,27 +275,31 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEFkZCA1LCAxMCwgYW5kIDE1XG5cbiMgU3VidHJhY3Qg
 <li><strong>Addition</strong>, or adding values with <code>+</code></li>
 <li><strong>Subtraction</strong>, or subtracting values with <code>-</code></li>
 </ol>
-<p><br></p>
-<div id="operator-precedence-in-r" class="section level3">
-<h3>Operator Precedence in R</h3>
-<p>Arithmetic operations in R are also evaluated in the same order. Press “Run” and observe:</p>
+<p>Arithmetic operations in R are also evaluated in the same order. Can you guess the results before evaluating the expressions? Press “Run” to execute the code and see the results:</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIoMTcgLSA3KSArIDMgICAgICAjIFBhcmFudGhlc2VzIGFyZSBldmFsdWF0ZWQgZmlyc3RcblxuMTcgLSAoNyArIDMpICAgICAgIyBUaGUgbG9jYXRpb25zIG9mIHBhcmFudGhlc2VzIG1hdHRlciBcblxuMiAqIDIgKyAzICogM1xuXG4yICogKDIgKyAzKSAqIDMifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGVhc3kgb25lXG41ICsgMTAgLyA1ICAgIFxuXG4jIGhhcmRlclxuNSAtIDEwICsgNSBcbjUgKyAxMCAtIDUgIFxuXG4jIHNpbWlsYXJseVxuNSAqIDEwIC8gNSAgIFxuNSAvIDEwICogNSBcblxuIyBlYXNpZXJcbjMgKiAyIF4gMlxuXG4jIGhtbW1cbjIgKiAoMiArIDMpICogM1xuXG4jIGh1aD9cbiggMiArIDMgKSAvIDUgKiAyXG4oIDIgKyAzICkgKiA1IC8gMlxuKCAyICsgMyApIC8gMiAqIDUifQ==
 </div>
 <p><br></p>
+<div class="tip">
+<p>Note that R is indifferent to order of operations for addition vs subtraction, and multiplication vs division.</p>
+<p>For cases where both occur the code is just executed from left to right.</p>
 </div>
 <div id="your-turn-1" class="section level3">
-<h3>Your Turn</h3>
+<h3><span class="header-section-number">1.3.1</span> Your Turn</h3>
 <div class="quiz">
-<p><strong>Instructions:</strong> Use the order of operations to calculate the following in R.</p>
-<ul>
-<li>First, subtract 500 from 600. Then add 100.</li>
-<li>Subtract 1,000 from 10 cubed (raised to the third power)</li>
-<li>Multiple 25 times 10, then subtract 500, then add 250</li>
-</ul>
+<p><strong>Instructions:</strong></p>
+<p>The formula to calculate a monthly mortgage payment based upon the loan amount, annual interest rate, and loan term (in months) is calculated as follows:</p>
+<p><span class="math display">\[
+PAYMENT = \frac{principal \cdot \frac{interest \ rate}{12}}{1-(1+\frac{interest \ rate}{12})^{- \ months}}
+\]</span></p>
+<p>Let’s say we have a $100,000 loan at a 5% interest rate amortized over 360 months (30 years). The payments would be as follows:</p>
+<p><span class="math display">\[
+PAYMENT = \frac{ 100k \cdot \frac{0.05}{12}}{1-(1+\frac{0.05}{12})^{- \ 360}}
+\]</span></p>
+<p>Can you type the formula into R correctly? The payment should come to $536.82 a month.</p>
 </div>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEZpcnN0LCBzdWJ0cmFjdCA1MDAgZnJvbSA2MDAsIHRoZW4gYWRkIDEwMFxuXG4jIFN1YnRyYWN0IDEsMDAwIGZyb20gMTAgY3ViZWQgKHJhaXNlZCB0byB0aGlyZCBwb3dlcilcblxuIyBNdWx0aXBsZSAyNSB0aW1lcyAxMCwgdGhlbiBzdWJ0cmFjdCA1MDAsIHRoZW4gYWRkIDI1MCJ9
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIFR5cGUgeW91ciBmb3JtdWxhIGhlcmUifQ==
 </div>
 <p><br></p>
 <div class="figure" style="text-align: center">
@@ -312,60 +314,96 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEZpcnN0LCBzdWJ0cmFjdCA1MDAgZnJvbSA2MDAsIHRo
 <p><br> <br></p>
 </div>
 </div>
-<div id="assignment" class="section level2">
-<h2>Assignment</h2>
+</div>
+<div id="assignment" class="section level1">
+<h1><span class="header-section-number">2</span> Assignment</h1>
 <blockquote>
-<p>"The philosophical workers… have to fix and formalize some great existing body of valuations - that is to say…</p>
+<p>&quot;The philosophical workers… have to fix and formalize some great existing body of valuations - that is to say…</p>
 </blockquote>
 <blockquote>
-<p>…creations of value, which have become prevalent, and are for a time called ‘truths’…" (Nietzsche)</p>
+<p>…creations of value, which have become prevalent, and are for a time called ‘truths’…&quot; (Nietzsche)</p>
 </blockquote>
 <p><br></p>
-<p>We’ve talked about <strong>objects</strong> quite a bit in R, and for good reason: They’re the meat and potatoes of R. Objects store information like datasets, function code, individual values, and even metadata, e.g. coefficents in linear models.</p>
+<p><strong>Objects</strong> are the meat and potatoes of R. They store information like datasets, function code, individual values, and even metadata, e.g. coefficents in linear models.</p>
 <p><br></p>
-<p><strong>But how can do we create an object?</strong></p>
-<p>In many cases, we may wish to store external data that we import to R. In other instances, we wish to store a value, sequence of values, or dataset we create ourselves. In all cases, we use <strong>assignment</strong>, the method of naming an object and storing data in it. In order to use <strong>assignment</strong>, we use the <strong>assignment operator</strong>, or <code>&lt;-</code>.</p>
+<p><strong>But how do we create an object?</strong></p>
+<p>We use <strong>assignment</strong> to create an object and store data in it. This requires the <strong>assignment operator</strong>, or the <code>&lt;-</code> arrow.</p>
+<p>Assignment can be used to store external data that was imported into R, to save a statistic that we calculated, or remember data we type into R ourselves.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">read.csv</span>( <span class="st">&quot;FileName.csv&quot;</span> ) </a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">x &lt;-<span class="st"> </span><span class="kw">mean</span>( y )</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Adam&quot;</span>,<span class="st">&quot;Susie&quot;</span>,<span class="st">&quot;Tony&quot;</span>)</a></code></pre></div>
 <p><br></p>
-<p>Run the following to assign 20 and 480 to objects <code>x</code> and <code>y</code>, respectively:</p>
+<p>Assign the values 3 and 4 to objects <code>x</code> and <code>y</code>, respectively. Note that typing an object’s name will report the object values.</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIDIwICAgICAgICMgQXNzaWduIDIwIHRvIFwieFwiXG5cbnggICAgICAgICAgICAgIyBBdXRvcHJpbnQgb2JqZWN0IFwieFwiXG5cbnkgPC0gNDgwICAgICAgIyBBc3NpZ24gNDgwIHRvIFwieVwiXG5cbnkgICAgICAgICAgICAgIyBBdXRvcHJpbnQgb2JqZWN0IFwieVwiIn0=
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIDMgICAgICAgICMgQXNzaWduIDIwIHRvIFwieFwiXG5cbnkgPC0gNCAgICAgICAgIyBBc3NpZ24gNDgwIHRvIFwieVwiXG5cbnggICAgICAgICAgICAgIyBXaWxsIHRoaXMgcHJpbnQgXCJ4XCIgb3IgMyA/XG5cbnggKiB5ICAgICAgICAgIn0=
 </div>
 <p><br></p>
-<p>Now find out what happens when we interact with <code>x</code> and <code>y</code> arithmetically:</p>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIDIwICAgICAgICMgUmVhc3NpZ24gMjAgdG8gXCJ4XCJcblxueSA8LSA0ODAgICAgICAjIFJlYXNzaWduIDQ4MCB0byBcInlcIlxuXG54ICogMiAgICAgICAgICMgTXVsdGlwbGUgb2JqZWN0IFwieFwiIGJ5IDJcblxueSAvIDQgICAgICAgICAjIERpdmlkZSBvYmplY3QgXCJ5XCIgYnkgNFxuXG54ICsgeSAgICAgICAgICMgQWRkIG9iamVjdHMgXCJ4XCIgYW5kIFwieVwiIn0=
-</div>
-<p><br></p>
-<p>Neat! Like algebra, <code>x</code> and <code>y</code> are used to <em>represent</em> numeric values.</p>
+<p>Like algebra, <code>x</code> and <code>y</code> are used to <em>represent</em> numeric values.</p>
 <p>Unlike algebra, we can <em>store many values</em> in objects, including other objects!</p>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIDIwICAgICAgICMgUmVhc3NpZ24gMjAgdG8gXCJ4XCJcblxueSA8LSA0ODAgICAgICAjIFJlYXNzaWduIDQ4MCB0byBcInlcIlxuXG56IDwtIHggKyB5ICAgICMgQXNzaWduIHRoZSBzdW0gb2YgXCJ4XCIgYW5kIFwieVwiIHRvIFwielwiXG5cbnogICAgICAgICAgICAgIyBBdXRvcHJpbnQgXCJ6XCIifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIDIwICAgICAgIyBBc3NpZ24gMjAgdG8gXCJ4XCJcblxueSA8LSA0MCAgICAgICMgQXNzaWduIDQwIHRvIFwieVwiXG5cbnogPC0geCArIHkgICAjIEFzc2lnbiB0aGUgc3VtIG9mIFwieFwiIGFuZCBcInlcIiB0byBcInpcIlxuXG56ICAgICAgICAgICAgIyBQcmludCB6In0=
 </div>
 <p><br></p>
+<p>What do you think the following will return?</p>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIDIwICAgICAgXG55IDwtIHggICAgXG54IDwtIDMwICBcblxueSAgICMgcHJpbnQgdGhlIHZhbHVlIHN0b3JlZCBieSB5In0=
+</div>
 <div class="tip">
-<h4 id="pro-tip">Pro Tip:</h4>
-<p>You can use the <code>=</code> operator for <strong>assignment</strong> instead of using <code>&lt;-</code>. <strong>But don’t</strong>.</p>
+<p><br></p>
+<p><strong>Why does R use the <code>&lt;-</code> for assignment?</strong></p>
+<p>Technically R allows you to use the equals <code>=</code> operator for <strong>assignment</strong> instead of using the arrow <code>&lt;-</code>.</p>
+<p><strong>BUT YOU SHOULD NEVER DO IT!</strong>.</p>
+<p>Assignment is important enough that the arrow helps keep your code easy to read.</p>
+<p>Also, mind your spaces!</p>
 <ul>
-<li>The <code>=</code> appears so often in scripts that it’s important to be able to recognize assignment with <code>&lt;-</code> when it occurs</li>
-<li>Hence, assignment with <code>&lt;-</code> makes your code more interpretable</li>
+<li>x &lt;- y is assignment</li>
+<li>x &lt; - y is less than negative y</li>
 </ul>
-<p><br> <br></p>
+<p><br></p>
 </div>
 <p><br></p>
 <div id="your-turn-2" class="section level3">
-<h3>Your Turn</h3>
+<h3><span class="header-section-number">2.0.1</span> Your Turn</h3>
 <div class="quiz">
-<p><strong>Instructions:</strong> Use the assignment operator to create the following objects.</p>
-<ul>
-<li>Assign <code>2019</code> to object <code>present</code></li>
-<li>Assign <code>1</code> to object <code>year</code></li>
-<li>Add objects <code>now</code> and <code>year</code> together (with <code>+</code>); assign to object <code>future</code></li>
-<li>Print object <code>future</code></li>
-</ul>
+<p>What will the following statements return?</p>
 </div>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEFzc2lnbiAyMDE5IHRvIG9iamVjdCBcInByZXNlbnRcIlxuXG4jIEFzc2lnbiAxIHRvIG9iamVjdCBcInllYXJcIlxuXG4jIEFkZCBvYmplY3RzIFwicHJlc2VudFwiIGFuZCBcInllYXJcIiB0byBvYmplY3QgXCJmdXR1cmVcIlxuXG4jIFByaW50IFwiZnV0dXJlXCIifQ==
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4IDwtIDVcbnggPC0gMTBcbnhcblxueCA8LSA1XG54IDwgLSAxMCAgXG54XG5cbjUgPC0geFxuNVxuXG41IC0+IHggICAgXG54ICBcblxueCA9IDVcbnhcblxuNSA9IHggICAgXG54IFxuXG55IDwtIDEwXG54IDwtIHkgPC0gM1xueCJ9
 </div>
+<p><img src="https://media1.tenor.com/images/1c8f37ff011d490eb685ab86c7e22fc2/tenor.gif?itemid=5114756" /></p>
+<center>
+Jennifer Lawrence practicing assignment.
+</center>
+<p><br></p>
+</div>
+<div id="valid-object-names" class="section level2">
+<h2><span class="header-section-number">2.1</span> Valid Object Names</h2>
+<p>When creating new objects there are both rules and conventions for naming them.</p>
+<p>The rules are fairly simple:</p>
+<ol style="list-style-type: decimal">
+<li>R is case sensitive, so <code>b</code> and <code>B</code> are different objects.</li>
+<li>Object names can include letters, periods and underscores.</li>
+<li>Object names can include numbers, but cannot begin with a number.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">x<span class="fl">.01</span> &lt;-<span class="st"> </span><span class="dv">99</span>  <span class="co"># good</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">x_<span class="dv">01</span> &lt;-<span class="st"> </span><span class="dv">99</span>  <span class="co"># this works</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="fl">01.</span>x &lt;-<span class="st"> </span><span class="dv">99</span>  <span class="co"># produces an error</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">.x &lt;-<span class="st"> </span><span class="dv">99</span>    <span class="co"># this works</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="fl">.1</span>x &lt;-<span class="st"> </span><span class="dv">99</span>   <span class="co"># this doesn&#39;t</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">_x &lt;-<span class="st"> </span><span class="dv">99</span>    <span class="co"># oddly this doesn&#39;t</span></a></code></pre></div>
+<p>In general it is good to name objects so they are easy to remember. You can combine words using one of three conventions:</p>
+<ul>
+<li>Camel Caps</li>
+<li>Underscores</li>
+<li>Periods</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">myData &lt;-<span class="st"> </span><span class="dv">99</span>   <span class="co"># camel caps</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">my_data &lt;-<span class="st"> </span><span class="dv">99</span>  <span class="co"># underscore</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">my.data &lt;-<span class="st"> </span><span class="dv">99</span>  <span class="co"># periods</span></a></code></pre></div>
+<p>Some people have strong views on these. You should find something that works for you and be consistent.</p>
 <p><br></p>
 <div class="figure" style="text-align: center">
 <img src="https://imgs.xkcd.com/comics/forgot_algebra.png" alt="*You can't do this anymore, sadly.*" width="40%" />
@@ -378,9 +416,8 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEFzc2lnbiAyMDE5IHRvIG9iamVjdCBcInByZXNlbnRc
 </center>
 <p><br> <br></p>
 </div>
-</div>
 <div id="further-resources" class="section level2">
-<h2>Further Resources</h2>
+<h2><span class="header-section-number">2.2</span> Further Resources</h2>
 <p>The following resources are helpful in learning more about arithmetic operators in R:</p>
 <ul>
 <li><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html">“Arithmetic Operators”</a> (CRAN)</li>
@@ -390,8 +427,8 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIEFzc2lnbiAyMDE5IHRvIG9iamVjdCBcInByZXNlbnRc
 <p><br> <br></p>
 </div>
 <div id="works-cited" class="section level2">
-<h2>Works Cited</h2>
-<p>The Hangover (2009)</p>
+<h2><span class="header-section-number">2.3</span> Works Cited</h2>
+<p>The Hangover (2009) The Hunger Games (2010)</p>
 <p><br></p>
 </div>
 </div>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>ch-021-help.utf8.md</title>
+
+<script src="ch-021-help_files/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="ch-021-help_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="ch-021-help_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="ch-021-help_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="ch-021-help_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="ch-021-help_files/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="here-there-be-ascii-dragons" class="section level1">
+<h1><em>Here There be ASCII Dragons</em></h1>
+<p><img src="figures/keyboard-dragon.jpg" /></p>
+<div class="tip">
+<h2 id="key-concepts">Key Concepts</h2>
+<p>You will get stuck while learning to code.</p>
+<p>R has lots of resources for problem-shooting. You should familiarize yourself with the following:</p>
+<ul>
+<li>Error messages</li>
+<li>Documentation</li>
+<li>Discussion boards</li>
+<li>Vignettes</li>
+</ul>
+<p><br> <br></p>
+</div>
+<p><br></p>
+</div>
+<div id="help" class="section level1">
+<h1>HELP!</h1>
+<p><em>When I was younger, so much younger than today</em><br />
+<em>I never needed anybody’s help in any way</em><br />
+<em>But now these days are gone, I’m not so self assured</em><br />
+<em>Now I find I’ve changed my mind and opened up the doors</em></p>
+<p><br></p>
+<p>Your code is going to fail. A lot. Bugs and broken <del>dreams</del> code are a normal part of any programming task. They never go away, but you get better at diagnosing and fixed them!</p>
+<p>The following is a brief taxonomy of errors in R, and some strategies to overcome them.</p>
+<p><br></p>
+<div id="what-does-it-mean-for-code-to-fail" class="section level2">
+<h2>What Does It Mean for Code to Fail?</h2>
+<p>Two simple criteria must be met in order to recognize trouble with your code (<a href="https://bookdown.org/rdpeng/RProgDA/">Peng et al. 2017</a>):</p>
+<ol style="list-style-type: decimal">
+<li>You expect your code to behave in a certain way</li>
+<li>Your code doesn’t behave as expected</li>
+</ol>
+<p>Oftentimes, the best case scenario is that R will throw an <strong>error message</strong>. Error messages signal that R has encountered some fatal flaw in your code and, in consequence, nothing happens.</p>
+<p>The next best scenario is that R will throw a <strong>warning message</strong>. Warning messages signal that R has successfully evaluated and executed code, but something unexpected happened, and R wants you to know about it.</p>
+<p><img src="http://rex-analytics.com/wp-content/uploads/2018/01/errors-in-R-739x1024.png" /></p>
+<center>
+Source: <a href="http://rex-analytics.com">Rex Analytics</a>
+</center>
+<p><br></p>
+<p>The worst and most pernicious scenario is when your code runs perfectly fine, without error or warning messages, yet the output isn’t exactly what you’d wanted. If you recognize this, that’s great. If you don’t recognize this, errors flow downstream and can be difficult to detect and fix. <em>Always inspect your output</em>.</p>
+<p>Oftentimes, users place too much emphasis on fixing their expected results and fail to consider their original expectations. <em>Never neglect revisiting your expectations</em>, as it’s possible that they, not your code, may explain an error (<a href="https://bookdown.org/rdpeng/RProgDA/">Peng et al. 2017</a>).</p>
+<p><br></p>
+</div>
+<div id="documentation" class="section level2">
+<h2>Documentation</h2>
+<p>When you’re in a jam, the foremost strategy for resolving said jam is to read any relevant documentation.</p>
+<div id="built-in-documentation" class="section level3">
+<h3>Built-In Documentation</h3>
+<p>All base R functions, as well as packages, functions, and datasets downloaded from CRAN (Comprehensive R Archie Network) contain documentation that can be accessed via the <code>help()</code> or <code>?</code> functions.</p>
+<p>When called, the <strong>Help</strong> pane displays built-in documentation, which typically contains names, descriptions, templates, arguments, values, references, related objects, and examples.</p>
+<p>Observe the following calls to <code>help()</code> on function <code>median()</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">help</span>(median)</a>
+<a class="sourceLine" id="cb1-2" title="2">?median</a></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/figures/helpdoc_med.jpg" alt="*Built-in documentation is displayed with function* `help()` *and an object name.*" width="75%" />
+<p class="caption">
+<em>Built-in documentation is displayed with function</em> <code>help()</code> <em>and an object name.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+<div id="external-documentation" class="section level3">
+<h3>External Documentation</h3>
+<p>Datasets found “in the wild” often have documentation containing metadata, variable definitions, and other helpful information, while many functions have external documentation outside of CRAN.</p>
+<p><br></p>
+<center>
+<p><strong><a href="https://db.rstudio.com/dplyr/">Documentation for RStudio’s “dplyr” Package</a></strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="https://github.com/DS4PS/dp4ss-textbook/blob/master/figures/externaldoc_dplyr.jpg?raw=true" alt="*More stylized documentation on package* `dplyr`  *from the Tidyverse website.*" width="75%" />
+<p class="caption">
+<em>More stylized documentation on package</em> <code>dplyr</code> <em>from the Tidyverse website.</em>
+</p>
+</div>
+<p><br></p>
+<p><strong>Documentation for the Pheonix Fire Department Data</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/figures/externaldoc_pazfiredep.jpg" alt="*Documentation on operational statistics data on the City of Phoenix Open Data portal.*" width="75%" />
+<p class="caption">
+<em>Documentation on operational statistics data on the City of Phoenix Open Data portal.</em>
+</p>
+</div>
+<p><br></p>
+<center>
+</div>
+<div id="vignettes" class="section level3">
+<h3>Vignettes</h3>
+<blockquote>
+<p>“A vignette is like a book chapter or an academic paper: It can describe the problem that your package is designed to solve, and then show the reader how to solve it.” (Hadley Wickham)</p>
+</blockquote>
+<p>Some R packages have <strong>vignettes</strong>, or more comprehensive and thorough overviews than typical documentation. Vignettes are written for the express purpose of learning how to use a package. While vignettes are easy to find in a conventional search engine, you can open a vignette from within R by calling function <code>browseVignettes()</code> and a quotes package name. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">browseVignettes</span>(<span class="st">&quot;tidyr&quot;</span>)</a></code></pre></div>
+<div class="figure" style="text-align: center">
+<img src="https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/figures/browse_vignettes.jpg" alt="*Available vignettes appear in your browser with* `browseVignettes()`" width="75%" />
+<p class="caption">
+<em>Available vignettes appear in your browser with</em> <code>browseVignettes()</code>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="making-sense-of-error-messages" class="section level1">
+<h1>Making Sense of Error Messages</h1>
+<p><em>Help me if you can, I’m feeling down</em><br />
+<em>And I do appreciate you being round</em><br />
+<em>Help me get my feet back on the ground</em><br />
+<em>Won’t you please, please help me</em></p>
+<p><br></p>
+<div id="troubleshooting-web-searches-forums" class="section level2">
+<h2>Troubleshooting: Web Searches &amp; Forums</h2>
+<p>While documentation tends to require a bit more reading, there’s a good chance that someone has run into the same problem you’ve encounters. The internet has a long memory and the following strategies show how to exploit it.</p>
+<div id="quoting-your-console" class="section level3">
+<h3>Quoting Your Console</h3>
+<p>You can take advantage of error and warning messages by copying them from your console and pasting them directly into an online search engine, verbatim and quoted. It often helps to include the function or package name outside of the quoted console message.</p>
+<p><br></p>
+<center>
+<p><strong>Quoting Error Messages in Search Engines</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="https://github.com/DS4PS/dp4ss-textbook/blob/master/figures/console_quote.jpg?raw=true" alt="*Quoting your console's error message in a search engine often yields helpful results.*" width="75%" />
+<p class="caption">
+<em>Quoting your console’s error message in a search engine often yields helpful results.</em>
+</p>
+</div>
+</div>
+<div id="forums-archives" class="section level3">
+<h3>Forums &amp; Archives</h3>
+<p>One of the best troubleshooting strategies is to search for answers in online forums like <a href="https://stackoverflow.com/">Stack Overflow</a> or <a href="https://stats.stackexchange.com/">Cross Validated</a>. Archives like the <a href="https://www.r-project.org/mail.html">“R-help” mailing list</a> are also searchable.</p>
+<p><br></p>
+<center>
+<p><strong>Potential Solutions as Seen on Stack Overflow</strong></p>
+</center>
+<div class="figure" style="text-align: center">
+<img src="https://github.com/DS4PS/dp4ss-textbook/blob/master/figures/stack_overflow.jpg?raw=true" alt="*Stack Overflow often provides multiple potential solutions. The best rise to the top.*" width="75%" />
+<p class="caption">
+<em>Stack Overflow often provides multiple potential solutions. The best rise to the top.</em>
+</p>
+</div>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="phone-a-friend" class="section level1">
+<h1>Phone a Friend</h1>
+<p><em>Help, I need somebody</em><br />
+<em>Help, not just anybody</em><br />
+<em>Help, you know I need someone, help</em></p>
+<div id="consulting-humans" class="section level2">
+<h2>Consulting Humans</h2>
+<p>Asking for help from another human <em>should always be your last recourse</em> after exhausted all of the above strategies. That said, if you’re still in a jam, there are several sources for human help:</p>
+<ul>
+<li>Mailing lists like “R-help” and forums like Stack Overflow</li>
+<li>Message boards in universities and MOOCs (massive open online classes)</li>
+<li>R user communities, e.g. <a href="https://www.reddit.com/r/rstats/">Reddit’s r/Rstats</a></li>
+<li>Email and in-person inquiries</li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center">
+<img src="https://imgs.xkcd.com/comics/nerd_sniping.png" alt="*There is an incredible amount of good will in the R community, but try to be respectful.*" width="75%" />
+<p class="caption">
+<em>There is an incredible amount of good will in the R community, but try to be respectful.</em>
+</p>
+</div>
+<p><br></p>
+<p>Importantly, there are established best practices in asking R-related questions. Make sure to:</p>
+<ol style="list-style-type: decimal">
+<li>Comply with any and all forum, community, and mailing list rules</li>
+<li>In email headers or topic threads, label with a succinct but detailed description</li>
+<li>Clearly state the expected behavior and unexpected result of your code</li>
+<li>Provide a reproducible example, including code and imitation data</li>
+<li>Include real or imitation output, e.g. error messages</li>
+<li>If using random number generation, include the seed</li>
+<li>Ensure your code is legible and organized</li>
+<li>Include your R and RStudio versions</li>
+<li>Include your operating system</li>
+<li>Be polite</li>
+</ol>
+<p><br></p>
+<div class="tip">
+<p><strong>Pro Tip:</strong> While not the best for specific coding problems, consider “tweeting” a question that includes the hashtag “#rstats”. Followers of <a href="https://twitter.com/hashtag/rstats?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Ehashtag">#rstats</a> often respond quickly, accurately, and sometimes in great numbers.</p>
+</div>
+<p><br></p>
+<div id="a-brief-note-on-language-precision" class="section level3">
+<h3>A Brief Note on Language Precision</h3>
+<p>Whether your poring over documentation, performing web, forum, and archive searches, or asking another human, <em>language precision is key to troubleshooting</em>. Hence, building your R vocabulary is critical to learning how to learn R. For example, instead of searching: “How do I combine two tables that share a column?”, search “join data frames on key variable r”, or something similar. The latter term, with precise R-specific jargon, is much more quick to fructify.</p>
+<p><br></p>
+</div>
+</div>
+<div id="further-resources" class="section level2">
+<h2>Further Resources</h2>
+<p>The following resources may prove valuable for both learning how to learn R and troubleshooting:</p>
+<p><strong>I) Full-Length Text</strong></p>
+<ul>
+<li><a href="https://rpubs.com/jamisoncrawford/nutsandbolts">“Intro to R: Nuts &amp; Bolts”</a> (Crawford, 2018)</li>
+</ul>
+<p><strong>II) Documentation &amp; Vignettes</strong></p>
+<ul>
+<li><a href="http://r-pkgs.had.co.nz/vignettes.html">“Vignettes: Long-Form Documentation”</a> (Wickham, 2019)</li>
+</ul>
+<p><strong>III) Forums, Email Lists, &amp; Communities</strong></p>
+<ul>
+<li><a href="https://stackoverflow.com/">Stack Overflow</a></li>
+<li><a href="https://stats.stackexchange.com/">Cross Validated</a></li>
+<li><a href="https://rpubs.com/jamisoncrawford/nutsandbolts">R Mailing Lists</a></li>
+<li><a href="https://www.reddit.com/r/rstats/">Reddit’s r/Rstats</a></li>
+<li><a href="https://twitter.com/hashtag/rstats?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Ehashtag">Twitter’s #Rstats</a></li>
+</ul>
+<p><strong>IV) Asking R-Related Questions</strong></p>
+<ul>
+<li><a href="http://www.catb.org/esr/faqs/smart-questions.html">“Hot to Ask Questions the Smart Way”</a> (Raymond, 2014)</li>
+<li><a href="https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example">“How to Make a Great R Reproducible Example”</a> (Stack Overflow, 2018)</li>
+<li><a href="https://www.r-project.org/posting-guide.html">“Posting Guide: Hot to Ask Good Questions that Prompt Useful Answers”</a> (Plate, 2013)</li>
+<li><a href="http://rex-analytics.com/decoding-error-messages-r/">Errors vs Warnings</a> (Rex Analytics)</li>
+</ul>
+<p><strong>V) More ASCII Dragons</strong></p>
+<ul>
+<li><a href="https://danadaldos.wordpress.com/2015/02/06/padded-with-%E2%88%8F/">danadaldoss</a></li>
+<li><a href="https://www.dougsartgallery.com/ascii-art-dragon.html">Doug</a></li>
+<li><a href="https://www.deviantart.com/ahmadsaifulhakim/art/Dragon-ascii-art-525981480">Ahmad</a></li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

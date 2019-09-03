@@ -5,10 +5,30 @@ output:
     theme: readable
     highlight: tango
     toc: true
+    toc_depth: 1
     number_sections: true
     self_contained: false
     css: textbook.css
 ---
+
+
+-------------
+
+<br>
+
+
+![](figures/keep-calm-and-markdown.png)
+
+
+<br>
+
+-------------
+
+
+<br>
+<br>
+
+
 
 
 Markdown is a set of simple conventions for formatting text in R Markdown (RMD) files. 
@@ -19,7 +39,6 @@ Here are the basic formatting rules for Markdown:
 
 
 
----
 
 # Headers
 

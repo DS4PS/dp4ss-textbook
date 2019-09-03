@@ -4,6 +4,7 @@ output:
     theme: readable
     highlight: tango
     self_contained: false
+    number_sections: true
     css: textbook.css
 ---
 
@@ -45,9 +46,11 @@ In this chapter, we'll learn and practice basic arithmetic functions in R, assig
 Everything you need to know in a few bullet points:
 
 * Arithmetic operators include: `+`, `-`, `*`, `/`, `^`, `( )`
-* Calculations follow the order of operations, or **PEMDAS**
-* Create **objects** with **assignment**, e.g. `x` contains `3` in `x <- 3`
-* Use numeric objects like variables in algebra, e.g. `x + 2` equals `5`
+* Calculations follow the **order of operations** 
+* Create **objects** with **assignment**:
+  - `x` stores the value `3` after calling `x <- 3`
+* Numeric bjects act like variables in algebra: 
+  - `x + 2` equals `5`
 
 <br>
 <br>
@@ -60,7 +63,7 @@ Everything you need to know in a few bullet points:
 ## Arithmetic Operators
 
 > "What sort of free will is left when we come to tabulation and arithmetic? When it will all be a case of twice two makes four?
-
+>
 > You don't need free will to determine that twice two is four." 
 > (Dostoyevsky)
 
@@ -111,26 +114,19 @@ Eureka! Forget your mobile phone's calculator app. Install R on it!
 
 <div class="quiz">
 
-**Instructions:** Perform the following arithmetic operations in R.
+**Instructions:** Perform the following arithmetic operation in R.
 
-* Add 5, 10, and 15
-* Subtract 12 from 6
-* Divide 1,000 by 300
-* Raise 5 to the fifth power (i.e. exponent)
-
-**Tip:** Remember, numeric values in R *don't use commas*. 
+**Tip:** Numeric values in R *don't use commas*. 
 
 </div>
 
 ```{r ex="practice-01", type="sample-code", tut=TRUE}
 
-# Add 5, 10, and 15
+# Raise 5 to the fifth power
 
-# Subtract 12 from 6
+# Subtract 30 from 100
 
 # Divide 1,000 by 300
-
-# Raise 5 to the fifth power
 
 ```
 
@@ -146,13 +142,13 @@ knitr::include_graphics("https://imgs.xkcd.com/comics/purity.png")
 <br>
 <br>
 
-## Operator Precedence
+## Order of Operations
 
-Here's another blast from the past: **operator precedence**. At least, that's what it's called in programming languages. You probably remember it as the **order of operations**. 
+Here's another blast from the past: the  **operator precedence**. At least, that's what it's called in programming languages. You probably remember it as the **order of operations**. 
 
-If that doesn't ring a bell, maybe you'll remember the mnemonic devices: **PEMDAS** or **Please Excuse My Dear Aunt Sally**. To this day, we've not the foggiest what social gaffes Aunt Sally actually committed.
+If you don't recall the specific rules, perhaps you remember the mnemonic devices: **PEMDAS** or **Please Excuse My Dear Aunt Sally**. We are not sure know what Aunt Sally did, but we are pretty sure she deserves whatever punshinment she received. 
 
-What we do know, however, is that Aunt Sally reminds us *in what order arithmetic operations are evaluated*, a.k.a. the **order of operations**. That order is as follows:  
+PEMDAS reminds us *the order arithmetic operations are evaluated*, a.k.a. the **order of operations**:
 
 1. **Parenthesis**, or expressions inside `( )`
 2. **Exponents**, or raising one value to the power of another with `^`
@@ -161,45 +157,70 @@ What we do know, however, is that Aunt Sally reminds us *in what order arithmeti
 5. **Addition**, or adding values with `+`
 6. **Subtraction**, or subtracting values with `-`
 
-<br>
-
-### Operator Precedence in R
-
-Arithmetic operations in R are also evaluated in the same order. Press "Run" and observe:
+Arithmetic operations in R are also evaluated in the same order. Can you guess the results before evaluating the expressions? Press "Run" to execute the code and see the results:
 
 ```{r ex="example-02", type="sample-code", tut=TRUE}
 
-(17 - 7) + 3      # Parantheses are evaluated first
+# easy one
+5 + 10 / 5    
 
-17 - (7 + 3)      # The locations of parantheses matter 
+# harder
+5 - 10 + 5 
+5 + 10 - 5  
 
-2 * 2 + 3 * 3
+# similarly
+5 * 10 / 5   
+5 / 10 * 5 
 
+# easier
+3 * 2 ^ 2
+
+# hmmm
 2 * (2 + 3) * 3
+
+# huh?
+( 2 + 3 ) / 5 * 2
+( 2 + 3 ) * 5 / 2
+( 2 + 3 ) / 2 * 5
 
 ```
 
 <br>
 
+<div class="tip">
+
+Note that R is indifferent to order of operations for addition vs subtraction, and multiplication vs division. 
+
+For cases where both occur the code is just executed from left to right.  
+
+</div>
+
+
 ### Your Turn
 
 <div class="quiz">
 
-**Instructions:** Use the order of operations to calculate the following in R.
+**Instructions:** 
 
-* First, subtract 500 from 600. Then add 100.
-* Subtract 1,000 from 10 cubed (raised to the third power)
-* Multiple 25 times 10, then subtract 500, then add 250
+The formula to calculate a monthly mortgage payment based upon the loan amount, annual interest rate, and loan term (in months) is calculated as follows:
+
+$$
+PAYMENT = \frac{principal \cdot \frac{interest \ rate}{12}}{1-(1+\frac{interest \ rate}{12})^{- \ months}}
+$$
+
+Let's say we have a $100,000 loan at a 5% interest rate amortized over 360 months (30 years). The payments would be as follows:
+
+$$
+PAYMENT = \frac{ 100k \cdot \frac{0.05}{12}}{1-(1+\frac{0.05}{12})^{- \ 360}}
+$$
+
+Can you type the formula into R correctly? The payment should come to $536.82 a month.
 
 </div>
 
 ```{r ex="practice-02", type="sample-code", tut=TRUE}
 
-# First, subtract 500 from 600, then add 100
-
-# Subtract 1,000 from 10 cubed (raised to third power)
-
-# Multiple 25 times 10, then subtract 500, then add 250
+# Type your formula here
 
 ```
 
@@ -215,7 +236,9 @@ knitr::include_graphics("https://prairieworldcomicsblog.files.wordpress.com/2018
 <br>
 <br>
 
-## Assignment
+
+
+# Assignment
 
 > "The philosophical workers... have to fix and formalize some great existing body of valuations - that is to say...
 
@@ -223,79 +246,95 @@ knitr::include_graphics("https://prairieworldcomicsblog.files.wordpress.com/2018
 
 <br>
 
-We've talked about **objects** quite a bit in R, and for good reason: They're the meat and potatoes of R. Objects store information like datasets, function code, individual values, and even metadata, e.g. coefficents in linear models.
+**Objects** are the meat and potatoes of R. They store information like datasets, function code, individual values, and even metadata, e.g. coefficents in linear models.
 
 <br>
 
-**But how can do we create an object?**
+**But how do we create an object?**
 
-In many cases, we may wish to store external data that we import to R. In other instances, we wish to store a value, sequence of values, or dataset we create ourselves. In all cases, we use **assignment**, the method of naming an object and storing data in it. In order to use **assignment**, we use the **assignment operator**, or `<-`.
+We use **assignment** to create an object and store data in it. This requires the **assignment operator**, or the `<-` arrow.
+
+Assignment can be used to store external data that was imported into R, to save a statistic that we calculated, or remember data we type into R ourselves.
+
+```r
+x <- read.csv( "FileName.csv" ) 
+
+x <- mean( y )
+
+x <- c("Adam","Susie","Tony")
+```
 
 <br>
 
-Run the following to assign 20 and 480 to objects `x` and `y`, respectively:
+Assign the values 3 and 4 to objects `x` and `y`, respectively. Note that typing an object's name will report the object values. 
 
 ```{r ex="example-03", type="sample-code", tut=TRUE}
 
-x <- 20       # Assign 20 to "x"
+x <- 3        # Assign 20 to "x"
 
-x             # Autoprint object "x"
+y <- 4        # Assign 480 to "y"
 
-y <- 480      # Assign 480 to "y"
+x             # Will this print "x" or 3 ?
 
-y             # Autoprint object "y"
-
-```
-
-<br>
-
-Now find out what happens when we interact with `x` and `y` arithmetically:
-
-```{r ex="example-04", type="sample-code", tut=TRUE}
-
-x <- 20       # Reassign 20 to "x"
-
-y <- 480      # Reassign 480 to "y"
-
-x * 2         # Multiple object "x" by 2
-
-y / 4         # Divide object "y" by 4
-
-x + y         # Add objects "x" and "y"
+x * y         
 
 ```
 
 
+
 <br>
 
-Neat! Like algebra, `x` and `y` are used to *represent* numeric values.
+Like algebra, `x` and `y` are used to *represent* numeric values.
 
 Unlike algebra, we can *store many values* in objects, including other objects!
 
 ```{r ex="example-05", type="sample-code", tut=TRUE}
 
-x <- 20       # Reassign 20 to "x"
+x <- 20      # Assign 20 to "x"
 
-y <- 480      # Reassign 480 to "y"
+y <- 40      # Assign 40 to "y"
 
-z <- x + y    # Assign the sum of "x" and "y" to "z"
+z <- x + y   # Assign the sum of "x" and "y" to "z"
 
-z             # Autoprint "z"
+z            # Print z
 
 ```
 
 <br>
 
+What do you think the following will return? 
+
+```{r ex="example-06", type="sample-code", tut=TRUE}
+
+x <- 20      
+y <- x    
+x <- 30  
+
+y   # print the value stored by y
+
+```
+
+
+
+
+
 <div class="tip">
 
-#### Pro Tip:
-
-You can use the `=` operator for **assignment** instead of using `<-`. **But don't**. 
-
-* The `=` appears so often in scripts that it's important to be able to recognize assignment with `<-` when it occurs
-* Hence, assignment with `<-` makes your code more interpretable
-
 <br>
+
+**Why does R use the `<-` for assignment?**
+
+Technically R allows you to use the equals `=` operator for **assignment** instead of using the arrow `<-`. 
+
+**BUT YOU SHOULD NEVER DO IT!**. 
+
+Assignment is important enough that the arrow helps keep your code easy to read.  
+
+Also, mind your spaces! 
+
+* x <- y  is assignment
+* x < - y is less than negative y
+
 <br>
 
 </div>
@@ -306,26 +345,88 @@ You can use the `=` operator for **assignment** instead of using `<-`. **But don
 
 <div class="quiz">
 
-**Instructions:** Use the assignment operator to create the following objects.
-
-* Assign `2019` to object `present`
-* Assign `1` to object `year`
-* Add objects `now` and `year` together (with `+`); assign to object `future`
-* Print object `future`
+What will the following statements return? 
 
 </div>
 
-```{r ex="practice-03", type="sample-code", tut=TRUE}
 
-# Assign 2019 to object "present"
+```{r ex="example-07", type="sample-code", tut=TRUE}
 
-# Assign 1 to object "year"
+x <- 5
+x <- 10
+x
 
-# Add objects "present" and "year" to object "future"
+x <- 5
+x < - 10  
+x
 
-# Print "future"
+5 <- x
+5
+
+5 -> x    
+x  
+
+x = 5
+x
+
+5 = x    
+x 
+
+y <- 10
+x <- y <- 3
+x
 
 ```
+
+
+
+
+
+![](https://media1.tenor.com/images/1c8f37ff011d490eb685ab86c7e22fc2/tenor.gif?itemid=5114756)
+
+<center> Jennifer Lawrence practicing assignment. </center>
+
+
+<br>
+
+
+
+## Valid Object Names
+
+When creating new objects there are both rules and conventions for naming them.
+
+The rules are fairly simple:
+
+1. R is case sensitive, so `b` and `B` are different objects.
+2. Object names can include letters, periods and underscores.
+3. Object names can include numbers, but cannot begin with a number. 
+
+```r
+x.01 <- 99  # good
+x_01 <- 99  # this works
+01.x <- 99  # produces an error
+
+.x <- 99    # this works
+.1x <- 99   # this doesn't
+_x <- 99    # oddly this doesn't
+```
+
+In general it is good to name objects so they are easy to remember. You can combine words using one of three conventions:
+
+* Camel Caps
+* Underscores 
+* Periods 
+
+```r
+myData <- 99   # camel caps
+my_data <- 99  # underscore
+my.data <- 99  # periods
+```
+
+Some people have strong views on these. You should find something that works for you and be consistent. 
+
+
+
 
 <br>
 
@@ -353,5 +454,6 @@ The following resources are helpful in learning more about arithmetic operators 
 ## Works Cited
 
 The Hangover (2009)
+The Hunger Games (2010)
 
 <br>

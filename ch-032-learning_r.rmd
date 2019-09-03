@@ -32,21 +32,16 @@ output:
 
 ## Key Concepts
 
-You will get stuck while learning to code. 
+* As you begin learning a new programming language you need to master nouns and verbs. 
+* Nouns represent the jargon specific to the field (objects, arguments, assignment, etc.).
+* Verbs represent functions.
+* Fluency takes time! Find ways to practice "speaking R" productively. 
 
+**Learning to Learn**
 
-```{r, echo=F, fig.align="left", out.width="50%"}
-
-knitr::include_graphics("https://i0.wp.com/thecrucialvoice.com/wp-content/uploads/2012/11/title-screen_go_web1-960x650.png?ssl=1")
-
-```
-
-What are the best strategies for gettting out of a jam? Key concepts include:
-
-* Error messages
-* Documentation 
-* Discussion boards 
-* Vignettes
+* R has thousands of packages and new ones are created daily. There is no way to learn everything about the language. 
+* The goal, rather, is figuring out how to quickly master new functions so you can leverage R for whatever problem you are working on. 
+* This requires learning to read help files and adapt code, and learning how to get help when you are stuck. 
 
 <br>
 <br>
@@ -89,16 +84,17 @@ Why is this important? *You learn R the same way you would a foreign language*:
 
 * **Vocabulary:** You need to learn words for things before all else.
 * **Reinforcement:** You learn by doing and repeating. 
-* **Necessity:** You learn best when success or survival depends on it. 
+* **Immersion:** You can't be fluent without being immersed. Get involved in professional and volunteer work, podcasts, and regular reading about your topic.
+* **Necessity:** You learn best when success or survival depends on it. Use R in projects that have deadlines as a commitment mechanism.  
 * **Languages are Social:** You learn faster through collaboration, meetups, forums, conferences.
-* **Immersion:** You can't be fluent without being immersed. Get involved in professional and volunteer work, podcasts, and regular reading about your topic.  
+  
+If this is your first programming language, you will get frustrated at times. Take a step back and remember that after a semester of Spanish you can only operate at the level of a three-year old. You only know one verb tense, a few dozen verbs, and several hundred words. You have so many emotions that you can't express in your new language! 
 
-If this is your first programming language, you will get frustrated at times. Take a step back and remember that after a semester of Spanish you can only operate at the level of a three-year old. You only know one verb tense, a few dozen verbs, and several hundred words. You can never quite translate all of the ideas 
-
-
-
+Similarly, you are going to have so many ideas that you want to to translate into code! More realistically you will end up melting down in office hours and then taking a nap.  
 
 <br>
+
+
 
 <div class="note">
 
@@ -116,7 +112,7 @@ There are thousands of R packages. The body of knowledge in the field is growing
 
 Data science is a fast-moving field of practice. 
 
-* There are tens of thousands of R packages; new ones appear every day.
+* New R packages are released every day.
 * Packages and functions are constantly being updated, replaced, consolidated, or deprecated.
 * There are nuances to every computational science applied to each natural or social science.
 
@@ -130,7 +126,6 @@ Accepting these limitations is liberating. It allows one to focus on an *ab init
 
 ### The Ultimate Objective: Learning How to Learn R
 
-> "I am always doing that which I cannot do, in order that I may learn how to do it." (Picasso)
 
 There are few telltale signs that you're becoming fluent in R. For example, you may:
 
@@ -138,11 +133,13 @@ There are few telltale signs that you're becoming fluent in R. For example, you 
 * Use search engines less frequently or not at all while coding
 * Be approached by others for collaborative work
 * Appraise the quality of code and data products
-* Begin dreaming in R (just kidding)
+* Begin dreaming in R (just kidding, not kidding...)
 
 <br>
 
-The ultimate measure of having learned R is to *learn how to learn it*. This is less empirically evident than the above examples, and requires some introspection and emotional awareness to gauge. For instance, imagine you've reached some impasse that the "first principles" approach to R fails to resolve. Do you:
+The goal of "learning R" is just *learning how to learn R*. This means knowing when to step on the gas and try to power through a problem, and knowing when to hit the brake in order to take a step back, assess, and make a plan. Knowing when and how to ask for help is a basic level of situational awareness you need to develop.  
+
+For example, imagine you've reached some impasse that the "first principles" approach to R fails to resolve. Do you:
 
 * Pore over online forums? 
 * Explore documentation and vignettes?
@@ -164,19 +161,53 @@ knitr::include_graphics("https://imgs.xkcd.com/comics/wisdom_of_the_ancients.png
 
 <br>
 
+
 This is only one of many hypothetical scenarios. Learning how to learn R is not a matter of learning something new everyday (e.g. a function, package, technique, or theory), but the cyclical process of learning in the face of necessity, shoring up your knowledge over some indefinite period, and learning again when the need arises. Above all, you'll know you've learned how to learn R when you no longer doubt your ability to resolve what once seemed impossible.
 
 <br>
 
+<div class="tip">
+
+## You are not alone in your quest
+
+![](https://media1.tenor.com/images/7b68a2d2ce39aeb58b700a212d736655/tenor.gif?itemid=7237007)
+
+
+When working on labs make sure you have a game plan for success. If you are stuck for more than 20 minutes on the same problem *without making progress* you should (1) phone a friend, (2) post to the **Get Help** discussion board on the course site, (3) attend a review session, or (4) schedule virtual office hours. 
+
+Your morale is a limited commodity, so spend it wisely! If you are doing the wrong thing over and over while stuck you might actually be reinforcing bad habits. 
+
+The qualifier *without making progress* is a relative term. You will spend more than 20 minutes on a problem without arriving at a solution. Stuck means you don't understand the question or you are out of things to try.
+
+Technically, for 3-credit class you should be spending about 12 hours per week on the class (3 hours of class time, 9 hours on homework/projects). If it's a condensed semester (7.5 week schedule) that translates to 24 hours per week.
+
+This will vary for everyone depending on background knowledge, speed, and interest! But it's a good rule of thumb to keep in mind, and a good reminder that you are not slow or incapable - there is a reason that they call education "investment in human capital"!
+
+<br>
+<br>
+
+</div>
+
+<br>
+<br>
+
+
 ## Troubleshooting in R
 
-> "The first step in fixing a broken program is getting it to fail repeatably." (Tom Duff)
 
-Your code is going to fail. A lot. We encounter errors all the time. The following is a brief overview for recognizing a problem, as well as myriad strategies to overcome one.
+Your code is going to fail. A lot. 
+
+![](https://media3.giphy.com/media/ZeB4HcMpsyDo4/source.gif)
+
+We encounter errors all the time. The following is a brief overview for recognizing a problem, as well as myriad strategies to overcome one.
 
 <br>
 
 ### Recognizing & Understanding Trouble
+
+> "The first step in fixing a broken program is getting it to fail repeatably." (Tom Duff)
+
+<br>
 
 Two simple criteria must be met in order to recognize trouble with your code ([Peng et al. 2017](https://bookdown.org/rdpeng/RProgDA/)):
 
@@ -198,6 +229,48 @@ The worst and most pernicious scenario is when your code runs perfectly fine, wi
 </div>
 
 <br>
+
+
+# The Learning Curve
+
+Are you on track? How should you measure progress? 
+
+Again, the language metaphor comes in handy. 
+
+
+### Vocab 
+
+We will emphasize vocabulary the first course. The concepts in programming are not hard, but they require a lot of jargon. 
+
+Most help files were written by computer scientists or statisticians. In other words, weirdos. Don't be surprised if it takes time to, um, decode their syntax. 
+
+### Adapting Code
+
+One of the first skills you learn while programming is how to start from existing code and adapting it for a new purpose. It is way more common to do this than to write code from scratch. 
+
+An important milestone is reaching a point where you can read code written by others and understand it without having to run it. 
+
+### Critical Thinking
+
+You might think that the most valuable skill you take from this course is knowledge of R. This is not correct. 
+
+**The real value in learning to program is learning how to think critically with data and problem-solve.**
+
+Programming languages are rigid and unforgiving. 
+
+> Did you use a capital letter when I was expecting a lower-case one? I'm sorry, I can't run your program then. 
+
+Although frustrating, it does teach your precision and discipline. You need to think very systematically about the problem in order to design something that works. 
+
+You will learn to value **pseudo-code**, which is a way of sketching out a basic blue-print for a script in plain English before you write any code. Then you can work incrementally and translate each step into R, refining as you go. 
+
+### Writing Your Own Code
+
+Drafting code from scratch is the equivalent of fluency in programming. This will come in time, but do not expect to jump right into creating elegant scripts. You need to practice the skills above, develop your vocabulary, master some data verbs (functions) before it all comes together. But you are on your way! 
+
+
+
+### A Preview of What's Ahead 
 
 
 ```{r, echo=F, fig.align="center", out.width="90%"}
@@ -257,3 +330,7 @@ The following resources may prove valuable for both learning how to learn R and 
 
 <br>
 <br>
+
+
+
+
