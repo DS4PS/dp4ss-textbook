@@ -1,0 +1,32 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: textbook.css
+---
+
+# Getting Data into R
+
+
+<div class="tip">
+
+## Key Concepts
+
+This chapter defines the following key concepts:
+
+* Flat or Text Files 
+* RData Format
+
+<br>
+<br>
+
+</div>
+
+
+## "Reading In" Data
+
+
+
+
