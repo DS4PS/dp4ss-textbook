@@ -13,14 +13,33 @@
 
 <title>ch-100-importing.utf8.md</title>
 
-<script src="ch-100-importing_files/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="ch-100-importing_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
-<script src="ch-100-importing_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="ch-100-importing_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="ch-100-importing_files/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="ch-100-importing_files/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -84,6 +103,93 @@ summary {
 </style>
 
 
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
 
 <!-- tabsets -->
 
@@ -168,6 +274,32 @@ $(document).ready(function () {
 
 
 
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
 <div class="fluid-row" id="header">
 
 
@@ -175,24 +307,638 @@ $(document).ready(function () {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#getting-data-into-r"><span class="toc-section-number">1</span> Getting Data into R</a><ul>
+<li><a href="#reading-in-data"><span class="toc-section-number">1.1</span> “Reading In” Data</a></li>
+<li><a href="#know-thy-data-file-formats"><span class="toc-section-number">1.2</span> Know Thy Data: File Formats</a></li>
+<li><a href="#key-functions-for-importing-data"><span class="toc-section-number">1.3</span> Key Functions for Importing Data</a></li>
+<li><a href="#base-r-reading-csv-files"><span class="toc-section-number">1.4</span> Base R: Reading CSV Files</a></li>
+<li><a href="#base-r-reading-tsv-other-delimited-formats"><span class="toc-section-number">1.5</span> Base R: Reading TSV &amp; Other Delimited Formats</a></li>
+<li><a href="#package-readr-functions"><span class="toc-section-number">1.6</span> Package “readr” Functions</a></li>
+<li><a href="#importing-excel-files"><span class="toc-section-number">1.7</span> Importing Excel Files</a></li>
+<li><a href="#importing-statistical-software-files"><span class="toc-section-number">1.8</span> Importing Statistical Software Files</a></li>
+<li><a href="#getting-data-off-of-the-web"><span class="toc-section-number">1.9</span> Getting Data Off of the Web</a></li>
+<li><a href="#further-resources"><span class="toc-section-number">1.10</span> Further Resources</a></li>
+</ul></li>
+</ul>
+</div>
 
 <div id="getting-data-into-r" class="section level1">
-<h1>Getting Data into R</h1>
+<h1><span class="header-section-number">1</span> Getting Data into R</h1>
+<p><br>
+<br></p>
 <div class="tip">
-<h2 id="key-concepts">Key Concepts</h2>
-<p>This chapter defines the following key concepts:</p>
+<h2 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h2>
+<p>In this chapter, we’ll explore the following key concepts:</p>
 <ul>
-<li>“Reading In” Data</li>
-<li>Flat or Text Files</li>
+<li>File Formats</li>
 <li>RData Format</li>
+<li>Flat or Text Files</li>
+<li>Wrapper Functions</li>
 </ul>
-<p><br> <br></p>
+<h2 id="key-takeaways"><span class="header-section-number">1</span> Key Takeaways</h2>
+<p>Too long; didn’t read? Here’s what you need to know:</p>
+<ul>
+<li>Importing data is called “reading in” data in R, and done with <code>read*()</code> functions</li>
+<li>Know as what format your data are stored to use the appropriate function</li>
+<li>Read in statistical software files with packages “foreign” or “haven”</li>
+<li>Read in JSON files with package “jsonlite”</li>
+<li>Read directly from the web with URLs</li>
+</ul>
+<p><br>
+<br></p>
 </div>
-<div id="section" class="section level2">
-<h2></h2>
+<p><br>
+<br></p>
+<div id="reading-in-data" class="section level2">
+<h2><span class="header-section-number">1.1</span> “Reading In” Data</h2>
+<p><strong>Importing data</strong> is also called <strong>reading in data</strong> in R.</p>
+<p>Many base R functions begin with <code>read</code>, like <code>read.csv()</code> and <code>read.table()</code>.</p>
+<p>Some R packages have new reading functions, like <code>read_csv()</code> in the <strong>“readr”</strong> package.</p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
+<img src="https://pbfcomics.com/wp-content/uploads/2016/04/PBF130-Book_World.png" alt="Be careful with what you read into R!" width="75%" />
+<p class="caption">
+Figure 1.1: Be careful with what you read into R!
+</p>
+</div>
+<center>
+Source: <a href="https://pbfcomics.com/comics/book-world/">Perry Bible Fellowship</a>
+</center>
+<p><br>
+<br></p>
+</div>
+<div id="know-thy-data-file-formats" class="section level2">
+<h2><span class="header-section-number">1.2</span> Know Thy Data: File Formats</h2>
+<blockquote>
+<p>"If you know the [data] and know yourself,</p>
+</blockquote>
+<blockquote>
+<p>you need not fear the result of a hundred [analyses]."</p>
+</blockquote>
+<blockquote>
+<p>Sun Tzu, The Art of [Data Science]</p>
+</blockquote>
+<p><br></p>
+<p>If you want to get certain data into R, you must know the <strong>file format</strong>.</p>
+<ul>
+<li>File formats are standardized frameworks for encoding and storing information</li>
+<li>Some file formats are better than others, depending on the information stored</li>
+<li>Determine a file’s format by its <em>filename extension</em>, e.g. <code>.csv</code></li>
+<li>The most common data file formats include <code>.csv</code>, <code>.tsv</code>, and <code>.xlsx</code></li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
+<img src="https://imgs.xkcd.com/comics/file_extensions.png" alt="Certain formats are better for storing data." width="75%" />
+<p class="caption">
+Figure 1.2: Certain formats are better for storing data.
+</p>
+</div>
+<center>
+Source: <a href="https://xkcd.com/1301/">XKCD</a>
+</center>
+<p><br>
+<br></p>
+<div id="text-or-flat-files" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Text or “Flat” Files</h3>
+<blockquote>
+<p><strong>flatly</strong> /ˈflatli/</p>
+</blockquote>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>Showing little interest or emotion.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>In a firm and unequivocal manner; absolutely.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>In a smooth and even way.</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><em>Oxford English Dictionary</em></p>
+</blockquote>
+<p><br></p>
+<p>The far most familiar family of file formats includes <strong>text data</strong> or <strong>flat files</strong>.</p>
+<ul>
+<li>Flat files are simple, standard formats that use plain text</li>
+<li>Flat files are ubiquitous, non-proprietary, and accessible</li>
+<li>Converting a spreadsheet into a text file will “flatten it”, removing all formatting</li>
+</ul>
+<p><br></p>
+<div class="tip">
+<p><strong>PRO TIP:</strong></p>
+<p>Flat files are ideal for sharing data with collaborators.</p>
+<ul>
+<li>Not everyone has spreadsheet software, but anyone can use flat files</li>
+<li>Flat files don’t preserve formats, like borders and highlighted cells</li>
+<li>Flat files force users to store data tabularly “flatly”</li>
+</ul>
+</div>
+<p><br></p>
+<p><strong>Comma-separated values</strong> or <strong>CSV</strong> files store data in plain text:</p>
+<ul>
+<li>Each line in a CSV file represents one row</li>
+<li>Each value in a CSV file is separated by a comma</li>
+<li>Therefore, each comma designates a separate column</li>
+</ul>
+<p><br></p>
+<p><strong>A CSV in the Wild:</strong> Observe the following <a href="https://github.com/jamisoncrawford/wealth/blob/master/Tidy%20Data/hancock_lakeview_tidy.csv">public construction records</a> on GitHub:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="figures/flat_file_image.jpg" alt="What can you decode by observing this raw CSV file?" width="90%" />
+<p class="caption">
+Figure 1.3: What can you decode by observing this raw CSV file?
+</p>
+</div>
+<p><br></p>
+<p><strong>A Wrangled CSV:</strong> R (and other software) interpret and tame these formats tabularly.</p>
+<pre><code>##     project       name     ending   zip  ssn      class hours rate  gross
+## 1  Lakeview Ajay Glass 2015-08-02 14612 3888 Journeyman    40 18.5  740.0
+## 2  Lakeview Ajay Glass 2015-08-02 13205 2807 Journeyman    32 28.7  918.4
+## 3  Lakeview Ajay Glass 2015-08-02 14428 7762 Journeyman    40 33.7 1348.0
+## 4  Lakeview Ajay Glass 2015-08-02 14549 9759 Journeyman    26 33.7  876.2
+## 5  Lakeview Ajay Glass 2015-08-09 14433 5632 Journeyman    32 17.0  544.0
+## 6  Lakeview Ajay Glass 2015-08-09 14612 3888 Journeyman    40 18.5  740.0
+## 7  Lakeview Ajay Glass 2015-08-09 14428 7762 Journeyman    40 33.7 1348.0
+## 8  Lakeview Ajay Glass 2015-08-09 13118 2838 Journeyman    16 28.7  459.2
+## 9  Lakeview Ajay Glass 2015-08-16 14433 5632 Journeyman    32 17.0  544.0
+## 10 Lakeview Ajay Glass 2015-08-16 14612 3888 Journeyman    42 18.5  795.5
+##        net  sex race ot pdf_no pdf_pg pg_ob
+## 1   511.31 &lt;NA&gt; &lt;NA&gt;  0      1      1     1
+## 2   586.65 &lt;NA&gt; &lt;NA&gt;  0      1      1     2
+## 3  1025.92 &lt;NA&gt; &lt;NA&gt;  0      1      1     3
+## 4   891.08 &lt;NA&gt; &lt;NA&gt;  0      1      1     4
+## 5   384.08 &lt;NA&gt; &lt;NA&gt;  0      1      3     1
+## 6   657.86 &lt;NA&gt; &lt;NA&gt;  0      1      3     2
+## 7  1025.92 &lt;NA&gt; &lt;NA&gt;  0      1      3     3
+## 8   361.98 &lt;NA&gt; &lt;NA&gt;  0      1      3     4
+## 9   384.08 &lt;NA&gt; &lt;NA&gt;  0      1      5     1
+## 10  616.28 &lt;NA&gt; &lt;NA&gt;  0      1      5     2</code></pre>
+<p><br>
+<br></p>
+<p><strong>Tab-separated values</strong> or <strong>TSV</strong> files store data in plain text:</p>
+<ul>
+<li>Like CSV, each line in a TSV file represents one row</li>
+<li>Also like CSV, each value in a CSV file is separated by a tab</li>
+<li>Each tab designates a separate column</li>
+</ul>
+<p><br></p>
+<p><strong>A TSV in the Wild:</strong> Observe the same <a href="https://github.com/jamisoncrawford/wealth/blob/master/Tidy%20Data/my_tsv.tsv">public construction records</a> on GitHub:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="figures/tsv_file_image.jpg" alt="Raw TSV files are much more intepretable thanks to tabulation." width="90%" />
+<p class="caption">
+Figure 1.4: Raw TSV files are much more intepretable thanks to tabulation.
+</p>
+</div>
+<p><br>
+<br></p>
+</div>
+<div id="excel-file-formats" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Excel File Formats</h3>
+<p><em>Microsoft Excel</em> files are significantly different from text or flat files.</p>
+<ul>
+<li>All Excel file extensions begin with <code>.xls</code>; a workbook is in <code>.xlsx</code> format</li>
+<li>Excel workbooks with multiple sheets must be read in one sheet at a time</li>
+<li>Multiple packages can help R handle Excel files, e.g. <code>readxl</code>, <code>XLConnect</code>, <code>gdata</code></li>
+</ul>
+<p><br></p>
+<div class="caution">
+<p><strong>WARNING:</strong></p>
+<p>Reading Excel files into R will remove all formatting, like:</p>
+<ul>
+<li>Highlighted and color-coded cells</li>
+<li>Font formatting, e.g. <strong>bold</strong> and <em>italics</em></li>
+<li>Borders, merged cells, formulas, and macros</li>
+</ul>
+<p>Some Excel users use formatting to represent information. For example, a user may use red, yellow, and green to represent a categorical variable like “low”, “medium”, and “high”, respectively. In such cases, create a new column to store these data.</p>
+</div>
+<p><br>
+<br></p>
+<p><strong>Excel Files in the Wild:</strong> It’s common to see Excel files with heavy formatting:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
+<img src="figures/excel_workbook.jpg" alt="If R were to import this file, as is, what information would survive?" width="90%" />
+<p class="caption">
+Figure 1.5: If R were to import this file, as is, what information would survive?
+</p>
+</div>
+<center>
+Source: <a href="https://legacy.cnyvitals.org/onondaga/civic-engagement/special-district-governments-2.html">Special District Governments, CNY Vitals Legacy</a>
+</center>
+<p><br>
+<br></p>
+</div>
+<div id="json-file-format" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> JSON File Format</h3>
+<p>The <strong>JSON</strong> format stands for “JavaScript Object Notation”:</p>
+<ul>
+<li>JSON files use extension <code>.json</code></li>
+<li>Like TSV files, JSON files are concise and well-structured</li>
+<li>Also like TSV, JSON files are generally human-readable</li>
+<li>JSON structure differs across files and are read into R differently</li>
+<li>Packages like <code>jsonlite</code> help R read in <code>.json</code> files</li>
+</ul>
+<p><br></p>
+<p><strong>JSON Files in the Wild:</strong> Check out these <a href="https://www.kaggle.com/gunnvant/game-of-thrones-srt#season1.json">Game of Thrones subtitles</a> in JSON format:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="figures/json_file.jpg" alt="This JSON file has nested arrays, or sets of values within sets of values." width="90%" />
+<p class="caption">
+Figure 1.6: This JSON file has nested arrays, or sets of values within sets of values.
+</p>
+</div>
+<p><br>
+<br></p>
+</div>
+<div id="statistical-software-formats" class="section level3">
+<h3><span class="header-section-number">1.2.4</span> Statistical Software Formats</h3>
+<p>Each major statistical software has its own (sometimes proprietary) file format, e.g.:</p>
+<ul>
+<li><strong>SPSS</strong> uses extensions <code>.sav</code> and <code>.por</code></li>
+<li><strong>SAS</strong> uses extensions <code>.sas7bdat</code> and <code>.sas7bcat</code></li>
+<li><strong>STATA</strong> uses extension <code>.dta</code></li>
+</ul>
+<p><br></p>
+<p>Different packages exist for importing statistical software files, e.g.:</p>
+<ul>
+<li>Package <code>foreign</code>, created by R’s core team, supports many formats</li>
+<li>Package <code>haven</code>, created by Hadley Wickham, is faster but for fewer formats</li>
+</ul>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="https://imgs.xkcd.com/comics/norm_normal_file_format.png" alt=".NORM files do not exist." width="75%" />
+<p class="caption">
+Figure 1.7: .NORM files do not exist.
+</p>
+</div>
+<center>
+Source: <a href="https://xkcd.com/2116/">XKCD</a>
+</center>
+<p><br>
+<br></p>
+</div>
+<div id="rdata-format" class="section level3">
+<h3><span class="header-section-number">1.2.5</span> RData Format</h3>
+<p>You may have noticed, when working in R, that you’re asked to save your workspace.</p>
+<p>When saving a workspace, <code>.rdata</code> or <code>.rda</code> files are stored in the working directory.</p>
+<ul>
+<li>You can manually save part or all of your workspace with function <code>save()</code></li>
+<li>You can then load part or all of your workspace with function <code>load()</code></li>
+<li><code>.rdata</code> and <code>.rda</code> files store your session’s objects, command history, etc.</li>
+<li>If creating an object is computationally expensive, consider saving it!</li>
+</ul>
+<p><br>
+<br></p>
+</div>
+<div id="conclusions" class="section level3">
+<h3><span class="header-section-number">1.2.6</span> Conclusions</h3>
+<p>There are a variety of file formats that you can read into R.</p>
+<p>For virtually every file format, there are functions and packages to import them.</p>
+<p><strong>You must know the file’s format to decide on the best import function.</strong></p>
+<p><br>
+<br></p>
+</div>
+</div>
+<div id="key-functions-for-importing-data" class="section level2">
+<h2><span class="header-section-number">1.3</span> Key Functions for Importing Data</h2>
+<p>Once you’ve identified the extension type, you should consider how to read it into R.</p>
+<ul>
+<li>Is it a flat or text file?</li>
+<li>What character delimits each value, e.g. <code>,</code>, <code>;</code>?</li>
+<li>Can you read it in using base R or do you need a new package?</li>
+<li>What other arguments should you specify to ensure success?</li>
+</ul>
+<p>We’ll look at a few common functions for importing common formats.</p>
+<p><br>
+<br></p>
+<div id="workhorses-wrapper-functions" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Workhorses &amp; Wrapper Functions:</h3>
+<p>The <em>workhorse</em> of all base R reading functions is <code>read.table()</code>.</p>
+<p>Thanks to its modifiability, function <code>read.table()</code> is remarkably flexible.</p>
+<p>Not only does it import most file types, it’s used by many <a href="https://stat.ethz.ch/pipermail/r-help/2008-March/158393.html"><strong>wrapper functions</strong></a>.</p>
+<p><br></p>
+<div class="quiz">
+<p><strong>QUESTION</strong></p>
+<p>You can see whats under a function’s hood by typing it without <code>()</code>.</p>
+<p>Look at the internals of function <code>read.csv()</code>. What function is used?</p>
+</div>
+<pre class="r"><code>read.csv</code></pre>
+<pre><code>## function (file, header = TRUE, sep = &quot;,&quot;, quote = &quot;\&quot;&quot;, dec = &quot;.&quot;, 
+##     fill = TRUE, comment.char = &quot;&quot;, ...) 
+## read.table(file = file, header = header, sep = sep, quote = quote, 
+##     dec = dec, fill = fill, comment.char = comment.char, ...)
+## &lt;bytecode: 0x0000000013a30440&gt;
+## &lt;environment: namespace:utils&gt;</code></pre>
+<p><br></p>
+<p>A <a href="https://stat.ethz.ch/pipermail/r-help/2008-March/158393.html"><strong>wrapper function</strong></a> is a modified version of a more powerful and versatile function.</p>
+<p>Each is optimized for a specific task, like <code>read.csv()</code> - a very common function.</p>
+<p><strong>Wrapper functions</strong> are like customized tools. Their toolboxes are <strong>packages</strong>.</p>
+<p><br>
+<br></p>
+</div>
+</div>
+<div id="base-r-reading-csv-files" class="section level2">
+<h2><span class="header-section-number">1.4</span> Base R: Reading CSV Files</h2>
+<p>Reading comma-separated values (CSV) files is done with base R’s <code>read.csv()</code> function.</p>
+<ul>
+<li>Only requires one argument: <code>path =</code></li>
+<li>Argument <code>path =</code> accepts the directory path or a web URL</li>
+</ul>
+<pre class="r"><code>read.csv(file = &quot;~/dp4ss-textbook/my_data.csv&quot;)
+read.csv(file = &quot;http://www.ds4ps.com/textbook/my_data.csv&quot;)</code></pre>
+<p><br></p>
+<p>We can read in <a href="http://data.syrgov.net/datasets/c15a39a8a00e48b1a60c826c8a2cb3e0_0">Syracuse, NY lead violations</a> directly from the city’s open data portal.</p>
+<pre class="r"><code>  #&#39; Put your URL in quotes; here, we name it &quot;url&quot;
+  #&#39; Use function paste0() to join long strings of text
+
+url &lt;- paste0(&quot;https://opendata.arcgis.com/datasets/&quot;, 
+              &quot;c15a39a8a00e48b1a60c826c8a2cb3e0_0.csv&quot;)
+
+lead_data &lt;- read.csv(file = url,                  # Use object storing URL text
+                      stringsAsFactors = FALSE)    # Always include this argument!</code></pre>
+<p><br></p>
+<p>Now, we have a locally-stored dataset:</p>
+<pre class="r"><code>lead_data[1:10, 1:4]      # Bracks specify rows and columns to include</code></pre>
+<pre><code>##         ï..X        Y                  property_address property_zip
+## 1  -76.14669 43.02176                     416 Cannon St      &quot;13205&quot;
+## 2  -76.16100 43.07128                    1106 Carbon St      &quot;13208&quot;
+## 3  -76.14960 43.02138               1815-17 Midland Ave      &quot;13205&quot;
+## 4  -76.16157 43.07151      1116 Carbon St &amp; Lemoyne Ave      &quot;13208&quot;
+## 5  -76.14939 43.02335                   159-61 Fage Ave      &quot;13205&quot;
+## 6  -76.16143 43.07733    3137 Grant Blvd &amp; Hiawatha Blv      &quot;13208&quot;
+## 7  -76.15006 43.02256 1629-31 Midland Ave &amp; Fernwood Av      &quot;13205&quot;
+## 8  -76.16143 43.07733    3137 Grant Blvd &amp; Hiawatha Blv      &quot;13208&quot;
+## 9  -76.15824 43.02256                    122 Bishop Ave      &quot;13207&quot;
+## 10 -76.15754 43.07989                      1012 Wolf St      &quot;13208&quot;</code></pre>
+<p><br></p>
+<p>Consider the following notable arguments for <code>read.csv()</code>:</p>
+<ul>
+<li><strong>file =</strong> takes a string of text, either a directory and file name or a URL</li>
+<li><strong>nrow =</strong> take a number, setting the limit of rows to read in</li>
+<li><strong>stringsAsFactors =</strong> converts text into categories (not cool!)</li>
+<li><strong>col.names =</strong> takes an array made with <code>c()</code> to rename variables</li>
+<li><strong>colClasses =</strong> also takes an array using <code>c()</code> to specify classes</li>
+</ul>
+<p><br>
+<br></p>
+<div class="tip">
+<p><strong>PRO TIP: READING FROM CLIPBOARDS</strong></p>
+<p>Why not read the data you’ve copied to your clipboard?</p>
+<p>In this approach, just change the first argument, <strong>file =</strong>, to “clipboard”.</p>
+<pre class="r"><code>read.csv(file = &quot;clipboard&quot;)</code></pre>
+</div>
+<p><br>
+<br></p>
+</div>
+<div id="base-r-reading-tsv-other-delimited-formats" class="section level2">
+<h2><span class="header-section-number">1.5</span> Base R: Reading TSV &amp; Other Delimited Formats</h2>
+<p>There are many ways to delimit data in a flat (text) file.</p>
+<p>For example, tab-delimited, semicolon-delimited, asterisk-delimited - you get it.</p>
+<p>In these instances, you can use function <code>read.delim()</code> to specify the delimiter.</p>
+<p><br></p>
+<p>Here, we specify the delimiter as a comma, <code>,</code>:</p>
+<pre class="r"><code>lead &lt;- read.delim(file = url, 
+                   stringsAsFactors = FALSE,
+                   sep = &#39;,&#39;)                   # Specifies delimiter</code></pre>
+<p><br></p>
+<p>You can specify your delimiter as any character you wish:</p>
+<pre class="r"><code>read.delim(file = my_file, sep = &#39;,&#39;)
+read.delim(file = my_file, sep = &#39;;&#39;)
+read.delim(file = my_file, sep = &#39;\t&#39;)          # Tab-delimited</code></pre>
+<p><br></p>
+<p>You can also read in any flat file, point-and-click, with RStudio’s import wizard:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-16"></span>
+<img src="figures/read_text_data.jpg" alt="Open the import wizard in the Environment pane." width="90%" />
+<p class="caption">
+Figure 1.8: Open the import wizard in the Environment pane.
+</p>
+</div>
+<p><br></p>
+<p>In the import wizard, you can specify arguments with a user-friendly interface.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-17"></span>
+<img src="figures/import_text_ui.jpg" alt="Click your way to victory!" width="90%" />
+<p class="caption">
+Figure 1.9: Click your way to victory!
+</p>
+</div>
+<p><br>
+<br></p>
+</div>
+<div id="package-readr-functions" class="section level2">
+<h2><span class="header-section-number">1.6</span> Package “readr” Functions</h2>
+<p>The “readr” package improves on several functions in base R’s reading toolkit, e.g.:</p>
+<ul>
+<li>Built into RStudio</li>
+<li>All functions begin with <code>read_</code></li>
+<li>All functions have more consistent argument names</li>
+<li>Automatically sets <strong>stringsAsFactors =</strong> to FALSE</li>
+<li>Expanded, specialized functions for specific data types</li>
+<li>Enhances your data frame by converting it into a “tibble”</li>
+</ul>
+<p><br></p>
+<p>Observe the output from the “tibble” data frame. What’s different?</p>
+<pre class="r"><code>library(readr)
+
+url &lt;- paste0(&quot;https://opendata.arcgis.com/datasets/&quot;, 
+              &quot;c15a39a8a00e48b1a60c826c8a2cb3e0_0.csv&quot;)
+
+read_csv(url)</code></pre>
+<pre><code>## # A tibble: 200 x 22
+##        X     Y property_address property_zip case_number property_owner_~
+##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;           
+##  1 -76.1  43.0 416 Cannon St    &quot;\&quot;13205\&quot;&quot;  L00472      Sylvester Fair  
+##  2 -76.2  43.1 1106 Carbon St   &quot;\&quot;13208\&quot;&quot;  L00477      Giovanni Canzano
+##  3 -76.1  43.0 1815-17 Midland~ &quot;\&quot;13205\&quot;&quot;  L00495      Michael Hemmer  
+##  4 -76.2  43.1 1116 Carbon St ~ &quot;\&quot;13208\&quot;&quot;  L00594      Lam Nguyen      
+##  5 -76.1  43.0 159-61 Fage Ave  &quot;\&quot;13205\&quot;&quot;  L00374      Jaulonda Smith  
+##  6 -76.2  43.1 3137 Grant Blvd~ &quot;\&quot;13208\&quot;&quot;  L00364      Jeffrey Fenocchi
+##  7 -76.2  43.0 1629-31 Midland~ &quot;\&quot;13205\&quot;&quot;  L00065      Maurice Krohl   
+##  8 -76.2  43.1 3137 Grant Blvd~ &quot;\&quot;13208\&quot;&quot;  L00471      Jeffrey Fenocchi
+##  9 -76.2  43.0 122 Bishop Ave   &quot;\&quot;13207\&quot;&quot;  L00142      Webster Ballant~
+## 10 -76.2  43.1 1012 Wolf St     &quot;\&quot;13208\&quot;&quot;  L00035      Michael Lembo   
+## # ... with 190 more rows, and 16 more variables: case_open_date &lt;dttm&gt;,
+## #   nature_of_complaint &lt;chr&gt;, case_type &lt;chr&gt;, case_status &lt;chr&gt;,
+## #   property_id &lt;chr&gt;, vacant_property &lt;chr&gt;,
+## #   property_owner_address &lt;chr&gt;, property_owner_city &lt;chr&gt;,
+## #   property_owner_state &lt;chr&gt;, property_owner_zip &lt;chr&gt;,
+## #   neighborhood &lt;chr&gt;, identifier &lt;chr&gt;, long &lt;dbl&gt;, lat &lt;dbl&gt;,
+## #   TNT_NAME &lt;chr&gt;, ObjectId &lt;dbl&gt;</code></pre>
+<p><br></p>
+<div class="tip">
+<p><strong>PRO TIP</strong></p>
+<p>Consider getting used to <strong>tibbles</strong> (enhanced data frames from “readr”).</p>
+<ul>
+<li>Tibbles print a lot more details about your data, e.g. variable classes</li>
+<li>They cooperate more easily with packages in the Rstudio ecosystem</li>
+<li>Also, they automatically truncate output to appear more organized</li>
+</ul>
+</div>
+<p><br></p>
+<div class="tip">
+<p><strong>ANOTHER PRO TIP</strong></p>
+<p>You can change variable classes much more easily in “readr” functions.</p>
+<p><strong>Short string representation</strong> allows you to specify classes with one character:</p>
+<ul>
+<li>“c” for character</li>
+<li>“d” for double</li>
+<li>“i” for integer</li>
+<li>“l” for logical</li>
+<li>"_" to exclude variable</li>
+</ul>
+<p>In a function, to specify 3 logical, 2 integer, and 4 character variables:</p>
+<p><code>read_csv(path = path, col_types = c("llliicccc"))</code></p>
+</div>
+<p><br>
+<br></p>
+</div>
+<div id="importing-excel-files" class="section level2">
+<h2><span class="header-section-number">1.7</span> Importing Excel Files</h2>
+<p>There are many packages available for reading in Excel’s <code>.xlsx</code> format.</p>
+<p>Package “readxl” is part of the same package ecosystem as “readr”.</p>
+<ul>
+<li>Allows new Excel-related functions, like <code>read_xlsx()</code></li>
+<li>Lists all sheets in a workbook with <code>excel_sheets()</code></li>
+<li>Specify certain sheets with argument <strong>sheet =</strong></li>
+</ul>
+<pre class="r"><code>library(readxl)
+
+read_xlsx(path = url, 
+          sheet = &quot;FY 2018 Revenue&quot;,    # Specify sheet
+          range = &quot;B3:G78&quot;,             # Specify range
+          trim_ws = TRUE,               # Remove leading/trailing spaces
+          col_types = &quot;dcic_cli_cc&quot;)    # Specify variable classes</code></pre>
+<p><br></p>
+<p>Of course, RStudio has macros set up if you’d prefer:</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-20"></span>
+<img src="figures/excel_wizard.jpg" alt="RStudio's wizard for importing from Excel." width="900%" />
+<p class="caption">
+Figure 1.10: RStudio’s wizard for importing from Excel.
+</p>
+</div>
+<p><br>
+<br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-21"></span>
+<img src="https://i.giphy.com/media/Sb9KqeeymLlESGWZyE/giphy.webp" alt="Excel at times." width="40%" />
+<p class="caption">
+Figure 1.11: Excel at times.
+</p>
+</div>
+<center>
+Source: <a href="https://www.reddit.com/r/gifs/comments/asanrg/nice_one_excel/"><em>Reddit</em></a>
+</center>
+<p><br>
+<br></p>
+<div class="tip">
+<p><strong>LIFE HACK</strong></p>
+<p>Using RStudio’s import wizard may seem like such a noob move.</p>
+<p>It is, but that doesn’t mean you can’t turn it into a clutch move.</p>
+<p><br></p>
+<p>Even when using wizards and macros, <strong>code will still run in the R console:</strong></p>
+<p><br></p>
+<p><em>Copy that code and throw it into your script. It’s often faster than typing.</em></p>
+</div>
+<p><br>
+<br></p>
+</div>
+<div id="importing-statistical-software-files" class="section level2">
+<h2><span class="header-section-number">1.8</span> Importing Statistical Software Files</h2>
+<p>Two packages are commonly used to import files from SPSS, SAS, STATA and other software:</p>
+<ul>
+<li>Package “foreign” was developed by the R core team and highly versatile</li>
+<li>Package “haven” was developed by RStudio and only reads in SPSS, SAS, and STATA</li>
+</ul>
+<p><br></p>
+<p>Their differences are similar to those between base R and “readr” functions.</p>
+<ul>
+<li><code>read.dta()</code> is equivalent to <code>read_dta()</code> in the packages, respectively</li>
+<li><code>read.spss()</code> is equivalent to <code>read_spss()</code>, respectively</li>
+<li><code>read.stata()</code> is equavalent to <code>read_stata()</code>, and so on</li>
+</ul>
+<p><br>
+<br></p>
+</div>
+<div id="getting-data-off-of-the-web" class="section level2">
+<h2><span class="header-section-number">1.9</span> Getting Data Off of the Web</h2>
+<p>There are a variety of methods to get data out of the web and into R.</p>
+<p>Here are a few popular methods:</p>
+<p><br>
+<br></p>
+<div id="retrieve-download-urls" class="section level3">
+<h3><span class="header-section-number">1.9.1</span> Retrieve Download URLs</h3>
+<p>Many times, it’s a matter of copying URLs from links that download datasets.</p>
+<p>Here, we find the “Download” button on a <a href="https://www.phoenixopendata.com/dataset/officer-involved-shooting-incidents">City Of Pheonix Open Data dataset</a>:</p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-22"></span>
+<img src="figures/data_from_portals.jpg" alt="Open data portals make it easy to download data straight into R." width="90%" />
+<p class="caption">
+Figure 1.12: Open data portals make it easy to download data straight into R.
+</p>
+</div>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-23"></span>
+<img src="figures/data_from_portals2.jpg" alt="Right-click &quot;Download&quot; to copy the URL." width="90%" />
+<p class="caption">
+Figure 1.13: Right-click “Download” to copy the URL.
+</p>
+</div>
+<p><br></p>
+<p>You can save the URL in an object or use the whole string for the <strong>path =</strong> argument.</p>
+<p><br>
+<br></p>
+</div>
+<div id="retrieve-raw-data-urls" class="section level3">
+<h3><span class="header-section-number">1.9.2</span> Retrieve Raw Data URLs</h3>
+<p>GitHub is riddled with datasets.</p>
+<p>You can often find a “Download” button for them.</p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-24"></span>
+<img src="figures/github_data.jpg" alt="The head of a table in GitHub's data viewer." width="90%" />
+<p class="caption">
+Figure 1.14: The head of a table in GitHub’s data viewer.
+</p>
+</div>
+<p><br></p>
+<p>In the event that you cannot find a “Download” button, click on “Raw”.</p>
+<p>You can use the URL provided to read the data into R.</p>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-25"></span>
+<img src="figures/github_raw.jpg" alt="The raw CSV file, with the URL for reading into R." width="90%" />
+<p class="caption">
+Figure 1.15: The raw CSV file, with the URL for reading into R.
+</p>
+</div>
+<p><br>
+<br></p>
+</div>
+</div>
+<div id="further-resources" class="section level2">
+<h2><span class="header-section-number">1.10</span> Further Resources</h2>
+<p>The following resources should help you further your knowledge on reading in data.</p>
+<ul>
+<li><a href="https://www.rdocumentation.org/packages/utils/versions/3.6.1/topics/read.table">Official R Documentation for Function <code>read.table()</code></a></li>
+<li><a href="https://cran.r-project.org/web/packages/readr/vignettes/readr.html">Introduction to Package “readr”</a></li>
+<li><a href="http://rpubs.com/JamisonCrawford/readingtextdata">“Reading Text Data” (Crawford, 2018)</a></li>
+</ul>
+<p><br>
+<br></p>
 </div>
 </div>
 
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
 
 
 
