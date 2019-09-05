@@ -1,0 +1,345 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: textbook.css
+---
+
+# The Grammar of Graphics
+
+<br>
+<br>
+
+<div class="tip">
+
+## Key Concepts
+
+In this chapter, we'll explore the following key concepts:
+
+* Exploratory Data Analysis (EDA)
+* Exploratory Data Visualization (EDV)
+* Explanatory vs. Explanatory Plots
+* The Grammar of Graphics
+* Data & Non-Data Ink
+* Aesthetic Mappings
+* Attributes
+* Faceting
+
+## Key Takeaways
+
+Too long; didn't read? Here's what you need to know:
+
+* Item X
+* Item Y
+* Item Z
+
+<br>
+<br>
+
+</div>
+
+<br>
+<br>
+
+## Why Visualize Data?
+
+We visualize data for two principal reasons. We want to:
+
+1. Learn about our data, i.e. **exploratory data visualization**
+2. Tell our data's stories to others, i.e. **explanatory data visualization**
+
+<br>
+<br>
+
+### Explanatory Visualization
+
+**Explanatory visualization** is polished, publication-quality, and interpretable:
+
+* Meant to be consumed by broad, non-specialist audiences
+* Takes significant time and iterations to perfect
+* Conveys one or two "big ideas", each
+
+```{r message=F, warning=F, echo=F, cache=T}
+
+library(readr)
+
+url <- paste0("https://raw.githubusercontent",
+              ".com/jamisoncrawford/ddp_app/",
+              "master/Data/onet_bls_merged.csv")
+
+set.seed(1)
+
+```
+
+<br>
+
+Forget the code. What idea does this plot convey? Can it be misinterpreted? 
+
+```{r message=F, warning=F, cache=T}
+
+library(ggplot2)
+
+ggplot(read_csv(url), aes(x = val, y = myr)) +
+  geom_jitter(alpha = 0.3, color = "tomato") +
+  geom_smooth(method = "lm", se = FALSE, 
+              color = "grey50", lwd = 0.5, alpha = 0.3) +
+  facet_wrap(~ elm) +
+  labs(title = "Annual income vs. Holland personality scores", 
+       x = "Personality Score",
+       y = "Income (K)",
+       caption = "Sources: US DOL O*NET & BLS") +
+  scale_y_continuous(labels = c("0", "50", "100", "150", "$200")) +
+  theme_minimal()
+
+```
+
+<br>
+<br>
+
+### Exploratory Visualization
+
+**Exploratory visualization** is "quick and dirty" and intends to discover.
+
+* Meant to be consumed by yourself, colleagues, or other specialists
+* Created quickly, with no polish, refinement, or audience in mind 
+* Can convey many ideas, or none - that's why you do it!
+
+<br>
+
+This code is manageable! Observe a simple call to `ggpairs()` and the `iris` dataset.
+
+```{r message=F, warning=F, cache=T}
+
+library(ggplot2)
+library(GGally)
+
+ggpairs(data = iris, 
+        aes(color = Species))
+
+```
+
+Above, with just a little code, every variable plots against the other.
+
+<br>
+
+Hopefully, you wouldn't publish this. But we can quickly find patterns in a pairs plot:
+
+* We can see positive correlations between sepal and petals for two species
+* We observe that "Setosa" have thinner, longer sepals compared to others
+* We also observe that "Versicolor" has the least variation in size
+
+Such visual eploration can help refine hypotheses before analysis begins!
+
+<br>
+<br>
+
+### Do I have to Visualize?
+
+Exploratory viz is a key component in **exploratory data analysis**, or **EDA**.
+
+Failing to visually explore your data can get you in hot water. Let's try it!
+
+<br>
+
+Observe the following data frame containing four data sets.
+
+Variable `x1` corresponds to `y1`, `x2` to `y2`, and so forth:
+
+```{r message=F, warning=F, echo=F}
+
+library(datasets)
+
+set1 <- data.frame(x = anscombe[,1], y = anscombe[,5])
+set2 <- data.frame(x = anscombe[,2], y = anscombe[,6])
+set3 <- data.frame(x = anscombe[,3], y = anscombe[,7])
+set4 <- data.frame(x = anscombe[,4], y = anscombe[,8])
+
+```
+
+```{r}
+
+library(datasets)
+
+anscombe
+
+```
+
+At a glance, they look like the have some similaries!
+
+<br>
+
+**Check It:** Let's perform a few statistical EDA functions on each subset, 1-4.
+
+What do you notice when we figure out and organize:
+
+* Average of all X and Y values with `mean()`
+* Variance of all X and Y values with `var()`
+* Correlation between X and Y for all sets with `cor()`
+* Linear regression coefficients between X and Y with `lm()` 
+
+```{r echo=F, warning=F, message=F}
+
+x_mean <- sapply(list(set1$x, 
+                      set2$x, 
+                      set3$x, 
+                      set4$x), mean)
+
+y_mean <- sapply(list(set1$y, 
+                      set2$y, 
+                      set3$y, 
+                      set4$y), mean)
+
+x_var <- sapply(list(set1$x, 
+                     set2$x, 
+                     set3$x, 
+                     set4$x), var)
+
+y_var <- sapply(list(set1$y, 
+                     set2$y, 
+                     set3$y, 
+                     set4$y), var)
+
+correl <- c(cor(set1$x, set1$y), 
+            cor(set2$x, set2$y),
+            cor(set3$x, set3$y),
+            cor(set4$x, set4$y))
+
+coeff <- c(lm(y ~ x, set1)$coef[2],
+           lm(y ~ x, set2)$coef[2],
+           lm(y ~ x, set3)$coef[2],
+           lm(y ~ x, set4)$coef[2])
+
+data.frame(x_mean, 
+           y_mean, 
+           x_var, 
+           y_var, 
+           correl, 
+           coeff, 
+           row.names = c("Set 1", "Set 2", "Set 3", "Set 4"))
+
+```
+
+<br>
+
+**Heavens to Murgatroyd!** These are practically the same sets!
+
+* The mean and variance of X is the exact same across sets
+* The mean and variance of Y is *almost* exactly the same across sets
+* The correlation between X & Y is extremely close across sets
+* The coefficient of determination is also extremely close
+
+<br>
+
+Once visualized, all four linear relationships appear to be exactly the same:
+
+```{r warning=F, echo=F, message=F}
+
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(datasets)
+
+ansc <- anscombe %>%
+  gather(key = set_var, value = value, x1:y4) %>%
+  mutate(set = str_extract(set_var, pattern = "[1-4]{1}"),
+         var = str_extract(set_var, pattern = "[x-y]{1}")) %>%
+  select(-set_var)
+
+xy <- bind_cols(ansc[1:44, 1:3] %>%
+                rename(x = value) %>%
+                select(-var),
+              ansc[45:88, 1:3] %>%
+                rename(y = value) %>%
+                select(-var)) %>%
+      select(set, x, y, -set1)
+
+ggplot(xy, aes(x = x, y = y)) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~set) +
+  labs(title = "Linear relationship in Anscombe's Datasets",
+       x = "X Values",
+       y = "Y Values",
+       caption = "Source: Francis Anscombe (1973)") +
+  theme_classic()
+
+```
+
+<br>
+
+**Well, that settles that.** Pack it up, folks - the data are the same.
+
+<br>
+
+*Hold up.*
+
+<br>
+
+*Wait a minute.*
+
+<br>
+
+*Something ain't right.*
+
+<br>
+
+**Let's try replotting** the actual datasets and not just their linear models.
+
+<br>
+
+```{r echo=F, warning=F, message=F}
+
+ggplot(xy, aes(x = x, y = y)) +
+  geom_point(size = 2, alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, alpha = 0.3) +
+  facet_wrap(~set) +
+  labs(title = "Actual relationships in Anscombe's Datasets",
+       subtitle = "You've been had!",
+       x = "X Values",
+       y = "Y Values",
+       caption = "Source: Francis Anscombe (1973)") +
+  theme_classic()
+
+```
+
+<br>
+
+**Boom!** Not the same datasets *at all*. 
+
+<br>
+
+Despite having the same mean, variance, correlations, and coefficients:
+
+* Dataset 1 is a normally distributed linear relationship
+* Dataset 2 is a parabolic curve
+* Dataset 3 is a perfect linear relationship with a high-leverage outlier
+* Dataset 4 shows absolutely no relationship but again has an outlier
+
+<br>
+
+**Conclusion:** Always conduct exploratory visualization as a staple of any analysis.
+
+<br>
+<br>
+
+<div class = "note">
+
+**FUN FACT:**
+
+**You just got Anscombe'd.** [Francis John "Frank" Anscombe](https://en.wikipedia.org/wiki/Frank_Anscombe) was an English statistician who helped pioneer the field in the twentieth century. He wrote:
+
+<br>
+
+> "...a computer should make both calculations and graphs..."
+
+<br>
+
+To demonstrate, Anscombe invented these datasets: [Anscombe's Quartet](https://en.wikipedia.org/wiki/Anscombe%27s_quartet).
+
+</div>
+
+<br>
+
+## The Grammar of Graphics
