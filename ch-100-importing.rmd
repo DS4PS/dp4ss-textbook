@@ -700,6 +700,8 @@ The following resources should help you further your knowledge on reading in dat
 * [Official R Documentation for Function `read.table()`](https://www.rdocumentation.org/packages/utils/versions/3.6.1/topics/read.table)
 * [Introduction to Package "readr"](https://cran.r-project.org/web/packages/readr/vignettes/readr.html)
 * ["Reading Text Data" (Crawford, 2018)](http://rpubs.com/JamisonCrawford/readingtextdata)
+* ["How to Share Data for Collaboration" (Ellis & Leek, 2017)](https://peerj.com/preprints/3139v5.pdf)
+* [RStudio's "Data Import Cheat Sheet"](https://resources.rstudio.com/rstudio-cheatsheets/data-import-cheat-sheet)
 
 <br>
 <br>

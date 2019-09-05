@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>ch-101-exporting_files.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#writing-data"><span class="toc-section-number">1</span> Writing Data</a><ul>
+<li><a href="#functions-for-writing-data"><span class="toc-section-number">1.1</span> Functions for Writing Data</a></li>
+<li><a href="#saving-your-work-r-datasets-rds"><span class="toc-section-number">1.2</span> Saving Your Work: R Datasets (RDS)</a></li>
+<li><a href="#writing-data-to-statistical-software-files"><span class="toc-section-number">1.3</span> Writing Data to Statistical Software Files</a></li>
+<li><a href="#copying-data-to-your-clipboard"><span class="toc-section-number">1.4</span> Copying Data to Your Clipboard</a></li>
+<li><a href="#copying-data-to-excel"><span class="toc-section-number">1.5</span> Copying Data to Excel</a></li>
+<li><a href="#further-resources"><span class="toc-section-number">1.6</span> Further Resources</a></li>
+<li><a href="#works-cited"><span class="toc-section-number">1.7</span> Works Cited</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p><img src="https://media.giphy.com/media/13UPtnr8JdidYA/giphy.gif" width="100%" style="display: block; margin: auto;" /></p>
+<div id="writing-data" class="section level1">
+<h1><span class="header-section-number">1</span> Writing Data</h1>
+<p><br>
+<br></p>
+<div class="tip">
+<h2 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h2>
+<p>In this chapter, we’ll explore the following key concepts:</p>
+<ul>
+<li>CSV, TSV, &amp; Delimited Files</li>
+<li>R Data Sets (RDS)</li>
+<li>RData Format</li>
+</ul>
+<h2 id="key-takeaways"><span class="header-section-number">1</span> Key Takeaways</h2>
+<p>Too long; didn’t read? Here’s everything you need to know:</p>
+<ul>
+<li>Importing data is <strong>reading data</strong>; exporting data is <strong>writing data</strong></li>
+<li>Keep your working directories in mind, all files write to them by default</li>
+<li>Base R function <code>write.table()</code> writes most common file types</li>
+<li>Base R function <code>write.csv()</code> writes CSVs, TSVs, and more</li>
+<li>Package “readr” has <code>write*()</code> functions for each file type</li>
+<li>Save an object with <code>save()</code> and <code>.rds</code> extensions</li>
+<li>Save objects and workspaces using extension <code>.RData</code></li>
+<li>Write data to your clipboard with <code>writeClipboard()</code></li>
+</ul>
+<p><br>
+<br>
+<br></p>
+</div>
+<p><br>
+<br></p>
+<div class="caution">
+<p><br></p>
+<p><strong>ATTENTION</strong></p>
+<p>Readers are expected to have read the chapter “Getting Data into R”.</p>
+<p><br></p>
+</div>
+<p><br>
+<br></p>
+<div id="functions-for-writing-data" class="section level2">
+<h2><span class="header-section-number">1.1</span> Functions for Writing Data</h2>
+<p>We <strong>read data</strong> into R, or <em>import</em>, with <code>read*()</code> functions.</p>
+<p>Similarly, we <strong>write data</strong> from R, or <em>export</em>, with <code>write*()</code> functions.</p>
+<ul>
+<li>Most base R reading functions have equivalent writing functions</li>
+<li>Most package “readr” functions also have similar writing functions</li>
+<li>Packages for Excel, JSON, and other file formats have writing functions</li>
+</ul>
+<p><br></p>
+<p>What is <strong>writing data</strong>?</p>
+<p>Simply put, it’s the act of storing data in a location and format of your choosing.</p>
+<p>Typically, your data are stored in an object like a matrix or data frame.</p>
+<p>It’s simply a matter of exporting a data-laden object.</p>
+<p><br>
+<br></p>
+<div id="a-brief-note-on-working-directories" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> A Brief Note on Working Directories</h3>
+<p>Unless otherwise specified, data are written to your working directory by default.</p>
+<ul>
+<li>You can often specify different paths to save your data with argument <strong>file =</strong></li>
+<li>Print your working directory with function <code>getwd()</code></li>
+<li>Change your working directory with function <code>setwd()</code></li>
+<li>Create new directories with function <code>dir.create()</code></li>
+<li>See contents of directories with function <code>dir()</code></li>
+</ul>
+<p><br>
+<br></p>
+</div>
+<div id="base-rs-workhorse-writing-function-write.table" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Base R’s Workhorse Writing Function: <code>write.table()</code></h3>
+<p>R’s workhorse reading function, on which other functions depend, is <code>read.table()</code>.</p>
+<p>R’s workhorse writing function is <code>write.table()</code>.</p>
+<p><br></p>
+<p>Function wrappers like <code>write.csv()</code> are powered by <code>write.table()</code> under the hood.</p>
+<pre class="r"><code>write.csv</code></pre>
+<pre><code>## function (...) 
+## {
+##     Call &lt;- match.call(expand.dots = TRUE)
+##     for (argname in c(&quot;append&quot;, &quot;col.names&quot;, &quot;sep&quot;, &quot;dec&quot;, &quot;qmethod&quot;)) if (!is.null(Call[[argname]])) 
+##         warning(gettextf(&quot;attempt to set &#39;%s&#39; ignored&quot;, argname), 
+##             domain = NA)
+##     rn &lt;- eval.parent(Call$row.names)
+##     Call$append &lt;- NULL
+##     Call$col.names &lt;- if (is.logical(rn) &amp;&amp; !rn) 
+##         TRUE
+##     else NA
+##     Call$sep &lt;- &quot;,&quot;
+##     Call$dec &lt;- &quot;.&quot;
+##     Call$qmethod &lt;- &quot;double&quot;
+##     Call[[1L]] &lt;- as.name(&quot;write.table&quot;)
+##     eval.parent(Call)
+## }
+## &lt;bytecode: 0x0000000013a9fa68&gt;
+## &lt;environment: namespace:utils&gt;</code></pre>
+<p><br></p>
+<p>If all else fails (and it probably won’t), you can depend on <code>write.table()</code>.</p>
+<p><br>
+<br></p>
+</div>
+<div id="writing-text-files-write.csv-write_csv" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Writing Text Files: <code>write.csv()</code> &amp; <code>write_csv()</code></h3>
+<p>Comma-separated values (CSV) files are the most common type of output in R.</p>
+<p>However, we can use the same <code>write*()</code> functions to create TSVs and more.</p>
+<p><br></p>
+<p><strong>Practice Data:</strong> Let’s create a simple data frame to practice writing data.</p>
+<pre class="r"><code>name &lt;- c(&quot;Fatimah&quot;, &quot;Li&quot;, &quot;Arnold&quot;, &quot;Fede&quot;, &quot;Sly&quot;)   # Character vector
+weight &lt;- c(61.4, 68.4, 81.8, 79.9, 90.3)             # Double vector
+age &lt;- c(29L, 31L, 44L, 33L, 27L)                     # Integer vector
+
+clients &lt;- data.frame(name, weight, age,              # Create data frame
+                      stringsAsFactors = FALSE)       # Don&#39;t forget this!
+
+clients</code></pre>
+<pre><code>##      name weight age
+## 1 Fatimah   61.4  29
+## 2      Li   68.4  31
+## 3  Arnold   81.8  44
+## 4    Fede   79.9  33
+## 5     Sly   90.3  27</code></pre>
+<p><br></p>
+<p><strong>Base R:</strong> Write CSV files using function <code>write.csv()</code>.</p>
+<pre class="r"><code>write.csv(x = clients,                # Write object &quot;clients&quot;
+          file = &quot;clients.csv&quot;)       # Write file name and extension</code></pre>
+<p><strong>Include Extensions:</strong> When writing a file, <em>include the extension in the file name</em>.</p>
+<ul>
+<li>Saving an R script? Include <code>.r</code></li>
+<li>Saving an Excel sheet? Include <code>.xlsx</code></li>
+<li>Saving a CSV? Include <code>.csv</code></li>
+</ul>
+<p><br></p>
+<p><strong>TSVs &amp; Other Delimiters:</strong> You’re not restricted to using commas with <code>write.csv()</code>.</p>
+<pre class="r"><code>write.csv(x = clients,
+          file = &quot;clients.tsv&quot;,       # Use appropriate extension
+          sep = &quot;\t&quot;)                 # Save as tab-delimited</code></pre>
+<p><br></p>
+<p><strong>Notable Arguments:</strong> Function <code>write.csv()</code> has some notable parameters, e.g.</p>
+<ul>
+<li><strong>x =</strong> specifies the name of the object to write</li>
+<li><strong>file =</strong> specifies the output file name; requires quotes and extension</li>
+<li><strong>sep =</strong> specifies the delimiter, e.g. commas, tabs, semicolons, etc.</li>
+<li><strong>na =</strong> specifies the character(s) to use instead of missing values</li>
+</ul>
+<p><br></p>
+<p><strong>Package “readr”:</strong> Function <code>write_csv()</code> is the same as <code>write.csv()</code> except:</p>
+<ul>
+<li>Significantly faster at writing data</li>
+<li>Does not write row names automatically</li>
+<li>Cannot write files with non-comma delimiters</li>
+<li>More consistent argument names; <strong>file =</strong> is now <strong>path =</strong></li>
+</ul>
+<p><br></p>
+<p><strong>Writing with “readr”:</strong> Observe <code>write_csv()</code> in action:</p>
+<pre class="r"><code>library(readr)
+
+write_csv(x = clients,
+          path = &quot;clients.csv&quot;)</code></pre>
+<p><br></p>
+<p><strong>TSV Files with “readr”:</strong> Bummer! Can’t write TSV files with <code>write_csv()</code>.</p>
+<p>Hark! Package “readr” has function <code>write_tsv()</code> for precisely that!</p>
+<pre class="r"><code>library(readr)
+
+write_tsv(x = clients,
+          path = &quot;clients.tsv&quot;)     # Right tool for the job</code></pre>
+<p><br></p>
+<p>In fact, package “readr” has writing functions optimized for many file types.</p>
+<p>We encourage you to check out each one, e.g. <code>help(write_delim)</code>:</p>
+<ul>
+<li><code>write_csv()</code></li>
+<li><code>write_csv2()</code></li>
+<li><code>write_delim()</code></li>
+<li><code>write_excel_csv()</code></li>
+<li><code>write_file()</code></li>
+<li><code>write_rds()</code></li>
+<li><code>write_tsv()</code></li>
+</ul>
+<p><br>
+<br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-8"></span>
+<img src="https://media3.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif?cid=790b7611fef46f20fd40e0b7ca12682dfe7b765c777f55e5&rid=giphy.gif" alt="Mind blown." width="75%" />
+<p class="caption">
+Figure 1.1: Mind blown.
+</p>
+</div>
+<p><br>
+<br></p>
+</div>
+</div>
+<div id="saving-your-work-r-datasets-rds" class="section level2">
+<h2><span class="header-section-number">1.2</span> Saving Your Work: R Datasets (RDS)</h2>
+<p>Manually restoring your workspace to your former session’s glory is a pain.</p>
+<p>Hence, base R has functions <code>save()</code> and <code>load()</code> to save objects locally.</p>
+<p><br></p>
+<p><strong>Saving an Object:</strong> Save your original object, <code>clients</code>, as a <code>.rds</code> file:</p>
+<pre class="r"><code>save(clients, 
+     file = &quot;clients_object.rds&quot;)</code></pre>
+<p><br></p>
+<p><strong>Saving More than One Object:</strong> List each object first and save as <code>.RData</code>:</p>
+<pre class="r"><code>save(age, name, weight, clients,
+     file = &quot;clients_all.RData&quot;)</code></pre>
+<p><br></p>
+<p><strong>Saving your Workspace:</strong> Save your history and all objects with <code>save.image()</code>:</p>
+<pre class="r"><code>save.image(file = &quot;my_workspace.RData&quot;)</code></pre>
+<p><br></p>
+<p><strong>Load Objects &amp; Workspaces:</strong> Simply input the file name into function <code>load()</code>:</p>
+<pre class="r"><code>load(&quot;clients_object.rds&quot;)      # Load a single object file
+load(&quot;clients_all.RData&quot;)       # Load multiple objects
+load(&quot;my_workspace.RData&quot;)      # Laod entire workspace</code></pre>
+<p><br></p>
+<p><strong>Why save objects and workspaces?</strong></p>
+<ul>
+<li>Perfectly reproduce your environment for collaborators</li>
+<li>Load typical header information for scripts, like authors and versions</li>
+<li>Save and load objects that take a lot of time or computing power to create</li>
+<li>We haven’t learned many object types, but some are useful when reproduced often</li>
+</ul>
+<p><br>
+<br></p>
+</div>
+<div id="writing-data-to-statistical-software-files" class="section level2">
+<h2><span class="header-section-number">1.3</span> Writing Data to Statistical Software Files</h2>
+<p>The “foreign” and “haven” packages help read and write files used in SAS, SPSS, etc.</p>
+<p><br></p>
+<p>Package “foreign” uses <code>write.foreign()</code> as a catch-all writing function.</p>
+<p>Argument <strong>package =</strong> accepts “SPSS”, “SAS”, and other software names.</p>
+<p>It also has wrapper functions like <code>write_dta()</code> for Sata files, e.g.</p>
+<pre class="r"><code>library(foreign)
+
+write.foreign(df = clients, 
+              datafile = &quot;clients.sas&quot;, 
+              package = &quot;SAS&quot;)</code></pre>
+<p><br></p>
+<p>Package “haven” only has four specific functions rather than a single workhorse:</p>
+<pre class="r"><code>library(haven)
+
+write_dta(clients, &quot;clients.dta&quot;)   # Stata
+write_sas(clients, &quot;clients.sas&quot;)   # SAS
+write_sav(clients, &quot;clients.sav&quot;)   # SPSS
+write_xpt(clients, &quot;clients.xpt&quot;)   # SAS, too</code></pre>
+<p><br>
+<br></p>
+</div>
+<div id="copying-data-to-your-clipboard" class="section level2">
+<h2><span class="header-section-number">1.4</span> Copying Data to Your Clipboard</h2>
+<p>Read data from the clipboard with <code>readClipboard()</code>; write with <code>writeClipboard()</code>.</p>
+<p><br></p>
+<p>The concept, briefly:</p>
+<ol style="list-style-type: decimal">
+<li>When copying text, it goes to your clipboard - the same as <code>writeClipboard()</code></li>
+<li>When pasting text, it comes from your clipboard - the same as <code>readClipboard()</code></li>
+</ol>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="https://media0.giphy.com/media/56ikf9jD4ZK6s/giphy.gif" alt="You can write character data to your clipboard from R." width="75%" />
+<p class="caption">
+Figure 1.2: You can write character data to your clipboard from R.
+</p>
+</div>
+<p><br></p>
+<p><strong>Character Data Only:</strong> Here, we’ll copy two objects to the clipboard.</p>
+<ul>
+<li>Note that only the character data will copy to your clipboard</li>
+<li>Non-characyet data must be coerced with function <code>as.character()</code></li>
+</ul>
+<pre class="r"><code>txt &lt;- &quot;This is a sentences comprised of text.&quot;
+num &lt;- 2.718
+
+writeClipboard(txt)                 # Accepts character data
+writeClipboard(num)                 # Will not accept numeric data
+writeClipboard(as.character(num))   # Accepts when coerced to character</code></pre>
+<p><br>
+<br></p>
+</div>
+<div id="copying-data-to-excel" class="section level2">
+<h2><span class="header-section-number">1.5</span> Copying Data to Excel</h2>
+<p>There’s a “quick and dirty” method to copying and pasting data from R into Excel.</p>
+<ol style="list-style-type: decimal">
+<li>Open the tabular data object with function <code>View()</code></li>
+<li>Highlight each cell, starting at lower-right, ending at upper-left</li>
+<li>Right click or <strong>Ctrl + C</strong> to copy the RStudio Viewer data</li>
+<li>Right click or <strong>Ctrl + V</strong> to paste into Excel</li>
+</ol>
+<p><br></p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-17"></span>
+<img src="figures/copy_viewer.jpg" alt="Copy and paste right from your RStudio viewer." width="75%" />
+<p class="caption">
+Figure 1.3: Copy and paste right from your RStudio viewer.
+</p>
+</div>
+<p><br>
+<br></p>
+</div>
+<div id="further-resources" class="section level2">
+<h2><span class="header-section-number">1.6</span> Further Resources</h2>
+<ul>
+<li><a href="https://www.statmethods.net/input/exportingdata.html">Exporting Data (Quick-R)</a></li>
+<li><a href="https://cran.r-project.org/doc/manuals/r-release/R-data.html">R Data Import/Export (CRAN)</a></li>
+</ul>
+<p><br>
+<br></p>
+</div>
+<div id="works-cited" class="section level2">
+<h2><span class="header-section-number">1.7</span> Works Cited</h2>
+<ul>
+<li>SpongBob SquarePants</li>
+<li>Tim &amp; Eric’s Awesome Show</li>
+<li>Gravity Falls</li>
+</ul>
+<p><br>
+<br></p>
+</div>
+</div>
+
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
