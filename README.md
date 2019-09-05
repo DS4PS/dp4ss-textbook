@@ -72,7 +72,7 @@ https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 Or push some of these to DS II (data wrangling couse)? 
 
 
-## p-100 Visaulization 
+## p-100 Visualization 
 
 CH-24 - Principles of Visual Communication  
 CH-25 - Base R Graphics  
