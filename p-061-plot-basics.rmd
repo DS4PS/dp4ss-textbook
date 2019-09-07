@@ -159,6 +159,7 @@ dat <- data.frame( fertilizer,
 head( dat, 10 ) %>% pander()
 
 dat$fertilizer <- 1:100 
+fertilizer <- 1:100
 ```
 
 
