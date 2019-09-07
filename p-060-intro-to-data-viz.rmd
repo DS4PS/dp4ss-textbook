@@ -40,7 +40,7 @@ Popular blogs that demonstrate the step-by-step process of making a mediocre gra
 
 Useful introductory textbooks on data visualization:
 
-* [Schwabish, J. A. (2014). An economist's guide to visualizing data. Journal of Economic Perspectives, 28(1), 209-34.](../READINGS/Schwabish_Visualizing_Data_for_Economists.pdf)
+* [Schwabish, J. A. (2014). An economist's guide to visualizing data. Journal of Economic Perspectives, 28(1), 209-34.](resources/schwabish-visualizing-data-for-economists.pdf)
 * [T. Chiasson, D. Gregory, & Contributors (2013). Data + Design: A simple introduction to preparing and visualizing information.](https://static1.squarespace.com/static/55d9f3fbe4b001723c108c17/t/56214bdae4b0b08cace11af0/1445022682859/Ebook+On+Data+Visualization.pdf)
 * [Tableau: Which Chart Goes with What Data](https://www.tableau.com/sites/default/files/media/which_chart_v6_final_0.pdf) 
 
