@@ -35,16 +35,33 @@ This chapter uses the following packages:
 * ggplot2
 * GGally
 * scales
-* 
+* plotly
 
 ## Key Takeaways
 
 Too long; didn't read? Here's what you need to know:
 
-* Item X
-* Item Y
-* Item Z
+* We visualize data to:
+    - Submit, Publish, Teach ("Explanatory Viz")
+    - Explore, Learn, Share ("Exploratory Viz")
+* Exploratory viz is a key part of any data analysis
+* "Grammar of Graphics" framework inspired "ggplot2"
+* "Layers" are like visual parts of speech
+    - There are 7 layers - 3 are essential
+    - Each layer has a family of functions
+* Essential layers include:
+    1. Data: Intakes data frame/tibble
+    2. Aesthetic: Maps variables to axes, color, etc.
+    3. Geometry: Specifies the shape of your data
+* Nonessential layers include:
+    4. Statistics: Modeling and computation
+    5. Coordinates: Zooming in and modifying scales
+    6. Facets: Small multiples, a.k.a. trellis plots
+    7. Themes: Overall style - grid lines, text, etc.
+* Variety of ggplot2 extensions (see resources)
+* Use package "plotly" to make ggplot2 interactive
 
+<br>
 <br>
 <br>
 
@@ -94,7 +111,7 @@ library(ggplot2)
 ggplot(read_csv(url), aes(x = val, y = myr)) +
   geom_jitter(alpha = 0.3, color = "tomato") +
   geom_smooth(method = "lm", se = FALSE, 
-              color = "grey50", lwd = 0.5, alpha = 0.3) +
+              color = "grey50", lwd = 1, alpha = 0.3) +
   facet_wrap(~ elm) +
   labs(title = "Annual income vs. Holland personality scores", 
        x = "Personality Score",
@@ -350,6 +367,13 @@ To demonstrate, Anscombe invented these datasets: [Anscombe's Quartet](https://e
 
 </div>
 
+```{r warning=F, message=F, echo=F}
+
+rm(set1, set2, set3, set4, xy, ansc, coeff, 
+   correl, x_mean, x_var, y_mean, y_var)
+
+```
+
 <br>
 <br>
 
@@ -443,7 +467,7 @@ Like human *sentences*, every complete visualization has 3 essential layers:
 
 <br>
 
-```{r, echo=F, fig.align="center", fig.cap = "The three essential layers for a complete visualization.", out.width="100%", cache=T}
+```{r, echo=F, fig.align="center", fig.cap = "The three essential layers for a complete visualization.", out.width="75%", cache=T}
 
 knitr::include_graphics("figures/essential_layers.jpg")
 
@@ -463,9 +487,11 @@ lakeview <- read_csv(url) %>%
   filter(project == "Lakeview",
          !is.na(race))
 
+url <- paste0("https://raw.githubusercontent.com/DS4PS/",
+              "dp4ss-textbook/master/tables/hancock.csv")
+
 hancock <- read_csv(url) %>%
-  filter(project == "Hancock",
-         !is.na(race))
+  filter(!is.na(ethnicity))
 
 ```
 
@@ -498,11 +524,12 @@ Observe the same plot - the only difference is the **data layer**. What changes?
 
 library(gridExtra)
 library(ggplot2)
+library(scales)
 
 set.seed(1)
 
 p1 <- ggplot(lakeview, aes(x = factor(race, 
-                                      levels = c("Asian", "Black", "Hispanic", "Native", "White"), 
+                                      levels = c("Asian", "Black", "Hispanic", "Indigenous", "White"), 
                                       labels = c("Asian", "Black", "Hispanic", "Indigenous", "White")),
                            y = net)) +
   geom_jitter(alpha = 0.15, 
@@ -512,24 +539,26 @@ p1 <- ggplot(lakeview, aes(x = factor(race,
        subtitle = "Lakeview Amphitheater, 2015",
        x = NULL,
        y = "Weekly Net Income",
-       caption = "Source: Onondaga County") +
-  scale_y_continuous(labels = c("$ 0", "500", "1,000", "1,500", "2,000", "2,500")) +
+       caption = "") +
+  scale_y_continuous(labels = dollar,
+                     breaks = pretty_breaks(3)) +
   coord_flip() +
   theme_classic()
 
-p2 <- ggplot(hancock, aes(x = factor(race, 
-                                     levels = c("Hispanic", "Black", "Multiracial", "Native", "White"), 
+p2 <- ggplot(hancock, aes(x = factor(ethnicity, 
+                                     levels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White"), 
                                      labels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White")),
                           y = net)) +
   geom_jitter(alpha = 0.15, 
               color = "dodgerblue2", 
               width = 0.2) +
-  labs(title = "Weekly net by ethnicity",
+  labs(title = "",
        subtitle = "Hancock Airport, 2018",
        x = NULL,
        y = "Weekly Net Income",
        caption = "Source: Syracuse Regional Airport Authority") +
-  scale_y_continuous(labels = c("$ 0", "500", "1,000", "1,500", "2,000", "2,500")) +
+  scale_y_continuous(labels = dollar,
+                     breaks = pretty_breaks(2)) +
   coord_flip() +
   theme_classic()
 
@@ -571,8 +600,8 @@ library(ggplot2)
 
 set.seed(1)
 
-p1 <- ggplot(hancock, aes(x = factor(race, 
-                                     levels = c("Hispanic", "Black", "Multiracial", "Native", "White"), 
+p1 <- ggplot(hancock, aes(x = factor(ethnicity, 
+                                     levels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White"), 
                                      labels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White")),
                           y = net)) +
   geom_jitter(alpha = 0.15, 
@@ -582,8 +611,9 @@ p1 <- ggplot(hancock, aes(x = factor(race,
        subtitle = "Hancock Airport, 2018",
        x = NULL,
        y = "Weekly Net Income",
-       caption = "Source: Syracuse Regional Airport Authority") +
-  scale_y_continuous(labels = c("$ 0", "500", "1,000", "1,500", "2,000", "2,500")) +
+       caption = "") +
+  scale_y_continuous(labels = dollar,
+                     breaks = pretty_breaks(3)) +
   coord_flip() +
   theme_classic()
 
@@ -592,13 +622,14 @@ p2 <- ggplot(hancock, aes(x = gross,
   geom_jitter(alpha = 0.15, 
               color = "dodgerblue2", 
               width = 0.2) +
-  labs(title = "Weekly net vs. gross",
-       subtitle = "Hancock Airport, 2018",
+  labs(title = "",
+       subtitle = "",
        x = "Weekly Gross Income",
        y = "Weekly Net Income",
        caption = "Source: Syracuse Regional Airport Authority") +
-  scale_x_continuous(labels = c("$ 0", "1,000", "2,000", "3,000")) +
-  scale_y_continuous(labels = c("$ 0", "500", "1,000", "1,500", "2,000", "2,500")) +
+  scale_x_continuous(labels = dollar) +
+  scale_y_continuous(labels = dollar,
+                     breaks = pretty_breaks(2)) +
   coord_flip() +
   theme_classic()
 
@@ -637,11 +668,12 @@ Observe the same plot - the only difference is the **geometry layer**. What chan
 
 library(gridExtra)
 library(ggplot2)
+library(scales)
 
 set.seed(1)
 
-p1 <- ggplot(hancock, aes(x = factor(race, 
-                                     levels = c("Hispanic", "Black", "Multiracial", "Native", "White"), 
+p1 <- ggplot(hancock, aes(x = factor(ethnicity, 
+                                     levels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White"), 
                                      labels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White")),
                           y = net)) +
   geom_jitter(alpha = 0.15, 
@@ -651,23 +683,25 @@ p1 <- ggplot(hancock, aes(x = factor(race,
        subtitle = "Hancock Airport, 2018",
        x = NULL,
        y = "Weekly Net Income",
-       caption = "Source: Syracuse Regional Airport Authority") +
-  scale_y_continuous(labels = c("$ 0", "500", "1,000", "1,500", "2,000", "2,500")) +
+       caption = "") +
+  scale_y_continuous(labels = dollar,
+                     breaks = pretty_breaks(3)) +
   coord_flip() +
   theme_classic()
 
-p2 <- ggplot(hancock, aes(x = factor(race, 
-                                     levels = c("Hispanic", "Black", "Multiracial", "Native", "White"), 
+p2 <- ggplot(hancock, aes(x = factor(ethnicity, 
+                                     levels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White"), 
                                      labels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White")),
                           y = net)) +
   geom_boxplot(alpha = 0.15,
                color = "dodgerblue2") +
-  labs(title = "Weekly net by ethnicity",
-       subtitle = "Hancock Airport, 2018",
+  labs(title = "",
+       subtitle = "",
        x = NULL,
        y = "Weekly Net Income",
        caption = "Source: Syracuse Regional Airport Authority") +
-  scale_y_continuous(labels = c("$ 0", "500", "1,000", "1,500", "2,000", "2,500")) +
+  scale_y_continuous(labels = dollar,
+                     breaks = pretty_breaks(3)) +
   coord_flip() +
   theme_classic()
 
@@ -696,6 +730,12 @@ All "attributes" are specified in the "geometries" layer.
 
 </div>
 
+```{r warning=F, message=F, echo=F}
+
+rm(p1, p2, lakeview)
+
+```
+
 <br>
 <br>
 
@@ -711,6 +751,32 @@ The 4 remaining **layers** in the **grammar of graphics** include:
 <br> 
 
 We'll explore some key functions from these **layers** in the following sections.
+
+<br>
+<br>
+
+## Download the Practice Data
+
+Our practice data are public consruction project worker records in Syracuse, NY.
+
+You can download the raw data [here](https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/tables/hancock.csv).
+
+<br>
+
+**To Follow Along:** Run this code in your R console:
+
+```{r eval=F}
+
+library(readr)
+
+url <- paste0("https://raw.githubusercontent.com/DS4PS/",
+              "dp4ss-textbook/master/tables/hancock.csv")
+
+hancock <- read_csv(url)
+
+rm(url)
+
+```
 
 <br>
 <br>
@@ -957,14 +1023,14 @@ Each shape your data takes in the **geometry layer** has an associated function.
 
 **Rectangular Geoms:** When using geoms with rectangular shapes, set **stat =** to "identity".
 
-```{r, cache=T}
+```{r, warning=F, message=F, cache=T}
 
-options(scipen = 999)                 # Disable scientific notation
+options(scipen = 999)                       # Disable scientific notation
 
 ggplot(data = hancock, 
-       aes(x = reorder(race, -net),   # Reorder ethnicities by "net" 
+       aes(x = reorder(ethnicity, -net),    # Reorder ethnicities by "net" 
            y = net)) +
-  geom_bar(stat = "identity") +       # Specify stat = "identity"
+  geom_bar(stat = "identity") +             # Specify stat = "identity"
   labs(x = NULL,
        y = "Weekly Net") +
   theme_minimal()
@@ -973,14 +1039,101 @@ ggplot(data = hancock,
 
 <br>
 
-**Overlap & Transparency:** When multiple points overlap, we can use transparency (**alpha =**).
+**Use Fill to Modify Geoms:** Map `aes()` argument **fill =** to a categorical variable:
 
 ```{r, cache=T}
 
 ggplot(data = hancock, 
-       aes(x = reorder(race, -net), 
+       aes(x = reorder(ethnicity, -net), 
+           y = net,
+           fill = reorder(class, -net))) +  # Add fill = and reorder() on "net"
+  geom_bar(stat = "identity") +
+  labs(x = NULL,
+       y = "Weekly Net",
+       fill = "Class") +                    # Use labs() and fill= to title legend
+  theme_minimal()
+
+```
+<br>
+
+**Fill to 100%:** With a **fill =** asthetic, set **position =** to "fill":
+
+```{r, cache=T}
+
+ggplot(data = hancock, 
+       aes(x = reorder(ethnicity, -net), 
+           y = net,
+           fill = reorder(class, -net))) +
+  geom_bar(stat = "identity",
+           position = "fill") +             # Set position = to "fill"
+  labs(x = NULL,
+       y = "Weekly Net",
+       fill = "Class") +
+  theme_minimal()
+
+```
+<br>
+
+**New Geoms with New Positions:** With a **fill =** asthetic, set **position =** to "dodge":
+
+```{r, cache=T}
+
+ggplot(data = hancock, 
+       aes(x = reorder(ethnicity, -net), 
+           y = net,
+           fill = reorder(class, -net))) +
+  geom_bar(stat = "identity",
+           position = "dodge") +            # Set position = to "dodge"
+  labs(x = NULL,
+       y = "Weekly Net",
+       fill = "Class") +
+  theme_minimal()
+
+```
+
+<br>
+
+**Overlapping Barplots:** Set **position =** to `position_dodge()` and set **width =**:
+
+```{r, cache=T}
+
+ggplot(data = hancock, 
+       aes(x = reorder(ethnicity, -net), 
+           y = net,
+           fill = reorder(class, -net))) +
+  geom_bar(stat = "identity",
+           position = position_dodge(width = 0.5)) +            # Control the dodge!
+  labs(x = NULL,
+       y = "Weekly Net",
+       fill = "Class") +
+  theme_minimal()
+
+```
+
+<br>
+<br>
+
+<div class="note">
+
+FUN FACT
+
+Many ggplot2 color functions contain `brewer` in the name. That's because, by default, ggplot2 uses color palettes based on the research of [Cynthia Brewer, Ph.D.](https://en.wikipedia.org/wiki/Cynthia_Brewer).
+
+Dr. Brewer's premade palettes, all recognized in ggplot2, are available in [Color Brewer 2](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
+
+</div>
+
+<br>
+<br>
+
+**Overlap & Transparency:** When multiple points overlap, use transparency (**alpha =**).
+
+```{r, warning=F, message=F, cache=T}
+
+ggplot(data = hancock, 
+       aes(x = reorder(ethnicity, -net), 
            y = net)) +
-  geom_point(alpha = 0.15) +          # Set transparency to 15%
+  geom_point(alpha = 0.10) +          # Set transparency to 10%
   labs(x = NULL,
        y = "Weekly Net") +
   theme_minimal()
@@ -997,10 +1150,10 @@ ggplot(data = hancock,
 * Arguments **height =** and **width =** controls jitter
 * Alternatively, use function `geom_jitter()`
 
-```{r, cache=T}
+```{r, warning=F, message=F, cache=T}
 
 ggplot(data = hancock, 
-       aes(x = reorder(race, -net), 
+       aes(x = reorder(ethnicity, -net), 
            y = net)) +
   geom_jitter(alpha = 0.15,           # Change geom to geom_jitter()
               width = 0.25) +         # Set "jitter" width to 0.25
@@ -1087,7 +1240,7 @@ However, you can reverse the x- and y-axes by using function `coord_flip()`:
 ```{r, echo=F, message=F, warning=F, cache=T}
 
 ggplot(data = hancock, 
-       aes(x = reorder(race, net), 
+       aes(x = reorder(ethnicity, net), 
            y = net)) +
   geom_bar(stat = "identity") +
   labs(x = NULL,
@@ -1099,7 +1252,7 @@ ggplot(data = hancock,
 ```{r, cache=T}
 
 ggplot(data = hancock, 
-       aes(x = reorder(race, net), 
+       aes(x = reorder(ethnicity, net), 
            y = net)) +
   geom_bar(stat = "identity") +
   labs(title = "Flipped!",
@@ -1207,8 +1360,8 @@ Why do the LOESS curves and standard errors change between plots?
 ggplot(hancock,
        aes(x = net,
            y = gross)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth(color = "grey70") +
+  geom_point(alpha = 0.05) +
+  geom_smooth(color = "grey80", alpha = 0.1) +
   theme_minimal() +
   scale_x_continuous(name = "Weekly Net") +     # Axis? Continuous or discrete?
   scale_y_continuous(name = "Weekly Gross")     # Argument name = for axis titles
@@ -1224,8 +1377,8 @@ ggplot(hancock,
 ggplot(hancock,
        aes(x = net,
            y = gross)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth(color = "grey70") +
+  geom_point(alpha = 0.05) +
+  geom_smooth(color = "grey80", alpha = 0.1) +
   theme_minimal() +
   scale_x_continuous(name = "Weekly Net",
                      breaks = c(0, 1250, 2500)) +
@@ -1243,8 +1396,8 @@ ggplot(hancock,
 ggplot(hancock,
        aes(x = net,
            y = gross)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth(color = "grey70") +
+  geom_point(alpha = 0.05) +
+  geom_smooth(color = "grey80", alpha = 0.1) +
   theme_minimal() +
   scale_x_continuous(name = "Net",
                      breaks = c(0, 1250, 2500),
@@ -1274,8 +1427,8 @@ library(scales)
 ggplot(hancock,
        aes(x = net,
            y = gross)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth(color = "grey70") +
+  geom_point(alpha = 0.05) +
+  geom_smooth(color = "grey80", alpha = 0.1) +
   theme_minimal() +
   scale_x_continuous(name = "Net",
                      breaks = c(0, 1250, 2500),
@@ -1297,8 +1450,8 @@ library(scales)
 ggplot(hancock,
        aes(x = net,
            y = gross)) +
-  geom_point(alpha = 0.1) +
-  geom_smooth(color = "grey70") +
+  geom_point(alpha = 0.05) +
+  geom_smooth(color = "grey80", alpha = 0.1) +
   theme_minimal() +
   scale_x_continuous(name = "Net",
                      breaks = pretty_breaks(5),
@@ -1358,7 +1511,7 @@ ggplot(hancock,
   scale_y_continuous(name = "Gross",
                      breaks = pretty_breaks(3),
                      labels = dollar) +
-  facet_wrap(facets = race ~ .)                     # Only one side needed
+  facet_wrap(facets = ethnicity ~ .)                     # Only one side needed
 
 ```
 
@@ -1381,7 +1534,7 @@ ggplot(hancock,
   scale_y_continuous(name = "Gross",
                      breaks = pretty_breaks(3),
                      labels = dollar) +
-  facet_grid(facets = . ~ race, )                     # Now with facet_grid() !
+  facet_grid(facets = . ~ ethnicity, )                     # Now with facet_grid() !
 
 ```
 
@@ -1425,7 +1578,7 @@ ggplot(hancock,
   scale_y_continuous(name = "Gross",
                      breaks = pretty_breaks(3),
                      labels = dollar) +
-  facet_wrap(facets = . ~ race) +
+  facet_wrap(facets = . ~ ethnicity) +
   theme(strip.text = element_text(face = "bold",
                                   color = "grey40",
                                   family = "Verdana"))   # The framework in action
@@ -1459,7 +1612,7 @@ p <- ggplot(hancock,
   scale_y_continuous(name = "Gross",
                      breaks = pretty_breaks(3),
                      labels = dollar) +
-  facet_wrap(facets = . ~ race) +
+  facet_wrap(facets = . ~ ethnicity) +
   theme(strip.text = element_text(face = "bold",
                                   color = "grey40",
                                   family = "Verdana"))
@@ -1518,7 +1671,7 @@ p + theme(axis.title = element_text(color = "gray50",
 <br>
 <br>
 
-### Interactive Charts with "plotly"
+## Interactive Charts with "plotly"
 
 On a brief side note, you can make your "ggplot2" plots interactive with "plotly".
 
@@ -1531,7 +1684,7 @@ On a brief side note, you can make your "ggplot2" plots interactive with "plotly
 library(scales)
 library(ggplot2)
 
-p <- ggplot(hancock,
+p <- ggplot(hancock,              # Modified plot assigned to "p" with <-
        aes(x = net,
            y = gross)) +
   geom_point(alpha = 0.5,
@@ -1545,7 +1698,7 @@ p <- ggplot(hancock,
   scale_y_continuous(name = "Weekly Gross",
                      labels = dollar,
                      breaks = pretty_breaks(4)) +
-  facet_wrap(facets = . ~ race)
+  facet_wrap(facets = . ~ ethnicity)
 
 ```
 
@@ -1561,16 +1714,119 @@ ggplotly(p)       # Insert your ggplot object!
 
 ```
 
-Sweet.
+Sweet. Not perfect - but with a bit of TLC it'd be right as rain. 
 
 <br>
 <br>
 
-### Further Resources
+## Combining Plots
 
-* ["Visualization with ggplot2: Part I"](http://rpubs.com/JamisonCrawford/ggplot2) (Crawford, 2019)
-* ["Visualization with ggplot2: Part II"](http://rpubs.com/JamisonCrawford/ggplot22) (Crawford, 2019)
-* ["Visualization with ggplot2: Part III"](http://rpubs.com/JamisonCrawford/ggplot23) (Crawford, 2019)
+Overlaying one plot ontop of another is simply a matter of adding **geoms**.
+
+Needed within those **geoms** may be new calls to `aes()`.
+
+<br>
+
+Let's begin with a simple jitter plot of `net` distributed by `ethnicity`:
+
+```{r message=F, warning=F, cache=T}
+
+ggplot(hancock,
+       aes(x = net,
+           y = ethnicity)) +
+  geom_jitter(height = 0.3,
+              alpha = 0.3,
+              color = "steelblue") +
+  theme_minimal()
+
+```
+
+<br>
+
+**Overlay plots** by adding additional **geom**. Here, we add `geom_boxplot()`:
+
+```{r message=F, warning=F, cache=T}
+
+ggplot(hancock,
+       aes(x = ethnicity,
+           y = net)) +
+  geom_jitter(height = 0.3,
+              alpha = 0.3,
+              color = "steelblue") +
+  coord_flip() +
+  theme_minimal() +
+  geom_boxplot(height = 0.3,              # Simply add the new geom
+               fill = "transparent",      # Modify attributes accordingly
+               color = "grey50")
+
+```
+
+<br>
+
+**The Final Product:** A plot overlay with some finishing touches:
+
+```{r message=F, warning=F, cache=T}
+
+library(extrafont)
+
+ggplot(hancock,
+       aes(x = reorder(ethnicity, net),
+           y = net)) +
+  geom_jitter(height = 0.3,
+              alpha = 0.4,
+              color = "dodgerblue") +
+  coord_flip() +
+  theme_minimal() +
+  geom_boxplot(height = 0.2,
+               fill = "transparent",
+               color = "grey50") +
+  labs(title = "Distribution of weekly net by ethnicity",
+       subtitle = "Hancock Airport, 2018",
+       x = NULL,
+       y = "Weekly Net",
+       caption = "Source: Syracuse Regional Airport Authority") +
+  scale_y_continuous(labels = dollar) +
+  theme(text = element_text(family = "Calibri Light"),
+        axis.title.x = element_text(vjust = -1,
+                                    color = "grey20"),
+        plot.caption = element_text(vjust = -1,
+                                    color = "grey60"),
+        plot.subtitle = element_text(vjust = 1,
+                                     color = "grey30"),
+        plot.title = element_text(vjust = 2,
+                                  color = "grey10"),
+        axis.text.x = element_text(colour = "grey10"),
+        axis.text.y = element_text(colour = "grey10"))
+
+```
+
+<br>
+<br>
+
+## Package "ggplot2" Extensions
+
+We used a "ggplot2" extension in the introduction to this chapter: ["GGally"](https://www.rdocumentation.org/packages/GGally/versions/1.4.0).
+
+You can find a list of every single extension at the [**ggplot2 extensions gallery**](http://www.ggplot2-exts.org/gallery/).
+
+<br>
+<br>
+
+## Further Resources
+
+To review the practice data from Hancock Airport, get the raw data URL [here](https://raw.githubusercontent.com/DS4PS/dp4ss-textbook/master/tables/hancock.csv).
+
+There's a lot to master here - but it's worth it. These can help:
+
+* [ggplot2 Tidyverse Page](https://ggplot2.tidyverse.org)
+* [ggplot2 Cheat Sheet (RStudio)](https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf)
+* [ggplot2 Extensions Gallery](https://www.ggplot2-exts.org/gallery/)
+* [The R Graph Gallery](https://www.r-graph-gallery.com/)
+* [R Documentation: Scales](https://www.rdocumentation.org/packages/scales/versions/0.4.1)
+* [R Graphing Library (Plotly)](https://plot.ly/r/)
+* ["Visualization with ggplot2: Part I"](http://rpubs.com/JamisonCrawford/ggplot2)
+* ["Visualization with ggplot2: Part II"](http://rpubs.com/JamisonCrawford/ggplot22)
+* ["Visualization with ggplot2: Part III"](http://rpubs.com/JamisonCrawford/ggplot23)
 
 <br>
 <br>
