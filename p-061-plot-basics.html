@@ -208,15 +208,14 @@ $(document).ready(function () {
 <div id="TOC">
 <ul>
 <li><a href="#the-plot-function"><span class="toc-section-number">1</span> The plot() Function</a><ul>
-<li><a href="#key-concepts"><span class="toc-section-number">1.1</span> Key Concepts</a></li>
-<li><a href="#plot-arguments"><span class="toc-section-number">1.2</span> plot() Arguments</a></li>
-<li><a href="#the-default-scatterplot"><span class="toc-section-number">1.3</span> The Default Scatterplot</a></li>
-<li><a href="#titles"><span class="toc-section-number">1.4</span> Titles</a></li>
-<li><a href="#type-of-plot"><span class="toc-section-number">1.5</span> Type of Plot</a></li>
-<li><a href="#shape-of-points"><span class="toc-section-number">1.6</span> Shape of Points</a></li>
-<li><a href="#size-of-points"><span class="toc-section-number">1.7</span> Size of Points</a></li>
-<li><a href="#colors"><span class="toc-section-number">1.8</span> Colors</a></li>
-<li><a href="#looking-ahead"><span class="toc-section-number">1.9</span> Looking Ahead</a></li>
+<li><a href="#plot-arguments"><span class="toc-section-number">1.1</span> plot() Arguments</a></li>
+<li><a href="#the-default-scatterplot"><span class="toc-section-number">1.2</span> The Default Scatterplot</a></li>
+<li><a href="#titles"><span class="toc-section-number">1.3</span> Titles</a></li>
+<li><a href="#type-of-plot"><span class="toc-section-number">1.4</span> Type of Plot</a></li>
+<li><a href="#shape-of-points"><span class="toc-section-number">1.5</span> Shape of Points</a></li>
+<li><a href="#size-of-points"><span class="toc-section-number">1.6</span> Size of Points</a></li>
+<li><a href="#colors"><span class="toc-section-number">1.7</span> Colors</a></li>
+<li><a href="#looking-ahead"><span class="toc-section-number">1.8</span> Looking Ahead</a></li>
 </ul></li>
 </ul>
 </div>
@@ -224,14 +223,38 @@ $(document).ready(function () {
 <script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
 <div id="the-plot-function" class="section level1">
 <h1><span class="header-section-number">1</span> The plot() Function</h1>
+<div class="tip">
+<h3 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h3>
+<p>We can create highly-customized scatterplots by mastering a few arguments:</p>
+<ul>
+<li>xlim, ylim - min and max values for the x and y plot range displayed<br />
+</li>
+<li>frame.plot - change to FALSE to suppress a box drawn around the plot</li>
+<li>col - the colors of the plotting points<br />
+</li>
+<li>type - the style of plot: points, lines, or both</li>
+<li>pch - the shape of the plotting points</li>
+<li>cex - the size of the plotting points</li>
+<li>main - the title of the plot</li>
+<li>xlab, ylab - axes labels<br />
+</li>
+<li>cex.lab - the size of axes labels</li>
+</ul>
+<p>These are some of the most useful arguments for the plot() function, but only a small sample of settings that you can change.</p>
+<p>Try <strong>help( “par” )</strong> for a more extensive list.</p>
+<p><br>
+<br></p>
+</div>
+<p><br>
+<br></p>
 <div class="figure"><span id="fig:unnamed-chunk-3"></span>
 <img src="figures/anatomy_of_a_graph1.png" alt="The core graphics package allows you to control every element of a visualization." width="80%" />
 <p class="caption">
 Figure 1.1: The core graphics package allows you to control every element of a visualization.
 </p>
 </div>
-<div id="key-concepts" class="section level2">
-<h2><span class="header-section-number">1.1</span> Key Concepts</h2>
+<p><br>
+<br></p>
 <p>Mastering a few arguments in the <strong>plot()</strong> function allows for a lot of customization.</p>
 <pre class="r"><code>plot(
   
@@ -250,16 +273,15 @@ Figure 1.1: The core graphics package allows you to control every element of a v
   cex.lab=1.5            # aspect ratio for axes labels
   
   )</code></pre>
-</div>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-5-1.png" width="768" /></p>
 <div id="plot-arguments" class="section level2">
-<h2><span class="header-section-number">1.2</span> plot() Arguments</h2>
+<h2><span class="header-section-number">1.1</span> plot() Arguments</h2>
 <p>This lecture is a brief introduction to the plot() function in R, the work horse of the graphics package. We will introduce the flexibility of the fully-customizable graphics engine in R through the demonstration of some useful arguments.</p>
 <p>To demonstrate these arguments we will use a simple dataset from a hypothetical farming experiment that examines the relationship between levels of new fertilizer under development and the height of the corn. To identify the optimal dosage of fertilizer to use, the experiment applies different levels to separate fields of corn, then measures the average final corn height at each dosage. The fields are scattered across three farms, and “moisture” represents the average Volumetric Water Content of the soil in each field.</p>
 <p>You can load it as follows:</p>
 <pre class="r"><code>source( &quot;https://raw.githubusercontent.com/DS4PS/Data-Science-Class/master/DATA/corn_stalks.R&quot; )</code></pre>
-<table style="width:75%;">
+<table style="width:62%;">
 <colgroup>
-<col width="12%" />
 <col width="18%" />
 <col width="19%" />
 <col width="15%" />
@@ -267,7 +289,6 @@ Figure 1.1: The core graphics package allows you to control every element of a v
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center"> </th>
 <th align="center">fertilizer</th>
 <th align="center">corn.height</th>
 <th align="center">moisture</th>
@@ -276,74 +297,64 @@ Figure 1.1: The core graphics package allows you to control every element of a v
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>74</strong></td>
-<td align="center">74</td>
-<td align="center">271.8</td>
-<td align="center">0.6507</td>
-<td align="center">A</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>62</strong></td>
-<td align="center">62</td>
-<td align="center">297.9</td>
-<td align="center">0.04027</td>
-<td align="center">C</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>45</strong></td>
-<td align="center">45</td>
-<td align="center">324.5</td>
-<td align="center">0.5317</td>
-<td align="center">A</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>26</strong></td>
-<td align="center">26</td>
-<td align="center">248.9</td>
-<td align="center">0.4743</td>
-<td align="center">A</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>3</strong></td>
-<td align="center">3</td>
-<td align="center">254.6</td>
-<td align="center">0.7559</td>
+<td align="center">76</td>
+<td align="center">256</td>
+<td align="center">0.47</td>
 <td align="center">C</td>
 </tr>
 <tr class="even">
-<td align="center"><strong>91</strong></td>
-<td align="center">91</td>
-<td align="center">280.7</td>
-<td align="center">0.8079</td>
-<td align="center">C</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>96</strong></td>
-<td align="center">96</td>
-<td align="center">255.8</td>
-<td align="center">0.89</td>
-<td align="center">C</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>90</strong></td>
-<td align="center">90</td>
-<td align="center">266.1</td>
-<td align="center">0.5377</td>
-<td align="center">A</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>75</strong></td>
-<td align="center">75</td>
-<td align="center">263</td>
-<td align="center">0.468</td>
-<td align="center">A</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>35</strong></td>
-<td align="center">35</td>
-<td align="center">281.4</td>
-<td align="center">0.3609</td>
+<td align="center">22</td>
+<td align="center">300</td>
+<td align="center">0.5</td>
 <td align="center">B</td>
+</tr>
+<tr class="odd">
+<td align="center">25</td>
+<td align="center">323</td>
+<td align="center">0.6</td>
+<td align="center">C</td>
+</tr>
+<tr class="even">
+<td align="center">29</td>
+<td align="center">287</td>
+<td align="center">0.4</td>
+<td align="center">C</td>
+</tr>
+<tr class="odd">
+<td align="center">69</td>
+<td align="center">306</td>
+<td align="center">0.51</td>
+<td align="center">A</td>
+</tr>
+<tr class="even">
+<td align="center">24</td>
+<td align="center">258</td>
+<td align="center">0.76</td>
+<td align="center">C</td>
+</tr>
+<tr class="odd">
+<td align="center">60</td>
+<td align="center">311</td>
+<td align="center">0.07</td>
+<td align="center">B</td>
+</tr>
+<tr class="even">
+<td align="center">7</td>
+<td align="center">257</td>
+<td align="center">0.47</td>
+<td align="center">A</td>
+</tr>
+<tr class="odd">
+<td align="center">81</td>
+<td align="center">247</td>
+<td align="center">0.57</td>
+<td align="center">A</td>
+</tr>
+<tr class="even">
+<td align="center">92</td>
+<td align="center">241</td>
+<td align="center">0.74</td>
+<td align="center">C</td>
 </tr>
 </tbody>
 </table>
@@ -358,14 +369,14 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNvdXJjZSggXCJodHRwczovL3Jhdy5n
 </div>
 </div>
 <div id="the-default-scatterplot" class="section level2">
-<h2><span class="header-section-number">1.3</span> The Default Scatterplot</h2>
+<h2><span class="header-section-number">1.2</span> The Default Scatterplot</h2>
 <p>The default <strong>plot()</strong> function requires an x-variable and y-variable and will create a scatterplot, adding axes and a title:</p>
 <pre class="r"><code>plot( x=fertilizer, y=corn.height )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-10-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
 <p>Ok, so let’s improve upon this a bit. You can use the following arguments to customize the plot:</p>
 </div>
 <div id="titles" class="section level2">
-<h2><span class="header-section-number">1.4</span> Titles</h2>
+<h2><span class="header-section-number">1.3</span> Titles</h2>
 <p>We can add better labels and a title with <strong>xlab=</strong>, <strong>ylab=</strong>, and <strong>main=</strong>.</p>
 <pre class="r"><code>plot( 
       x=fertilizer, y=corn.height,
@@ -373,7 +384,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNvdXJjZSggXCJodHRwczovL3Jhdy5n
       ylab=&quot;Corn Height (cm)&quot;,
       main=&quot;Relationship Between Fertilizer Intensity and Corn Growth&quot;    
     )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-11-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-12-1.png" width="768" /></p>
 <p>We can also change their size with <strong>cex.lab=</strong> to control the size of the axes labels, and <strong>cex.main=</strong> to control the size of the title.</p>
 <p>Note that all of the <strong>cex</strong> arguments are aspect ratios, meaning that the default value of 1 represents 100% and all other argument values are in relation to this default. A value of 2 means to increase the title to 200% of the size, an argument of 0.5 shrinks the title to half the original size.</p>
 <pre class="r"><code>plot( 
@@ -384,10 +395,10 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNvdXJjZSggXCJodHRwczovL3Jhdy5n
       cex.lab=2,               # double the size of the axis labels
       col.lab=&quot;steelblue&quot;      # change color of axis labels
     )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-13-1.png" width="480" /><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-13-2.png" width="480" /><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-13-3.png" width="480" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-14-1.png" width="480" /><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-14-2.png" width="480" /><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-14-3.png" width="480" /></p>
 </div>
 <div id="type-of-plot" class="section level2">
-<h2><span class="header-section-number">1.5</span> Type of Plot</h2>
+<h2><span class="header-section-number">1.4</span> Type of Plot</h2>
 <p>We can plot points, lines, or some combination of lines and points using the <strong>type=</strong> argument:</p>
 <ul>
 <li>“l” for lines</li>
@@ -406,12 +417,12 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNvdXJjZSggXCJodHRwczovL3Jhdy5n
       col.axis=&quot;gray60&quot;,
       frame.plot=F
     )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-15-1.png" width="960" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
 </div>
 <div id="shape-of-points" class="section level2">
-<h2><span class="header-section-number">1.6</span> Shape of Points</h2>
+<h2><span class="header-section-number">1.5</span> Shape of Points</h2>
 <p>The argument <strong>pch</strong> determines the shape of the plot points. The numeric values 0 to 25 represent different default shapes. We can also use any number, letter, or symbol as a plotting shape.</p>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-16-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-17-1.png" width="768" /></p>
 <p>Note that shapes 0 to 14 are hollow, 15 to 20 are solid, and 21 to 25 can also plot a background color specified by the <strong>bg=</strong> argument.</p>
 <pre class="r"><code>plot( 
       x=fertilizer, y=corn.height,
@@ -421,10 +432,10 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNvdXJjZSggXCJodHRwczovL3Jhdy5n
       main=&quot;pch=23&quot;, cex.main=1.5,
       pch=23, col=&quot;red&quot;, bg=&quot;green&quot;
     )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-17-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-18-1.png" width="768" /></p>
 </div>
 <div id="size-of-points" class="section level2">
-<h2><span class="header-section-number">1.7</span> Size of Points</h2>
+<h2><span class="header-section-number">1.6</span> Size of Points</h2>
 <p>We change the size of points using the <strong>cex=</strong> argument (pronounced “chex”). Similar to the title cex, it is an aspect ratio so cex=2 increases the size of the plotting points to 200% of the original, and cex=0.5 scales the size down to half of the original size.</p>
 <pre class="r"><code>plot( 
       x=fertilizer, y=corn.height,
@@ -435,7 +446,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNvdXJjZSggXCJodHRwczovL3Jhdy5n
       main=&quot;cex=2&quot;, cex.main=2,
       frame.plot=FALSE
     )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-19-1.png" width="480" /><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-19-2.png" width="480" /><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-19-3.png" width="480" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-20-1.png" width="480" /><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-20-2.png" width="480" /><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-20-3.png" width="480" /></p>
 <p>The <strong>cex=</strong> argument is also useful for incorporating a third numeric variable into the analysis. For example, perhaps we want to include the average moisture levels of the soil for each field. When we use a numeric vector like this with the <strong>cex=</strong> argument, instead of a single constant, the plot will adjust the size of observation based upon its measured moisture level. Since moisture values are between 0 and 1, I have scaled them by 3 to ensure the points are large enough to see.</p>
 <pre class="r"><code>plot( 
       x=fertilizer, y=corn.height,
@@ -446,10 +457,10 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNvdXJjZSggXCJodHRwczovL3Jhdy5n
       ylab=&quot;Corn Height (cm)&quot;,
       main=&quot;Relationship Between Fertilizer Intensity and Corn Growth&quot;
     )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-20-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-21-1.png" width="768" /></p>
 </div>
 <div id="colors" class="section level2">
-<h2><span class="header-section-number">1.8</span> Colors</h2>
+<h2><span class="header-section-number">1.7</span> Colors</h2>
 <p>The argument <strong>col=</strong> determines the color of plot points. To see a list of preset options check out:</p>
 <p><a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">List of default named colors in R</a></p>
 <pre class="r"><code>plot( 
@@ -460,7 +471,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNvdXJjZSggXCJodHRwczovL3Jhdy5n
       main=&quot;Relationship Between Fertilizer Intensity and Corn Growth&quot;,
       frame.plot=FALSE
     )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-21-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
 <p>In the example above we specified a single color for all of our corn heights. If we want to incorporate a third categorical variable in our analysis, we can use a factor in our dataset as the value we pass to the <strong>col=</strong> argument. For example, perhaps we want to indicate which farm each field belongs to in the graph.</p>
 <pre class="r"><code>plot( 
       x=fertilizer, y=corn.height,
@@ -471,7 +482,7 @@ eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6InNvdXJjZSggXCJodHRwczovL3Jhdy5n
       main=&quot;Relationship Between Fertilizer Intensity and Corn Growth&quot;,
       frame.plot=FALSE
     )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-23-1.png" width="768" /></p>
 <p>Note that “farms” has to be a factor in order to use it in the <strong>col=</strong> argument. In this example, the farms have labels of “A” to “C”.</p>
 <pre class="r"><code>levels( farm )</code></pre>
 <pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot;</code></pre>
@@ -492,10 +503,10 @@ plot(
       main=&quot;Relationship Between Fertilizer Intensity and Corn Growth&quot;,
       frame.plot=FALSE
     )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-25-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-26-1.png" width="768" /></p>
 </div>
 <div id="looking-ahead" class="section level2">
-<h2><span class="header-section-number">1.9</span> Looking Ahead</h2>
+<h2><span class="header-section-number">1.8</span> Looking Ahead</h2>
 <p>In the next section, we will add some lines, points, and text to the plot.</p>
 <p>We can add lines to highlight trends (a regression is just the average of Y at each level of X).</p>
 <pre class="r"><code>plot( 
@@ -510,7 +521,7 @@ plot(
     )
 
 lines( lowess( fertilizer, corn.height ), col=&quot;darkgoldenrod2&quot;, lwd=4 )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-26-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-27-1.png" width="768" /></p>
 <p>In order to add narrative to your graphs, you can add points and text.</p>
 <p>The <strong>points()</strong> function operates with basically the same parameters as the <strong>plot()</strong> function. The <strong>text()</strong> function uses the same X and Y coordinates, but you also have to add an argument for the text that you want added to the plot.</p>
 <p>Let’s highlight the tallest corn stalk as an example.</p>
@@ -522,7 +533,7 @@ points( x=tallest.x, y=tallest.y, cex=3, lwd=1.5, col=&quot;firebrick4&quot; )
 text( x=tallest.x, y=tallest.y, 
       labels=&quot;Tallest Stalk&quot;, 
       pos=3, offset=1, col=&quot;firebrick4&quot; )</code></pre>
-<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-28-1.png" width="768" /></p>
+<p><img src="p-061-plot-basics_files/figure-html/unnamed-chunk-29-1.png" width="768" /></p>
 </div>
 </div>
 
