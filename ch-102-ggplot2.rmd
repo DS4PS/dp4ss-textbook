@@ -1117,7 +1117,7 @@ ggplot(data = hancock,
 
 FUN FACT
 
-Many ggplot2 color functions contain `brewer` in the name. That's because, by default, ggplot2 uses color palettes based on the research of [Cynthia Brewer, Ph.D.](https://en.wikipedia.org/wiki/Cynthia_Brewer).
+Many ggplot2 color functions contain `brewer` in the name. That's because, by default, ggplot2 uses color palettes based on the research of [Dr. Cynthia Brewer](https://en.wikipedia.org/wiki/Cynthia_Brewer).
 
 Dr. Brewer's premade palettes, all recognized in ggplot2, are available in [Color Brewer 2](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3).
 
@@ -1239,6 +1239,8 @@ However, you can reverse the x- and y-axes by using function `coord_flip()`:
 
 ```{r, echo=F, message=F, warning=F, cache=T}
 
+options(scipen = 999)
+
 ggplot(data = hancock, 
        aes(x = reorder(ethnicity, net), 
            y = net)) +
@@ -1250,6 +1252,8 @@ ggplot(data = hancock,
 ```
 
 ```{r, cache=T}
+
+options(scipen = 999)                 # Disable scientific notation
 
 ggplot(data = hancock, 
        aes(x = reorder(ethnicity, net), 

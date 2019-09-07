@@ -982,7 +982,7 @@ ggplot(data = hancock,
 <br></p>
 <div class="note">
 <p>FUN FACT</p>
-<p>Many ggplot2 color functions contain <code>brewer</code> in the name. That’s because, by default, ggplot2 uses color palettes based on the research of <a href="https://en.wikipedia.org/wiki/Cynthia_Brewer">Cynthia Brewer, Ph.D.</a>.</p>
+<p>Many ggplot2 color functions contain <code>brewer</code> in the name. That’s because, by default, ggplot2 uses color palettes based on the research of <a href="https://en.wikipedia.org/wiki/Cynthia_Brewer">Dr. Cynthia Brewer</a>.</p>
 <p>Dr. Brewer’s premade palettes, all recognized in ggplot2, are available in <a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3">Color Brewer 2</a>.</p>
 </div>
 <p><br>
@@ -1068,7 +1068,9 @@ ggplot(data = hancock,
 <p><strong>Flipping Coordinates!</strong> No, we’re not cursing out <strong>coordinates</strong>.</p>
 <p>However, you can reverse the x- and y-axes by using function <code>coord_flip()</code>:</p>
 <p><img src="ch-102-ggplot2_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
-<pre class="r"><code>ggplot(data = hancock, 
+<pre class="r"><code>options(scipen = 999)                 # Disable scientific notation
+
+ggplot(data = hancock, 
        aes(x = reorder(ethnicity, net), 
            y = net)) +
   geom_bar(stat = &quot;identity&quot;) +
