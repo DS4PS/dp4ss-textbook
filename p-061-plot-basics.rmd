@@ -154,12 +154,16 @@ dat <- data.frame( fertilizer,
                    farm )
 
 head( dat, 10 ) %>% pander()
-
-dat$fertilizer <- 1:100 
-fertilizer <- 1:100
 ```
 
 
+```{r, echo=F}
+source( "https://raw.githubusercontent.com/DS4PS/Data-Science-Class/master/DATA/corn_stalks.R" )
+dat <- data.frame( fertilizer,
+                   corn.height=round(corn.height,0),
+                   moisture=round(moisture,2),
+                   farm )
+```
 
 
 
