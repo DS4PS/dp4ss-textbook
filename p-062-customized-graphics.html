@@ -271,16 +271,16 @@ Mark McGuire before and after alleged steroid use.
 <div id="core-graphic-functions" class="section level2">
 <h2><span class="header-section-number">1.2</span> Core Graphic Functions</h2>
 <pre class="r"><code>points(
-  x=x, y=y,                    # plots points at the x,y positions 
-  pch=19,                      # the type of point to plot
-  cex=2,                           # aspect ratio of point size
-  col=&quot;red&quot;,                     # color of points
-  bg=&quot;green&quot;                     # fill color for open symbols
+  x=x, y=y,              # plots points at the x,y positions 
+  pch=19,                # the type of point to plot
+  cex=2,                 # aspect ratio of point size
+  col=&quot;red&quot;,             # color of points
+  bg=&quot;green&quot;             # fill color for open symbols
  )
 
 
 text(
-  x=x, y=y,                    # draws a line by connecting points 
+  x=x, y=y,              # draws a line by connecting points 
   labels=some.text,          # vector of labels to plot on the graph
   pos=3,                           # position: 1=below, 2=left, 3=above, 4=right
   cex=2,                           # aspect ratio of text size
@@ -510,7 +510,7 @@ points( height.jitter[ these.iowa ],
 
 points( 63, 250, pch=19, col=&quot;firebrick&quot; )
 text( 63, 250, &quot;Players form Iowa&quot;, 
-      pos=4, col=&quot;darkgray&quot; )</code></pre>
+      pos=4, cex=1.5, col=&quot;darkgray&quot; )</code></pre>
 <p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
 <p>Let’s add another layer with only that data that falls within the 25th to 75th percentiles of BMI, what we might consider “averaged” sized players relative to their height.</p>
 <pre class="r"><code>plot.new()

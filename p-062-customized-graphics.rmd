@@ -123,16 +123,16 @@ plot( t2, t1, pch=19, type="b",
 
 ```{r, eval=F}
 points(
-  x=x, y=y,				       # plots points at the x,y positions 
-  pch=19, 				       # the type of point to plot
-  cex=2,					       # aspect ratio of point size
-  col="red",				     # color of points
-  bg="green"				     # fill color for open symbols
+  x=x, y=y,              # plots points at the x,y positions 
+  pch=19,                # the type of point to plot
+  cex=2,                 # aspect ratio of point size
+  col="red",             # color of points
+  bg="green"             # fill color for open symbols
  )
 
 
 text(
-  x=x, y=y,				       # draws a line by connecting points 
+  x=x, y=y,              # draws a line by connecting points 
   labels=some.text,			 # vector of labels to plot on the graph
   pos=3, 					       # position: 1=below, 2=left, 3=above, 4=right
   cex=2,					       # aspect ratio of text size
@@ -442,7 +442,7 @@ points( height.jitter[ these.iowa ],
 
 points( 63, 250, pch=19, col="firebrick" )
 text( 63, 250, "Players form Iowa", 
-      pos=4, col="darkgray" )
+      pos=4, cex=1.5, col="darkgray" )
 ```
 
 
