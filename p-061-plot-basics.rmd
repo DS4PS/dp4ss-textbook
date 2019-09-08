@@ -1,0 +1,616 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    toc: true
+    toc_depth: 1
+    number_sections: false
+    self_contained: false
+    css: textbook.css
+---
+
+
+```{r, echo=F }
+knitr::opts_chunk$set( echo = TRUE, message=F, warning=F, fig.width=8)
+```
+
+
+```{r, echo=F}
+library( dplyr )
+library( pander )
+```
+
+
+
+# The plot() Function
+
+
+
+<div class="tip">
+
+### Key Concepts
+
+We can create highly-customized scatterplots by mastering a few arguments:
+
+* xlim, ylim - min and max values for the x and y plot range displayed  
+* frame.plot - change to FALSE to suppress a box drawn around the plot 
+* col - the colors of the plotting points  
+* type - the style of plot: points, lines, or both 
+* pch - the shape of the plotting points 
+* cex - the size of the plotting points
+* main - the title of the plot 
+* xlab, ylab - axes labels  
+* cex.lab - the size of axes labels 
+
+These are some of the most useful arguments for the plot() function, but only a small sample of settings that you can change. 
+
+Try **help( "par" )** for a more extensive list. 
+
+<br>
+<br>
+
+</div>
+
+<br>
+<br>
+
+```{r, fig.cap="The core graphics package allows you to control every element of a visualization.", echo=F, out.width='80%' }
+knitr::include_graphics( "figures/anatomy_of_a_graph1.png" )
+```
+
+
+
+
+<br>
+<br>
+
+
+Mastering a few arguments in the **plot()** function allows for a lot of customization.
+
+```{r, eval=F}
+plot(
+  
+  x=fertilizer,          # data, if x is omitted then uses 1:length(y)
+  y=corn.height,                   
+  xlim=c(0,100),         # min and max value of axes
+  ylim=c(200,350),   
+  frame.plot=FALSE,      # draw a box around the data?
+  col="steel blue",      # color of the points
+  type="b",              # points="p", lines="l", both="b", or none="n"
+  pch=19,                # shape of points to plot
+  cex=2,                 # size of points
+  main="Plot Title",     # title of your plot
+  xlab="Label for X",    # axes labels
+  ylab="Label for Y",  
+  cex.lab=1.5            # aspect ratio for axes labels
+  
+  )
+```
+
+
+
+```{r, echo=F}
+source( "https://raw.githubusercontent.com/DS4PS/Data-Science-Class/master/DATA/corn_stalks.R" )
+
+plot(
+  
+  x=fertilizer,          # data, if x is omitted then uses 1:length(y)
+  y=corn.height,                   
+  xlim=c(-10,110),         # min and max value of axes
+  ylim=c(200,350),   
+  frame.plot=FALSE,      # draw a box around the data?
+  col="steel blue",      # color of the points
+  type="b",              # points="p", lines="l", both="b", or none="n"
+  pch=19,                # shape of points to plot
+  cex=2,                 # size of points
+  main="Plot Title",     # title of your plot
+  col.main="darkorange",
+  
+  xlab="Label for X",    # axes labels
+  ylab="Label for Y",  
+  cex.lab=1.5,            # aspect ratio for axes labels
+  col.lab="firebrick"
+  
+  )
+
+title( xlab="<--  xlim=c(0,100)  -->", 
+       line=-1.5, cex.lab=1, col.lab="gray20", family="mono" )
+title( ylab="<-- ylim=c(200,350) -->", 
+       line=-1.5, cex.lab=1, col.lab="gray20", adj=1, family="mono" )
+text( 85, 345, "pch = 19", col="steelblue", cex=0.9, pos=4 )
+text( 85, 335, "type = 'b'", col="steelblue", cex=0.9, pos=4 )
+text( 85, 325, "cex = 2", col="steelblue", cex=0.9, pos=4 )
+text( 85, 315, "col = 'steelblue'", col="steelblue", cex=0.9, pos=4 )
+title( main="( col.main = 'darkorange' )              ", 
+       adj=1, col.main="darkorange", cex.main=0.8 )
+title( xlab="( col.lab = 'firebrick' )                ", 
+       adj=1, col.lab="firebrick", cex.main=0.8 )
+```
+
+
+
+## plot() Arguments
+
+This lecture is a brief introduction to the plot() function in R, the work horse of the graphics package. We will introduce the flexibility of the fully-customizable graphics engine in R through the demonstration of  some useful arguments.
+
+To demonstrate these arguments we will use a simple dataset from a hypothetical farming experiment that examines the relationship between levels of new fertilizer under development and the height of the corn. To identify the optimal dosage of fertilizer to use, the experiment applies different levels to separate fields of corn, then measures the average final corn height at each dosage. The fields are scattered across three farms, and "moisture" represents the average Volumetric Water Content of the soil in each field.
+
+You can load it as follows:
+
+```{r}
+source( "https://raw.githubusercontent.com/DS4PS/Data-Science-Class/master/DATA/corn_stalks.R" )
+```
+
+
+
+```{r, echo=F}
+# source( "https://raw.githubusercontent.com/DS4PS/Data-Science-Class/master/DATA/corn_stalks.R" )
+
+fertilizer <- sample( 1:100, 100 )
+corn.height <- 250 + 2*fertilizer + 20*rnorm(100) - 0.02*fertilizer^2
+moisture <- abs( rnorm(100,50,25) / 100 )
+farm <- factor( sample( c("A","B","C"), 100, replace=T ) )
+dat <- data.frame( fertilizer,
+                   corn.height=round(corn.height,0),
+                   moisture=round(moisture,2),
+                   farm )
+
+head( dat, 10 ) %>% pander()
+
+dat$fertilizer <- 1:100 
+fertilizer <- 1:100
+```
+
+
+
+
+
+
+<br>
+<br>
+
+<div class="question">
+Change plot() arguments to see how they impact the graph.
+
+In your R console type `colors()` to get a list of color names that R will recognize, or type `demo("colors")` to get a tour of some options.
+</div>
+
+
+```{r, include=FALSE}
+tutorial::go_interactive( greedy=FALSE)
+```
+
+```{r ex="ex-01", type="pre-exercise-code", tut=TRUE}
+source( "https://raw.githubusercontent.com/DS4PS/Data-Science-Class/master/DATA/corn_stalks.R" )
+```
+
+
+```{r ex="ex-01", type="sample-code", tut=TRUE, height=400 }
+plot(
+  
+  x=fertilizer,          # input data
+  y=corn.height,                   
+  xlim=c(0,100),         # min and max value of axes
+  ylim=c(200,350),   
+  frame.plot=FALSE,      # draw a box around the data?
+  col="steel blue",      # color of the points
+  type="b",              # points="p", 
+                         # lines="l", 
+                         # both="b", 
+  pch=19,                # shape of points to plot
+  cex=2,                 # size of points
+  main="Plot Title",     # title of your plot
+  xlab="Label for X",    # axes labels
+  ylab="Label for Y",  
+  cex.lab=1.5            # aspect ratio for axes labels
+)
+
+```
+
+
+
+
+## The Default Scatterplot 
+
+The default **plot()** function requires an x-variable and y-variable and will create a scatterplot, adding axes and a title:
+
+
+```{r}
+plot( x=fertilizer, y=corn.height )
+```
+
+Ok, so let's improve upon this a bit. You can use the following arguments to customize the plot:
+
+## Titles
+
+
+We can add better labels and a title with **xlab=**, **ylab=**, and **main=**.
+
+```{r}
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="Relationship Between Fertilizer Intensity and Corn Growth"    
+    )
+```
+
+We can also change their size with **cex.lab=** to control the size of the axes labels, and **cex.main=** to control the size of the title. 
+
+Note that all of the **cex** arguments are aspect ratios, meaning that the default value of 1 represents 100% and all other argument values are in relation to this default. A value of 2 means to increase the title to 200% of the size, an argument of 0.5 shrinks the title to half the original size. 
+
+
+```{r, eval=F}
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="cex.lab=2", 
+      cex.lab=2,               # double the size of the axis labels
+      col.lab="steelblue"      # change color of axis labels
+    )
+
+```
+
+```{r, fig.width=5, echo=F}
+par( mar=c(5,5,5,2), bty="n" )  # set the margins
+     
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="default cex.lab",
+      col.lab="steelblue", las=1,
+      cex.main=1.5
+    )
+
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="cex.lab=0.5", cex.main=1.5,
+      col.lab="steelblue", las=1,
+      cex.lab=0.5
+    )
+
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="cex.lab=2", cex.main=1.5,
+      col.lab="steelblue", las=1,
+      cex.lab=2
+    )
+```
+
+
+
+
+## Type of Plot
+
+We can plot points, lines, or some combination of lines and points using the **type=** argument:
+
+* "l" for lines
+* "p" for points
+* "b" for both points and lines
+* "o" plots lines over points
+* "n" for no lines or points
+
+```{r, eval=F}
+plot( 
+      x=fertilizer, y=corn.height,
+      type="p",
+      main='type="p"',
+      cex.main=2,
+      xlab="",
+      ylab="",
+      col.axis="gray60",
+      frame.plot=F
+    )
+```
+
+
+```{r, echo=F, fig.width=10}
+par( mfrow=c(2,2), mar=c(2,2,5,2) )
+
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="",
+      ylab="",
+      main='type="p"', 
+      type="p", bty="n", col.axis="gray60",
+      cex.main=2
+    )
+
+
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="",
+      ylab="",
+      main='type="l"',
+      type="l", bty="n", col.axis="gray60",
+      cex.main=2
+    )
+
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="",
+      ylab="",
+      main='type="b"',
+      type="b", bty="n", col.axis="gray60",
+      cex.main=2
+    )
+
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="",
+      ylab="",
+      main='type="o"',
+      type="o", bty="n", col.axis="gray60",
+      cex.main=2
+    )
+```
+
+
+
+
+## Shape of Points
+
+
+The argument **pch** determines the shape of the plot points. The numeric values 0 to 25 represent different default shapes. We can also use any number, letter, or symbol as a plotting shape.
+
+```{r, echo=F}
+pchShow <-
+  function(extras = c("*",".", "o","O","0","+","-","|","%","#"),
+           cex = 3, ## good for both .Device=="postscript" and "x11"
+           col = "darkgray", bg = "gold", coltext = "black", cextext = 1.2,
+           main = paste("plot symbols :  points (...  pch = *, cex =",
+                        cex,")"))
+  {
+    nex <- length(extras)
+    np  <- 26 + nex
+    ipch <- 0:(np-1)
+    k <- floor(sqrt(np))
+    dd <- c(-1,1)/2
+    rx <- dd + range(ix <- ipch %/% k)
+    ry <- dd + range(iy <- 3 + (k-1)- ipch %% k)
+    pch <- as.list(ipch) # list with integers & strings
+    if(nex > 0) pch[26+ 1:nex] <- as.list(extras)
+    plot(rx, ry, type = "n", axes  =  FALSE, xlab = "", ylab = "", main = main)
+    abline(v = ix, h = iy, col = "lightgray", lty = "dotted")
+    for(i in 1:np) {
+      pc <- pch[[i]]
+      ## 'col' symbols with a 'bg'-colored interior (where available) :
+      points(ix[i], iy[i], pch = pc, col = col, bg = bg, cex = cex)
+      if(cextext > 0)
+          text(ix[i] - 0.3, iy[i], pc, col = coltext, cex = cextext)
+    }
+  }
+
+pchShow()
+
+```
+
+Note that shapes 0 to 14 are hollow, 15 to 20 are solid, and 21 to 25 can also plot a background color specified by the **bg=** argument. 
+
+
+```{r}
+plot( 
+      x=fertilizer, y=corn.height,
+      frame.plot=FALSE,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="pch=23", cex.main=1.5,
+      pch=23, col="red", bg="green"
+    )
+```
+
+
+
+
+## Size of Points
+
+We change the size of points using the **cex=** argument (pronounced "chex"). Similar to the title cex, it is an aspect ratio so cex=2 increases the size of the plotting points to 200% of the original, and cex=0.5 scales the size down to half of the original size. 
+
+
+```{r, eval=F}
+plot( 
+      x=fertilizer, y=corn.height,
+      col="darkgoldenrod2", 
+      pch=19, 
+      cex=2,                        # scale points to 200% normal size
+      xlab="", ylab="", las=1, 
+      main="cex=2", cex.main=2,
+      frame.plot=FALSE
+    )
+```
+
+
+```{r, fig.width=5, echo=F }
+
+# par( mar=c(4,2,5,2), mfrow=c(3,1) )  # layout
+
+par( mar=c(4,3,5,2) )  # margins
+
+plot( 
+      x=fertilizer, y=corn.height,
+      col="darkgoldenrod2", pch=19, frame=FALSE,
+      xlab="", ylab="", main="cex=1 (default)",
+      cex.main=2, las=1
+    )
+
+plot( 
+      x=fertilizer, y=corn.height,
+      col="darkgoldenrod2", pch=19, frame=FALSE,
+      xlab="", ylab="",main="cex=0.5", cex.main=2,
+      cex=0.5, las=1
+    )
+
+plot( 
+      x=fertilizer, y=corn.height,
+      col="darkgoldenrod2", pch=19, frame=FALSE,
+      xlab="", ylab="", main="cex=2", cex.main=2,
+      cex=2, las=1
+    )
+```
+
+
+The **cex=** argument is also useful for incorporating a third numeric variable into the analysis. For example, perhaps we want to include the average moisture levels of the soil for each field. When we use a numeric vector like this with the **cex=** argument, instead of a single constant, the plot will adjust the size of observation based upon its measured moisture level. Since moisture values are between 0 and 1, I have scaled them by 3 to ensure the points are large enough to see. 
+
+
+```{r}
+plot( 
+      x=fertilizer, y=corn.height,
+      col="darkgoldenrod2", 
+      cex=3*moisture,
+      pch=19, frame.plot=F,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="Relationship Between Fertilizer Intensity and Corn Growth"
+    )
+```
+
+
+## Colors
+
+The argument **col=** determines the color of plot points. To see a list of preset options check out:
+
+[List of default named colors in R](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)
+
+```{r}
+plot( 
+      x=fertilizer, y=corn.height,
+      col="darkgoldenrod2", pch=19, cex=2,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="Relationship Between Fertilizer Intensity and Corn Growth",
+      frame.plot=FALSE
+    )
+```
+
+
+In the example above we specified a single color for all of our corn heights. If we want to incorporate a third categorical variable in our analysis, we can use a factor in our dataset as the value we pass to the **col=** argument. For example, perhaps we want to indicate which farm each field belongs to in the graph. 
+
+
+
+```{r}
+plot( 
+      x=fertilizer, y=corn.height,
+      pch=19, cex=2,
+      col=farm, 
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="Relationship Between Fertilizer Intensity and Corn Growth",
+      frame.plot=FALSE
+    )
+```
+
+Note that "farms" has to be a factor in order to use it in the **col=** argument. In this example, the farms have labels of "A" to "C".
+
+```{r}
+levels( farm )
+```
+
+You might be curious how R selected the colors for the three farms. The **palette()** function will print the default values that R uses for categorical variables:
+
+```{r}
+palette()
+```
+
+You can see that the first three are the colors used in the graph above. Since there are only 8 default values, if your categorical variable has more than 8 levels it will start to recycle colors.
+
+Perhaps you don't like the default values. You can select your own by passing color names to the **palette()** function as follows:
+
+
+```{r}
+palette( c("forestgreen","darkorange1","darkorchid") )
+
+plot( 
+      x=fertilizer, y=corn.height,
+      pch=18, cex=3,
+      col=farm, 
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="Relationship Between Fertilizer Intensity and Corn Growth",
+      frame.plot=FALSE
+    )
+```
+
+
+
+## Looking Ahead
+
+In the next section, we will add some lines, points, and text to the plot.
+
+
+We can add lines to highlight trends (a regression is just the average of Y at each level of X).
+
+```{r}
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      main="Relationship Between Fertilizer Intensity and Corn Growth",
+      pch=19, 
+      col="gray",
+      cex=2,
+      bty="n"
+    )
+
+lines( lowess( fertilizer, corn.height ), col="darkgoldenrod2", lwd=4 )
+```
+
+
+In order to add narrative to your graphs, you can add points and text.
+
+The **points()** function operates with basically the same parameters as the **plot()** function. The **text()** function uses the same X and Y coordinates, but you also have to add an argument for the text that you want added to the plot. 
+
+Let's highlight the tallest corn stalk as an example.
+
+
+```{r, eval=F}
+tallest.x <- fertilizer[ which.max( corn.height ) ]
+tallest.y <- corn.height[ which.max( corn.height ) ]
+
+points( x=tallest.x, y=tallest.y, cex=3, lwd=1.5, col="firebrick4" )
+
+text( x=tallest.x, y=tallest.y, 
+      labels="Tallest Stalk", 
+      pos=3, offset=1, col="firebrick4" )
+```
+
+```{r, echo=F}
+plot( 
+      x=fertilizer, y=corn.height,
+      xlab="Fertilizer (mg)",
+      ylab="Corn Height (cm)",
+      ylim=c(200,400),
+      main="Relationship Between Fertilizer Intensity and Corn Growth",
+      pch=19, 
+      col="gray",
+      cex=2,
+      bty="n"
+    )
+
+lines( lowess( fertilizer, corn.height ), col="darkgoldenrod2", lwd=4 )
+
+tallest.x <- fertilizer[ which.max( corn.height ) ]
+tallest.y <- corn.height[ which.max( corn.height ) ]
+points( x=tallest.x, y=tallest.y, cex=3, lwd=1.5, col="firebrick4" )
+text( x=tallest.x, y=tallest.y, labels="Tallest Stalk", pos=3, offset=1, col="firebrick4" )
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
