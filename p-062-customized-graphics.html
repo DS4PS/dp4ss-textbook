@@ -399,7 +399,7 @@ data( Master )</code></pre>
 </tbody>
 </table>
 <p>Remove players that are missing height or weight measures:</p>
-<pre class="r"><code>Master &lt;- select( Master, height, weight )
+<pre class="r"><code>Master &lt;- select( Master, height, weight, birthState )
 Master &lt;- na.omit( Master )</code></pre>
 </div>
 <div id="building-the-canvas" class="section level3">
@@ -510,7 +510,7 @@ points( height.jitter[ these.iowa ],
 
 points( 63, 250, pch=19, col=&quot;firebrick&quot; )
 text( 63, 250, &quot;Players form Iowa&quot;, 
-      pos=4, cex=0.8, col=&quot;darkgray&quot; )</code></pre>
+      pos=4, col=&quot;darkgray&quot; )</code></pre>
 <p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
 <p>Let’s add another layer with only that data that falls within the 25th to 75th percentiles of BMI, what we might consider “averaged” sized players relative to their height.</p>
 <pre class="r"><code>plot.new()
