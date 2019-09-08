@@ -281,32 +281,32 @@ Mark McGuire before and after alleged steroid use.
 
 text(
   x=x, y=y,              # draws a line by connecting points 
-  labels=some.text,          # vector of labels to plot on the graph
-  pos=3,                           # position: 1=below, 2=left, 3=above, 4=right
-  cex=2,                           # aspect ratio of text size
-  col=&quot;red&quot;                    # color of text
+  labels=some.text,      # vector of labels to plot on the graph
+  pos=3,                 # position: 1=below, 2=left, 3=above, 4=right
+  cex=2,                 # aspect ratio of text size
+  col=&quot;red&quot;              # color of text
  )
 
 
 lines(
-  x=x, y=y,                    # draws a line by connecting points 
-  lty=&quot;l&quot;,                       # type of lines, same as above
-  lwd=0.5,                     # line thickness
+  x=x, y=y,              # draws a line by connecting points 
+  lty=&quot;l&quot;,               # type of lines, same as above
+  lwd=0.5,               # line thickness
 )
 
 
 segments(
-  x0=x0, y0=y0,              # starting points of the segments (usually a vector)
-  x1=x1, y1=y1,              # end points of the segments (usually a vector)
-  ...                            # other arguments from lines()
+  x0=x0, y0=y0,          # starting points of the segments (usually a vector)
+  x1=x1, y1=y1,          # end points of the segments (usually a vector)
+  ...                    # other arguments from lines()
  )
 
 
 title(
-  main=&quot;Plot Title&quot;,       # text for the plot title
-  xlab=&quot;x variable&quot;,       # text for the x-axis label
-  ylab=&quot;y variable&quot;,       # text for the y-axis label
-  line= -1                 # move the title closer / further
+  main=&quot;Plot Title&quot;,     # text for the plot title
+  xlab=&quot;x variable&quot;,     # text for the x-axis label
+  ylab=&quot;y variable&quot;,     # text for the y-axis label
+  line= -1               # move the title closer / further
 )
  
 
@@ -408,7 +408,7 @@ Master &lt;- na.omit( Master )</code></pre>
 <p>The canvas is the Cartesian coordinate system upon which you will place the data. You need to define the coordinate system before plotting any data using the <strong>xlim=</strong> and <strong>ylim=</strong> arguments.</p>
 <p>The <strong>plot.new()</strong> function launches a new graphics window. The <strong>plot.window()</strong> function sets the coordinates.</p>
 <pre class="r"><code>plot.new()
-plot.window( xlim=c( 1, 10 ), ylim=c( 1, 10 ) )</code></pre>
+plot.window( xlim=c( 1, 10 ), ylim=c( 1, 5 ) )</code></pre>
 <p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-10-1.png" width="480" /></p>
 <center>
 <em>New canvas with the grid defined by <strong>xlim</strong> and <strong>ylim</strong> values.</em>

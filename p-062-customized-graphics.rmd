@@ -133,32 +133,32 @@ points(
 
 text(
   x=x, y=y,              # draws a line by connecting points 
-  labels=some.text,			 # vector of labels to plot on the graph
-  pos=3, 					       # position: 1=below, 2=left, 3=above, 4=right
-  cex=2,					       # aspect ratio of text size
-  col="red"				       # color of text
+  labels=some.text,      # vector of labels to plot on the graph
+  pos=3,                 # position: 1=below, 2=left, 3=above, 4=right
+  cex=2,                 # aspect ratio of text size
+  col="red"              # color of text
  )
 
 
 lines(
-  x=x, y=y,				       # draws a line by connecting points 
-  lty="l",					     # type of lines, same as above
-  lwd=0.5, 				       # line thickness
+  x=x, y=y,              # draws a line by connecting points 
+  lty="l",               # type of lines, same as above
+  lwd=0.5,               # line thickness
 )
 
 
 segments(
-  x0=x0, y0=y0,		         # starting points of the segments (usually a vector)
-  x1=x1, y1=y1,		         # end points of the segments (usually a vector)
-  ...			                 # other arguments from lines()
+  x0=x0, y0=y0,          # starting points of the segments (usually a vector)
+  x1=x1, y1=y1,          # end points of the segments (usually a vector)
+  ...                    # other arguments from lines()
  )
 
 
 title(
-  main="Plot Title",       # text for the plot title
-  xlab="x variable",       # text for the x-axis label
-  ylab="y variable",       # text for the y-axis label
-  line= -1                 # move the title closer / further
+  main="Plot Title",     # text for the plot title
+  xlab="x variable",     # text for the x-axis label
+  ylab="y variable",     # text for the y-axis label
+  line= -1               # move the title closer / further
 )
  
 
@@ -221,16 +221,16 @@ The **plot.new()** function launches a new graphics window. The **plot.window()*
 
 ```{r, fig.height=5, fig.width=5, eval=F}
 plot.new()
-plot.window( xlim=c( 1, 10 ), ylim=c( 1, 10 ) )
+plot.window( xlim=c( 1, 10 ), ylim=c( 1, 5 ) )
 ```
 
-```{r, fig.height=5, fig.width=5, echo=F}
+```{r, fig.height=3, fig.width=5, echo=F}
 par( mar=c(3,3,3,3) ) 
 plot.new()
-plot.window( xlim=c( 1, 10 ), ylim=c( 1, 10 ) )
-abline( h=1:10, col="gray" )
+plot.window( xlim=c( 1, 10 ), ylim=c( 1, 5 ) )
+abline( h=1:5, col="gray" )
 abline( v=1:10, col="gray" )
-mtext( 1:10, at=1:10, side=4, col="gray", line=0.5, las=2 )
+mtext( 1:5, at=1:5, side=4, col="gray", line=0.5, las=2 )
 mtext( 1:10, at=1:10, side=3, col="gray", line=0.5, las=1 )
 box("outer", col="navy") 
 ```
