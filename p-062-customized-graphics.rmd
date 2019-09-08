@@ -1,11 +1,125 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    toc: true
+    toc_depth: 1
+    number_sections: true
+    self_contained: false
+    css: textbook.css
+---
+
+```{r, echo=F }
+knitr::opts_chunk$set( echo = TRUE, message=F, warning=F, fig.width=10)
+```
+
+
+```{r, echo=F}
+library( dplyr )
+library( Lahman )
+library( pander )
+```
+
+
+
 # Customizing Plots
 
 
+<div class="tip">
 
-## Key Concepts
+### Key Concepts
 
-We can create almost any customized visualization using a small number of functions from the Core R graphics engine:
 
+We can create almost any customized visualization using a small number of functions from the Core R graphics engine. 
+
+Creating a new canvas:
+
+* plot.new()  
+* plot.window( xlim, ylim )  
+
+Adding data:
+
+* points()  
+* lines()  
+* segments()  
+* ablines()  
+
+Annotating data: 
+
+* text()  
+
+Annotating the canvas:
+
+* title()  
+* axis() 
+* box()  
+
+
+<br>
+<br>
+<br>
+<br>
+
+</div>
+
+
+## Packages Used in This Chapter
+
+We will use some data from the **Lahman** baseball data package for examples in this chapter.
+
+The **Master** data frame contains information about professional baseball players. We will focus on the relationship between height and weight of the players using the Body Mass Index (bmi) measure. 
+
+The data is interesting because it is easy to detect an abrubt and significant increase in baseball player size starting in the 1980's when the the abuse of steroids began.
+
+![](http://2.bp.blogspot.com/_VM2gyxxMdEI/SucFZwYpWMI/AAAAAAAAABE/ToFDxoPFpbw/s400/jurystillout.JPG)
+
+<center>
+Mark McGuire before and after alleged steroid use. 
+</center>
+
+
+```{r, echo=F}
+# install.packages( "Lahman" )
+library( Lahman )
+data( Master )
+```
+
+
+```{r, echo=F}
+Master <- filter( Master, birthYear > 1849 & birthYear < 1996 )
+
+t1 <- tapply( Master$height, Master$birthYear, mean, na.rm=T )
+t2 <- as.numeric( names( t1 ) )
+plot( t2, t1, pch=19, type="b",
+      frame.plot=F,
+      xlab="Year of Birth",
+      ylab="Average Height (inches)",
+      main="Height of MLB Players Over Time" )
+
+t1 <- tapply( Master$weight, Master$birthYear, mean, na.rm=T )
+t2 <- as.numeric( names( t1 ) )
+plot( t2, t1, pch=19, type="b",
+      frame.plot=F,
+      xlab="Year of Birth",
+      ylab="Average Weight (lbs)",
+      main="Weight of MLB Players Over Time" )
+arrows( x0=1985, y0=180, y1=200, col="darkorange", lwd=3 )
+text( x=1985, y=180, "Steroids!", pos=1, cex=1.5, col="darkorange" )
+
+bmi <- (Master$weight * 0.45359237) / (Master$height / 39.370)^2 
+t1 <- tapply( bmi, Master$birthYear, mean, na.rm=T )
+t2 <- as.numeric( names( t1 ) )
+plot( t2, t1, pch=19, type="b",
+      frame.plot=F,
+      xlab="Year of Birth",
+      ylab="Average BMI",
+      main="Body Mass Index of MLB Players Over Time" )
+```
+
+
+
+## Core Graphic Functions
 
 ```{r, eval=F}
 points(
@@ -57,114 +171,211 @@ axis(
 
 
 
-## Packages Used in This Chapter
-
-We will use some data from the **Lahman** baseball data package for examples in this chapter.
-
-The **Master** data frame contains information about professional baseball players. We will focus on the relationship between height and weight of the players. 
-
-```{r}
-library( Lahman )
-data( Master )
-```
-
-```{r, echo=F}
-head( Master[, c(14,15,17:20,2) ] ) %>% pander()
-```
-
-
-```{r, echo=F}
-Master <- filter( Master, birthYear > 1849 & birthYear < 1996 )
-
-t1 <- tapply( Master$height, Master$birthYear, mean, na.rm=T )
-t2 <- as.numeric( names( t1 ) )
-plot( t2, t1, pch=19, type="b",
-      frame.plot=F,
-      xlab="Year of Birth",
-      ylab="Average Height (inches)",
-      main="Height of MLB Players Over Time" )
-
-t1 <- tapply( Master$weight, Master$birthYear, mean, na.rm=T )
-t2 <- as.numeric( names( t1 ) )
-plot( t2, t1, pch=19, type="b",
-      frame.plot=F,
-      xlab="Year of Birth",
-      ylab="Average Weight (lbs)",
-      main="Weight of MLB Players Over Time" )
-
-bmi <- (Master$weight * 0.45359237) / (Master$height / 39.370)^2 
-t1 <- tapply( bmi, Master$birthYear, mean, na.rm=T )
-t2 <- as.numeric( names( t1 ) )
-plot( t2, t1, pch=19, type="b",
-      frame.plot=F,
-      xlab="Year of Birth",
-      ylab="Average BMI",
-      main="Body Mass Index of MLB Players Over Time" )
-```
-
-
-
 ## Layering Approach
 
-Graphs in R are created by layering elements on top of each other. The easiest way to understand this is to build a plot from the ground up.
+Graphs in R are created by layering elements on top of each other. The easiest way to understand this is to build a plot from piece by piece.
 
 The following graph is comprised of six components:
 
-* points
 * plot box
+* points
 * x-axis
 * y-axis
 * x-label
 * y-label
 
-Many other elements can be added to the plot, but this is a good start.
+Many other elements can be added to the plot, but you will see below the flexibility that is gained by mastering even the basic plotting functions. 
 
 
+### Load Player Data
+
+The Lahman package is an example of a data package in R - one that does not include new functions or analytical tools. Rather, it contains player and team statistics stored as a collection of data frames to make it easy to share and deploy for any analytics involving player or team performance.
+
+Datasets are loaded from R packages using the **data()** function.
+
+```{r, eval=F}
+# install.packages( "Lahman" )
+library( Lahman )
+data( Master )
+```
+
+```{r, echo=F}
+preview.these <- c("nameFirst", "nameLast", "height", "weight", "birthYear")
+head( Master[ preview.these ] ) %>% pander()
+```
+
+Remove players that are missing height or weight measures:
 
 ```{r}
-# remove players with no height or weight measures
-Master <- select( Master, height, weight )
-Master <- na.omit( Master ) 
+Master <- select( Master, height, weight, birthState )
+Master <- na.omit( Master )
+```
 
-# find max and min values for each
-xmin <- min(Master$height)
-xmax <- max(Master$height)
-ymin <- min(Master$weight)
-ymax <- max(Master$weight)
+### Building the Canvas
+
+Custom graphics in R allow you to create a blank canvas upon which you will add your data and your data narrative. 
+
+The canvas is the Cartesian coordinate system upon which you will place the data. You need to define the coordinate system before plotting any data using the **xlim=** and **ylim=** arguments.
+
+The **plot.new()** function launches a new graphics window. The **plot.window()** function sets the coordinates.
+
+```{r, fig.height=5, fig.width=5, eval=F}
+plot.new()
+plot.window( xlim=c( 1, 10 ), ylim=c( 1, 10 ) )
+```
+
+```{r, fig.height=5, fig.width=5, echo=F}
+par( mar=c(3,3,3,3) ) 
+plot.new()
+plot.window( xlim=c( 1, 10 ), ylim=c( 1, 10 ) )
+abline( h=1:10, col="gray" )
+abline( v=1:10, col="gray" )
+mtext( 1:10, at=1:10, side=4, col="gray", line=0.5, las=2 )
+mtext( 1:10, at=1:10, side=3, col="gray", line=0.5, las=1 )
+box("outer", col="navy") 
+```
+
+<center>
+_New canvas with the grid defined by **xlim** and **ylim** values._
+</center>
+
+
+Note that data can only be plotted on the canvas, but graphs also contain margins around the canvas used for titles, text, and axes. 
+
+```{r, echo=F, fig.width=10, fig.height=7.5}
+# Generate data  
+x = 0:10;  
+y = 0:10;  
+  
+# Plot the data  
+  
+# - Specify the layout parameters before any plotting  
+#   If you don't specify them before any plotting, the  
+#   results will be inconsistent and misaligned.  
+#  
+# - oma stands for 'Outer Margin Area', or the total margin space that is outside  
+#   of the standard plotting region (see graph)  
+#  
+# - The vector is ordered, the first value corresponding to the bottom. The entire  
+#   array is c(bottom, left, top, right)  
+#  
+# - All of the alternatives are:  
+#   - oma: Specify width of margins in number of lines  
+#   - omi: Specify width of margins in inches  
+#   - omd: Specify width of margins in 'device coordinates'  
+#       - Device coordinates place (0,0) in the upper left and (1,1) in the  
+#         lower right corner  
+  
+# par(oma=c(3,3,3,3))  # all sides have 3 lines of space  
+  
+  
+# - The mar command represents the figure margins. The vector is in the same ordering of  
+#   the oma commands.  
+#   
+# - The default size is c(5,4,4,2) + 0.1, (equivalent to c(5.1,4.1,4.1,2.1)).   
+#  
+# - The axes tick marks will go in the first line of the left and bottom with the axis  
+#   label going in the second line.  
+#  
+# - The title will fit in the third line on the top of the graph.   
+#  
+# - All of the alternatives are:  
+#   - mar: Specify the margins of the figure in number of lines  
+#   - mai: Specify the margins of the figure in number of inches  
+  
+par(mar=c(5,4,4,2) + 0.1)   
+  
+
+# Plot  
+plot(x, y, type="n", xlab="",  ylab="", yaxt="n", 
+     col.axis="darkgreen", col.ticks="darkgreen" )     
+title( xlab="axis", family="mono", col.lab="darkgreen", cex.lab=2 )
+
+box( col="darkorange" ) 
+text( 5, 5, "Canvas", col="darkorange", cex=3 )
+  
+# Place text in the margins and label the margins, all in green  
+mtext("Margins", side=3, line=1, cex=2.5, col="darkgreen")  
+# mtext("par( mar=c(5,4,4,2) + 0.1 )", side=3, line=1, cex=1, col="darkgreen")  
+# mtext("Line 0", side=3, line=0, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 1", side=3, line=1, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 2", side=3, line=2, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 3", side=3, line=3, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 0", side=2, line=0, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 1", side=2, line=1, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 2", side=2, line=2, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 3", side=2, line=3, adj=1.0, cex=1, col="darkgreen")  
+box("figure", col="darkgreen")  
+  
+
+# Label the outer margin area and color it blue  
+# Note the 'outer=TRUE' command moves us from the figure margins to the outer  
+# margins.  
+# mtext("Outer Margin Area", side=1, line=1.5, cex=2, col="navy", outer=TRUE)  
+# mtext("par( oma=c(3,3,3,3) )", side=1, line=2, cex=1, col="navy", outer=TRUE)  
+# mtext("Line 0", side=1, line=0, adj=0.0, cex=1, col="navy", outer=TRUE)  
+# mtext("Line 1", side=1, line=1, adj=0.0, cex=1, col="navy", outer=TRUE)  
+# mtext("Line 2", side=1, line=2, adj=0.0, cex=1, col="navy", outer=TRUE)  
+
+# box("outer", col="navy") 
+
+
+# mtext( "This is mtext", side=2, outer=T, line=1, col="navy" )
+```
+
+
+
+
+We need to pick a grid that suits our data. Since we will examine the relationship between **height** and **weight** we will use the min and max values of these variables to create the bounding box for our canvas. 
+
+```{r}
+# find max and min values for each variable
+xmin <- min( Master$height )
+xmax <- max( Master$height )
+ymin <- min( Master$weight )
+ymax <- max( Master$weight )
 
 # empty plot
 plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
-box( col="gray" )
-text( 64, 200, "(Empty Plot Window)", cex=2 )
+box( col="black" )
+box( "outer", col="gray" )
+text( 64, 200, "(Empty Canvas)", cex=2 )
 ```
 
 
+
+### Add Points
+
+We can now add some data to the canvas:
+
 ```{r}
-# add points
 plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
-box( col="gray" )
+box( col="black" )
+box( "outer", col="gray" )
 points( Master$height, Master$weight, pch=19 )
 ```
 
+### Add axes
 
 ```{r}
 # add an x-axis and y-axis
 plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
-box( col="gray" )
+box( "outer", col="gray" )
 points( Master$height, Master$weight, pch=19 )
 axis( side=1 )
-axis( side=2, las=1 )
+axis( side=2, las=1 )   # las turns the y-axis tick mark numbers 
 ```
+
+### Add Axis Labels
 
 
 ```{r}
 # add axis labels
 plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
-box( col="gray" )
 points( Master$height, Master$weight, pch=19 )
 axis( side=1 )
 axis( side=2, las=1 )
@@ -174,20 +385,27 @@ title( main="Relationship Between Height and Weight of MLB Players" )
 
 
 
-Now let's see if we can improve the aestetics a bit. This is pretty dense data, so let's see if we can use some color transparency to get a sense of typical players versus outliers.
+### Improving Aesthetics
 
-Let's adjust the xlim and ylim arguments so we don't show the empty bottom left quadrant, and let's use the **gray()** color function to add some transparency to the over-plotted data points. The first argument is a value between 0 and 1 specifying how dark you want the gray (0 being white, 1 being black, and any value in-between being a shade of gray). The second argument is another value between 0 and 1 specifying the transparency of the points, 0 being invisible and 1 being no transparency. 
+Now let's see if we can improve the look and feel of the graph to make the narrative pop.
+
+This is pretty dense data, so let's see if we can use some color transparency to get a sense of typical players versus outliers.
+
+We can adjust the xlim and ylim arguments so we don't show the empty bottom left quadrant, and let's use the **gray()** color function to add some transparency to the over-plotted data points. 
+
+The first argument of the **gray()** function is a value between 0 and 1 specifying how dark you want the gray (0 being white, 1 being black), and the second argument is another value between 0 and 1 specifying the transparency of the points (0 being invisible and 1 being no transparency). 
 
 We can also jitter them a bit (a tiny amount of random error to each data point) so they are not all plotted on top of each other since height and weight only take integer values.
 
 ```{r, fig.height=6}
+# rnorm() adds random noise to a data point
 height.jitter <- Master$height + rnorm( nrow(Master) )
 weight.jitter <- Master$weight + rnorm( nrow(Master) )
 
 plot.new()
-plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
+plot.window( xlim=c(62,xmax), ylim=c(110,ymax) )
 points( height.jitter, weight.jitter, 
-        pch=19, cex=1.2, col=gray(0.5,0.02) )
+        pch=19, cex=1.5, col=gray(0.5,0.1) )
 axis( side=1 )
 axis( side=2 )
 title( xlab="Height (inches)", ylab="Weight (lbs)",
@@ -195,56 +413,13 @@ title( xlab="Height (inches)", ylab="Weight (lbs)",
 ```
 
 
-This is helpful, but maybe we want to highlight the data core some more. Let's add another layer with only that data that falls within the 25th to 75th percentiles of height and weight.
+### Highlighting Groups
 
-```{r}
-quantile( Master$height ) %>% pander()
-quantile( Master$weight ) %>% pander()
-```
+This is helpful, but maybe we want to highlight a group within the data. 
 
+Perhaps we have a theory that corn-fed players that grew up in Iowa 
 
 ```{r, fig.height=6}
-height.jitter <- Master$height + rnorm( nrow(Master) )
-weight.jitter <- Master$weight + rnorm( nrow(Master) )
-
-height.25th <- quantile( Master$height, 0.25, na.rm=T )
-height.75th <- quantile( Master$height, 0.75, na.rm=T )
-these.height.25th.to.75th <- Master$height > height.25th & Master$height < height.75th
-
-weight.25th <- quantile( Master$weight, 0.25, na.rm=T )
-weight.75th <- quantile( Master$weight, 0.75, na.rm=T )
-these.weight.25th.to.75th <- Master$weight > weight.25th & Master$weight < weight.75th
-
-these.both.25th.to.75th <- these.height.25th.to.75th & these.weight.25th.to.75th
-
-plot.new()
-plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
-axis( side=1 )
-axis( side=2 )
-title( xlab="Height (inches)", ylab="Weight (lbs)",
-       main="Relationship Between Height and Weight of MLB Players" )
-
-points( height.jitter, weight.jitter, 
-        pch=19, cex=1.2, col=gray(0.5,0.02) )
-
-points( height.jitter[ these.both.25th.to.75th ], 
-        weight.jitter[ these.both.25th.to.75th ], 
-        pch=19, cex=0.3, col="firebrick3" )
-```
-
-
-That didn't quite work out because a player might be "average" height (height between 25th and 75th percentile), but be heavier or lighter than normal. The criteria we applied basically draws a box and finds data within the box. 
-
-Let's rethink this a bit, and select players with "average" size using ratios between height and weight, often expressed as Body Mass Index (BMI). This selection criteria will not limit us to a square.  
-
-
-```{r, fig.height=6}
-bmi <- (Master$weight * 0.45359237) / (Master$height / 39.370)^2 
-
-bmi.25th <- quantile( bmi, 0.25, na.rm=T )
-bmi.75th <- quantile( bmi, 0.75, na.rm=T )
-these.bmi.25th.to.75th <- bmi > bmi.25th & bmi < bmi.75th
-
 plot.new()
 plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
 axis( side=1 )
@@ -255,8 +430,47 @@ title( xlab="Height (inches)", ylab="Weight (lbs)",
 points( height.jitter, weight.jitter, 
         pch=19, cex=2, col=gray(0.5,0.02) )
 
-points( height.jitter[ these.bmi.25th.to.75th ], 
-        weight.jitter[ these.bmi.25th.to.75th ], 
+# highlight players from Iowa
+
+these.iowa <- Master$birthState == "IA"
+
+# use our selection vector to subset the data used in overplotting
+
+points( height.jitter[ these.iowa ], 
+        weight.jitter[ these.iowa ], 
+        pch=19, cex=0.5, col="firebrick3" )
+
+points( 63, 250, pch=19, col="firebrick" )
+text( 63, 250, "Players form Iowa", 
+      pos=4, col="darkgray" )
+```
+
+
+Let's add another layer with only that data that falls within the 25th to 75th percentiles of BMI, what we might consider "averaged" sized players relative to their height.
+
+
+```{r, fig.height=6}
+plot.new()
+plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
+axis( side=1 )
+axis( side=2 )
+title( xlab="Height (inches)", ylab="Weight (lbs)",
+       main="Relationship Between Height and Weight of MLB Players" )
+
+points( height.jitter, weight.jitter, 
+        pch=19, cex=2, col=gray(0.5,0.02) )
+
+# highlight average-sized players
+
+bmi <- (Master$weight * 0.45359237) / (Master$height / 39.370)^2 
+
+bmi.25th <- quantile( bmi, 0.25, na.rm=T )
+bmi.75th <- quantile( bmi, 0.75, na.rm=T )
+
+# group definition:  bmi > bmi.25th & bmi < bmi.75th
+
+points( height.jitter[ bmi > bmi.25th & bmi < bmi.75th ], 
+        weight.jitter[ bmi > bmi.25th & bmi < bmi.75th ], 
         pch=19, cex=0.1, col="firebrick3" )
 ```
 
@@ -290,13 +504,17 @@ data( Master)
 Master[ which.min(Master$height) , c(14,15,17:20,2) ] %>% pander()
 ```
 
+
+
+
+It turns out that [Eddie Gaedel](https://www.theversed.com/10266/the-tragic-story-of-eddie-gaedel-the-shortest-player-in-mlb-history/#.i0Qgkojft1), at 3 foot 7 inches, was the shortest man to ever play on a professional team. He was hired by the owner of the St. Louis Browns as a publicity stunt. He was so short that his strike zone, which goes form the knee to mid-chest, was too small for most pitchers. Crowds would cheer as he would quickly accumulate walks. 
+
+
 ```{r, echo=F, out.width='70%' }
 knitr::include_graphics( "figures/eddie_gaedel.png" )
 ```
 
 
-
-It turns out that [Eddie Gaedel](https://www.theversed.com/10266/the-tragic-story-of-eddie-gaedel-the-shortest-player-in-mlb-history/#.i0Qgkojft1), at 3 foot 7 inches, was the shortest man to ever play on a professional team. He was hired by the owner of the St. Louis Browns as a publicity stunt. He was so short that his strike zone, which goes form the knee to mid-chest, was too small for most pitchers. Crowds would cheer as he would quickly accumulate walks. 
 
 Perhaps it would be useful to annotate some of the outliers on our graph. To do this, we can use the text() function.
 
@@ -412,7 +630,7 @@ text( Master$height[ this.heaviest ],
 
 
 
-## Visual Hypothesis Testing
+## Using Text as Plot Points
 
 As you can see, the **text()** function can be used to add narrative to a graphic. It can also be used in place of plotting points. 
 
@@ -520,7 +738,9 @@ names( Teams )
 ```
 
 
-## Additional Parameters
+
+
+# Additional Parameters
 
 The small number of functions introduced here in these chapters on data visualization can be used to make highly-customizable graphics that help you discover important patterns in the data and share the story with others. 
 
@@ -533,6 +753,109 @@ help( par )
 
 These chapters show how core R graphics can be used to create highly-customized graphics. You can see that you have fine-tuned access to all aspects of the figures you create. You don't have to become familiar with all of the options to develop solid visualization skills. Rather, you will likely focus on a few specific functions. A little time invested in learning the arguments for plot(), points(), lines(), text(), title(), and axis() goes a long way.   
 
+
+
+
+## Margins
+
+It is sometimes helpful to include narrative in the margins instead of on actual graph. In these cases you need to expand your margins and use the **title()**, **axis()** and **mtext()** functions. The margins themselves are controlled by the inner margin **mar=c** argument and outer margin **oma=** arguments in the graphical parameters function **par()**, which is called prior to your plot function to change how a new plot will be laid out. 
+
+Similar to other parameters, the four argument values refer to the bottom, left, top and right regions on the graph. 
+
+```{r, eval=F}
+par( mar=c(5,4,4,2), oma=c(3,3,3,3) )
+plot( ... )
+```
+
+
+```{r, echo=F, fig.width=10, fig.height=6}
+# Generate data  
+x = 0:10;  
+y = 0:10;  
+  
+# Plot the data  
+  
+# - Specify the layout parameters before any plotting  
+#   If you don't specify them before any plotting, the  
+#   results will be inconsistent and misaligned.  
+#  
+# - oma stands for 'Outer Margin Area', or the total margin space that is outside  
+#   of the standard plotting region (see graph)  
+#  
+# - The vector is ordered, the first value corresponding to the bottom. The entire  
+#   array is c(bottom, left, top, right)  
+#  
+# - All of the alternatives are:  
+#   - oma: Specify width of margins in number of lines  
+#   - omi: Specify width of margins in inches  
+#   - omd: Specify width of margins in 'device coordinates'  
+#       - Device coordinates place (0,0) in the upper left and (1,1) in the  
+#         lower right corner  
+  
+par( oma=c(4,3,4,3) )  # all sides have 3 lines of space  
+  
+  
+# - The mar command represents the figure margins. The vector is in the same ordering of  
+#   the oma commands.  
+#   
+# - The default size is c(5,4,4,2) + 0.1, (equivalent to c(5.1,4.1,4.1,2.1)).   
+#  
+# - The axes tick marks will go in the first line of the left and bottom with the axis  
+#   label going in the second line.  
+#  
+# - The title will fit in the third line on the top of the graph.   
+#  
+# - All of the alternatives are:  
+#   - mar: Specify the margins of the figure in number of lines  
+#   - mai: Specify the margins of the figure in number of inches  
+  
+par( mar=c(5,4,4,2) + 0.1 )   
+  
+
+# Plot  
+plot(x, y, type="n", xlab="",  ylab="", yaxt="n", xaxt="n" )    # type="n" hides the points  
+
+axis( side=1, col="darkorange", col.axis="orange" )
+title( xlab="axis( side=1 )", family="mono", col.lab="darkorange", line=2 )
+title( xlab="title( xlab='my label' )", family="mono", col.lab="darkorange", line=3 )
+
+box( col="darkorange" ) 
+text( 5, 5, "Canvas", col="darkgray", cex=2 )
+  
+# Place text in the margins and label the margins, all in green  
+mtext("Margins", side=3, line=2, cex=2, col="darkgreen")  
+mtext("par( mar = c(5,4,4,2) + 0.1 )", 
+      side=3, line=0.5, cex=0.8, col="darkgreen", family="mono" )  
+mtext("Line 0", side=3, line=0, adj=1.0, cex=1, col="darkgreen")  
+mtext("Line 1", side=3, line=1, adj=1.0, cex=1, col="darkgreen")  
+mtext("Line 2", side=3, line=2, adj=1.0, cex=1, col="darkgreen")  
+mtext("Line 3", side=3, line=3, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 0", side=2, line=0, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 1", side=2, line=1, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 2", side=2, line=2, adj=1.0, cex=1, col="darkgreen")  
+# mtext("Line 3", side=2, line=3, adj=1.0, cex=1, col="darkgreen")  
+box("figure", col="darkgreen")  
+  
+
+# Label the outer margin area and color it blue  
+# Note the 'outer=TRUE' command moves us from the figure margins to the outer  
+# margins.  
+mtext("Outer Margin Area", side=1, line=1, cex=2, col="navy", outer=TRUE)  
+mtext("par( oma = c(4,3,4,3) )", 
+      side=1, line=2.5, cex=1, col="navy", outer=TRUE, family="mono" )  
+mtext("Line 0", side=1, line=0, adj=1, cex=1, col="navy", outer=TRUE)  
+mtext("Line 1", side=1, line=1, adj=1, cex=1, col="navy", outer=TRUE)  
+mtext("Line 2", side=1, line=2, adj=1, cex=1, col="navy", outer=TRUE) 
+mtext("Line 3", side=1, line=3, adj=1, cex=1, col="navy", outer=TRUE)
+
+box("outer", col="navy") 
+
+
+mtext( "This is mtext", side=3, outer=T, line=2, cex=1.5, col="navy" )
+mtext( 'mtext( "This is mtext", side=2, outer=T, line=1 )', 
+       side=3, outer=T, line=1, cex=1, col="navy", family="mono" )
+
+```
 
 
 

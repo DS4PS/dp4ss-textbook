@@ -12,7 +12,7 @@ output:
 
 
 ```{r, echo=F }
-knitr::opts_chunk$set( echo = TRUE, message=F, warning=F, fig.width=8)
+knitr::opts_chunk$set( echo = TRUE, message=F, warning=F, fig.width=10)
 ```
 
 
@@ -49,15 +49,11 @@ Try **help( "par" )** for a more extensive list.
 
 <br>
 <br>
+<br>
+<br>
 
 </div>
 
-<br>
-<br>
-
-```{r, fig.cap="The core graphics package allows you to control every element of a visualization.", echo=F, out.width='80%' }
-knitr::include_graphics( "figures/anatomy_of_a_graph1.png" )
-```
 
 
 
@@ -106,6 +102,7 @@ plot(
   cex=2,                 # size of points
   main="Plot Title",     # title of your plot
   col.main="darkorange",
+  cex.main=1.5,
   
   xlab="Label for X",    # axes labels
   ylab="Label for Y",  
@@ -116,15 +113,15 @@ plot(
 
 title( xlab="<--  xlim=c(0,100)  -->", 
        line=-1.5, cex.lab=1, col.lab="gray20", family="mono" )
-title( ylab="<-- ylim=c(200,350) -->", 
+title( ylab="<-- ylim=c(200,350) -->    ", 
        line=-1.5, cex.lab=1, col.lab="gray20", adj=1, family="mono" )
 text( 85, 345, "pch = 19", col="steelblue", cex=0.9, pos=4 )
 text( 85, 335, "type = 'b'", col="steelblue", cex=0.9, pos=4 )
 text( 85, 325, "cex = 2", col="steelblue", cex=0.9, pos=4 )
 text( 85, 315, "col = 'steelblue'", col="steelblue", cex=0.9, pos=4 )
 title( main="( col.main = 'darkorange' )              ", 
-       adj=1, col.main="darkorange", cex.main=0.8 )
-title( xlab="( col.lab = 'firebrick' )                ", 
+       adj=1, col.main="darkorange", cex.main=1 )
+title( xlab="( col.lab = 'firebrick' )                     ", 
        adj=1, col.lab="firebrick", cex.main=0.8 )
 ```
 
@@ -195,9 +192,7 @@ plot(
   ylim=c(200,350),   
   frame.plot=FALSE,      # draw a box around the data?
   col="steel blue",      # color of the points
-  type="b",              # points="p", 
-                         # lines="l", 
-                         # both="b", 
+  type="b",              # "p", "l", or "b" 
   pch=19,                # shape of points to plot
   cex=2,                 # size of points
   main="Plot Title",     # title of your plot
