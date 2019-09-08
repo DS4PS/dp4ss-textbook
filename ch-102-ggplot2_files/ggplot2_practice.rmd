@@ -9,3 +9,22 @@ output:
 
 # Practice ggplot2
 
+```{r, include=FALSE}
+
+library(ggplot2)
+
+tutorial::go_interactive( greedy=FALSE )
+
+```
+
+```{r ex="example-01", type="sample-code", tut=TRUE}
+
+library(ggplot2)
+
+ggplot(economics, 
+       aes(x = date, 
+           y = unemploy)) +
+  geom_path() +
+  theme_minimal()
+
+```

@@ -70,6 +70,21 @@ Too long; didn't read? Here's what you need to know:
 <br>
 <br>
 
+```{r echo=F}
+
+# ATTENTION : GLOBAL CHUNK DEFAULTS
+
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE)        # Disable warnings, messages
+
+```
+
+```{r include=FALSE}
+
+tutorial::go_interactive( greedy=FALSE )      # Enable interactive exercises
+
+```
+
 ## Why Visualize Data?
 
 We visualize data for two principal reasons. We want to:
@@ -122,6 +137,8 @@ ggplot(read_csv(url), aes(x = val, y = myr)) +
 
 ```
 
+To experiment with Holland codes and predicted income, [check it out in Shiny](https://uruguayguy.shinyapps.io/shiny_app/). 
+
 <br>
 <br>
 
@@ -137,8 +154,6 @@ ggplot(read_csv(url), aes(x = val, y = myr)) +
 
 This code is manageable! Observe a simple call to `ggpairs()` and the `iris` dataset.
 
-<center>
-
 ```{r message=F, warning=F, cache=T}
 
 library(ggplot2)
@@ -149,9 +164,11 @@ ggpairs(data = iris,
 
 ```
 
- *With just a little code, pairs plots visualize every variable against the other.* 
+<center>
+
+*With just a little code, pairs plots visualize every variable against the other.* 
  
- </center>
+</center>
 
 <br>
 
@@ -162,6 +179,40 @@ Hopefully, you wouldn't publish this. But we can quickly find patterns in a pair
 * We also observe that "Versicolor" has the least variation in size
 
 Such visual exploration can help refine hypotheses before analysis begins!
+
+<br>
+<br>
+
+<div class="quiz">
+
+<br>
+
+YOUR TURN: EXPLORATORY VIZ WITH PAIRS PLOTS
+
+<br>
+
+Load the necessary packages with `library()`.
+
+Then, call `ggpairs()` on the `economics` dataset from ggplot2.
+
+<br>
+
+</div>
+
+<br>
+
+```{r ex="example-01", type="sample-code", tut=TRUE}
+
+# Load required packages
+
+library(ggplot2)
+library(GGally)
+
+# Set first argument to "economics"
+    
+ggpairs(data = ...)
+
+```
 
 <br>
 <br>
@@ -484,8 +535,10 @@ In the grammar of graphics framework, each visualization is comprised of **layer
 Like human *sentences*, every complete visualization has 3 essential layers:
 
 <br>
+<br>
+<br>
 
-```{r, echo=F, fig.align="center", fig.cap = "The three essential layers for a complete visualization.", out.width="75%", cache=T}
+```{r, echo=F, fig.align="center", fig.cap = "The three essential layers for a complete visualization.", out.width="100%", cache=T}
 
 knitr::include_graphics("figures/essential_layers.jpg")
 
@@ -515,6 +568,7 @@ hancock <- read_csv(url) %>%
 
 <br>
 <br>
+<br>
 
 #### The Data Layer
 
@@ -538,6 +592,9 @@ The **data layer** in everyday conversation:
 
 Observe the same plot - the only difference is the **data layer**. What changes?
 
+<br>
+<br>
+
 ```{r echo=F, message=F, warning=F, cache=T}
 
 library(gridExtra)
@@ -553,15 +610,22 @@ p1 <- ggplot(lakeview, aes(x = factor(race,
   geom_jitter(alpha = 0.15, 
               color = "dodgerblue2", 
               width = 0.2) +
-  labs(title = "Weekly net by ethnicity",
+  labs(title = "Racial disparities in public work",
        subtitle = "Lakeview Amphitheater, 2015",
        x = NULL,
-       y = "Weekly Net Income",
+       y = "Weekly Net",
        caption = "") +
   scale_y_continuous(labels = dollar,
                      breaks = pretty_breaks(3)) +
   coord_flip() +
-  theme_classic()
+  theme_minimal() +
+  theme(text = element_text(family = "Quicksand"),
+        plot.title = element_text(vjust = 3,
+                                  face = "bold"),
+        plot.subtitle = element_text(vjust = 2),
+        axis.title.x = element_text(vjust = -0.666),
+        axis.title.y = element_text(vjust = 2),
+        plot.caption = element_text(vjust = -1.333))
 
 p2 <- ggplot(hancock, aes(x = factor(ethnicity, 
                                      levels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White"), 
@@ -573,12 +637,19 @@ p2 <- ggplot(hancock, aes(x = factor(ethnicity,
   labs(title = "",
        subtitle = "Hancock Airport, 2018",
        x = NULL,
-       y = "Weekly Net Income",
+       y = "Weekly Net",
        caption = "Source: Syracuse Regional Airport Authority") +
   scale_y_continuous(labels = dollar,
                      breaks = pretty_breaks(2)) +
   coord_flip() +
-  theme_classic()
+  theme_minimal() +
+  theme(text = element_text(family = "Quicksand"),
+        plot.title = element_text(vjust = 3,
+                                  face = "bold"),
+        plot.subtitle = element_text(vjust = 2),
+        axis.title.x = element_text(vjust = -0.666),
+        axis.title.y = element_text(vjust = 2),
+        plot.caption = element_text(vjust = -1.333))
 
 grid.arrange(p1, p2, ncol=2)
 
@@ -611,9 +682,13 @@ The **aesthetics layer** in everyday conversation:
 
 Observe the same plot - the only difference is the **aesthetics layer**. What changes?
 
+<br>
+<br>
+
 ```{r echo=F, message=F, warning=F, cache=T}
 
 library(gridExtra)
+library(extrafont)
 library(ggplot2)
 
 set.seed(1)
@@ -625,15 +700,22 @@ p1 <- ggplot(hancock, aes(x = factor(ethnicity,
   geom_jitter(alpha = 0.15, 
               color = "dodgerblue2", 
               width = 0.2) +
-  labs(title = "Weekly net by ethnicity",
+  labs(title = "Racial disparities in public work",
        subtitle = "Hancock Airport, 2018",
        x = NULL,
-       y = "Weekly Net Income",
+       y = "Weekly Net",
        caption = "") +
   scale_y_continuous(labels = dollar,
                      breaks = pretty_breaks(3)) +
   coord_flip() +
-  theme_classic()
+  theme_minimal() +
+  theme(text = element_text(family = "Quicksand"),
+        plot.title = element_text(vjust = 3,
+                                  face = "bold"),
+        plot.subtitle = element_text(vjust = 2),
+        axis.title.x = element_text(vjust = -0.666),
+        axis.title.y = element_text(vjust = 2),
+        plot.caption = element_text(vjust = -1.333))
 
 p2 <- ggplot(hancock, aes(x = gross,
                           y = net)) +
@@ -642,14 +724,21 @@ p2 <- ggplot(hancock, aes(x = gross,
               width = 0.2) +
   labs(title = "",
        subtitle = "",
-       x = "Weekly Gross Income",
-       y = "Weekly Net Income",
+       x = "Weekly Gross",
+       y = "Weekly Net",
        caption = "Source: Syracuse Regional Airport Authority") +
   scale_x_continuous(labels = dollar) +
   scale_y_continuous(labels = dollar,
                      breaks = pretty_breaks(2)) +
   coord_flip() +
-  theme_classic()
+  theme_minimal() +
+  theme(text = element_text(family = "Quicksand"),
+        plot.title = element_text(vjust = 3,
+                                  face = "bold"),
+        plot.subtitle = element_text(vjust = 2),
+        axis.title.x = element_text(vjust = -0.666),
+        axis.title.y = element_text(vjust = 2),
+        plot.caption = element_text(vjust = -1.333))
 
 grid.arrange(p1, p2, ncol=2)
 
@@ -682,6 +771,9 @@ The **geometry layer** in everyday conversation:
 
 Observe the same plot - the only difference is the **geometry layer**. What changes?
 
+<br>
+<br>
+
 ```{r echo=F, message=F, warning=F, cache=T}
 
 library(gridExtra)
@@ -697,15 +789,22 @@ p1 <- ggplot(hancock, aes(x = factor(ethnicity,
   geom_jitter(alpha = 0.15, 
               color = "dodgerblue2", 
               width = 0.2) +
-  labs(title = "Weekly net by ethnicity",
+  labs(title = "Racial disparities in public work",
        subtitle = "Hancock Airport, 2018",
        x = NULL,
-       y = "Weekly Net Income",
+       y = "Weekly Net",
        caption = "") +
   scale_y_continuous(labels = dollar,
                      breaks = pretty_breaks(3)) +
   coord_flip() +
-  theme_classic()
+  theme_minimal() +
+  theme(text = element_text(family = "Quicksand"),
+        plot.title = element_text(vjust = 3,
+                                  face = "bold"),
+        plot.subtitle = element_text(vjust = 2),
+        axis.title.x = element_text(vjust = -0.666),
+        axis.title.y = element_text(vjust = 2),
+        plot.caption = element_text(vjust = -1.333))
 
 p2 <- ggplot(hancock, aes(x = factor(ethnicity, 
                                      levels = c("Hispanic", "Black", "Multiracial", "Indigenous", "White"), 
@@ -716,12 +815,19 @@ p2 <- ggplot(hancock, aes(x = factor(ethnicity,
   labs(title = "",
        subtitle = "",
        x = NULL,
-       y = "Weekly Net Income",
+       y = "Weekly Net",
        caption = "Source: Syracuse Regional Airport Authority") +
   scale_y_continuous(labels = dollar,
                      breaks = pretty_breaks(3)) +
   coord_flip() +
-  theme_classic()
+  theme_minimal() +
+  theme(text = element_text(family = "Quicksand"),
+        plot.title = element_text(vjust = 3,
+                                  face = "bold"),
+        plot.subtitle = element_text(vjust = 2),
+        axis.title.x = element_text(vjust = -0.666),
+        axis.title.y = element_text(vjust = 2),
+        plot.caption = element_text(vjust = -1.333))
 
 grid.arrange(p1, p2, ncol=2)
 
@@ -860,6 +966,49 @@ knitr::include_graphics("figures/ggplot2_recipe.jpg")
 ```
 
 <br>
+<br>
+
+<div class="quiz">
+
+<br>
+
+YOUR TURN: A BASIC GGPLOT
+
+<br>
+
+1. Load the necessary packages with `library()`
+2. Call `ggplot()` on the `economics` dataset from ggplot2
+3. In `aes()`, map **x =** to `date` and **y =** to `unemploy`
+4. Call `geom_line()`
+
+<br>
+
+A call to `theme_classic()` has been added for panache.
+
+<br>
+
+</div>
+
+<br>
+
+```{r ex="example-02", type="sample-code", tut=TRUE}
+
+# Load required packages
+
+library(ggplot2)
+
+# Specify dataset and variable names
+    
+ggplot(data = ...,        # Call "economics" dataset
+       aes(x = ...,       # Map "x" aesthetic
+           y = ...)) +    # Map "y" aesthetic
+  geom...() +             # Call correct geom
+  theme_classic()         
+
+```
+
+<br>
+<br>
 
 **Adding Aesthetics:** Let's plot the same data, except with:
 
@@ -940,6 +1089,57 @@ ggplot(data = hancock,
 * Call data, aesthetics, and geometry in `ggplot()`, `aes()`, and `geom*()` functions
 * Once you've build an initial plot, you can add new layers to enhance it, like **themes**
 * Each addition makes plots more decodable and better emphasizes big ideas 
+
+<br>
+<br>
+
+<div class="quiz">
+
+<br>
+
+YOUR TURN: AESTHETICS & ATTRIBUTES
+
+<br>
+
+A basic ggplot has been prepared for you.
+
+Load the necessary packages with `library()`.
+
+<br>
+
+Modify `geom_point()` with the following:
+
+* Set size to 2.75 (**size =**)
+* Set transparency to 0.15 (**alpha =**)
+* Set color to "darkslateblue" (**color = **)
+
+<br>
+
+A `theme_minimal()` is provided for panache.
+
+<br>
+
+</div>
+
+<br>
+
+```{r ex="example-03", type="sample-code", tut=TRUE}
+
+# Load required packages
+
+library(ggplot2)
+
+# Instructions
+    
+ggplot(economics,
+       aes(x = pce,
+           y = psavert)) +
+  geom_point(size = ...,
+             ... = ...,
+             ... = "...") +
+  theme_minimal()
+  
+```
 
 <br>
 <br>
@@ -1190,6 +1390,50 @@ ggplot(data = hancock,
   labs(x = NULL,
        y = "Weekly Net") +
   theme_minimal()
+
+```
+
+<br>
+<br>
+
+<div class="quiz">
+
+<br>
+
+YOUR TURN: JITTER & TRANSPARENCY
+
+<br>
+
+Load the necessary packages with `library()`.
+
+Then, call `ggplot()` on the `midwest` dataset from ggplot2.
+
+<br>
+
+1. Change `geom_point()` to `geom_jitter()`
+2. In `geom_jitter()`, set argument alpha = 0.25
+3. Also in the geom, set argument width = 0.15
+
+<br>
+
+</div>
+
+<br>
+
+```{r ex="example-04", type="sample-code", tut=TRUE}
+
+# Load required packages
+
+library(ggplot2)
+
+# Replace the geom and add attributes
+    
+ggplot(data = midwest, 
+       aes(x = category,
+           y = log10(poptotal))) +
+  geom_point(... = ...,
+             ... = ...) +
+  theme_light()
 
 ```
 
@@ -1516,6 +1760,57 @@ These and [other functions](https://cran.r-project.org/web/packages/scales/scale
 <br>
 <br>
 
+<div class="quiz">
+
+<br>
+
+YOUR TURN: STATS, COORDINATES, AND SCALES
+
+<br>
+
+Load the necessary packages with `library()`.
+
+<br>
+
+1. In `geom_point()`, set "alpha = 0.3"
+2. Add `geom_smooth()` with `+`
+3. Add `lims()` with:
+    - *x =* `c(0, 10000)` 
+    - *y =* `c(0, 50)`
+4. In `scale_x_continuous()`, add "label = name"
+5. Add `labs()` with:
+    - *x =* "Population Density"
+    - *y =* "College Educated (%)"
+
+<br>
+
+</div>
+
+<br>
+
+```{r ex="example-05", type="sample-code", tut=TRUE}
+
+library(ggplot2)
+library(scales)
+
+ggplot(midwest, 
+       aes(x = popdensity, 
+           y = percollege)) +
+  geom_point(... = ...) +               # Set alpha
+  geom...() +                           # Add smoother
+  lims(x = ..., 
+       y = ...) +                       # Set lims with c()
+  scale...(... = number) +              # Specify function and argument
+  labs(x = "...",
+       y = "...",                       # Set labels in quotes
+       title = "Density & Education") + 
+  theme_minimal()
+
+```
+
+<br>
+<br>
+
 ### The Faceting Layer 
 
 The **faceting layer** allows us to create **facets**, a.k.a [small multiples](https://en.wikipedia.org/wiki/Small_multiple) or trellis charts.
@@ -1579,6 +1874,49 @@ ggplot(hancock,
 * **rows =** accepts the number of rows in a facet grid
 * **cols =** accepts the number of columns
 * **labeller =** accepts new strip names
+
+<br>
+<br>
+
+<div class="quiz">
+
+<br>
+
+YOUR TURN: FACETING
+
+<br>
+
+Unfortunately, the R widget cannot visualize faceting (yet).
+
+Open a new RStudio script. Copy and paste the below code.
+
+Use a `facet_*()` function on variable `cut`.
+
+<br>
+
+</div>
+
+<br>
+
+```{r ex="example-06", type="sample-code", tut=TRUE}
+
+library(ggplot2)
+
+ggplot(data = diamonds,
+       aes(x = carat, 
+           y = price)) +
+  geom_smooth(color = "grey40") +
+  geom_point(alpha = 0.05, 
+             size = 0.75) +
+  labs(title = "Weight and selling price by cut",
+       subtitle = "53,940 Diamonds",
+       x = "Carat", 
+       y = "Price") +
+  scale_y_continuous(labels = dollar) +
+  theme_minimal() + 
+  ...(. ~ ...)        # Faceting won't work here; use R
+
+```
 
 <br>
 <br>
@@ -1699,6 +2037,54 @@ p + theme(axis.title = ...)
 p + theme(axis.title = element_text(color = "gray50",
                                     face = "bold",
                                     size = 10))
+
+```
+
+<br>
+<br>
+
+<div class="quiz">
+
+<br>
+
+YOUR TURN: CUSTOMIZING TITLE THEMES
+
+<br>
+
+Load package scales to help format our scales. In `themes()`:
+
+* Change argument 'x =' in `labs()` to "Year" 
+* Format the plot's axes title color to "grey20"
+* Make the main title size 12 and "bold" face
+* Continue experimenting with modifications
+
+<br>
+
+</div>
+
+<br>
+
+```{r ex="example-07", type="sample-code", tut=TRUE}
+
+# Load required packages
+    
+library(ggplot2)
+library(scales)
+
+ggplot(economics,
+       aes(x = date,
+           y = unemploy)) +
+  geom_line() +
+  labs(x = ...,
+       y = "Unemployed (Thousands)",
+       title = "U.S. unemployment over time",
+       caption = "Source: Federal Reserve Bank of St. Louis") +
+  scale_y_continuous(labels = comma) +
+  theme_minimal() +
+  theme(axis.title = element_text(color = "..."), 
+        plot.title = element_text(... = 12,
+                                  face = "..."))
+  
 
 ```
 
