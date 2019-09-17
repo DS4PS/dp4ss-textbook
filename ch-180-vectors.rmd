@@ -1,0 +1,137 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: textbook.css
+---
+
+# Summarizing Vectors
+
+<br>
+<br>
+
+<div class="tip">
+
+## Key Concepts
+
+In this chapter, we'll explore the following key concepts:
+
+* Counting Logical Values: Function `sum()`
+* Tallying Categorical Variables: `table()`
+* Determining Missing Values: `is.na()`
+* Table Proportionality: `prop.table()`
+* Table Margins: `margin.table()`
+* Functions for Descriptive Stats: 
+    - `min()`
+    - `max()`
+    - `mean()`
+    - `summary()`
+    - `quantile()`
+* Combining Functions `summary()` & `data.frame()`
+* Creating Tables of Descriptives: Factor & Numeric Variables
+
+## New Packages
+
+This chapter uses the following packages:
+
+* Package A
+
+## Key Takeaways
+
+Too long; didn't read? Here's what you need to know:
+
+* Item A
+* Item B
+* Item C
+
+<br>
+<br>
+<br>
+
+</div>
+
+```{r echo=F}
+
+# ATTENTION : GLOBAL CHUNK DEFAULTS
+
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE)
+
+```
+
+```{r include=F}
+
+tutorial::go_interactive( greedy=FALSE )
+
+```
+
+<br>
+<br>
+
+## Logical Variables
+
+Class **logical** variables are comprised of one of two values: `TRUE` or `FALSE`.
+
+<br>
+
+We can create **logical** variables manually. Determine their class with function `class()`:
+
+```{r}
+
+x <- TRUE
+y <- FALSE
+
+class(x)
+class(y)
+
+```
+
+<br>
+
+Often, **logical** values simply indicate "yes" or "no"
+
+```{r}
+
+character <- c("Raskolnikov", "Marmeladov", "Razumikhin")
+criminal <- c(TRUE, FALSE, FALSE)
+
+data.frame(character,
+           criminal)        # Create data frame of characters and crime status
+
+```
+
+<br>
+
+Most common, however, is that **logical** values result from conditional statements.
+
+Observe the function call `head()` on *ggplot2* dataset `economics`:
+
+```{r}
+
+library(ggplot2)
+
+head(economics)             # First 6 rows of "economics" dataset
+
+```
+
+<br>
+
+Here we use the operator `>` to determine months with more than 10 M unemployed:
+
+```{r}
+
+economics$unemploy > 10000  # Condition: Is unemployment greater than 10 M?
+
+```
+
+<br>
+
+Here's a more complex conditional statement: More than 5 M but less than 10 M:
+
+```{r}
+
+economics$unemploy > 5000 & economics$unemploy < 10000
+
+```
