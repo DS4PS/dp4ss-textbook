@@ -1,0 +1,120 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    toc: true
+    toc_depth: 1
+    number_sections: true
+    self_contained: false
+    css: textbook.css
+---
+
+```{r, echo=F }
+knitr::opts_chunk$set( echo = TRUE, message=F, warning=F, fig.width=10)
+```
+
+
+# Descriptive Statistics
+
+
+## Useful Packages
+
+```{r}
+library( stargazer )  # publication quality tables
+library( skimr )      # quick and comprehensive descriptive stats
+library( dplyr )      # data wrangling
+```
+
+Descriptive statistics are hugely important for any analysis, but they can be challenging to produce because different classes of variable require different tables or statistics to be meaningful. 
+
+The most general core R **summary()** function prints some basic descriptives about variables in a dataset, reporting statistics based upon data type:
+
+```{r, echo=F}
+strength <- c(167,185,119,142)
+height <- c(73,67,62,65)
+weight <- c(180,190,130,140)
+name <- c("adam","jamal","linda","sriti")
+gender <- factor( c("male","male","female","female") )
+group <- factor( c( "treatment","control","treatment","control" ) )
+dat <- data.frame( name, group, gender, height, weight, strength, stringsAsFactors=F )
+dat %>% pander()
+```
+
+```{r}
+summary( dat )
+```
+
+
+
+
+
+These are not pretty enough to include in a report. Fortunately there are some functions that produce nice tables for R Markdown reports. We will use the **stargazer** package extensively for regression results and descriptive statistics. 
+
+<br>
+
+```{r results="asis", eval=T}
+library( stargazer )
+dat.numeric <- select_if( dat, is.numeric )
+stargazer( dat.numeric, type="html", digits=2, 
+           summary.stat = c("n","min","median","mean","max","sd") )
+```
+
+<br>
+
+In many instances we will be working with a large dataset with many variables that are non-numeric. For example, the **Lahman** package contains a *Master* data frame with the demographic information of all Major League baseball players in the League's 100-year history. 
+
+Variables contained in the **Master** data frame in the **Lahman** package: 
+
+VARIABLE  |  CLASS  |  DESCRIPTION 
+----------|---------|-----------------
+**playerID** | factor | A unique code asssigned to each player. The playerID links the data in this file with records on players in the other files.
+**birthYear**  | numeric | Year player was born
+**birthMonth**  | numeric | Month player was born
+**birthDay**  | numeric | Day player was born
+**birthCountry**  | character | Country where player was born
+**birthState**  | character | State where player was born
+**birthCity**  | character | City where player was born
+**deathYear**  | numeric | Year player died
+**deathMonth**  | numeric | Month player died
+**deathDay**  | numeric | Day player died
+**deathCountry**  | character | Country where player died
+**deathState**  | character | State where player died
+**deathCity**  | character | City where player died
+**nameFirst**  | character | Player’s first name
+**nameLast**  | character | Player’s last name
+**nameGiven**  | character | Player’s given name (typically first and middle)
+**weight**  | numeric | Player’s weight in pounds
+**height**  | numeric | Player’s height in inches
+**bats**  | factor | a factor: Player’s batting hand (left (L), right (R), or both (B))
+**throws**  | factor | a factor: Player’s throwing hand (left(L) or right(R))
+**debut**  | character | Date that player made first major league appearance
+**finalGame**  | character | Date that player made first major league appearance (blank if still active)
+**retroID**  | character | ID used by retrosheet, http://www.retrosheet.org/
+**bbrefID**  | character | ID used by Baseball Reference website, http://www.baseball-reference.com/
+**birthDate**  | date | Player’s birthdate, in as.Date format
+**deathDate**  | date | Player’s deathdate, in as.Date format
+
+
+In these cases, many of the summary functions will be of limited use. The **skimr** package was developed for large datasets like these. It will automatically create a set of summary tables for a variety of data types, and the default statistics are reasonable and informative:
+
+
+```{r}
+library( skimr )
+library( Lahman )
+
+data( Master )
+skim( Master )
+```
+
+
+For more functionality see:
+
+```{r, eval=F}
+vignette( "Using_skimr", package = "skimr" )
+```
+
+
+There are many additional packages and tricks for producing descriptive statistics. Note, though, that most produce a print-out of summary statistics but do not return a useful "tidy" dataset that can be used in subsequent steps. For most data recipes, we will rely on the **summarize()** function in the **dplyr** package. It's utility will become obvious in the next two chapters. 
+
+

@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>p-072-data-recipes.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/detect-resize-0.5.3/jquery.resize.js"></script>
+<link href="site_libs/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet" />
+<script src="site_libs/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/d3-3.5.2/d3.min.js"></script>
+<script src="site_libs/vega-1.4.3/vega.min.js"></script>
+<script src="site_libs/lodash-2.2.1/lodash.min.js"></script>
+<script>var lodash = _.noConflict();</script>
+<link href="site_libs/ggvis-0.4.4/css/ggvis.css" rel="stylesheet" />
+<script src="site_libs/ggvis-0.4.4/js/ggvis.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#data-recipes"><span class="toc-section-number">1</span> Data Recipes</a><ul>
+<li><a href="#packages-used-in-this-chapter"><span class="toc-section-number">1.1</span> Packages Used in This Chapter</a></li>
+<li><a href="#key-concepts"><span class="toc-section-number">1.2</span> Key Concepts</a></li>
+<li><a href="#the-pipe-operator"><span class="toc-section-number">1.3</span> The Pipe Operator <strong>%&gt;%</strong></a></li>
+<li><a href="#building-data-recipes"><span class="toc-section-number">1.4</span> Building Data Recipes</a></li>
+<li><a href="#conclusion"><span class="toc-section-number">1.5</span> Conclusion</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="data-recipes" class="section level1">
+<h1><span class="header-section-number">1</span> Data Recipes</h1>
+<style>
+th {
+    text-align: left;
+}
+td {
+    text-align: left;
+}
+</style>
+<div id="packages-used-in-this-chapter" class="section level2">
+<h2><span class="header-section-number">1.1</span> Packages Used in This Chapter</h2>
+<pre class="r"><code>library( dplyr )
+library( pander )
+library( ggvis )</code></pre>
+</div>
+<div id="key-concepts" class="section level2">
+<h2><span class="header-section-number">1.2</span> Key Concepts</h2>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="figures/data_recipe.png" alt="Data recipes are written using a series of data steps. We can simplify this process using pipes" width="80%" />
+<p class="caption">
+Figure 1.1: Data recipes are written using a series of data steps. We can simplify this process using pipes
+</p>
+</div>
+<p><br><br></p>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="figures/data_verb_input_output.png" alt="Recall, data verbs use data frames as the primary input and the output value." width="80%" />
+<p class="caption">
+Figure 1.2: Recall, data verbs use data frames as the primary input and the output value.
+</p>
+</div>
+<p><br><br></p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="figures/chaining_data_verbs.png" alt="The pipe operator passes a data frame forward through a chain of data vergs. We only reference the dataset name once, and all other times it's implicitly called through through piping." width="90%" />
+<p class="caption">
+Figure 1.3: The pipe operator passes a data frame forward through a chain of data vergs. We only reference the dataset name once, and all other times it’s implicitly called through through piping.
+</p>
+</div>
+</div>
+<div id="the-pipe-operator" class="section level2">
+<h2><span class="header-section-number">1.3</span> The Pipe Operator <strong>%&gt;%</strong></h2>
+<p>The idea of functions() was first introduced using a metaphor of a cookie recipe that has ingredients (data and arguments) and requires that each step of the process building on the results of the previous step.</p>
+<p>The pipe operator allows us to follow this same model to build “data recipes”, a stylized way of writing a program as a series of data verbs chained together to wrangle and analyze the data. The pipe operator passes the data from one verb to the next without having to name it directly.</p>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="figures/chaining_data_verbs.png" alt="The pipe operator allows us to pass a transformed dataset forward in the recipe." width="80%" />
+<p class="caption">
+Figure 1.4: The pipe operator allows us to pass a transformed dataset forward in the recipe.
+</p>
+</div>
+</div>
+<div id="building-data-recipes" class="section level2">
+<h2><span class="header-section-number">1.4</span> Building Data Recipes</h2>
+<p>Data recipes are simple scripts that follow a series of steps, just like a recipe.</p>
+<p>This chapter demonstrates how data verbs and pipe operators can be used to write recipes to generate interesting insights.</p>
+<p>To demonstrate the idea, we will use a dataset of <a href="https://www.kaggle.com/ryanburge/hipster-names/data">US Baby Names</a> released by the Social Security Administration. This version was downloaded by <a href="https://www.kaggle.com/ryanburge">Ryan Burge</a> and posted on Kaggle. I’ve re-posted it on GitHub so it can be read directly into R easily:</p>
+<pre class="r"><code>URL &lt;- &quot;https://github.com/DS4PS/Data-Science-Class/blob/master/DATA/BabyNames.rds?raw=true&quot;
+names &lt;- readRDS( gzcon( url( URL )))
+names %&gt;% head() %&gt;% pander()</code></pre>
+<table style="width:58%;">
+<colgroup>
+<col width="6%" />
+<col width="16%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Id</th>
+<th align="center">Name</th>
+<th align="center">Year</th>
+<th align="center">Gender</th>
+<th align="center">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Mary</td>
+<td align="center">1880</td>
+<td align="center">F</td>
+<td align="center">7065</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Anna</td>
+<td align="center">1880</td>
+<td align="center">F</td>
+<td align="center">2604</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">Emma</td>
+<td align="center">1880</td>
+<td align="center">F</td>
+<td align="center">2003</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">Elizabeth</td>
+<td align="center">1880</td>
+<td align="center">F</td>
+<td align="center">1939</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">Minnie</td>
+<td align="center">1880</td>
+<td align="center">F</td>
+<td align="center">1746</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">Margaret</td>
+<td align="center">1880</td>
+<td align="center">F</td>
+<td align="center">1578</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s start by building a recipe to identify the top 10 male names for Baby Boomers.</p>
+<ol style="list-style-type: decimal">
+<li>Create a subset of data for men born between 1946 and 1964.</li>
+<li>Sort by the annual count of each name in the subset.</li>
+<li>Keep only the most popular year for each name.</li>
+<li>Identify the top 10 most popular during this period.</li>
+<li>Print the results in a nice table that includes name and peak year data.</li>
+</ol>
+<p>The recipe will look something like this:</p>
+<pre class="r"><code>names %&gt;% 
+  filter( Gender ==&quot;M&quot; &amp; Year &gt;= 1946 &amp; Year &lt;= 1964 ) %&gt;%
+  arrange( desc( Count ) ) %&gt;%
+  distinct( Name, .keep_all=T ) %&gt;%
+  top_n( 10, Count ) %&gt;%
+  select( Name, Year, Count ) %&gt;%
+  pander()</code></pre>
+<table style="width:35%;">
+<colgroup>
+<col width="13%" />
+<col width="9%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Name</th>
+<th align="center">Year</th>
+<th align="center">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">James</td>
+<td align="center">1947</td>
+<td align="center">94755</td>
+</tr>
+<tr class="even">
+<td align="center">Michael</td>
+<td align="center">1957</td>
+<td align="center">92709</td>
+</tr>
+<tr class="odd">
+<td align="center">Robert</td>
+<td align="center">1947</td>
+<td align="center">91642</td>
+</tr>
+<tr class="even">
+<td align="center">John</td>
+<td align="center">1947</td>
+<td align="center">88318</td>
+</tr>
+<tr class="odd">
+<td align="center">David</td>
+<td align="center">1955</td>
+<td align="center">86191</td>
+</tr>
+<tr class="even">
+<td align="center">William</td>
+<td align="center">1947</td>
+<td align="center">66969</td>
+</tr>
+<tr class="odd">
+<td align="center">Richard</td>
+<td align="center">1946</td>
+<td align="center">58859</td>
+</tr>
+<tr class="even">
+<td align="center">Mark</td>
+<td align="center">1960</td>
+<td align="center">58735</td>
+</tr>
+<tr class="odd">
+<td align="center">Thomas</td>
+<td align="center">1952</td>
+<td align="center">48617</td>
+</tr>
+<tr class="even">
+<td align="center">Charles</td>
+<td align="center">1947</td>
+<td align="center">40773</td>
+</tr>
+</tbody>
+</table>
+<p>There are many ways to construct a data recipe. We could have alternatively taken this approach:</p>
+<ol style="list-style-type: decimal">
+<li>Create a subset of data for men born between 1946 and 1964.</li>
+<li>Count the total numer of men given each name during the period.</li>
+<li>Find the top 10 most popular names.</li>
+</ol>
+<pre class="r"><code>names %&gt;% 
+  filter( Gender ==&quot;M&quot; &amp; Year &gt;= 1946 &amp; Year &lt;= 1964 ) %&gt;%
+  group_by( Name ) %&gt;%
+  dplyr::summarize( total=sum(Count) ) %&gt;%
+  dplyr::arrange( desc(total) ) %&gt;%
+  slice( 1:10 ) %&gt;%
+  pander()</code></pre>
+<table style="width:28%;">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Name</th>
+<th align="center">total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">James</td>
+<td align="center">1570607</td>
+</tr>
+<tr class="even">
+<td align="center">Robert</td>
+<td align="center">1530527</td>
+</tr>
+<tr class="odd">
+<td align="center">John</td>
+<td align="center">1524619</td>
+</tr>
+<tr class="even">
+<td align="center">Michael</td>
+<td align="center">1463911</td>
+</tr>
+<tr class="odd">
+<td align="center">David</td>
+<td align="center">1395499</td>
+</tr>
+<tr class="even">
+<td align="center">William</td>
+<td align="center">1072303</td>
+</tr>
+<tr class="odd">
+<td align="center">Richard</td>
+<td align="center">959321</td>
+</tr>
+<tr class="even">
+<td align="center">Thomas</td>
+<td align="center">810160</td>
+</tr>
+<tr class="odd">
+<td align="center">Mark</td>
+<td align="center">684159</td>
+</tr>
+<tr class="even">
+<td align="center">Charles</td>
+<td align="center">657780</td>
+</tr>
+</tbody>
+</table>
+<p>We can see that these two approaches to answering our question give us slightly different results, but are pretty close.</p>
+<p>Let’s try to identify when specific female names have peaked.</p>
+<ol style="list-style-type: decimal">
+<li>Create a subset of data for women.</li>
+<li>Group the data by “Name” so we can analyze each name separately.</li>
+<li>Find the year with the highest count for each name.</li>
+<li>Store this data as “peak.years”.</li>
+</ol>
+<p>Each name will occur once in this dataset in the year that it experienced it’s peak popularity.</p>
+<pre class="r"><code>peak.years &lt;- 
+  names %&gt;%
+  filter( Gender == &quot;F&quot; ) %&gt;%
+  group_by( Name ) %&gt;%
+  top_n( 1, Count ) %&gt;% 
+  ungroup() 
+
+peak.years %&gt;% head( 5 ) %&gt;% pander()</code></pre>
+<table style="width:58%;">
+<colgroup>
+<col width="9%" />
+<col width="13%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Id</th>
+<th align="center">Name</th>
+<th align="center">Year</th>
+<th align="center">Gender</th>
+<th align="center">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">568</td>
+<td align="center">Manerva</td>
+<td align="center">1880</td>
+<td align="center">F</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center">720</td>
+<td align="center">Neppie</td>
+<td align="center">1880</td>
+<td align="center">F</td>
+<td align="center">7</td>
+</tr>
+<tr class="odd">
+<td align="center">2621</td>
+<td align="center">Zilpah</td>
+<td align="center">1881</td>
+<td align="center">F</td>
+<td align="center">9</td>
+</tr>
+<tr class="even">
+<td align="center">4625</td>
+<td align="center">Crete</td>
+<td align="center">1882</td>
+<td align="center">F</td>
+<td align="center">8</td>
+</tr>
+<tr class="odd">
+<td align="center">4750</td>
+<td align="center">Alwina</td>
+<td align="center">1882</td>
+<td align="center">F</td>
+<td align="center">6</td>
+</tr>
+</tbody>
+</table>
+<p>We can then filter by years to see which names peaked in a given period.</p>
+<pre class="r"><code>filter( peak.years, Year == 1950 ) %&gt;% 
+  arrange( desc( Count ) ) %&gt;%
+  slice( 1:5 ) %&gt;%
+  pander()</code></pre>
+<table style="width:64%;">
+<colgroup>
+<col width="12%" />
+<col width="16%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Id</th>
+<th align="center">Name</th>
+<th align="center">Year</th>
+<th align="center">Gender</th>
+<th align="center">Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">462006</td>
+<td align="center">Constance</td>
+<td align="center">1950</td>
+<td align="center">F</td>
+<td align="center">4442</td>
+</tr>
+<tr class="even">
+<td align="center">462008</td>
+<td align="center">Glenda</td>
+<td align="center">1950</td>
+<td align="center">F</td>
+<td align="center">4213</td>
+</tr>
+<tr class="odd">
+<td align="center">462103</td>
+<td align="center">Bonita</td>
+<td align="center">1950</td>
+<td align="center">F</td>
+<td align="center">1527</td>
+</tr>
+<tr class="even">
+<td align="center">462301</td>
+<td align="center">Ilene</td>
+<td align="center">1950</td>
+<td align="center">F</td>
+<td align="center">453</td>
+</tr>
+<tr class="odd">
+<td align="center">462305</td>
+<td align="center">Marta</td>
+<td align="center">1950</td>
+<td align="center">F</td>
+<td align="center">445</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code># library( ggvis )
+names %&gt;%
+  filter( Name == &quot;Constance&quot; &amp; Gender ==&quot;F&quot; ) %&gt;%
+  select (Name, Year, Count) %&gt;%
+  ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
+  layer_lines()</code></pre>
+<div id="plot_id267155377-container" class="ggvis-output-container">
+<div id="plot_id267155377" class="ggvis-output"></div>
+<div class="plot-gear-icon">
+<nav class="ggvis-control">
+<a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
+<ul class="ggvis-dropdown">
+<li>
+Renderer: 
+<a id="plot_id267155377_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id267155377" data-renderer="svg">SVG</a>
+ | 
+<a id="plot_id267155377_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id267155377" data-renderer="canvas">Canvas</a>
+</li>
+<li>
+<a id="plot_id267155377_download" class="ggvis-download" data-plot-id="plot_id267155377">Download</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var plot_id267155377_spec = {
+  "data": [
+    {
+      "name": ".0/group_by1/arrange2_flat",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "Year": "number",
+          "Count": "number"
+        }
+      },
+      "values": "\"Name\",\"Year\",\"Count\"\n\"Constance\",1880,15\n\"Constance\",1881,14\n\"Constance\",1882,22\n\"Constance\",1883,17\n\"Constance\",1884,29\n\"Constance\",1885,31\n\"Constance\",1886,36\n\"Constance\",1887,37\n\"Constance\",1888,43\n\"Constance\",1889,46\n\"Constance\",1890,45\n\"Constance\",1891,44\n\"Constance\",1892,60\n\"Constance\",1893,60\n\"Constance\",1894,62\n\"Constance\",1895,90\n\"Constance\",1896,75\n\"Constance\",1897,82\n\"Constance\",1898,82\n\"Constance\",1899,106\n\"Constance\",1900,112\n\"Constance\",1901,94\n\"Constance\",1902,117\n\"Constance\",1903,144\n\"Constance\",1904,127\n\"Constance\",1905,163\n\"Constance\",1906,167\n\"Constance\",1907,194\n\"Constance\",1908,214\n\"Constance\",1909,206\n\"Constance\",1910,261\n\"Constance\",1911,298\n\"Constance\",1912,375\n\"Constance\",1913,458\n\"Constance\",1914,600\n\"Constance\",1915,728\n\"Constance\",1916,811\n\"Constance\",1917,845\n\"Constance\",1918,971\n\"Constance\",1919,1078\n\"Constance\",1920,1377\n\"Constance\",1921,1686\n\"Constance\",1922,1677\n\"Constance\",1923,1686\n\"Constance\",1924,1656\n\"Constance\",1925,1654\n\"Constance\",1926,1670\n\"Constance\",1927,1521\n\"Constance\",1928,1318\n\"Constance\",1929,1325\n\"Constance\",1930,1465\n\"Constance\",1931,2072\n\"Constance\",1932,2492\n\"Constance\",1933,2191\n\"Constance\",1934,1975\n\"Constance\",1935,1803\n\"Constance\",1936,1698\n\"Constance\",1937,2028\n\"Constance\",1938,2160\n\"Constance\",1939,2009\n\"Constance\",1940,2039\n\"Constance\",1941,2275\n\"Constance\",1942,2356\n\"Constance\",1943,2552\n\"Constance\",1944,2633\n\"Constance\",1945,2600\n\"Constance\",1946,3417\n\"Constance\",1947,3895\n\"Constance\",1948,3812\n\"Constance\",1949,4328\n\"Constance\",1950,4442\n\"Constance\",1951,4366\n\"Constance\",1952,4114\n\"Constance\",1953,4025\n\"Constance\",1954,3840\n\"Constance\",1955,3661\n\"Constance\",1956,2820\n\"Constance\",1957,2418\n\"Constance\",1958,1996\n\"Constance\",1959,1840\n\"Constance\",1960,1734\n\"Constance\",1961,1704\n\"Constance\",1962,1651\n\"Constance\",1963,1584\n\"Constance\",1964,1548\n\"Constance\",1965,1834\n\"Constance\",1966,1469\n\"Constance\",1967,1232\n\"Constance\",1968,1032\n\"Constance\",1969,875\n\"Constance\",1970,805\n\"Constance\",1971,652\n\"Constance\",1972,563\n\"Constance\",1973,495\n\"Constance\",1974,456\n\"Constance\",1975,436\n\"Constance\",1976,348\n\"Constance\",1977,383\n\"Constance\",1978,360\n\"Constance\",1979,344\n\"Constance\",1980,351\n\"Constance\",1981,715\n\"Constance\",1982,780\n\"Constance\",1983,639\n\"Constance\",1984,564\n\"Constance\",1985,520\n\"Constance\",1986,603\n\"Constance\",1987,562\n\"Constance\",1988,510\n\"Constance\",1989,489\n\"Constance\",1990,475\n\"Constance\",1991,375\n\"Constance\",1992,342\n\"Constance\",1993,306\n\"Constance\",1994,240\n\"Constance\",1995,273\n\"Constance\",1996,237\n\"Constance\",1997,220\n\"Constance\",1998,220\n\"Constance\",1999,205\n\"Constance\",2000,187\n\"Constance\",2001,164\n\"Constance\",2002,184\n\"Constance\",2003,183\n\"Constance\",2004,201\n\"Constance\",2005,185\n\"Constance\",2006,207\n\"Constance\",2007,188\n\"Constance\",2008,192\n\"Constance\",2009,173\n\"Constance\",2010,151\n\"Constance\",2011,137\n\"Constance\",2012,163\n\"Constance\",2013,103\n\"Constance\",2014,133"
+    },
+    {
+      "name": ".0/group_by1/arrange2",
+      "source": ".0/group_by1/arrange2_flat",
+      "transform": [
+        {
+          "type": "treefacet",
+          "keys": [
+            "data.Name"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scale/stroke",
+      "format": {
+        "type": "csv",
+        "parse": {}
+      },
+      "values": "\"domain\"\n\"Constance\""
+    },
+    {
+      "name": "scale/x",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n1873.3\n2020.7"
+    },
+    {
+      "name": "scale/y",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n-207.4\n4663.4"
+    }
+  ],
+  "scales": [
+    {
+      "name": "stroke",
+      "type": "ordinal",
+      "domain": {
+        "data": "scale/stroke",
+        "field": "data.domain"
+      },
+      "points": true,
+      "sort": false,
+      "range": "category10"
+    },
+    {
+      "name": "x",
+      "domain": {
+        "data": "scale/x",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "domain": {
+        "data": "scale/y",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "height"
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {
+        "data": ".0/group_by1/arrange2"
+      },
+      "marks": [
+        {
+          "type": "line",
+          "properties": {
+            "update": {
+              "stroke": {
+                "scale": "stroke",
+                "field": "data.Name"
+              },
+              "x": {
+                "scale": "x",
+                "field": "data.Year"
+              },
+              "y": {
+                "scale": "y",
+                "field": "data.Count"
+              }
+            },
+            "ggvis": {
+              "data": {
+                "value": ".0/group_by1/arrange2"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "orient": "right",
+      "stroke": "stroke",
+      "title": "Name"
+    }
+  ],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "bottom",
+      "layer": "back",
+      "grid": true,
+      "title": "Year"
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "orient": "left",
+      "layer": "back",
+      "grid": true,
+      "title": "Count"
+    }
+  ],
+  "padding": null,
+  "ggvis_opts": {
+    "keep_aspect": false,
+    "resizable": true,
+    "padding": {},
+    "duration": 250,
+    "renderer": "svg",
+    "hover_duration": 0,
+    "width": 768,
+    "height": 480
+  },
+  "handlers": null
+};
+ggvis.getPlot("plot_id267155377").parseSpec(plot_id267155377_spec);
+</script>
+<pre class="r"><code>top.five.1920 &lt;- 
+  filter( peak.years, Year == 1920 ) %&gt;% 
+  top_n( 5, Count ) 
+
+top.five.1920</code></pre>
+<pre><code>## # A tibble: 5 x 5
+##       Id Name     Year Gender Count
+##    &lt;int&gt; &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;  &lt;int&gt;
+## 1 169464 Ruth     1920 F      26100
+## 2 169465 Mildred  1920 F      18058
+## 3 169472 Marie    1920 F      12745
+## 4 169477 Lillian  1920 F      10050
+## 5 169481 Gladys   1920 F       8819</code></pre>
+<pre class="r"><code>names %&gt;%
+  filter( Name %in% top.five.1920$Name &amp; Gender ==&quot;F&quot; ) %&gt;%
+  select (Name, Year, Count) %&gt;%
+  ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
+  layer_lines()</code></pre>
+<div id="plot_id139711977-container" class="ggvis-output-container">
+<div id="plot_id139711977" class="ggvis-output"></div>
+<div class="plot-gear-icon">
+<nav class="ggvis-control">
+<a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
+<ul class="ggvis-dropdown">
+<li>
+Renderer: 
+<a id="plot_id139711977_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id139711977" data-renderer="svg">SVG</a>
+ | 
+<a id="plot_id139711977_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id139711977" data-renderer="canvas">Canvas</a>
+</li>
+<li>
+<a id="plot_id139711977_download" class="ggvis-download" data-plot-id="plot_id139711977">Download</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var plot_id139711977_spec = {
+  "data": [
+    {
+      "name": ".0/group_by1/arrange2_flat",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "Year": "number",
+          "Count": "number"
+        }
+      },
+      "values": "\"Name\",\"Year\",\"Count\"\n\"Gladys\",1880,20\n\"Gladys\",1881,40\n\"Gladys\",1882,46\n\"Gladys\",1883,71\n\"Gladys\",1884,92\n\"Gladys\",1885,91\n\"Gladys\",1886,131\n\"Gladys\",1887,201\n\"Gladys\",1888,314\n\"Gladys\",1889,414\n\"Gladys\",1890,525\n\"Gladys\",1891,633\n\"Gladys\",1892,867\n\"Gladys\",1893,1017\n\"Gladys\",1894,1258\n\"Gladys\",1895,1464\n\"Gladys\",1896,1757\n\"Gladys\",1897,1737\n\"Gladys\",1898,2136\n\"Gladys\",1899,2228\n\"Gladys\",1900,2733\n\"Gladys\",1901,2676\n\"Gladys\",1902,2809\n\"Gladys\",1903,2674\n\"Gladys\",1904,2976\n\"Gladys\",1905,2996\n\"Gladys\",1906,3000\n\"Gladys\",1907,3303\n\"Gladys\",1908,3580\n\"Gladys\",1909,3538\n\"Gladys\",1910,3842\n\"Gladys\",1911,3933\n\"Gladys\",1912,4980\n\"Gladys\",1913,5428\n\"Gladys\",1914,6227\n\"Gladys\",1915,7857\n\"Gladys\",1916,8019\n\"Gladys\",1917,8075\n\"Gladys\",1918,8735\n\"Gladys\",1919,8717\n\"Gladys\",1920,8819\n\"Gladys\",1921,8813\n\"Gladys\",1922,8041\n\"Gladys\",1923,7694\n\"Gladys\",1924,7791\n\"Gladys\",1925,7231\n\"Gladys\",1926,6631\n\"Gladys\",1927,6415\n\"Gladys\",1928,5793\n\"Gladys\",1929,5328\n\"Gladys\",1930,5063\n\"Gladys\",1931,4347\n\"Gladys\",1932,4183\n\"Gladys\",1933,3585\n\"Gladys\",1934,3610\n\"Gladys\",1935,3147\n\"Gladys\",1936,2942\n\"Gladys\",1937,2872\n\"Gladys\",1938,2590\n\"Gladys\",1939,2417\n\"Gladys\",1940,2245\n\"Gladys\",1941,2221\n\"Gladys\",1942,2191\n\"Gladys\",1943,2112\n\"Gladys\",1944,1900\n\"Gladys\",1945,1707\n\"Gladys\",1946,1714\n\"Gladys\",1947,1820\n\"Gladys\",1948,1602\n\"Gladys\",1949,1544\n\"Gladys\",1950,1531\n\"Gladys\",1951,1450\n\"Gladys\",1952,1303\n\"Gladys\",1953,1367\n\"Gladys\",1954,1260\n\"Gladys\",1955,1228\n\"Gladys\",1956,1171\n\"Gladys\",1957,1072\n\"Gladys\",1958,951\n\"Gladys\",1959,846\n\"Gladys\",1960,861\n\"Gladys\",1961,817\n\"Gladys\",1962,715\n\"Gladys\",1963,689\n\"Gladys\",1964,628\n\"Gladys\",1965,578\n\"Gladys\",1966,435\n\"Gladys\",1967,442\n\"Gladys\",1968,382\n\"Gladys\",1969,399\n\"Gladys\",1970,364\n\"Gladys\",1971,344\n\"Gladys\",1972,243\n\"Gladys\",1973,270\n\"Gladys\",1974,267\n\"Gladys\",1975,310\n\"Gladys\",1976,257\n\"Gladys\",1977,270\n\"Gladys\",1978,201\n\"Gladys\",1979,237\n\"Gladys\",1980,291\n\"Gladys\",1981,255\n\"Gladys\",1982,292\n\"Gladys\",1983,216\n\"Gladys\",1984,227\n\"Gladys\",1985,256\n\"Gladys\",1986,231\n\"Gladys\",1987,236\n\"Gladys\",1988,243\n\"Gladys\",1989,265\n\"Gladys\",1990,448\n\"Gladys\",1991,332\n\"Gladys\",1992,312\n\"Gladys\",1993,320\n\"Gladys\",1994,289\n\"Gladys\",1995,283\n\"Gladys\",1996,277\n\"Gladys\",1997,249\n\"Gladys\",1998,192\n\"Gladys\",1999,214\n\"Gladys\",2000,184\n\"Gladys\",2001,184\n\"Gladys\",2002,198\n\"Gladys\",2003,190\n\"Gladys\",2004,186\n\"Gladys\",2005,202\n\"Gladys\",2006,207\n\"Gladys\",2007,160\n\"Gladys\",2008,135\n\"Gladys\",2009,120\n\"Gladys\",2010,103\n\"Gladys\",2011,81\n\"Gladys\",2012,81\n\"Gladys\",2013,69\n\"Gladys\",2014,73\n\"Lillian\",1880,672\n\"Lillian\",1881,723\n\"Lillian\",1882,830\n\"Lillian\",1883,907\n\"Lillian\",1884,1109\n\"Lillian\",1885,1143\n\"Lillian\",1886,1282\n\"Lillian\",1887,1308\n\"Lillian\",1888,1656\n\"Lillian\",1889,1640\n\"Lillian\",1890,1862\n\"Lillian\",1891,1812\n\"Lillian\",1892,2154\n\"Lillian\",1893,2193\n\"Lillian\",1894,2441\n\"Lillian\",1895,2495\n\"Lillian\",1896,2702\n\"Lillian\",1897,2683\n\"Lillian\",1898,3061\n\"Lillian\",1899,2703\n\"Lillian\",1900,3414\n\"Lillian\",1901,2681\n\"Lillian\",1902,3063\n\"Lillian\",1903,2972\n\"Lillian\",1904,3139\n\"Lillian\",1905,3185\n\"Lillian\",1906,3293\n\"Lillian\",1907,3542\n\"Lillian\",1908,3634\n\"Lillian\",1909,3596\n\"Lillian\",1910,4127\n\"Lillian\",1911,4367\n\"Lillian\",1912,5568\n\"Lillian\",1913,6015\n\"Lillian\",1914,7354\n\"Lillian\",1915,9546\n\"Lillian\",1916,9592\n\"Lillian\",1917,9843\n\"Lillian\",1918,9986\n\"Lillian\",1919,9515\n\"Lillian\",1920,10050\n\"Lillian\",1921,9769\n\"Lillian\",1922,9427\n\"Lillian\",1923,9327\n\"Lillian\",1924,9094\n\"Lillian\",1925,8355\n\"Lillian\",1926,7657\n\"Lillian\",1927,7187\n\"Lillian\",1928,6571\n\"Lillian\",1929,5712\n\"Lillian\",1930,5452\n\"Lillian\",1931,4805\n\"Lillian\",1932,4349\n\"Lillian\",1933,3997\n\"Lillian\",1934,3972\n\"Lillian\",1935,3424\n\"Lillian\",1936,3116\n\"Lillian\",1937,2900\n\"Lillian\",1938,2824\n\"Lillian\",1939,2554\n\"Lillian\",1940,2524\n\"Lillian\",1941,2460\n\"Lillian\",1942,2489\n\"Lillian\",1943,2394\n\"Lillian\",1944,2118\n\"Lillian\",1945,2017\n\"Lillian\",1946,2159\n\"Lillian\",1947,2089\n\"Lillian\",1948,2114\n\"Lillian\",1949,1944\n\"Lillian\",1950,1887\n\"Lillian\",1951,1822\n\"Lillian\",1952,1734\n\"Lillian\",1953,1657\n\"Lillian\",1954,1626\n\"Lillian\",1955,1655\n\"Lillian\",1956,1631\n\"Lillian\",1957,1602\n\"Lillian\",1958,1421\n\"Lillian\",1959,1470\n\"Lillian\",1960,1430\n\"Lillian\",1961,1309\n\"Lillian\",1962,1307\n\"Lillian\",1963,1166\n\"Lillian\",1964,1063\n\"Lillian\",1965,1016\n\"Lillian\",1966,877\n\"Lillian\",1967,841\n\"Lillian\",1968,814\n\"Lillian\",1969,773\n\"Lillian\",1970,782\n\"Lillian\",1971,676\n\"Lillian\",1972,620\n\"Lillian\",1973,563\n\"Lillian\",1974,482\n\"Lillian\",1975,455\n\"Lillian\",1976,479\n\"Lillian\",1977,471\n\"Lillian\",1978,399\n\"Lillian\",1979,439\n\"Lillian\",1980,510\n\"Lillian\",1981,518\n\"Lillian\",1982,475\n\"Lillian\",1983,451\n\"Lillian\",1984,468\n\"Lillian\",1985,542\n\"Lillian\",1986,553\n\"Lillian\",1987,531\n\"Lillian\",1988,646\n\"Lillian\",1989,695\n\"Lillian\",1990,722\n\"Lillian\",1991,767\n\"Lillian\",1992,749\n\"Lillian\",1993,736\n\"Lillian\",1994,881\n\"Lillian\",1995,942\n\"Lillian\",1996,1127\n\"Lillian\",1997,1393\n\"Lillian\",1998,1716\n\"Lillian\",1999,2190\n\"Lillian\",2000,2597\n\"Lillian\",2001,2949\n\"Lillian\",2002,3396\n\"Lillian\",2003,4029\n\"Lillian\",2004,4730\n\"Lillian\",2005,5210\n\"Lillian\",2006,6228\n\"Lillian\",2007,6544\n\"Lillian\",2008,6804\n\"Lillian\",2009,6846\n\"Lillian\",2010,6946\n\"Lillian\",2011,6902\n\"Lillian\",2012,7143\n\"Lillian\",2013,7060\n\"Lillian\",2014,6869\n\"Marie\",1880,471\n\"Marie\",1881,499\n\"Marie\",1882,591\n\"Marie\",1883,622\n\"Marie\",1884,746\n\"Marie\",1885,885\n\"Marie\",1886,988\n\"Marie\",1887,994\n\"Marie\",1888,1258\n\"Marie\",1889,1436\n\"Marie\",1890,1563\n\"Marie\",1891,1596\n\"Marie\",1892,2066\n\"Marie\",1893,2212\n\"Marie\",1894,2649\n\"Marie\",1895,3011\n\"Marie\",1896,3087\n\"Marie\",1897,3078\n\"Marie\",1898,3435\n\"Marie\",1899,3156\n\"Marie\",1900,3856\n\"Marie\",1901,3157\n\"Marie\",1902,3423\n\"Marie\",1903,3469\n\"Marie\",1904,3595\n\"Marie\",1905,3643\n\"Marie\",1906,3690\n\"Marie\",1907,3879\n\"Marie\",1908,4076\n\"Marie\",1909,4301\n\"Marie\",1910,4790\n\"Marie\",1911,5017\n\"Marie\",1912,6642\n\"Marie\",1913,7352\n\"Marie\",1914,8829\n\"Marie\",1915,11362\n\"Marie\",1916,11682\n\"Marie\",1917,11813\n\"Marie\",1918,12587\n\"Marie\",1919,12010\n\"Marie\",1920,12745\n\"Marie\",1921,12500\n\"Marie\",1922,11912\n\"Marie\",1923,11507\n\"Marie\",1924,11580\n\"Marie\",1925,10930\n\"Marie\",1926,10628\n\"Marie\",1927,10314\n\"Marie\",1928,9291\n\"Marie\",1929,9158\n\"Marie\",1930,8425\n\"Marie\",1931,7544\n\"Marie\",1932,6911\n\"Marie\",1933,6236\n\"Marie\",1934,6325\n\"Marie\",1935,6295\n\"Marie\",1936,6131\n\"Marie\",1937,6074\n\"Marie\",1938,5960\n\"Marie\",1939,5889\n\"Marie\",1940,5544\n\"Marie\",1941,6150\n\"Marie\",1942,6556\n\"Marie\",1943,5980\n\"Marie\",1944,5294\n\"Marie\",1945,5082\n\"Marie\",1946,5759\n\"Marie\",1947,6059\n\"Marie\",1948,5785\n\"Marie\",1949,5309\n\"Marie\",1950,5226\n\"Marie\",1951,5046\n\"Marie\",1952,4970\n\"Marie\",1953,4955\n\"Marie\",1954,5315\n\"Marie\",1955,4923\n\"Marie\",1956,4794\n\"Marie\",1957,4861\n\"Marie\",1958,4489\n\"Marie\",1959,4677\n\"Marie\",1960,4723\n\"Marie\",1961,4344\n\"Marie\",1962,4021\n\"Marie\",1963,4006\n\"Marie\",1964,3788\n\"Marie\",1965,3486\n\"Marie\",1966,3083\n\"Marie\",1967,2737\n\"Marie\",1968,2374\n\"Marie\",1969,2247\n\"Marie\",1970,2187\n\"Marie\",1971,2006\n\"Marie\",1972,1763\n\"Marie\",1973,1620\n\"Marie\",1974,1511\n\"Marie\",1975,1630\n\"Marie\",1976,1764\n\"Marie\",1977,1910\n\"Marie\",1978,1861\n\"Marie\",1979,1879\n\"Marie\",1980,1945\n\"Marie\",1981,1985\n\"Marie\",1982,1921\n\"Marie\",1983,1749\n\"Marie\",1984,1585\n\"Marie\",1985,1507\n\"Marie\",1986,1523\n\"Marie\",1987,1495\n\"Marie\",1988,1434\n\"Marie\",1989,1376\n\"Marie\",1990,1340\n\"Marie\",1991,1263\n\"Marie\",1992,1164\n\"Marie\",1993,1052\n\"Marie\",1994,919\n\"Marie\",1995,853\n\"Marie\",1996,811\n\"Marie\",1997,790\n\"Marie\",1998,790\n\"Marie\",1999,823\n\"Marie\",2000,785\n\"Marie\",2001,722\n\"Marie\",2002,684\n\"Marie\",2003,567\n\"Marie\",2004,599\n\"Marie\",2005,590\n\"Marie\",2006,516\n\"Marie\",2007,549\n\"Marie\",2008,563\n\"Marie\",2009,536\n\"Marie\",2010,514\n\"Marie\",2011,479\n\"Marie\",2012,512\n\"Marie\",2013,504\n\"Marie\",2014,523\n\"Mildred\",1880,132\n\"Mildred\",1881,154\n\"Mildred\",1882,172\n\"Mildred\",1883,183\n\"Mildred\",1884,247\n\"Mildred\",1885,245\n\"Mildred\",1886,289\n\"Mildred\",1887,373\n\"Mildred\",1888,499\n\"Mildred\",1889,625\n\"Mildred\",1890,635\n\"Mildred\",1891,761\n\"Mildred\",1892,959\n\"Mildred\",1893,1008\n\"Mildred\",1894,1220\n\"Mildred\",1895,1474\n\"Mildred\",1896,1620\n\"Mildred\",1897,1723\n\"Mildred\",1898,2102\n\"Mildred\",1899,2291\n\"Mildred\",1900,2800\n\"Mildred\",1901,2424\n\"Mildred\",1902,2750\n\"Mildred\",1903,3088\n\"Mildred\",1904,3525\n\"Mildred\",1905,3758\n\"Mildred\",1906,3873\n\"Mildred\",1907,4277\n\"Mildred\",1908,4624\n\"Mildred\",1909,5054\n\"Mildred\",1910,5692\n\"Mildred\",1911,6270\n\"Mildred\",1912,8764\n\"Mildred\",1913,9921\n\"Mildred\",1914,11649\n\"Mildred\",1915,15252\n\"Mildred\",1916,15633\n\"Mildred\",1917,16257\n\"Mildred\",1918,17256\n\"Mildred\",1919,17300\n\"Mildred\",1920,18058\n\"Mildred\",1921,17882\n\"Mildred\",1922,16413\n\"Mildred\",1923,15990\n\"Mildred\",1924,15855\n\"Mildred\",1925,14448\n\"Mildred\",1926,13549\n\"Mildred\",1927,13053\n\"Mildred\",1928,11652\n\"Mildred\",1929,10252\n\"Mildred\",1930,9343\n\"Mildred\",1931,8168\n\"Mildred\",1932,7645\n\"Mildred\",1933,6570\n\"Mildred\",1934,6177\n\"Mildred\",1935,5544\n\"Mildred\",1936,5053\n\"Mildred\",1937,4646\n\"Mildred\",1938,4441\n\"Mildred\",1939,4136\n\"Mildred\",1940,3935\n\"Mildred\",1941,3844\n\"Mildred\",1942,3811\n\"Mildred\",1943,3623\n\"Mildred\",1944,3317\n\"Mildred\",1945,2961\n\"Mildred\",1946,3064\n\"Mildred\",1947,3120\n\"Mildred\",1948,2755\n\"Mildred\",1949,2634\n\"Mildred\",1950,2296\n\"Mildred\",1951,2183\n\"Mildred\",1952,2055\n\"Mildred\",1953,1939\n\"Mildred\",1954,1835\n\"Mildred\",1955,1638\n\"Mildred\",1956,1637\n\"Mildred\",1957,1408\n\"Mildred\",1958,1312\n\"Mildred\",1959,1266\n\"Mildred\",1960,1080\n\"Mildred\",1961,994\n\"Mildred\",1962,963\n\"Mildred\",1963,901\n\"Mildred\",1964,846\n\"Mildred\",1965,749\n\"Mildred\",1966,659\n\"Mildred\",1967,572\n\"Mildred\",1968,476\n\"Mildred\",1969,450\n\"Mildred\",1970,482\n\"Mildred\",1971,387\n\"Mildred\",1972,337\n\"Mildred\",1973,311\n\"Mildred\",1974,300\n\"Mildred\",1975,256\n\"Mildred\",1976,239\n\"Mildred\",1977,204\n\"Mildred\",1978,180\n\"Mildred\",1979,160\n\"Mildred\",1980,159\n\"Mildred\",1981,155\n\"Mildred\",1982,175\n\"Mildred\",1983,138\n\"Mildred\",1984,149\n\"Mildred\",1985,106\n\"Mildred\",1986,128\n\"Mildred\",1987,116\n\"Mildred\",1988,122\n\"Mildred\",1989,127\n\"Mildred\",1990,109\n\"Mildred\",1991,122\n\"Mildred\",1992,101\n\"Mildred\",1993,89\n\"Mildred\",1994,77\n\"Mildred\",1995,84\n\"Mildred\",1996,79\n\"Mildred\",1997,69\n\"Mildred\",1998,80\n\"Mildred\",1999,63\n\"Mildred\",2000,81\n\"Mildred\",2001,75\n\"Mildred\",2002,83\n\"Mildred\",2003,89\n\"Mildred\",2004,80\n\"Mildred\",2005,73\n\"Mildred\",2006,76\n\"Mildred\",2007,93\n\"Mildred\",2008,87\n\"Mildred\",2009,69\n\"Mildred\",2010,68\n\"Mildred\",2011,70\n\"Mildred\",2012,63\n\"Mildred\",2013,73\n\"Mildred\",2014,82\n\"Ruth\",1880,234\n\"Ruth\",1881,275\n\"Ruth\",1882,323\n\"Ruth\",1883,387\n\"Ruth\",1884,442\n\"Ruth\",1885,506\n\"Ruth\",1886,581\n\"Ruth\",1887,627\n\"Ruth\",1888,850\n\"Ruth\",1889,1073\n\"Ruth\",1890,1195\n\"Ruth\",1891,1857\n\"Ruth\",1892,3291\n\"Ruth\",1893,3658\n\"Ruth\",1894,3372\n\"Ruth\",1895,3551\n\"Ruth\",1896,3905\n\"Ruth\",1897,3878\n\"Ruth\",1898,4249\n\"Ruth\",1899,3912\n\"Ruth\",1900,4765\n\"Ruth\",1901,3974\n\"Ruth\",1902,4384\n\"Ruth\",1903,4518\n\"Ruth\",1904,4900\n\"Ruth\",1905,5068\n\"Ruth\",1906,5140\n\"Ruth\",1907,5573\n\"Ruth\",1908,6180\n\"Ruth\",1909,6509\n\"Ruth\",1910,7212\n\"Ruth\",1911,8003\n\"Ruth\",1912,11278\n\"Ruth\",1913,12608\n\"Ruth\",1914,15840\n\"Ruth\",1915,21881\n\"Ruth\",1916,23189\n\"Ruth\",1917,23567\n\"Ruth\",1918,25535\n\"Ruth\",1919,24566\n\"Ruth\",1920,26100\n\"Ruth\",1921,25781\n\"Ruth\",1922,23630\n\"Ruth\",1923,23636\n\"Ruth\",1924,23600\n\"Ruth\",1925,22248\n\"Ruth\",1926,20215\n\"Ruth\",1927,19413\n\"Ruth\",1928,17863\n\"Ruth\",1929,16014\n\"Ruth\",1930,14937\n\"Ruth\",1931,13130\n\"Ruth\",1932,12251\n\"Ruth\",1933,11136\n\"Ruth\",1934,10564\n\"Ruth\",1935,9988\n\"Ruth\",1936,9212\n\"Ruth\",1937,9605\n\"Ruth\",1938,9300\n\"Ruth\",1939,9059\n\"Ruth\",1940,8886\n\"Ruth\",1941,8863\n\"Ruth\",1942,9312\n\"Ruth\",1943,9364\n\"Ruth\",1944,8675\n\"Ruth\",1945,8043\n\"Ruth\",1946,8474\n\"Ruth\",1947,8480\n\"Ruth\",1948,7901\n\"Ruth\",1949,7652\n\"Ruth\",1950,7125\n\"Ruth\",1951,7082\n\"Ruth\",1952,6945\n\"Ruth\",1953,6573\n\"Ruth\",1954,6564\n\"Ruth\",1955,6187\n\"Ruth\",1956,6068\n\"Ruth\",1957,5670\n\"Ruth\",1958,5247\n\"Ruth\",1959,5051\n\"Ruth\",1960,4943\n\"Ruth\",1961,4891\n\"Ruth\",1962,4293\n\"Ruth\",1963,3869\n\"Ruth\",1964,3636\n\"Ruth\",1965,3231\n\"Ruth\",1966,2847\n\"Ruth\",1967,2419\n\"Ruth\",1968,2148\n\"Ruth\",1969,1901\n\"Ruth\",1970,1819\n\"Ruth\",1971,1626\n\"Ruth\",1972,1384\n\"Ruth\",1973,1274\n\"Ruth\",1974,1301\n\"Ruth\",1975,1230\n\"Ruth\",1976,1198\n\"Ruth\",1977,1189\n\"Ruth\",1978,1208\n\"Ruth\",1979,1200\n\"Ruth\",1980,1254\n\"Ruth\",1981,1265\n\"Ruth\",1982,1175\n\"Ruth\",1983,1124\n\"Ruth\",1984,1161\n\"Ruth\",1985,1116\n\"Ruth\",1986,1082\n\"Ruth\",1987,1031\n\"Ruth\",1988,996\n\"Ruth\",1989,985\n\"Ruth\",1990,906\n\"Ruth\",1991,984\n\"Ruth\",1992,853\n\"Ruth\",1993,855\n\"Ruth\",1994,878\n\"Ruth\",1995,849\n\"Ruth\",1996,800\n\"Ruth\",1997,854\n\"Ruth\",1998,846\n\"Ruth\",1999,864\n\"Ruth\",2000,901\n\"Ruth\",2001,937\n\"Ruth\",2002,899\n\"Ruth\",2003,885\n\"Ruth\",2004,905\n\"Ruth\",2005,906\n\"Ruth\",2006,888\n\"Ruth\",2007,956\n\"Ruth\",2008,924\n\"Ruth\",2009,912\n\"Ruth\",2010,927\n\"Ruth\",2011,897\n\"Ruth\",2012,925\n\"Ruth\",2013,979\n\"Ruth\",2014,1042"
+    },
+    {
+      "name": ".0/group_by1/arrange2",
+      "source": ".0/group_by1/arrange2_flat",
+      "transform": [
+        {
+          "type": "treefacet",
+          "keys": [
+            "data.Name"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scale/stroke",
+      "format": {
+        "type": "csv",
+        "parse": {}
+      },
+      "values": "\"domain\"\n\"Lillian\"\n\"Marie\"\n\"Ruth\"\n\"Mildred\"\n\"Gladys\""
+    },
+    {
+      "name": "scale/x",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n1873.3\n2020.7"
+    },
+    {
+      "name": "scale/y",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n-1284\n27404"
+    }
+  ],
+  "scales": [
+    {
+      "name": "stroke",
+      "type": "ordinal",
+      "domain": {
+        "data": "scale/stroke",
+        "field": "data.domain"
+      },
+      "points": true,
+      "sort": false,
+      "range": "category10"
+    },
+    {
+      "name": "x",
+      "domain": {
+        "data": "scale/x",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "domain": {
+        "data": "scale/y",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "height"
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {
+        "data": ".0/group_by1/arrange2"
+      },
+      "marks": [
+        {
+          "type": "line",
+          "properties": {
+            "update": {
+              "stroke": {
+                "scale": "stroke",
+                "field": "data.Name"
+              },
+              "x": {
+                "scale": "x",
+                "field": "data.Year"
+              },
+              "y": {
+                "scale": "y",
+                "field": "data.Count"
+              }
+            },
+            "ggvis": {
+              "data": {
+                "value": ".0/group_by1/arrange2"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "orient": "right",
+      "stroke": "stroke",
+      "title": "Name"
+    }
+  ],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "bottom",
+      "layer": "back",
+      "grid": true,
+      "title": "Year"
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "orient": "left",
+      "layer": "back",
+      "grid": true,
+      "title": "Count"
+    }
+  ],
+  "padding": null,
+  "ggvis_opts": {
+    "keep_aspect": false,
+    "resizable": true,
+    "padding": {},
+    "duration": 250,
+    "renderer": "svg",
+    "hover_duration": 0,
+    "width": 768,
+    "height": 480
+  },
+  "handlers": null
+};
+ggvis.getPlot("plot_id139711977").parseSpec(plot_id139711977_spec);
+</script>
+<pre class="r"><code>top.five.1975 &lt;- 
+  filter( peak.years, Year == 1975 ) %&gt;% 
+  top_n( 5, Count ) 
+
+names %&gt;%
+  filter( Name %in% top.five.1975$Name &amp; Gender ==&quot;F&quot; ) %&gt;%
+  select (Name, Year, Count) %&gt;%
+  ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
+  layer_lines()</code></pre>
+<div id="plot_id198781676-container" class="ggvis-output-container">
+<div id="plot_id198781676" class="ggvis-output"></div>
+<div class="plot-gear-icon">
+<nav class="ggvis-control">
+<a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
+<ul class="ggvis-dropdown">
+<li>
+Renderer: 
+<a id="plot_id198781676_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id198781676" data-renderer="svg">SVG</a>
+ | 
+<a id="plot_id198781676_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id198781676" data-renderer="canvas">Canvas</a>
+</li>
+<li>
+<a id="plot_id198781676_download" class="ggvis-download" data-plot-id="plot_id198781676">Download</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var plot_id198781676_spec = {
+  "data": [
+    {
+      "name": ".0/group_by1/arrange2_flat",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "Year": "number",
+          "Count": "number"
+        }
+      },
+      "values": "\"Name\",\"Year\",\"Count\"\n\"Amy\",1880,167\n\"Amy\",1881,145\n\"Amy\",1882,196\n\"Amy\",1883,209\n\"Amy\",1884,205\n\"Amy\",1885,240\n\"Amy\",1886,226\n\"Amy\",1887,251\n\"Amy\",1888,236\n\"Amy\",1889,252\n\"Amy\",1890,275\n\"Amy\",1891,266\n\"Amy\",1892,331\n\"Amy\",1893,281\n\"Amy\",1894,329\n\"Amy\",1895,303\n\"Amy\",1896,320\n\"Amy\",1897,315\n\"Amy\",1898,341\n\"Amy\",1899,281\n\"Amy\",1900,335\n\"Amy\",1901,244\n\"Amy\",1902,255\n\"Amy\",1903,242\n\"Amy\",1904,255\n\"Amy\",1905,269\n\"Amy\",1906,240\n\"Amy\",1907,247\n\"Amy\",1908,245\n\"Amy\",1909,244\n\"Amy\",1910,287\n\"Amy\",1911,296\n\"Amy\",1912,371\n\"Amy\",1913,387\n\"Amy\",1914,472\n\"Amy\",1915,624\n\"Amy\",1916,595\n\"Amy\",1917,610\n\"Amy\",1918,573\n\"Amy\",1919,609\n\"Amy\",1920,624\n\"Amy\",1921,619\n\"Amy\",1922,612\n\"Amy\",1923,596\n\"Amy\",1924,605\n\"Amy\",1925,561\n\"Amy\",1926,493\n\"Amy\",1927,446\n\"Amy\",1928,366\n\"Amy\",1929,343\n\"Amy\",1930,386\n\"Amy\",1931,347\n\"Amy\",1932,341\n\"Amy\",1933,303\n\"Amy\",1934,321\n\"Amy\",1935,325\n\"Amy\",1936,334\n\"Amy\",1937,326\n\"Amy\",1938,354\n\"Amy\",1939,364\n\"Amy\",1940,389\n\"Amy\",1941,423\n\"Amy\",1942,473\n\"Amy\",1943,465\n\"Amy\",1944,447\n\"Amy\",1945,440\n\"Amy\",1946,521\n\"Amy\",1947,577\n\"Amy\",1948,612\n\"Amy\",1949,983\n\"Amy\",1950,1186\n\"Amy\",1951,1443\n\"Amy\",1952,1753\n\"Amy\",1953,2303\n\"Amy\",1954,2675\n\"Amy\",1955,3195\n\"Amy\",1956,3553\n\"Amy\",1957,4076\n\"Amy\",1958,4822\n\"Amy\",1959,5584\n\"Amy\",1960,5971\n\"Amy\",1961,6614\n\"Amy\",1962,7181\n\"Amy\",1963,8232\n\"Amy\",1964,9579\n\"Amy\",1965,11527\n\"Amy\",1966,13002\n\"Amy\",1967,16129\n\"Amy\",1968,17090\n\"Amy\",1969,21468\n\"Amy\",1970,25212\n\"Amy\",1971,26239\n\"Amy\",1972,25868\n\"Amy\",1973,26964\n\"Amy\",1974,29566\n\"Amy\",1975,32252\n\"Amy\",1976,31341\n\"Amy\",1977,26730\n\"Amy\",1978,23215\n\"Amy\",1979,21613\n\"Amy\",1980,19832\n\"Amy\",1981,20339\n\"Amy\",1982,18798\n\"Amy\",1983,17095\n\"Amy\",1984,15991\n\"Amy\",1985,14422\n\"Amy\",1986,13451\n\"Amy\",1987,11786\n\"Amy\",1988,10031\n\"Amy\",1989,8898\n\"Amy\",1990,8456\n\"Amy\",1991,7275\n\"Amy\",1992,6342\n\"Amy\",1993,5421\n\"Amy\",1994,4690\n\"Amy\",1995,4527\n\"Amy\",1996,4069\n\"Amy\",1997,3690\n\"Amy\",1998,3485\n\"Amy\",1999,3203\n\"Amy\",2000,3171\n\"Amy\",2001,2935\n\"Amy\",2002,3095\n\"Amy\",2003,2878\n\"Amy\",2004,3114\n\"Amy\",2005,2950\n\"Amy\",2006,2744\n\"Amy\",2007,2827\n\"Amy\",2008,2539\n\"Amy\",2009,2483\n\"Amy\",2010,2279\n\"Amy\",2011,2190\n\"Amy\",2012,2231\n\"Amy\",2013,2230\n\"Amy\",2014,2178\n\"Christie\",1881,5\n\"Christie\",1882,7\n\"Christie\",1883,6\n\"Christie\",1884,5\n\"Christie\",1885,9\n\"Christie\",1886,5\n\"Christie\",1887,9\n\"Christie\",1888,16\n\"Christie\",1889,6\n\"Christie\",1891,7\n\"Christie\",1892,18\n\"Christie\",1893,16\n\"Christie\",1894,11\n\"Christie\",1895,13\n\"Christie\",1896,10\n\"Christie\",1897,17\n\"Christie\",1898,15\n\"Christie\",1899,17\n\"Christie\",1900,15\n\"Christie\",1901,12\n\"Christie\",1902,10\n\"Christie\",1903,5\n\"Christie\",1905,5\n\"Christie\",1906,9\n\"Christie\",1907,8\n\"Christie\",1908,10\n\"Christie\",1909,5\n\"Christie\",1910,10\n\"Christie\",1911,12\n\"Christie\",1912,13\n\"Christie\",1913,7\n\"Christie\",1914,18\n\"Christie\",1915,19\n\"Christie\",1916,15\n\"Christie\",1917,24\n\"Christie\",1918,17\n\"Christie\",1919,14\n\"Christie\",1920,9\n\"Christie\",1921,15\n\"Christie\",1922,16\n\"Christie\",1923,21\n\"Christie\",1924,21\n\"Christie\",1925,20\n\"Christie\",1926,18\n\"Christie\",1927,10\n\"Christie\",1928,18\n\"Christie\",1929,16\n\"Christie\",1930,8\n\"Christie\",1931,15\n\"Christie\",1932,11\n\"Christie\",1933,13\n\"Christie\",1934,8\n\"Christie\",1935,11\n\"Christie\",1936,20\n\"Christie\",1937,13\n\"Christie\",1938,20\n\"Christie\",1939,24\n\"Christie\",1940,58\n\"Christie\",1941,74\n\"Christie\",1942,119\n\"Christie\",1943,99\n\"Christie\",1944,83\n\"Christie\",1945,95\n\"Christie\",1946,135\n\"Christie\",1947,225\n\"Christie\",1948,240\n\"Christie\",1949,327\n\"Christie\",1950,295\n\"Christie\",1951,336\n\"Christie\",1952,415\n\"Christie\",1953,406\n\"Christie\",1954,358\n\"Christie\",1955,482\n\"Christie\",1956,480\n\"Christie\",1957,529\n\"Christie\",1958,535\n\"Christie\",1959,484\n\"Christie\",1960,585\n\"Christie\",1961,529\n\"Christie\",1962,524\n\"Christie\",1963,556\n\"Christie\",1964,527\n\"Christie\",1965,468\n\"Christie\",1966,737\n\"Christie\",1967,852\n\"Christie\",1968,1038\n\"Christie\",1969,1203\n\"Christie\",1970,1312\n\"Christie\",1971,1383\n\"Christie\",1972,1480\n\"Christie\",1973,1512\n\"Christie\",1974,2705\n\"Christie\",1975,3028\n\"Christie\",1976,2010\n\"Christie\",1977,1757\n\"Christie\",1978,1534\n\"Christie\",1979,1458\n\"Christie\",1980,1113\n\"Christie\",1981,1032\n\"Christie\",1982,1040\n\"Christie\",1983,1098\n\"Christie\",1984,1115\n\"Christie\",1985,1083\n\"Christie\",1986,980\n\"Christie\",1987,808\n\"Christie\",1988,761\n\"Christie\",1989,656\n\"Christie\",1990,573\n\"Christie\",1991,452\n\"Christie\",1992,458\n\"Christie\",1993,374\n\"Christie\",1994,312\n\"Christie\",1995,255\n\"Christie\",1996,217\n\"Christie\",1997,222\n\"Christie\",1998,187\n\"Christie\",1999,150\n\"Christie\",2000,123\n\"Christie\",2001,114\n\"Christie\",2002,106\n\"Christie\",2003,108\n\"Christie\",2004,78\n\"Christie\",2005,82\n\"Christie\",2006,62\n\"Christie\",2007,65\n\"Christie\",2008,75\n\"Christie\",2009,55\n\"Christie\",2010,64\n\"Christie\",2011,50\n\"Christie\",2012,53\n\"Christie\",2013,38\n\"Christie\",2014,31\n\"Christy\",1887,5\n\"Christy\",1898,5\n\"Christy\",1899,5\n\"Christy\",1906,5\n\"Christy\",1913,5\n\"Christy\",1916,6\n\"Christy\",1917,7\n\"Christy\",1918,8\n\"Christy\",1920,6\n\"Christy\",1923,9\n\"Christy\",1924,8\n\"Christy\",1925,7\n\"Christy\",1926,8\n\"Christy\",1927,9\n\"Christy\",1928,7\n\"Christy\",1929,11\n\"Christy\",1930,13\n\"Christy\",1931,5\n\"Christy\",1932,7\n\"Christy\",1933,8\n\"Christy\",1934,10\n\"Christy\",1935,19\n\"Christy\",1936,13\n\"Christy\",1937,6\n\"Christy\",1938,7\n\"Christy\",1939,24\n\"Christy\",1940,30\n\"Christy\",1941,38\n\"Christy\",1942,93\n\"Christy\",1943,79\n\"Christy\",1944,69\n\"Christy\",1945,82\n\"Christy\",1946,182\n\"Christy\",1947,276\n\"Christy\",1948,270\n\"Christy\",1949,421\n\"Christy\",1950,478\n\"Christy\",1951,565\n\"Christy\",1952,748\n\"Christy\",1953,620\n\"Christy\",1954,657\n\"Christy\",1955,835\n\"Christy\",1956,860\n\"Christy\",1957,957\n\"Christy\",1958,1116\n\"Christy\",1959,1023\n\"Christy\",1960,1163\n\"Christy\",1961,1165\n\"Christy\",1962,1065\n\"Christy\",1963,1210\n\"Christy\",1964,1374\n\"Christy\",1965,1127\n\"Christy\",1966,1137\n\"Christy\",1967,1314\n\"Christy\",1968,2139\n\"Christy\",1969,3052\n\"Christy\",1970,3714\n\"Christy\",1971,3930\n\"Christy\",1972,4190\n\"Christy\",1973,4121\n\"Christy\",1974,5067\n\"Christy\",1975,5170\n\"Christy\",1976,4850\n\"Christy\",1977,4602\n\"Christy\",1978,4663\n\"Christy\",1979,4285\n\"Christy\",1980,3674\n\"Christy\",1981,2941\n\"Christy\",1982,2599\n\"Christy\",1983,1974\n\"Christy\",1984,2026\n\"Christy\",1985,1940\n\"Christy\",1986,1555\n\"Christy\",1987,1293\n\"Christy\",1988,1130\n\"Christy\",1989,1093\n\"Christy\",1990,974\n\"Christy\",1991,798\n\"Christy\",1992,719\n\"Christy\",1993,609\n\"Christy\",1994,637\n\"Christy\",1995,573\n\"Christy\",1996,543\n\"Christy\",1997,403\n\"Christy\",1998,392\n\"Christy\",1999,335\n\"Christy\",2000,362\n\"Christy\",2001,301\n\"Christy\",2002,284\n\"Christy\",2003,242\n\"Christy\",2004,228\n\"Christy\",2005,223\n\"Christy\",2006,189\n\"Christy\",2007,148\n\"Christy\",2008,157\n\"Christy\",2009,120\n\"Christy\",2010,126\n\"Christy\",2011,127\n\"Christy\",2012,103\n\"Christy\",2013,84\n\"Christy\",2014,85\n\"Heather\",1914,8\n\"Heather\",1917,5\n\"Heather\",1920,5\n\"Heather\",1922,5\n\"Heather\",1923,8\n\"Heather\",1929,9\n\"Heather\",1930,9\n\"Heather\",1931,7\n\"Heather\",1932,11\n\"Heather\",1933,30\n\"Heather\",1934,41\n\"Heather\",1935,63\n\"Heather\",1936,52\n\"Heather\",1937,52\n\"Heather\",1938,76\n\"Heather\",1939,94\n\"Heather\",1940,106\n\"Heather\",1941,131\n\"Heather\",1942,159\n\"Heather\",1943,166\n\"Heather\",1944,131\n\"Heather\",1945,175\n\"Heather\",1946,237\n\"Heather\",1947,273\n\"Heather\",1948,215\n\"Heather\",1949,249\n\"Heather\",1950,310\n\"Heather\",1951,308\n\"Heather\",1952,381\n\"Heather\",1953,427\n\"Heather\",1954,541\n\"Heather\",1955,614\n\"Heather\",1956,661\n\"Heather\",1957,665\n\"Heather\",1958,732\n\"Heather\",1959,912\n\"Heather\",1960,972\n\"Heather\",1961,1103\n\"Heather\",1962,1284\n\"Heather\",1963,2088\n\"Heather\",1964,2386\n\"Heather\",1965,2499\n\"Heather\",1966,2898\n\"Heather\",1967,3906\n\"Heather\",1968,5500\n\"Heather\",1969,10073\n\"Heather\",1970,14668\n\"Heather\",1971,15020\n\"Heather\",1972,16324\n\"Heather\",1973,19354\n\"Heather\",1974,23184\n\"Heather\",1975,24305\n\"Heather\",1976,24202\n\"Heather\",1977,23772\n\"Heather\",1978,22268\n\"Heather\",1979,20840\n\"Heather\",1980,19971\n\"Heather\",1981,17943\n\"Heather\",1982,17485\n\"Heather\",1983,20749\n\"Heather\",1984,21486\n\"Heather\",1985,21149\n\"Heather\",1986,19789\n\"Heather\",1987,18980\n\"Heather\",1988,18029\n\"Heather\",1989,16249\n\"Heather\",1990,14217\n\"Heather\",1991,11699\n\"Heather\",1992,9723\n\"Heather\",1993,8105\n\"Heather\",1994,7034\n\"Heather\",1995,6031\n\"Heather\",1996,4758\n\"Heather\",1997,3768\n\"Heather\",1998,3395\n\"Heather\",1999,2888\n\"Heather\",2000,2684\n\"Heather\",2001,2272\n\"Heather\",2002,2065\n\"Heather\",2003,1617\n\"Heather\",2004,1303\n\"Heather\",2005,1066\n\"Heather\",2006,973\n\"Heather\",2007,793\n\"Heather\",2008,651\n\"Heather\",2009,552\n\"Heather\",2010,420\n\"Heather\",2011,391\n\"Heather\",2012,326\n\"Heather\",2013,314\n\"Heather\",2014,328\n\"Tamika\",1951,5\n\"Tamika\",1959,5\n\"Tamika\",1963,28\n\"Tamika\",1964,30\n\"Tamika\",1965,16\n\"Tamika\",1966,20\n\"Tamika\",1967,36\n\"Tamika\",1968,181\n\"Tamika\",1969,175\n\"Tamika\",1970,259\n\"Tamika\",1971,400\n\"Tamika\",1972,628\n\"Tamika\",1973,808\n\"Tamika\",1974,1039\n\"Tamika\",1975,2159\n\"Tamika\",1976,1867\n\"Tamika\",1977,1696\n\"Tamika\",1978,1635\n\"Tamika\",1979,1414\n\"Tamika\",1980,1278\n\"Tamika\",1981,1187\n\"Tamika\",1982,1057\n\"Tamika\",1983,918\n\"Tamika\",1984,831\n\"Tamika\",1985,704\n\"Tamika\",1986,557\n\"Tamika\",1987,544\n\"Tamika\",1988,492\n\"Tamika\",1989,381\n\"Tamika\",1990,404\n\"Tamika\",1991,326\n\"Tamika\",1992,259\n\"Tamika\",1993,220\n\"Tamika\",1994,160\n\"Tamika\",1995,147\n\"Tamika\",1996,115\n\"Tamika\",1997,107\n\"Tamika\",1998,100\n\"Tamika\",1999,75\n\"Tamika\",2000,68\n\"Tamika\",2001,51\n\"Tamika\",2002,53\n\"Tamika\",2003,39\n\"Tamika\",2004,35\n\"Tamika\",2005,32\n\"Tamika\",2006,25\n\"Tamika\",2007,29\n\"Tamika\",2008,19\n\"Tamika\",2009,21\n\"Tamika\",2010,20\n\"Tamika\",2011,9\n\"Tamika\",2012,11\n\"Tamika\",2013,9\n\"Tamika\",2014,5"
+    },
+    {
+      "name": ".0/group_by1/arrange2",
+      "source": ".0/group_by1/arrange2_flat",
+      "transform": [
+        {
+          "type": "treefacet",
+          "keys": [
+            "data.Name"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scale/stroke",
+      "format": {
+        "type": "csv",
+        "parse": {}
+      },
+      "values": "\"domain\"\n\"Amy\"\n\"Christie\"\n\"Christy\"\n\"Heather\"\n\"Tamika\""
+    },
+    {
+      "name": "scale/x",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n1873.3\n2020.7"
+    },
+    {
+      "name": "scale/y",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n-1607.35\n33864.35"
+    }
+  ],
+  "scales": [
+    {
+      "name": "stroke",
+      "type": "ordinal",
+      "domain": {
+        "data": "scale/stroke",
+        "field": "data.domain"
+      },
+      "points": true,
+      "sort": false,
+      "range": "category10"
+    },
+    {
+      "name": "x",
+      "domain": {
+        "data": "scale/x",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "domain": {
+        "data": "scale/y",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "height"
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {
+        "data": ".0/group_by1/arrange2"
+      },
+      "marks": [
+        {
+          "type": "line",
+          "properties": {
+            "update": {
+              "stroke": {
+                "scale": "stroke",
+                "field": "data.Name"
+              },
+              "x": {
+                "scale": "x",
+                "field": "data.Year"
+              },
+              "y": {
+                "scale": "y",
+                "field": "data.Count"
+              }
+            },
+            "ggvis": {
+              "data": {
+                "value": ".0/group_by1/arrange2"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "orient": "right",
+      "stroke": "stroke",
+      "title": "Name"
+    }
+  ],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "bottom",
+      "layer": "back",
+      "grid": true,
+      "title": "Year"
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "orient": "left",
+      "layer": "back",
+      "grid": true,
+      "title": "Count"
+    }
+  ],
+  "padding": null,
+  "ggvis_opts": {
+    "keep_aspect": false,
+    "resizable": true,
+    "padding": {},
+    "duration": 250,
+    "renderer": "svg",
+    "hover_duration": 0,
+    "width": 768,
+    "height": 480
+  },
+  "handlers": null
+};
+ggvis.getPlot("plot_id198781676").parseSpec(plot_id198781676_spec);
+</script>
+<pre class="r"><code>top.five.2000 &lt;- 
+  filter( peak.years, Year == 2000 ) %&gt;% 
+  top_n( 5, Count ) 
+
+names %&gt;%
+  filter( Name %in% top.five.2000$Name &amp; Gender ==&quot;F&quot; ) %&gt;%
+  select (Name, Year, Count) %&gt;%
+  ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
+  layer_lines()</code></pre>
+<div id="plot_id239506692-container" class="ggvis-output-container">
+<div id="plot_id239506692" class="ggvis-output"></div>
+<div class="plot-gear-icon">
+<nav class="ggvis-control">
+<a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
+<ul class="ggvis-dropdown">
+<li>
+Renderer: 
+<a id="plot_id239506692_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id239506692" data-renderer="svg">SVG</a>
+ | 
+<a id="plot_id239506692_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id239506692" data-renderer="canvas">Canvas</a>
+</li>
+<li>
+<a id="plot_id239506692_download" class="ggvis-download" data-plot-id="plot_id239506692">Download</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var plot_id239506692_spec = {
+  "data": [
+    {
+      "name": ".0/group_by1/arrange2_flat",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "Year": "number",
+          "Count": "number"
+        }
+      },
+      "values": "\"Name\",\"Year\",\"Count\"\n\"Brianna\",1963,8\n\"Brianna\",1964,9\n\"Brianna\",1965,9\n\"Brianna\",1966,11\n\"Brianna\",1967,12\n\"Brianna\",1968,15\n\"Brianna\",1969,18\n\"Brianna\",1970,31\n\"Brianna\",1971,46\n\"Brianna\",1972,32\n\"Brianna\",1973,36\n\"Brianna\",1974,44\n\"Brianna\",1975,78\n\"Brianna\",1976,138\n\"Brianna\",1977,224\n\"Brianna\",1978,298\n\"Brianna\",1979,714\n\"Brianna\",1980,710\n\"Brianna\",1981,730\n\"Brianna\",1982,889\n\"Brianna\",1983,971\n\"Brianna\",1984,1355\n\"Brianna\",1985,1416\n\"Brianna\",1986,1815\n\"Brianna\",1987,2287\n\"Brianna\",1988,2962\n\"Brianna\",1989,3995\n\"Brianna\",1990,5678\n\"Brianna\",1991,6558\n\"Brianna\",1992,7296\n\"Brianna\",1993,8771\n\"Brianna\",1994,10518\n\"Brianna\",1995,11879\n\"Brianna\",1996,11923\n\"Brianna\",1997,12007\n\"Brianna\",1998,12046\n\"Brianna\",1999,12410\n\"Brianna\",2000,12873\n\"Brianna\",2001,11774\n\"Brianna\",2002,11516\n\"Brianna\",2003,10580\n\"Brianna\",2004,9797\n\"Brianna\",2005,9354\n\"Brianna\",2006,9361\n\"Brianna\",2007,8845\n\"Brianna\",2008,8251\n\"Brianna\",2009,7345\n\"Brianna\",2010,6267\n\"Brianna\",2011,5173\n\"Brianna\",2012,4624\n\"Brianna\",2013,3884\n\"Brianna\",2014,3582\n\"Destiny\",1956,5\n\"Destiny\",1957,5\n\"Destiny\",1959,6\n\"Destiny\",1960,9\n\"Destiny\",1962,8\n\"Destiny\",1963,12\n\"Destiny\",1964,13\n\"Destiny\",1965,13\n\"Destiny\",1966,20\n\"Destiny\",1967,13\n\"Destiny\",1968,26\n\"Destiny\",1969,24\n\"Destiny\",1970,37\n\"Destiny\",1971,49\n\"Destiny\",1972,58\n\"Destiny\",1973,86\n\"Destiny\",1974,117\n\"Destiny\",1975,161\n\"Destiny\",1976,185\n\"Destiny\",1977,211\n\"Destiny\",1978,324\n\"Destiny\",1979,384\n\"Destiny\",1980,440\n\"Destiny\",1981,467\n\"Destiny\",1982,469\n\"Destiny\",1983,516\n\"Destiny\",1984,564\n\"Destiny\",1985,572\n\"Destiny\",1986,605\n\"Destiny\",1987,811\n\"Destiny\",1988,941\n\"Destiny\",1989,1151\n\"Destiny\",1990,1408\n\"Destiny\",1991,1898\n\"Destiny\",1992,2610\n\"Destiny\",1993,2941\n\"Destiny\",1994,4087\n\"Destiny\",1995,5380\n\"Destiny\",1996,5856\n\"Destiny\",1997,6726\n\"Destiny\",1998,8149\n\"Destiny\",1999,9172\n\"Destiny\",2000,9844\n\"Destiny\",2001,9744\n\"Destiny\",2002,7794\n\"Destiny\",2003,6967\n\"Destiny\",2004,6538\n\"Destiny\",2005,6876\n\"Destiny\",2006,6301\n\"Destiny\",2007,5724\n\"Destiny\",2008,5300\n\"Destiny\",2009,4599\n\"Destiny\",2010,3719\n\"Destiny\",2011,3251\n\"Destiny\",2012,2702\n\"Destiny\",2013,2291\n\"Destiny\",2014,2043\n\"Haley\",1890,6\n\"Haley\",1891,5\n\"Haley\",1893,7\n\"Haley\",1894,5\n\"Haley\",1895,8\n\"Haley\",1897,9\n\"Haley\",1899,5\n\"Haley\",1900,5\n\"Haley\",1904,10\n\"Haley\",1906,5\n\"Haley\",1907,6\n\"Haley\",1908,6\n\"Haley\",1910,12\n\"Haley\",1913,6\n\"Haley\",1914,9\n\"Haley\",1915,14\n\"Haley\",1916,9\n\"Haley\",1917,7\n\"Haley\",1918,5\n\"Haley\",1919,8\n\"Haley\",1920,6\n\"Haley\",1921,8\n\"Haley\",1922,11\n\"Haley\",1923,13\n\"Haley\",1924,12\n\"Haley\",1925,7\n\"Haley\",1926,5\n\"Haley\",1927,11\n\"Haley\",1928,5\n\"Haley\",1930,6\n\"Haley\",1932,5\n\"Haley\",1935,12\n\"Haley\",1938,5\n\"Haley\",1939,5\n\"Haley\",1942,5\n\"Haley\",1943,7\n\"Haley\",1944,5\n\"Haley\",1949,5\n\"Haley\",1953,6\n\"Haley\",1958,6\n\"Haley\",1961,16\n\"Haley\",1962,21\n\"Haley\",1963,23\n\"Haley\",1964,39\n\"Haley\",1965,44\n\"Haley\",1966,45\n\"Haley\",1967,52\n\"Haley\",1968,68\n\"Haley\",1969,70\n\"Haley\",1970,74\n\"Haley\",1971,85\n\"Haley\",1972,88\n\"Haley\",1973,98\n\"Haley\",1974,130\n\"Haley\",1975,110\n\"Haley\",1976,117\n\"Haley\",1977,462\n\"Haley\",1978,518\n\"Haley\",1979,511\n\"Haley\",1980,489\n\"Haley\",1981,773\n\"Haley\",1982,1024\n\"Haley\",1983,918\n\"Haley\",1984,991\n\"Haley\",1985,1378\n\"Haley\",1986,1278\n\"Haley\",1987,1556\n\"Haley\",1988,2004\n\"Haley\",1989,2361\n\"Haley\",1990,3199\n\"Haley\",1991,4461\n\"Haley\",1992,6040\n\"Haley\",1993,7616\n\"Haley\",1994,7804\n\"Haley\",1995,8205\n\"Haley\",1996,9040\n\"Haley\",1997,8682\n\"Haley\",1998,7935\n\"Haley\",1999,8201\n\"Haley\",2000,9068\n\"Haley\",2001,8009\n\"Haley\",2002,7449\n\"Haley\",2003,7194\n\"Haley\",2004,5722\n\"Haley\",2005,5120\n\"Haley\",2006,4291\n\"Haley\",2007,4195\n\"Haley\",2008,3330\n\"Haley\",2009,2615\n\"Haley\",2010,1979\n\"Haley\",2011,1947\n\"Haley\",2012,1706\n\"Haley\",2013,1402\n\"Haley\",2014,1223\n\"Hannah\",1880,221\n\"Hannah\",1881,196\n\"Hannah\",1882,214\n\"Hannah\",1883,209\n\"Hannah\",1884,275\n\"Hannah\",1885,236\n\"Hannah\",1886,254\n\"Hannah\",1887,279\n\"Hannah\",1888,295\n\"Hannah\",1889,301\n\"Hannah\",1890,267\n\"Hannah\",1891,293\n\"Hannah\",1892,326\n\"Hannah\",1893,304\n\"Hannah\",1894,293\n\"Hannah\",1895,301\n\"Hannah\",1896,323\n\"Hannah\",1897,288\n\"Hannah\",1898,338\n\"Hannah\",1899,288\n\"Hannah\",1900,325\n\"Hannah\",1901,266\n\"Hannah\",1902,271\n\"Hannah\",1903,250\n\"Hannah\",1904,261\n\"Hannah\",1905,219\n\"Hannah\",1906,256\n\"Hannah\",1907,239\n\"Hannah\",1908,240\n\"Hannah\",1909,278\n\"Hannah\",1910,305\n\"Hannah\",1911,279\n\"Hannah\",1912,359\n\"Hannah\",1913,396\n\"Hannah\",1914,443\n\"Hannah\",1915,546\n\"Hannah\",1916,549\n\"Hannah\",1917,541\n\"Hannah\",1918,513\n\"Hannah\",1919,534\n\"Hannah\",1920,471\n\"Hannah\",1921,496\n\"Hannah\",1922,411\n\"Hannah\",1923,434\n\"Hannah\",1924,382\n\"Hannah\",1925,381\n\"Hannah\",1926,360\n\"Hannah\",1927,347\n\"Hannah\",1928,274\n\"Hannah\",1929,256\n\"Hannah\",1930,249\n\"Hannah\",1931,213\n\"Hannah\",1932,231\n\"Hannah\",1933,202\n\"Hannah\",1934,239\n\"Hannah\",1935,208\n\"Hannah\",1936,174\n\"Hannah\",1937,199\n\"Hannah\",1938,197\n\"Hannah\",1939,212\n\"Hannah\",1940,187\n\"Hannah\",1941,181\n\"Hannah\",1942,213\n\"Hannah\",1943,194\n\"Hannah\",1944,166\n\"Hannah\",1945,153\n\"Hannah\",1946,143\n\"Hannah\",1947,184\n\"Hannah\",1948,183\n\"Hannah\",1949,171\n\"Hannah\",1950,165\n\"Hannah\",1951,164\n\"Hannah\",1952,151\n\"Hannah\",1953,154\n\"Hannah\",1954,153\n\"Hannah\",1955,134\n\"Hannah\",1956,141\n\"Hannah\",1957,124\n\"Hannah\",1958,124\n\"Hannah\",1959,136\n\"Hannah\",1960,133\n\"Hannah\",1961,150\n\"Hannah\",1962,143\n\"Hannah\",1963,146\n\"Hannah\",1964,136\n\"Hannah\",1965,125\n\"Hannah\",1966,135\n\"Hannah\",1967,123\n\"Hannah\",1968,143\n\"Hannah\",1969,145\n\"Hannah\",1970,173\n\"Hannah\",1971,181\n\"Hannah\",1972,249\n\"Hannah\",1973,300\n\"Hannah\",1974,327\n\"Hannah\",1975,444\n\"Hannah\",1976,538\n\"Hannah\",1977,636\n\"Hannah\",1978,736\n\"Hannah\",1979,973\n\"Hannah\",1980,1221\n\"Hannah\",1981,1409\n\"Hannah\",1982,1579\n\"Hannah\",1983,2398\n\"Hannah\",1984,2264\n\"Hannah\",1985,2448\n\"Hannah\",1986,3385\n\"Hannah\",1987,4592\n\"Hannah\",1988,5556\n\"Hannah\",1989,7829\n\"Hannah\",1990,10275\n\"Hannah\",1991,10765\n\"Hannah\",1992,11493\n\"Hannah\",1993,12498\n\"Hannah\",1994,14494\n\"Hannah\",1995,17012\n\"Hannah\",1996,18593\n\"Hannah\",1997,20586\n\"Hannah\",1998,21371\n\"Hannah\",1999,21667\n\"Hannah\",2000,23073\n\"Hannah\",2001,20707\n\"Hannah\",2002,18814\n\"Hannah\",2003,17628\n\"Hannah\",2004,15598\n\"Hannah\",2005,14842\n\"Hannah\",2006,14535\n\"Hannah\",2007,13293\n\"Hannah\",2008,9554\n\"Hannah\",2009,7563\n\"Hannah\",2010,6974\n\"Hannah\",2011,6555\n\"Hannah\",2012,7261\n\"Hannah\",2013,7260\n\"Hannah\",2014,6512\n\"Sydney\",1886,8\n\"Sydney\",1888,6\n\"Sydney\",1890,6\n\"Sydney\",1892,6\n\"Sydney\",1896,5\n\"Sydney\",1899,6\n\"Sydney\",1901,7\n\"Sydney\",1902,5\n\"Sydney\",1903,5\n\"Sydney\",1904,6\n\"Sydney\",1905,21\n\"Sydney\",1906,6\n\"Sydney\",1907,7\n\"Sydney\",1908,11\n\"Sydney\",1909,16\n\"Sydney\",1910,15\n\"Sydney\",1911,12\n\"Sydney\",1912,12\n\"Sydney\",1913,21\n\"Sydney\",1914,23\n\"Sydney\",1915,27\n\"Sydney\",1916,39\n\"Sydney\",1917,32\n\"Sydney\",1918,44\n\"Sydney\",1919,40\n\"Sydney\",1920,30\n\"Sydney\",1921,24\n\"Sydney\",1922,30\n\"Sydney\",1923,44\n\"Sydney\",1924,33\n\"Sydney\",1925,25\n\"Sydney\",1926,21\n\"Sydney\",1927,38\n\"Sydney\",1928,28\n\"Sydney\",1929,33\n\"Sydney\",1930,29\n\"Sydney\",1931,41\n\"Sydney\",1932,72\n\"Sydney\",1933,107\n\"Sydney\",1934,103\n\"Sydney\",1935,94\n\"Sydney\",1936,97\n\"Sydney\",1937,91\n\"Sydney\",1938,87\n\"Sydney\",1939,77\n\"Sydney\",1940,85\n\"Sydney\",1941,171\n\"Sydney\",1942,187\n\"Sydney\",1943,190\n\"Sydney\",1944,146\n\"Sydney\",1945,132\n\"Sydney\",1946,152\n\"Sydney\",1947,137\n\"Sydney\",1948,137\n\"Sydney\",1949,176\n\"Sydney\",1950,202\n\"Sydney\",1951,206\n\"Sydney\",1952,208\n\"Sydney\",1953,152\n\"Sydney\",1954,143\n\"Sydney\",1955,134\n\"Sydney\",1956,120\n\"Sydney\",1957,117\n\"Sydney\",1958,106\n\"Sydney\",1959,136\n\"Sydney\",1960,128\n\"Sydney\",1961,127\n\"Sydney\",1962,100\n\"Sydney\",1963,155\n\"Sydney\",1964,169\n\"Sydney\",1965,169\n\"Sydney\",1966,168\n\"Sydney\",1967,128\n\"Sydney\",1968,102\n\"Sydney\",1969,107\n\"Sydney\",1970,105\n\"Sydney\",1971,104\n\"Sydney\",1972,84\n\"Sydney\",1973,64\n\"Sydney\",1974,50\n\"Sydney\",1975,93\n\"Sydney\",1976,123\n\"Sydney\",1977,90\n\"Sydney\",1978,109\n\"Sydney\",1979,112\n\"Sydney\",1980,130\n\"Sydney\",1981,155\n\"Sydney\",1982,154\n\"Sydney\",1983,200\n\"Sydney\",1984,285\n\"Sydney\",1985,438\n\"Sydney\",1986,461\n\"Sydney\",1987,651\n\"Sydney\",1988,914\n\"Sydney\",1989,1193\n\"Sydney\",1990,2026\n\"Sydney\",1991,2382\n\"Sydney\",1992,2709\n\"Sydney\",1993,3050\n\"Sydney\",1994,4737\n\"Sydney\",1995,7357\n\"Sydney\",1996,7258\n\"Sydney\",1997,8031\n\"Sydney\",1998,8549\n\"Sydney\",1999,9648\n\"Sydney\",2000,10242\n\"Sydney\",2001,9636\n\"Sydney\",2002,9032\n\"Sydney\",2003,8910\n\"Sydney\",2004,8364\n\"Sydney\",2005,7374\n\"Sydney\",2006,6512\n\"Sydney\",2007,6028\n\"Sydney\",2008,5257\n\"Sydney\",2009,5054\n\"Sydney\",2010,4328\n\"Sydney\",2011,3968\n\"Sydney\",2012,3449\n\"Sydney\",2013,3165\n\"Sydney\",2014,2831"
+    },
+    {
+      "name": ".0/group_by1/arrange2",
+      "source": ".0/group_by1/arrange2_flat",
+      "transform": [
+        {
+          "type": "treefacet",
+          "keys": [
+            "data.Name"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scale/stroke",
+      "format": {
+        "type": "csv",
+        "parse": {}
+      },
+      "values": "\"domain\"\n\"Hannah\"\n\"Sydney\"\n\"Haley\"\n\"Destiny\"\n\"Brianna\""
+    },
+    {
+      "name": "scale/x",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n1873.3\n2020.7"
+    },
+    {
+      "name": "scale/y",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n-1148.4\n24226.4"
+    }
+  ],
+  "scales": [
+    {
+      "name": "stroke",
+      "type": "ordinal",
+      "domain": {
+        "data": "scale/stroke",
+        "field": "data.domain"
+      },
+      "points": true,
+      "sort": false,
+      "range": "category10"
+    },
+    {
+      "name": "x",
+      "domain": {
+        "data": "scale/x",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "domain": {
+        "data": "scale/y",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "height"
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {
+        "data": ".0/group_by1/arrange2"
+      },
+      "marks": [
+        {
+          "type": "line",
+          "properties": {
+            "update": {
+              "stroke": {
+                "scale": "stroke",
+                "field": "data.Name"
+              },
+              "x": {
+                "scale": "x",
+                "field": "data.Year"
+              },
+              "y": {
+                "scale": "y",
+                "field": "data.Count"
+              }
+            },
+            "ggvis": {
+              "data": {
+                "value": ".0/group_by1/arrange2"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "orient": "right",
+      "stroke": "stroke",
+      "title": "Name"
+    }
+  ],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "bottom",
+      "layer": "back",
+      "grid": true,
+      "title": "Year"
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "orient": "left",
+      "layer": "back",
+      "grid": true,
+      "title": "Count"
+    }
+  ],
+  "padding": null,
+  "ggvis_opts": {
+    "keep_aspect": false,
+    "resizable": true,
+    "padding": {},
+    "duration": 250,
+    "renderer": "svg",
+    "hover_duration": 0,
+    "width": 768,
+    "height": 480
+  },
+  "handlers": null
+};
+ggvis.getPlot("plot_id239506692").parseSpec(plot_id239506692_spec);
+</script>
+<p>Ryan Burge posted a <a href="https://www.kaggle.com/ryanburge/hipster-names/notebook">fun project on Kaggle</a> about how to find hipster names using this historical data. He defines hipster names as those meeting the following criteria:</p>
+<ul>
+<li>They were popular when your grandmother was young.</li>
+<li>They were unpopular when your parent were young.</li>
+<li>They have recently become popular again.</li>
+</ul>
+<p>Let’s stick with women’s names.</p>
+<pre class="r"><code>df1 &lt;- filter( names, Gender == &quot;F&quot; &amp; Year &gt;= 1915 &amp; Year &lt;= 1935 &amp; Count &gt; 3000 )
+df2 &lt;- filter( names, Gender == &quot;F&quot; &amp; Year == 1980 &amp; Count &lt;= 1000 )
+df3 &lt;- filter( names, Gender == &quot;F&quot; &amp; Year &gt;= 2010 &amp; Count &gt; 2000)
+
+hipster.names &lt;- 
+  names %&gt;%
+  filter( Name %in% df1$Name &amp; Name %in% df2$Name &amp; Name %in% df3$Name ) %&gt;%
+  group_by( Name ) %&gt;%
+  dplyr::summarize( total=sum(Count), peak=max(Count) ) %&gt;%
+  arrange( desc( peak ) ) </code></pre>
+<p>Here are the top 6 female hipster names:</p>
+<pre class="r"><code>top.hipster.names &lt;- c(&quot;Emma&quot;,&quot;Evelyn&quot;,&quot;Alice&quot;,&quot;Grace&quot;,&quot;Lillian&quot;,&quot;Charlotte&quot;)
+
+names %&gt;%
+  filter( Name %in% top.hipster.names &amp; Gender ==&quot;F&quot; ) %&gt;%
+  select (Name, Year, Count) %&gt;%
+  ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
+  layer_lines()</code></pre>
+<div id="plot_id701418714-container" class="ggvis-output-container">
+<div id="plot_id701418714" class="ggvis-output"></div>
+<div class="plot-gear-icon">
+<nav class="ggvis-control">
+<a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
+<ul class="ggvis-dropdown">
+<li>
+Renderer: 
+<a id="plot_id701418714_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id701418714" data-renderer="svg">SVG</a>
+ | 
+<a id="plot_id701418714_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id701418714" data-renderer="canvas">Canvas</a>
+</li>
+<li>
+<a id="plot_id701418714_download" class="ggvis-download" data-plot-id="plot_id701418714">Download</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var plot_id701418714_spec = {
+  "data": [
+    {
+      "name": ".0/group_by1/arrange2_flat",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "Year": "number",
+          "Count": "number"
+        }
+      },
+      "values": "\"Name\",\"Year\",\"Count\"\n\"Alice\",1880,1414\n\"Alice\",1881,1308\n\"Alice\",1882,1542\n\"Alice\",1883,1488\n\"Alice\",1884,1732\n\"Alice\",1885,1681\n\"Alice\",1886,1811\n\"Alice\",1887,1819\n\"Alice\",1888,2202\n\"Alice\",1889,2145\n\"Alice\",1890,2271\n\"Alice\",1891,2015\n\"Alice\",1892,2373\n\"Alice\",1893,2434\n\"Alice\",1894,2414\n\"Alice\",1895,2457\n\"Alice\",1896,2652\n\"Alice\",1897,2431\n\"Alice\",1898,2846\n\"Alice\",1899,2523\n\"Alice\",1900,3059\n\"Alice\",1901,2562\n\"Alice\",1902,3135\n\"Alice\",1903,2996\n\"Alice\",1904,3131\n\"Alice\",1905,3611\n\"Alice\",1906,4192\n\"Alice\",1907,4107\n\"Alice\",1908,4270\n\"Alice\",1909,4170\n\"Alice\",1910,4671\n\"Alice\",1911,4812\n\"Alice\",1912,6285\n\"Alice\",1913,6933\n\"Alice\",1914,8197\n\"Alice\",1915,10525\n\"Alice\",1916,10719\n\"Alice\",1917,10990\n\"Alice\",1918,11590\n\"Alice\",1919,11141\n\"Alice\",1920,11596\n\"Alice\",1921,11956\n\"Alice\",1922,11274\n\"Alice\",1923,11331\n\"Alice\",1924,11540\n\"Alice\",1925,11571\n\"Alice\",1926,10953\n\"Alice\",1927,10677\n\"Alice\",1928,10139\n\"Alice\",1929,9477\n\"Alice\",1930,9517\n\"Alice\",1931,8815\n\"Alice\",1932,8534\n\"Alice\",1933,7694\n\"Alice\",1934,7781\n\"Alice\",1935,7445\n\"Alice\",1936,7198\n\"Alice\",1937,7124\n\"Alice\",1938,7487\n\"Alice\",1939,7369\n\"Alice\",1940,7601\n\"Alice\",1941,7446\n\"Alice\",1942,7378\n\"Alice\",1943,7647\n\"Alice\",1944,7103\n\"Alice\",1945,6358\n\"Alice\",1946,7364\n\"Alice\",1947,7846\n\"Alice\",1948,6981\n\"Alice\",1949,6658\n\"Alice\",1950,6361\n\"Alice\",1951,6315\n\"Alice\",1952,5913\n\"Alice\",1953,5745\n\"Alice\",1954,5265\n\"Alice\",1955,5071\n\"Alice\",1956,4682\n\"Alice\",1957,4433\n\"Alice\",1958,4127\n\"Alice\",1959,4154\n\"Alice\",1960,4048\n\"Alice\",1961,3583\n\"Alice\",1962,3254\n\"Alice\",1963,3065\n\"Alice\",1964,2839\n\"Alice\",1965,2568\n\"Alice\",1966,2221\n\"Alice\",1967,1929\n\"Alice\",1968,1730\n\"Alice\",1969,1716\n\"Alice\",1970,1620\n\"Alice\",1971,1506\n\"Alice\",1972,1199\n\"Alice\",1973,1187\n\"Alice\",1974,1179\n\"Alice\",1975,1055\n\"Alice\",1976,954\n\"Alice\",1977,858\n\"Alice\",1978,791\n\"Alice\",1979,776\n\"Alice\",1980,738\n\"Alice\",1981,745\n\"Alice\",1982,747\n\"Alice\",1983,699\n\"Alice\",1984,686\n\"Alice\",1985,667\n\"Alice\",1986,706\n\"Alice\",1987,769\n\"Alice\",1988,821\n\"Alice\",1989,741\n\"Alice\",1990,771\n\"Alice\",1991,723\n\"Alice\",1992,686\n\"Alice\",1993,683\n\"Alice\",1994,594\n\"Alice\",1995,579\n\"Alice\",1996,592\n\"Alice\",1997,578\n\"Alice\",1998,593\n\"Alice\",1999,650\n\"Alice\",2000,668\n\"Alice\",2001,631\n\"Alice\",2002,654\n\"Alice\",2003,699\n\"Alice\",2004,755\n\"Alice\",2005,753\n\"Alice\",2006,843\n\"Alice\",2007,949\n\"Alice\",2008,1023\n\"Alice\",2009,1273\n\"Alice\",2010,1778\n\"Alice\",2011,2191\n\"Alice\",2012,2495\n\"Alice\",2013,2928\n\"Alice\",2014,3042\n\"Charlotte\",1880,237\n\"Charlotte\",1881,227\n\"Charlotte\",1882,257\n\"Charlotte\",1883,291\n\"Charlotte\",1884,344\n\"Charlotte\",1885,317\n\"Charlotte\",1886,368\n\"Charlotte\",1887,351\n\"Charlotte\",1888,464\n\"Charlotte\",1889,455\n\"Charlotte\",1890,417\n\"Charlotte\",1891,387\n\"Charlotte\",1892,486\n\"Charlotte\",1893,476\n\"Charlotte\",1894,484\n\"Charlotte\",1895,472\n\"Charlotte\",1896,492\n\"Charlotte\",1897,492\n\"Charlotte\",1898,569\n\"Charlotte\",1899,496\n\"Charlotte\",1900,602\n\"Charlotte\",1901,503\n\"Charlotte\",1902,524\n\"Charlotte\",1903,504\n\"Charlotte\",1904,554\n\"Charlotte\",1905,614\n\"Charlotte\",1906,619\n\"Charlotte\",1907,666\n\"Charlotte\",1908,766\n\"Charlotte\",1909,841\n\"Charlotte\",1910,896\n\"Charlotte\",1911,960\n\"Charlotte\",1912,1375\n\"Charlotte\",1913,1603\n\"Charlotte\",1914,2008\n\"Charlotte\",1915,2757\n\"Charlotte\",1916,2995\n\"Charlotte\",1917,3230\n\"Charlotte\",1918,3372\n\"Charlotte\",1919,3353\n\"Charlotte\",1920,3623\n\"Charlotte\",1921,3587\n\"Charlotte\",1922,3583\n\"Charlotte\",1923,3596\n\"Charlotte\",1924,3613\n\"Charlotte\",1925,3549\n\"Charlotte\",1926,3513\n\"Charlotte\",1927,3677\n\"Charlotte\",1928,3472\n\"Charlotte\",1929,3538\n\"Charlotte\",1930,3407\n\"Charlotte\",1931,3401\n\"Charlotte\",1932,3363\n\"Charlotte\",1933,3112\n\"Charlotte\",1934,3432\n\"Charlotte\",1935,3469\n\"Charlotte\",1936,3555\n\"Charlotte\",1937,3537\n\"Charlotte\",1938,3624\n\"Charlotte\",1939,3740\n\"Charlotte\",1940,4289\n\"Charlotte\",1941,4563\n\"Charlotte\",1942,5021\n\"Charlotte\",1943,5481\n\"Charlotte\",1944,4927\n\"Charlotte\",1945,4529\n\"Charlotte\",1946,4970\n\"Charlotte\",1947,5386\n\"Charlotte\",1948,5165\n\"Charlotte\",1949,5144\n\"Charlotte\",1950,4736\n\"Charlotte\",1951,4644\n\"Charlotte\",1952,4204\n\"Charlotte\",1953,3812\n\"Charlotte\",1954,3761\n\"Charlotte\",1955,3328\n\"Charlotte\",1956,3266\n\"Charlotte\",1957,3260\n\"Charlotte\",1958,3013\n\"Charlotte\",1959,2968\n\"Charlotte\",1960,2780\n\"Charlotte\",1961,2933\n\"Charlotte\",1962,2681\n\"Charlotte\",1963,2596\n\"Charlotte\",1964,2421\n\"Charlotte\",1965,2471\n\"Charlotte\",1966,2301\n\"Charlotte\",1967,2022\n\"Charlotte\",1968,2002\n\"Charlotte\",1969,2028\n\"Charlotte\",1970,1992\n\"Charlotte\",1971,1743\n\"Charlotte\",1972,1537\n\"Charlotte\",1973,1328\n\"Charlotte\",1974,1253\n\"Charlotte\",1975,1081\n\"Charlotte\",1976,956\n\"Charlotte\",1977,939\n\"Charlotte\",1978,830\n\"Charlotte\",1979,856\n\"Charlotte\",1980,849\n\"Charlotte\",1981,833\n\"Charlotte\",1982,791\n\"Charlotte\",1983,835\n\"Charlotte\",1984,785\n\"Charlotte\",1985,943\n\"Charlotte\",1986,860\n\"Charlotte\",1987,820\n\"Charlotte\",1988,857\n\"Charlotte\",1989,893\n\"Charlotte\",1990,959\n\"Charlotte\",1991,976\n\"Charlotte\",1992,962\n\"Charlotte\",1993,944\n\"Charlotte\",1994,940\n\"Charlotte\",1995,997\n\"Charlotte\",1996,944\n\"Charlotte\",1997,954\n\"Charlotte\",1998,996\n\"Charlotte\",1999,1002\n\"Charlotte\",2000,1104\n\"Charlotte\",2001,1378\n\"Charlotte\",2002,1602\n\"Charlotte\",2003,1763\n\"Charlotte\",2004,1993\n\"Charlotte\",2005,2441\n\"Charlotte\",2006,2778\n\"Charlotte\",2007,3326\n\"Charlotte\",2008,3666\n\"Charlotte\",2009,4182\n\"Charlotte\",2010,5354\n\"Charlotte\",2011,6418\n\"Charlotte\",2012,7468\n\"Charlotte\",2013,9274\n\"Charlotte\",2014,10048\n\"Emma\",1880,2003\n\"Emma\",1881,2034\n\"Emma\",1882,2303\n\"Emma\",1883,2367\n\"Emma\",1884,2587\n\"Emma\",1885,2728\n\"Emma\",1886,2764\n\"Emma\",1887,2647\n\"Emma\",1888,3087\n\"Emma\",1889,2884\n\"Emma\",1890,2980\n\"Emma\",1891,2884\n\"Emma\",1892,3128\n\"Emma\",1893,2968\n\"Emma\",1894,2937\n\"Emma\",1895,2952\n\"Emma\",1896,2872\n\"Emma\",1897,2698\n\"Emma\",1898,2788\n\"Emma\",1899,2445\n\"Emma\",1900,3095\n\"Emma\",1901,2374\n\"Emma\",1902,2514\n\"Emma\",1903,2308\n\"Emma\",1904,2312\n\"Emma\",1905,2298\n\"Emma\",1906,2224\n\"Emma\",1907,2356\n\"Emma\",1908,2357\n\"Emma\",1909,2338\n\"Emma\",1910,2607\n\"Emma\",1911,2616\n\"Emma\",1912,3357\n\"Emma\",1913,3474\n\"Emma\",1914,3972\n\"Emma\",1915,5044\n\"Emma\",1916,5217\n\"Emma\",1917,5121\n\"Emma\",1918,5323\n\"Emma\",1919,5088\n\"Emma\",1920,5237\n\"Emma\",1921,5073\n\"Emma\",1922,5013\n\"Emma\",1923,4974\n\"Emma\",1924,4899\n\"Emma\",1925,4711\n\"Emma\",1926,4478\n\"Emma\",1927,4326\n\"Emma\",1928,4021\n\"Emma\",1929,3804\n\"Emma\",1930,3555\n\"Emma\",1931,3306\n\"Emma\",1932,3327\n\"Emma\",1933,3150\n\"Emma\",1934,2939\n\"Emma\",1935,2803\n\"Emma\",1936,2831\n\"Emma\",1937,2749\n\"Emma\",1938,2667\n\"Emma\",1939,2686\n\"Emma\",1940,2606\n\"Emma\",1941,2545\n\"Emma\",1942,2605\n\"Emma\",1943,2421\n\"Emma\",1944,2247\n\"Emma\",1945,2052\n\"Emma\",1946,2072\n\"Emma\",1947,2141\n\"Emma\",1948,2099\n\"Emma\",1949,1998\n\"Emma\",1950,1898\n\"Emma\",1951,1726\n\"Emma\",1952,1712\n\"Emma\",1953,1590\n\"Emma\",1954,1528\n\"Emma\",1955,1456\n\"Emma\",1956,1346\n\"Emma\",1957,1215\n\"Emma\",1958,1086\n\"Emma\",1959,1058\n\"Emma\",1960,981\n\"Emma\",1961,886\n\"Emma\",1962,796\n\"Emma\",1963,725\n\"Emma\",1964,770\n\"Emma\",1965,638\n\"Emma\",1966,621\n\"Emma\",1967,564\n\"Emma\",1968,494\n\"Emma\",1969,516\n\"Emma\",1970,527\n\"Emma\",1971,471\n\"Emma\",1972,454\n\"Emma\",1973,419\n\"Emma\",1974,495\n\"Emma\",1975,477\n\"Emma\",1976,418\n\"Emma\",1977,478\n\"Emma\",1978,442\n\"Emma\",1979,486\n\"Emma\",1980,534\n\"Emma\",1981,533\n\"Emma\",1982,561\n\"Emma\",1983,552\n\"Emma\",1984,674\n\"Emma\",1985,940\n\"Emma\",1986,1257\n\"Emma\",1987,1588\n\"Emma\",1988,1787\n\"Emma\",1989,1932\n\"Emma\",1990,2415\n\"Emma\",1991,2591\n\"Emma\",1992,3206\n\"Emma\",1993,4099\n\"Emma\",1994,4756\n\"Emma\",1995,5039\n\"Emma\",1996,6133\n\"Emma\",1997,7731\n\"Emma\",1998,10431\n\"Emma\",1999,11720\n\"Emma\",2000,12540\n\"Emma\",2001,13304\n\"Emma\",2002,16530\n\"Emma\",2003,22701\n\"Emma\",2004,21599\n\"Emma\",2005,20334\n\"Emma\",2006,19107\n\"Emma\",2007,18361\n\"Emma\",2008,18799\n\"Emma\",2009,17881\n\"Emma\",2010,17322\n\"Emma\",2011,18777\n\"Emma\",2012,20902\n\"Emma\",2013,20876\n\"Emma\",2014,20799\n\"Evelyn\",1880,122\n\"Evelyn\",1881,116\n\"Evelyn\",1882,125\n\"Evelyn\",1883,139\n\"Evelyn\",1884,170\n\"Evelyn\",1885,191\n\"Evelyn\",1886,203\n\"Evelyn\",1887,194\n\"Evelyn\",1888,237\n\"Evelyn\",1889,320\n\"Evelyn\",1890,316\n\"Evelyn\",1891,362\n\"Evelyn\",1892,418\n\"Evelyn\",1893,457\n\"Evelyn\",1894,491\n\"Evelyn\",1895,630\n\"Evelyn\",1896,646\n\"Evelyn\",1897,691\n\"Evelyn\",1898,836\n\"Evelyn\",1899,802\n\"Evelyn\",1900,1116\n\"Evelyn\",1901,966\n\"Evelyn\",1902,1151\n\"Evelyn\",1903,1211\n\"Evelyn\",1904,1371\n\"Evelyn\",1905,1661\n\"Evelyn\",1906,2077\n\"Evelyn\",1907,3035\n\"Evelyn\",1908,2857\n\"Evelyn\",1909,3157\n\"Evelyn\",1910,3776\n\"Evelyn\",1911,4075\n\"Evelyn\",1912,5620\n\"Evelyn\",1913,6680\n\"Evelyn\",1914,8505\n\"Evelyn\",1915,11594\n\"Evelyn\",1916,11890\n\"Evelyn\",1917,12532\n\"Evelyn\",1918,13493\n\"Evelyn\",1919,13321\n\"Evelyn\",1920,13838\n\"Evelyn\",1921,14279\n\"Evelyn\",1922,13318\n\"Evelyn\",1923,13172\n\"Evelyn\",1924,13355\n\"Evelyn\",1925,12506\n\"Evelyn\",1926,11779\n\"Evelyn\",1927,11496\n\"Evelyn\",1928,10536\n\"Evelyn\",1929,9883\n\"Evelyn\",1930,9531\n\"Evelyn\",1931,8490\n\"Evelyn\",1932,7957\n\"Evelyn\",1933,6945\n\"Evelyn\",1934,6977\n\"Evelyn\",1935,6558\n\"Evelyn\",1936,6107\n\"Evelyn\",1937,5762\n\"Evelyn\",1938,5687\n\"Evelyn\",1939,5327\n\"Evelyn\",1940,4984\n\"Evelyn\",1941,4930\n\"Evelyn\",1942,4939\n\"Evelyn\",1943,4912\n\"Evelyn\",1944,4514\n\"Evelyn\",1945,4377\n\"Evelyn\",1946,4888\n\"Evelyn\",1947,5245\n\"Evelyn\",1948,4845\n\"Evelyn\",1949,4527\n\"Evelyn\",1950,4273\n\"Evelyn\",1951,4225\n\"Evelyn\",1952,4155\n\"Evelyn\",1953,4062\n\"Evelyn\",1954,3954\n\"Evelyn\",1955,3811\n\"Evelyn\",1956,3740\n\"Evelyn\",1957,3636\n\"Evelyn\",1958,3276\n\"Evelyn\",1959,3262\n\"Evelyn\",1960,3224\n\"Evelyn\",1961,2937\n\"Evelyn\",1962,2781\n\"Evelyn\",1963,2564\n\"Evelyn\",1964,2378\n\"Evelyn\",1965,2004\n\"Evelyn\",1966,1869\n\"Evelyn\",1967,1724\n\"Evelyn\",1968,1644\n\"Evelyn\",1969,1454\n\"Evelyn\",1970,1466\n\"Evelyn\",1971,1298\n\"Evelyn\",1972,1062\n\"Evelyn\",1973,1016\n\"Evelyn\",1974,940\n\"Evelyn\",1975,865\n\"Evelyn\",1976,821\n\"Evelyn\",1977,833\n\"Evelyn\",1978,821\n\"Evelyn\",1979,849\n\"Evelyn\",1980,861\n\"Evelyn\",1981,1029\n\"Evelyn\",1982,1375\n\"Evelyn\",1983,1139\n\"Evelyn\",1984,1049\n\"Evelyn\",1985,1132\n\"Evelyn\",1986,1079\n\"Evelyn\",1987,1012\n\"Evelyn\",1988,1124\n\"Evelyn\",1989,1170\n\"Evelyn\",1990,1301\n\"Evelyn\",1991,1267\n\"Evelyn\",1992,1413\n\"Evelyn\",1993,1346\n\"Evelyn\",1994,1452\n\"Evelyn\",1995,1506\n\"Evelyn\",1996,1594\n\"Evelyn\",1997,1571\n\"Evelyn\",1998,1707\n\"Evelyn\",1999,1963\n\"Evelyn\",2000,2222\n\"Evelyn\",2001,2692\n\"Evelyn\",2002,3369\n\"Evelyn\",2003,3700\n\"Evelyn\",2004,3762\n\"Evelyn\",2005,4485\n\"Evelyn\",2006,4748\n\"Evelyn\",2007,5050\n\"Evelyn\",2008,5093\n\"Evelyn\",2009,5577\n\"Evelyn\",2010,5837\n\"Evelyn\",2011,6702\n\"Evelyn\",2012,6869\n\"Evelyn\",2013,7647\n\"Evelyn\",2014,8692\n\"Grace\",1880,982\n\"Grace\",1881,1089\n\"Grace\",1882,1195\n\"Grace\",1883,1307\n\"Grace\",1884,1525\n\"Grace\",1885,1575\n\"Grace\",1886,1723\n\"Grace\",1887,1692\n\"Grace\",1888,2090\n\"Grace\",1889,2049\n\"Grace\",1890,2278\n\"Grace\",1891,2088\n\"Grace\",1892,2299\n\"Grace\",1893,2308\n\"Grace\",1894,2361\n\"Grace\",1895,2448\n\"Grace\",1896,2485\n\"Grace\",1897,2458\n\"Grace\",1898,2726\n\"Grace\",1899,2353\n\"Grace\",1900,2942\n\"Grace\",1901,2398\n\"Grace\",1902,2642\n\"Grace\",1903,2615\n\"Grace\",1904,2513\n\"Grace\",1905,2630\n\"Grace\",1906,2626\n\"Grace\",1907,2747\n\"Grace\",1908,2901\n\"Grace\",1909,2912\n\"Grace\",1910,3145\n\"Grace\",1911,3304\n\"Grace\",1912,4418\n\"Grace\",1913,4669\n\"Grace\",1914,5595\n\"Grace\",1915,7044\n\"Grace\",1916,7461\n\"Grace\",1917,7373\n\"Grace\",1918,7770\n\"Grace\",1919,7194\n\"Grace\",1920,7173\n\"Grace\",1921,7230\n\"Grace\",1922,6742\n\"Grace\",1923,6316\n\"Grace\",1924,6328\n\"Grace\",1925,5981\n\"Grace\",1926,5429\n\"Grace\",1927,5300\n\"Grace\",1928,4992\n\"Grace\",1929,4566\n\"Grace\",1930,4216\n\"Grace\",1931,3713\n\"Grace\",1932,3536\n\"Grace\",1933,3326\n\"Grace\",1934,3087\n\"Grace\",1935,2996\n\"Grace\",1936,2789\n\"Grace\",1937,2710\n\"Grace\",1938,2609\n\"Grace\",1939,2370\n\"Grace\",1940,2385\n\"Grace\",1941,2103\n\"Grace\",1942,2157\n\"Grace\",1943,2121\n\"Grace\",1944,1926\n\"Grace\",1945,1746\n\"Grace\",1946,1763\n\"Grace\",1947,1882\n\"Grace\",1948,1679\n\"Grace\",1949,1609\n\"Grace\",1950,1510\n\"Grace\",1951,1578\n\"Grace\",1952,1524\n\"Grace\",1953,1380\n\"Grace\",1954,1410\n\"Grace\",1955,1387\n\"Grace\",1956,1837\n\"Grace\",1957,1918\n\"Grace\",1958,1706\n\"Grace\",1959,1660\n\"Grace\",1960,1568\n\"Grace\",1961,1443\n\"Grace\",1962,1328\n\"Grace\",1963,1271\n\"Grace\",1964,1212\n\"Grace\",1965,1115\n\"Grace\",1966,937\n\"Grace\",1967,896\n\"Grace\",1968,751\n\"Grace\",1969,697\n\"Grace\",1970,776\n\"Grace\",1971,680\n\"Grace\",1972,606\n\"Grace\",1973,606\n\"Grace\",1974,533\n\"Grace\",1975,568\n\"Grace\",1976,527\n\"Grace\",1977,526\n\"Grace\",1978,588\n\"Grace\",1979,690\n\"Grace\",1980,757\n\"Grace\",1981,831\n\"Grace\",1982,948\n\"Grace\",1983,998\n\"Grace\",1984,1015\n\"Grace\",1985,1062\n\"Grace\",1986,1154\n\"Grace\",1987,1376\n\"Grace\",1988,1706\n\"Grace\",1989,1926\n\"Grace\",1990,2186\n\"Grace\",1991,2386\n\"Grace\",1992,2653\n\"Grace\",1993,2701\n\"Grace\",1994,3171\n\"Grace\",1995,3471\n\"Grace\",1996,3742\n\"Grace\",1997,4638\n\"Grace\",1998,5717\n\"Grace\",1999,9178\n\"Grace\",2000,11283\n\"Grace\",2001,12084\n\"Grace\",2002,12052\n\"Grace\",2003,12770\n\"Grace\",2004,12525\n\"Grace\",2005,11859\n\"Grace\",2006,10962\n\"Grace\",2007,9760\n\"Grace\",2008,9032\n\"Grace\",2009,8306\n\"Grace\",2010,7675\n\"Grace\",2011,7622\n\"Grace\",2012,7359\n\"Grace\",2013,7345\n\"Grace\",2014,7554\n\"Lillian\",1880,672\n\"Lillian\",1881,723\n\"Lillian\",1882,830\n\"Lillian\",1883,907\n\"Lillian\",1884,1109\n\"Lillian\",1885,1143\n\"Lillian\",1886,1282\n\"Lillian\",1887,1308\n\"Lillian\",1888,1656\n\"Lillian\",1889,1640\n\"Lillian\",1890,1862\n\"Lillian\",1891,1812\n\"Lillian\",1892,2154\n\"Lillian\",1893,2193\n\"Lillian\",1894,2441\n\"Lillian\",1895,2495\n\"Lillian\",1896,2702\n\"Lillian\",1897,2683\n\"Lillian\",1898,3061\n\"Lillian\",1899,2703\n\"Lillian\",1900,3414\n\"Lillian\",1901,2681\n\"Lillian\",1902,3063\n\"Lillian\",1903,2972\n\"Lillian\",1904,3139\n\"Lillian\",1905,3185\n\"Lillian\",1906,3293\n\"Lillian\",1907,3542\n\"Lillian\",1908,3634\n\"Lillian\",1909,3596\n\"Lillian\",1910,4127\n\"Lillian\",1911,4367\n\"Lillian\",1912,5568\n\"Lillian\",1913,6015\n\"Lillian\",1914,7354\n\"Lillian\",1915,9546\n\"Lillian\",1916,9592\n\"Lillian\",1917,9843\n\"Lillian\",1918,9986\n\"Lillian\",1919,9515\n\"Lillian\",1920,10050\n\"Lillian\",1921,9769\n\"Lillian\",1922,9427\n\"Lillian\",1923,9327\n\"Lillian\",1924,9094\n\"Lillian\",1925,8355\n\"Lillian\",1926,7657\n\"Lillian\",1927,7187\n\"Lillian\",1928,6571\n\"Lillian\",1929,5712\n\"Lillian\",1930,5452\n\"Lillian\",1931,4805\n\"Lillian\",1932,4349\n\"Lillian\",1933,3997\n\"Lillian\",1934,3972\n\"Lillian\",1935,3424\n\"Lillian\",1936,3116\n\"Lillian\",1937,2900\n\"Lillian\",1938,2824\n\"Lillian\",1939,2554\n\"Lillian\",1940,2524\n\"Lillian\",1941,2460\n\"Lillian\",1942,2489\n\"Lillian\",1943,2394\n\"Lillian\",1944,2118\n\"Lillian\",1945,2017\n\"Lillian\",1946,2159\n\"Lillian\",1947,2089\n\"Lillian\",1948,2114\n\"Lillian\",1949,1944\n\"Lillian\",1950,1887\n\"Lillian\",1951,1822\n\"Lillian\",1952,1734\n\"Lillian\",1953,1657\n\"Lillian\",1954,1626\n\"Lillian\",1955,1655\n\"Lillian\",1956,1631\n\"Lillian\",1957,1602\n\"Lillian\",1958,1421\n\"Lillian\",1959,1470\n\"Lillian\",1960,1430\n\"Lillian\",1961,1309\n\"Lillian\",1962,1307\n\"Lillian\",1963,1166\n\"Lillian\",1964,1063\n\"Lillian\",1965,1016\n\"Lillian\",1966,877\n\"Lillian\",1967,841\n\"Lillian\",1968,814\n\"Lillian\",1969,773\n\"Lillian\",1970,782\n\"Lillian\",1971,676\n\"Lillian\",1972,620\n\"Lillian\",1973,563\n\"Lillian\",1974,482\n\"Lillian\",1975,455\n\"Lillian\",1976,479\n\"Lillian\",1977,471\n\"Lillian\",1978,399\n\"Lillian\",1979,439\n\"Lillian\",1980,510\n\"Lillian\",1981,518\n\"Lillian\",1982,475\n\"Lillian\",1983,451\n\"Lillian\",1984,468\n\"Lillian\",1985,542\n\"Lillian\",1986,553\n\"Lillian\",1987,531\n\"Lillian\",1988,646\n\"Lillian\",1989,695\n\"Lillian\",1990,722\n\"Lillian\",1991,767\n\"Lillian\",1992,749\n\"Lillian\",1993,736\n\"Lillian\",1994,881\n\"Lillian\",1995,942\n\"Lillian\",1996,1127\n\"Lillian\",1997,1393\n\"Lillian\",1998,1716\n\"Lillian\",1999,2190\n\"Lillian\",2000,2597\n\"Lillian\",2001,2949\n\"Lillian\",2002,3396\n\"Lillian\",2003,4029\n\"Lillian\",2004,4730\n\"Lillian\",2005,5210\n\"Lillian\",2006,6228\n\"Lillian\",2007,6544\n\"Lillian\",2008,6804\n\"Lillian\",2009,6846\n\"Lillian\",2010,6946\n\"Lillian\",2011,6902\n\"Lillian\",2012,7143\n\"Lillian\",2013,7060\n\"Lillian\",2014,6869"
+    },
+    {
+      "name": ".0/group_by1/arrange2",
+      "source": ".0/group_by1/arrange2_flat",
+      "transform": [
+        {
+          "type": "treefacet",
+          "keys": [
+            "data.Name"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "scale/stroke",
+      "format": {
+        "type": "csv",
+        "parse": {}
+      },
+      "values": "\"domain\"\n\"Emma\"\n\"Alice\"\n\"Grace\"\n\"Lillian\"\n\"Charlotte\"\n\"Evelyn\""
+    },
+    {
+      "name": "scale/x",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n1873.3\n2020.7"
+    },
+    {
+      "name": "scale/y",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "domain": "number"
+        }
+      },
+      "values": "\"domain\"\n-1013.25\n23830.25"
+    }
+  ],
+  "scales": [
+    {
+      "name": "stroke",
+      "type": "ordinal",
+      "domain": {
+        "data": "scale/stroke",
+        "field": "data.domain"
+      },
+      "points": true,
+      "sort": false,
+      "range": "category10"
+    },
+    {
+      "name": "x",
+      "domain": {
+        "data": "scale/x",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "domain": {
+        "data": "scale/y",
+        "field": "data.domain"
+      },
+      "zero": false,
+      "nice": false,
+      "clamp": false,
+      "range": "height"
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {
+        "data": ".0/group_by1/arrange2"
+      },
+      "marks": [
+        {
+          "type": "line",
+          "properties": {
+            "update": {
+              "stroke": {
+                "scale": "stroke",
+                "field": "data.Name"
+              },
+              "x": {
+                "scale": "x",
+                "field": "data.Year"
+              },
+              "y": {
+                "scale": "y",
+                "field": "data.Count"
+              }
+            },
+            "ggvis": {
+              "data": {
+                "value": ".0/group_by1/arrange2"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "legends": [
+    {
+      "orient": "right",
+      "stroke": "stroke",
+      "title": "Name"
+    }
+  ],
+  "axes": [
+    {
+      "type": "x",
+      "scale": "x",
+      "orient": "bottom",
+      "layer": "back",
+      "grid": true,
+      "title": "Year"
+    },
+    {
+      "type": "y",
+      "scale": "y",
+      "orient": "left",
+      "layer": "back",
+      "grid": true,
+      "title": "Count"
+    }
+  ],
+  "padding": null,
+  "ggvis_opts": {
+    "keep_aspect": false,
+    "resizable": true,
+    "padding": {},
+    "duration": 250,
+    "renderer": "svg",
+    "hover_duration": 0,
+    "width": 768,
+    "height": 480
+  },
+  "handlers": null
+};
+ggvis.getPlot("plot_id701418714").parseSpec(plot_id701418714_spec);
+</script>
+<p>And the full list:</p>
+<pre class="r"><code>hipster.names %&gt;% pander()</code></pre>
+<table style="width:42%;">
+<colgroup>
+<col width="16%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Name</th>
+<th align="center">total</th>
+<th align="center">peak</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Emma</td>
+<td align="center">595546</td>
+<td align="center">22701</td>
+</tr>
+<tr class="even">
+<td align="center">Evelyn</td>
+<td align="center">534502</td>
+<td align="center">14279</td>
+</tr>
+<tr class="odd">
+<td align="center">Grace</td>
+<td align="center">469034</td>
+<td align="center">12770</td>
+</tr>
+<tr class="even">
+<td align="center">Alice</td>
+<td align="center">551034</td>
+<td align="center">11956</td>
+</tr>
+<tr class="odd">
+<td align="center">Lillian</td>
+<td align="center">421392</td>
+<td align="center">10050</td>
+</tr>
+<tr class="even">
+<td align="center">Charlotte</td>
+<td align="center">312022</td>
+<td align="center">10048</td>
+</tr>
+<tr class="odd">
+<td align="center">Ella</td>
+<td align="center">273663</td>
+<td align="center">9868</td>
+</tr>
+<tr class="even">
+<td align="center">Josephine</td>
+<td align="center">297064</td>
+<td align="center">8683</td>
+</tr>
+<tr class="odd">
+<td align="center">Eleanor</td>
+<td align="center">268153</td>
+<td align="center">8499</td>
+</tr>
+<tr class="even">
+<td align="center">Ruby</td>
+<td align="center">340143</td>
+<td align="center">8407</td>
+</tr>
+<tr class="odd">
+<td align="center">Hazel</td>
+<td align="center">244069</td>
+<td align="center">7615</td>
+</tr>
+<tr class="even">
+<td align="center">Clara</td>
+<td align="center">268980</td>
+<td align="center">5779</td>
+</tr>
+<tr class="odd">
+<td align="center">Eva</td>
+<td align="center">252465</td>
+<td align="center">4564</td>
+</tr>
+<tr class="even">
+<td align="center">Lucy</td>
+<td align="center">185064</td>
+<td align="center">4257</td>
+</tr>
+<tr class="odd">
+<td align="center">Stella</td>
+<td align="center">155080</td>
+<td align="center">4165</td>
+</tr>
+<tr class="even">
+<td align="center">Violet</td>
+<td align="center">122984</td>
+<td align="center">4156</td>
+</tr>
+<tr class="odd">
+<td align="center">Vivian</td>
+<td align="center">198012</td>
+<td align="center">4128</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="conclusion" class="section level2">
+<h2><span class="header-section-number">1.5</span> Conclusion</h2>
+<p>The pipe operator is a little confusing when you first encounter it, but you will find that using data verbs contained in the <strong>dplyr</strong> package and the pipe operator will speed up your analysis and make your code more readable.</p>
+<p>In the next chapter we focus more on the use of groups in data science, and the applications of the <strong>group_by()</strong> function to make your job easier.</p>
+</div>
+</div>
+
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

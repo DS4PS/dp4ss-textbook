@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>p-071-summary-stats.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#descriptive-statistics"><span class="toc-section-number">1</span> Descriptive Statistics</a><ul>
+<li><a href="#useful-packages"><span class="toc-section-number">1.1</span> Useful Packages</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="descriptive-statistics" class="section level1">
+<h1><span class="header-section-number">1</span> Descriptive Statistics</h1>
+<div id="useful-packages" class="section level2">
+<h2><span class="header-section-number">1.1</span> Useful Packages</h2>
+<pre class="r"><code>library( stargazer )  # publication quality tables
+library( skimr )      # quick and comprehensive descriptive stats
+library( dplyr )      # data wrangling</code></pre>
+<p>Descriptive statistics are hugely important for any analysis, but they can be challenging to produce because different classes of variable require different tables or statistics to be meaningful.</p>
+<p>The most general core R <strong>summary()</strong> function prints some basic descriptives about variables in a dataset, reporting statistics based upon data type:</p>
+<table style="width:81%;">
+<colgroup>
+<col width="11%" />
+<col width="16%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">group</th>
+<th align="center">gender</th>
+<th align="center">height</th>
+<th align="center">weight</th>
+<th align="center">strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">adam</td>
+<td align="center">treatment</td>
+<td align="center">male</td>
+<td align="center">73</td>
+<td align="center">180</td>
+<td align="center">167</td>
+</tr>
+<tr class="even">
+<td align="center">jamal</td>
+<td align="center">control</td>
+<td align="center">male</td>
+<td align="center">67</td>
+<td align="center">190</td>
+<td align="center">185</td>
+</tr>
+<tr class="odd">
+<td align="center">linda</td>
+<td align="center">treatment</td>
+<td align="center">female</td>
+<td align="center">62</td>
+<td align="center">130</td>
+<td align="center">119</td>
+</tr>
+<tr class="even">
+<td align="center">sriti</td>
+<td align="center">control</td>
+<td align="center">female</td>
+<td align="center">65</td>
+<td align="center">140</td>
+<td align="center">142</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>summary( dat )</code></pre>
+<pre><code>##      name                 group      gender      height     
+##  Length:4           control  :2   female:2   Min.   :62.00  
+##  Class :character   treatment:2   male  :2   1st Qu.:64.25  
+##  Mode  :character                            Median :66.00  
+##                                              Mean   :66.75  
+##                                              3rd Qu.:68.50  
+##                                              Max.   :73.00  
+##      weight         strength    
+##  Min.   :130.0   Min.   :119.0  
+##  1st Qu.:137.5   1st Qu.:136.2  
+##  Median :160.0   Median :154.5  
+##  Mean   :160.0   Mean   :153.2  
+##  3rd Qu.:182.5   3rd Qu.:171.5  
+##  Max.   :190.0   Max.   :185.0</code></pre>
+<p>These are not pretty enough to include in a report. Fortunately there are some functions that produce nice tables for R Markdown reports. We will use the <strong>stargazer</strong> package extensively for regression results and descriptive statistics.</p>
+<p><br></p>
+<pre class="r"><code>library( stargazer )
+dat.numeric &lt;- select_if( dat, is.numeric )
+stargazer( dat.numeric, type=&quot;html&quot;, digits=2, 
+           summary.stat = c(&quot;n&quot;,&quot;min&quot;,&quot;median&quot;,&quot;mean&quot;,&quot;max&quot;,&quot;sd&quot;) )</code></pre>
+<table style="text-align:center">
+<tr>
+<td colspan="7" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Min
+</td>
+<td>
+Median
+</td>
+<td>
+Mean
+</td>
+<td>
+Max
+</td>
+<td>
+St. Dev.
+</td>
+</tr>
+<tr>
+<td colspan="7" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+height
+</td>
+<td>
+4
+</td>
+<td>
+62
+</td>
+<td>
+66
+</td>
+<td>
+66.75
+</td>
+<td>
+73
+</td>
+<td>
+4.65
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+weight
+</td>
+<td>
+4
+</td>
+<td>
+130
+</td>
+<td>
+160
+</td>
+<td>
+160.00
+</td>
+<td>
+190
+</td>
+<td>
+29.44
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+strength
+</td>
+<td>
+4
+</td>
+<td>
+119
+</td>
+<td>
+154.5
+</td>
+<td>
+153.25
+</td>
+<td>
+185
+</td>
+<td>
+28.85
+</td>
+</tr>
+<tr>
+<td colspan="7" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</table>
+<p><br></p>
+<p>In many instances we will be working with a large dataset with many variables that are non-numeric. For example, the <strong>Lahman</strong> package contains a <em>Master</em> data frame with the demographic information of all Major League baseball players in the League’s 100-year history.</p>
+<p>Variables contained in the <strong>Master</strong> data frame in the <strong>Lahman</strong> package:</p>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="25%" />
+<col width="47%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>VARIABLE</th>
+<th>CLASS</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>playerID</strong></td>
+<td>factor</td>
+<td>A unique code asssigned to each player. The playerID links the data in this file with records on players in the other files.</td>
+</tr>
+<tr class="even">
+<td><strong>birthYear</strong></td>
+<td>numeric</td>
+<td>Year player was born</td>
+</tr>
+<tr class="odd">
+<td><strong>birthMonth</strong></td>
+<td>numeric</td>
+<td>Month player was born</td>
+</tr>
+<tr class="even">
+<td><strong>birthDay</strong></td>
+<td>numeric</td>
+<td>Day player was born</td>
+</tr>
+<tr class="odd">
+<td><strong>birthCountry</strong></td>
+<td>character</td>
+<td>Country where player was born</td>
+</tr>
+<tr class="even">
+<td><strong>birthState</strong></td>
+<td>character</td>
+<td>State where player was born</td>
+</tr>
+<tr class="odd">
+<td><strong>birthCity</strong></td>
+<td>character</td>
+<td>City where player was born</td>
+</tr>
+<tr class="even">
+<td><strong>deathYear</strong></td>
+<td>numeric</td>
+<td>Year player died</td>
+</tr>
+<tr class="odd">
+<td><strong>deathMonth</strong></td>
+<td>numeric</td>
+<td>Month player died</td>
+</tr>
+<tr class="even">
+<td><strong>deathDay</strong></td>
+<td>numeric</td>
+<td>Day player died</td>
+</tr>
+<tr class="odd">
+<td><strong>deathCountry</strong></td>
+<td>character</td>
+<td>Country where player died</td>
+</tr>
+<tr class="even">
+<td><strong>deathState</strong></td>
+<td>character</td>
+<td>State where player died</td>
+</tr>
+<tr class="odd">
+<td><strong>deathCity</strong></td>
+<td>character</td>
+<td>City where player died</td>
+</tr>
+<tr class="even">
+<td><strong>nameFirst</strong></td>
+<td>character</td>
+<td>Player’s first name</td>
+</tr>
+<tr class="odd">
+<td><strong>nameLast</strong></td>
+<td>character</td>
+<td>Player’s last name</td>
+</tr>
+<tr class="even">
+<td><strong>nameGiven</strong></td>
+<td>character</td>
+<td>Player’s given name (typically first and middle)</td>
+</tr>
+<tr class="odd">
+<td><strong>weight</strong></td>
+<td>numeric</td>
+<td>Player’s weight in pounds</td>
+</tr>
+<tr class="even">
+<td><strong>height</strong></td>
+<td>numeric</td>
+<td>Player’s height in inches</td>
+</tr>
+<tr class="odd">
+<td><strong>bats</strong></td>
+<td>factor</td>
+<td>a factor: Player’s batting hand (left (L), right (R), or both (B))</td>
+</tr>
+<tr class="even">
+<td><strong>throws</strong></td>
+<td>factor</td>
+<td>a factor: Player’s throwing hand (left(L) or right(R))</td>
+</tr>
+<tr class="odd">
+<td><strong>debut</strong></td>
+<td>character</td>
+<td>Date that player made first major league appearance</td>
+</tr>
+<tr class="even">
+<td><strong>finalGame</strong></td>
+<td>character</td>
+<td>Date that player made first major league appearance (blank if still active)</td>
+</tr>
+<tr class="odd">
+<td><strong>retroID</strong></td>
+<td>character</td>
+<td>ID used by retrosheet, <a href="http://www.retrosheet.org/" class="uri">http://www.retrosheet.org/</a></td>
+</tr>
+<tr class="even">
+<td><strong>bbrefID</strong></td>
+<td>character</td>
+<td>ID used by Baseball Reference website, <a href="http://www.baseball-reference.com/" class="uri">http://www.baseball-reference.com/</a></td>
+</tr>
+<tr class="odd">
+<td><strong>birthDate</strong></td>
+<td>date</td>
+<td>Player’s birthdate, in as.Date format</td>
+</tr>
+<tr class="even">
+<td><strong>deathDate</strong></td>
+<td>date</td>
+<td>Player’s deathdate, in as.Date format</td>
+</tr>
+</tbody>
+</table>
+<p>In these cases, many of the summary functions will be of limited use. The <strong>skimr</strong> package was developed for large datasets like these. It will automatically create a set of summary tables for a variety of data types, and the default statistics are reasonable and informative:</p>
+<pre class="r"><code>library( skimr )
+library( Lahman )
+
+data( Master )
+skim( Master )</code></pre>
+<pre><code>## Skim summary statistics
+##  n obs: 19105 
+##  n variables: 26 
+## 
+## -- Variable type:character --------------------------------------------------------------------------------------
+##      variable missing complete     n min max empty n_unique
+##       bbrefID       2    19103 19105   5   9     0    19103
+##     birthCity     180    18925 19105   3  26     0     4745
+##  birthCountry      69    19036 19105   3  14     0       53
+##    birthState     571    18534 19105   2  22     0      260
+##     deathCity    9674     9431 19105   2  28     0     2578
+##  deathCountry    9669     9436 19105   3  14     0       25
+##    deathState    9715     9390 19105   2  20     0      101
+##         debut     195    18910 19105  10  10     0    10155
+##     finalGame     195    18910 19105  10  10     0     9138
+##     nameFirst      37    19068 19105   2  12     0     2353
+##     nameGiven      37    19068 19105   2  43     0    12616
+##      nameLast       0    19105 19105   2  14     0     9831
+##      playerID       0    19105 19105   5   9     0    19105
+##       retroID      56    19049 19105   8   8     0    19049
+## 
+## -- Variable type:Date -------------------------------------------------------------------------------------------
+##   variable missing complete     n        min        max     median
+##  birthDate     449    18656 19105 1820-04-17 1996-08-12 1939-01-01
+##  deathDate    9666     9439 19105 1872-03-17 2017-02-19 1967-03-06
+##  n_unique
+##     15404
+##      8458
+## 
+## -- Variable type:factor -----------------------------------------------------------------------------------------
+##  variable missing complete     n n_unique
+##      bats    1185    17920 19105        3
+##    throws     979    18126 19105        3
+##                            top_counts ordered
+##  R: 11788, L: 4957, NA: 1185, B: 1175   FALSE
+##      R: 14472, L: 3653, NA: 979, S: 1   FALSE
+## 
+## -- Variable type:integer ----------------------------------------------------------------------------------------
+##    variable missing complete     n    mean    sd   p0  p25  p50  p75 p100
+##    birthDay     449    18656 19105   15.61  8.75    1    8   16   23   31
+##  birthMonth     302    18803 19105    6.63  3.47    1    4    7   10   12
+##   birthYear     132    18973 19105 1931.44 41.56 1820 1895 1937 1969 1996
+##    deathDay    9666     9439 19105   15.57  8.78    1    8   15   23   31
+##  deathMonth    9665     9440 19105    6.48  3.53    1    3    6   10   12
+##   deathYear    9664     9441 19105 1964.29 31.81 1872 1942 1967 1990 2017
+##      height     785    18320 19105   72.27  2.6    43   71   72   74   83
+##      weight     854    18251 19105  186.38 21.52   65  170  185  200  320
+##      hist
+##  &lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;
+##  &lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2586&gt;&lt;U+2583&gt;&lt;U+2583&gt;&lt;U+2587&gt;&lt;U+2585&gt;&lt;U+2587&gt;
+##  &lt;U+2581&gt;&lt;U+2582&gt;&lt;U+2585&gt;&lt;U+2586&gt;&lt;U+2585&gt;&lt;U+2586&gt;&lt;U+2587&gt;&lt;U+2587&gt;
+##  &lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;
+##  &lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2583&gt;&lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2587&gt;
+##  &lt;U+2581&gt;&lt;U+2582&gt;&lt;U+2583&gt;&lt;U+2585&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2586&gt;
+##  &lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2587&gt;&lt;U+2585&gt;&lt;U+2581&gt;
+##  &lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2582&gt;&lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;</code></pre>
+<p>For more functionality see:</p>
+<pre class="r"><code>vignette( &quot;Using_skimr&quot;, package = &quot;skimr&quot; )</code></pre>
+<p>There are many additional packages and tricks for producing descriptive statistics. Note, though, that most produce a print-out of summary statistics but do not return a useful “tidy” dataset that can be used in subsequent steps. For most data recipes, we will rely on the <strong>summarize()</strong> function in the <strong>dplyr</strong> package. It’s utility will become obvious in the next two chapters.</p>
+</div>
+</div>
+
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
