@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>p-076-merging-data.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#merging-data"><span class="toc-section-number">1</span> Merging Data</a></li>
+<li><a href="#overview-of-joins"><span class="toc-section-number">2</span> Overview of Joins</a><ul>
+<li><a href="#inner-outer-left-and-right"><span class="toc-section-number">2.1</span> Inner, Outer, Left and Right</a></li>
+<li><a href="#compound-ids"><span class="toc-section-number">2.2</span> Compound IDs</a></li>
+<li><a href="#merge-keys"><span class="toc-section-number">2.3</span> Merge Keys</a></li>
+<li><a href="#in-summary"><span class="toc-section-number">2.4</span> In Summary</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="merging-data" class="section level1">
+<h1><span class="header-section-number">1</span> Merging Data</h1>
+<pre class="r"><code>library( dplyr )
+library( pander )</code></pre>
+<p><br></p>
+<p>This chapter demonstrates the process of joining two datasets through a <strong>merge()</strong> function. This is one of the most common and most important processes in data science, because it allows you to combine multiple datasets to link observations that pertain to the same individuals / cases. The deepest insights often come from bringing data together in this way.</p>
+<p><br><br></p>
+</div>
+<div id="overview-of-joins" class="section level1">
+<h1><span class="header-section-number">2</span> Overview of Joins</h1>
+<p><br></p>
+<div id="inner-outer-left-and-right" class="section level2">
+<h2><span class="header-section-number">2.1</span> Inner, Outer, Left and Right</h2>
+<p>There are two things to remember when conducting joins. The first is that when you merge two datasets it is rare for them both to contain the exact same observations. As a result, you need to make decisions about which data to keep and which data to drop post-merge. There are four options:</p>
+<ul>
+<li>Keep everything: “Outer Join”</li>
+<li>Keep only observations in both datasets: “Inner Join”</li>
+<li>Keep all observations from dat1: “Left Join”</li>
+<li>Keep all observations from dat2: “Right Join”</li>
+</ul>
+<p><br></p>
+<p><img src="figures/shared_observations.png" width="40%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p>These options are specified through the <em>all=</em>, <em>all.x=</em>, and <em>all.y=</em> arguments in the <strong>merge()</strong> function, where the arguments all.x stands for observations in dat1, and all.y stands for observations in dat2 in this example.</p>
+<p><img src="figures/outer_join.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p><img src="figures/inner_join.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p><img src="figures/left_join.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br></p>
+<p><img src="figures/right_join.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><br><br></p>
+</div>
+<div id="compound-ids" class="section level2">
+<h2><span class="header-section-number">2.2</span> Compound IDs</h2>
+<p>It is often the case where a single ID does not unique specify observations needed to join data. For example, if you are looking at the relationship between employee eye color and their height, these are both variables that can only have one value per employee, so the employee ID would be sufficient to merge the eye color and height datasets.</p>
+<p>If we want to look at the relationship between employee sick days in a given year and their performance, we now might have multiple years of data for each employee. To merge these two datasets we need to use both ID and YEAR. This is an example of a compound ID - two or more variables are needed to create a unique key for the join.</p>
+<p><img src="figures/compound_ids.png" width="60%" style="display: block; margin: auto;" /></p>
+<p>Consider an example where sales representatives get a bonus if they sell over $100,000 in subscriptions each year. We have one database generated by the sales department, and another generated by HR. We want to merge them to ensure bonuses have been properly issued. The data tables are structured as follows:</p>
+<table style="width:29%;">
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">year</th>
+<th align="center">sales</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">A</td>
+<td align="center">2001</td>
+<td align="center">54000</td>
+</tr>
+<tr class="even">
+<td align="center">A</td>
+<td align="center">2002</td>
+<td align="center">119000</td>
+</tr>
+<tr class="odd">
+<td align="center">B</td>
+<td align="center">2001</td>
+<td align="center">141000</td>
+</tr>
+<tr class="even">
+<td align="center">B</td>
+<td align="center">2002</td>
+<td align="center">102000</td>
+</tr>
+<tr class="odd">
+<td align="center">C</td>
+<td align="center">2001</td>
+<td align="center">66000</td>
+</tr>
+<tr class="even">
+<td align="center">C</td>
+<td align="center">2002</td>
+<td align="center">68000</td>
+</tr>
+</tbody>
+</table>
+<table style="width:28%;">
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">year</th>
+<th align="center">bonus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">A</td>
+<td align="center">2001</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">A</td>
+<td align="center">2002</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">B</td>
+<td align="center">2001</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="even">
+<td align="center">B</td>
+<td align="center">2002</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">C</td>
+<td align="center">2001</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">C</td>
+<td align="center">2002</td>
+<td align="center">FALSE</td>
+</tr>
+</tbody>
+</table>
+<p>The RIGHT way to merge these tables is to specify the set of IDs that allow you to indentify unique observations. The employee ID is not sufficient in this case because there are separate observations for each year. As a result,</p>
+<pre class="r"><code>merge( dat1, dat2, by=c(&quot;id&quot;,&quot;year&quot;) )         %&gt;% pander()</code></pre>
+<table style="width:42%;">
+<colgroup>
+<col width="6%" />
+<col width="9%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">year</th>
+<th align="center">sales</th>
+<th align="center">bonus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">A</td>
+<td align="center">2001</td>
+<td align="center">54000</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">A</td>
+<td align="center">2002</td>
+<td align="center">119000</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">B</td>
+<td align="center">2001</td>
+<td align="center">141000</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="even">
+<td align="center">B</td>
+<td align="center">2002</td>
+<td align="center">102000</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">C</td>
+<td align="center">2001</td>
+<td align="center">66000</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">C</td>
+<td align="center">2002</td>
+<td align="center">68000</td>
+<td align="center">FALSE</td>
+</tr>
+</tbody>
+</table>
+<p>The WRONG way to merge these two datasets is to use only the employee ID. In this case, since the rows are now no longer unique, the only choice the merge() function has is to join EVERY instance on the right to each instance on the left. It has the effect of blowing up the size of the database (notice we have increased from 6 to 12 rows), as well as duplicating fields and incorrectly aligning data.</p>
+<p>Row number 2, for example, reports that employee A received a bonus on $54,000 in sales.</p>
+<pre class="r"><code>merge( dat1, dat2, by=&quot;id&quot; )         %&gt;% pander()</code></pre>
+<table style="width:57%;">
+<colgroup>
+<col width="6%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">year.x</th>
+<th align="center">sales</th>
+<th align="center">year.y</th>
+<th align="center">bonus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">A</td>
+<td align="center">2001</td>
+<td align="center">54000</td>
+<td align="center">2001</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">A</td>
+<td align="center">2001</td>
+<td align="center">54000</td>
+<td align="center">2002</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">A</td>
+<td align="center">2002</td>
+<td align="center">119000</td>
+<td align="center">2001</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">A</td>
+<td align="center">2002</td>
+<td align="center">119000</td>
+<td align="center">2002</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">B</td>
+<td align="center">2001</td>
+<td align="center">141000</td>
+<td align="center">2001</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="even">
+<td align="center">B</td>
+<td align="center">2001</td>
+<td align="center">141000</td>
+<td align="center">2002</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">B</td>
+<td align="center">2002</td>
+<td align="center">102000</td>
+<td align="center">2001</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="even">
+<td align="center">B</td>
+<td align="center">2002</td>
+<td align="center">102000</td>
+<td align="center">2002</td>
+<td align="center">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="center">C</td>
+<td align="center">2001</td>
+<td align="center">66000</td>
+<td align="center">2001</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">C</td>
+<td align="center">2001</td>
+<td align="center">66000</td>
+<td align="center">2002</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="center">C</td>
+<td align="center">2002</td>
+<td align="center">68000</td>
+<td align="center">2001</td>
+<td align="center">FALSE</td>
+</tr>
+<tr class="even">
+<td align="center">C</td>
+<td align="center">2002</td>
+<td align="center">68000</td>
+<td align="center">2002</td>
+<td align="center">FALSE</td>
+</tr>
+</tbody>
+</table>
+<p>The solution is to ensure you are using the combination of keys that ensures each observation is correctly specified.</p>
+<p><br><br></p>
+</div>
+<div id="merge-keys" class="section level2">
+<h2><span class="header-section-number">2.3</span> Merge Keys</h2>
+<p>Your “keys” are the shared IDs across your datasets used for the join. You can check for shared variable names by looking at the intersection of names in both:</p>
+<pre class="r"><code>intersect( names(dat1), names(dat2) )</code></pre>
+<pre><code>## [1] &quot;id&quot;   &quot;year&quot;</code></pre>
+<p>Thi works when the datasets were generated from a common system that uses standardized and identical ID names. In other cases, the same key may be spelled differently (‘year’ vs. ‘YEAR’) or have completely different names.</p>
+<p>The check above at least allows you to catch instances where variable names would be repeated, and thus duplicated in the merged file. When this happens, like the ‘year’ variable in the example above, the merge operation will add an ‘x’ and ‘y’ to the end of the variable names to specify which dataset they originated from (‘year.x’ and ‘year.y’ in the example above).</p>
+<p>In instances where variable names differ, you can specify the names directly using “by.x=” and “by.y=”:</p>
+<pre class="r"><code>merge( dat1, dat2, by.x=&quot;fips&quot;, by.y=&quot;FIPS&quot; ) </code></pre>
+<p><br><br></p>
+</div>
+<div id="in-summary" class="section level2">
+<h2><span class="header-section-number">2.4</span> In Summary</h2>
+<p>You will be using the merge() function in this lab to join datasets. You need to specify two arguments in each merge call.</p>
+<pre class="r"><code>merge( dat1, dat2, by=&quot;&quot;, all=&quot;&quot; )</code></pre>
+<p>Your IDs used to join dataset:</p>
+<ul>
+<li>Use “by=” when variable names are identical</li>
+<li>Use “by.x=” and “by.y=” when the variable names are spelled differently</li>
+<li>Remember the c() when you have a compound key: by=c(“FIPS”,“YEAR”)</li>
+</ul>
+<p>Specify an outer, inner, left, or right join:</p>
+<ul>
+<li>all=TRUE creates an outer join</li>
+<li>all=FALSE creates an inner join</li>
+<li>all.x=TRUE creates a left join</li>
+<li>all.y=TRUE creates a right join</li>
+</ul>
+<p><br><br></p>
+</div>
+</div>
+
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

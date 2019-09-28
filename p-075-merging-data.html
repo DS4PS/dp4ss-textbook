@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>p-075-merging-data.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#merging-data"><span class="toc-section-number">1</span> Merging Data</a><ul>
+<li><a href="#packages-used-in-this-chapter"><span class="toc-section-number">1.1</span> Packages Used in This Chapter</a></li>
+<li><a href="#relational-databases"><span class="toc-section-number">1.2</span> Relational Databases</a></li>
+<li><a href="#set-theory"><span class="toc-section-number">1.3</span> Set Theory</a></li>
+<li><a href="#merging-data-1"><span class="toc-section-number">1.4</span> Merging Data</a></li>
+<li><a href="#non-unique-observations-in-id-variables"><span class="toc-section-number">1.5</span> Non-Unique Observations in ID Variables</a></li>
+<li><a href="#the-in-function"><span class="toc-section-number">1.6</span> The %in% function</a></li>
+<li><a href="#the-match-function"><span class="toc-section-number">1.7</span> The Match Function</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="merging-data" class="section level1">
+<h1><span class="header-section-number">1</span> Merging Data</h1>
+<div id="packages-used-in-this-chapter" class="section level2">
+<h2><span class="header-section-number">1.1</span> Packages Used in This Chapter</h2>
+<pre class="r"><code>library( pander )
+library( dplyr )
+library( maps )</code></pre>
+</div>
+<div id="relational-databases" class="section level2">
+<h2><span class="header-section-number">1.2</span> Relational Databases</h2>
+<p>Modern databases are huge - think about the amount of information stored at Amazon in the history of each transation, the database where Google logs every single search from every person around the world, or Twitter’s database of all of the tweets (millions each day).</p>
+<p>When databases become large, flat spreadsheet style formats are not useful because they create a lot of redundant information, are large to store, and are not efficient to search. Large datasets are instead stored in relational databases - sets of tables that contain unique IDs that allow them to be joined when necessary.</p>
+<p>For example, consider a simple customer database. We don’t want to store customer info with our transactions because we would be repeating their name and street address every time they make a new purchase. As a result, we store customer information and transaction information separately.</p>
+<p><strong>Customer Database</strong></p>
+<table style="width:92%;">
+<colgroup>
+<col width="19%" />
+<col width="18%" />
+<col width="16%" />
+<col width="22%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">CUSTOMER.ID</th>
+<th align="center">FIRST.NAME</th>
+<th align="center">LAST.NAME</th>
+<th align="center">ADDRESS</th>
+<th align="center">ZIP.CODE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">178</td>
+<td align="center">Alvaro</td>
+<td align="center">Jaurez</td>
+<td align="center">123 Park Ave</td>
+<td align="center">57701</td>
+</tr>
+<tr class="even">
+<td align="center">934</td>
+<td align="center">Janette</td>
+<td align="center">Johnson</td>
+<td align="center">456 Candy Ln</td>
+<td align="center">57701</td>
+</tr>
+<tr class="odd">
+<td align="center">269</td>
+<td align="center">Latisha</td>
+<td align="center">Shane</td>
+<td align="center">1600 Penn Ave</td>
+<td align="center">20500</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Transactions Database</strong></p>
+<table style="width:47%;">
+<colgroup>
+<col width="19%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">CUSTOMER.ID</th>
+<th align="center">PRODUCT</th>
+<th align="center">PRICE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">178</td>
+<td align="center">video</td>
+<td align="center">5.38</td>
+</tr>
+<tr class="even">
+<td align="center">178</td>
+<td align="center">shovel</td>
+<td align="center">12</td>
+</tr>
+<tr class="odd">
+<td align="center">269</td>
+<td align="center">book</td>
+<td align="center">3.99</td>
+</tr>
+<tr class="even">
+<td align="center">269</td>
+<td align="center">purse</td>
+<td align="center">8</td>
+</tr>
+<tr class="odd">
+<td align="center">934</td>
+<td align="center">mirror</td>
+<td align="center">7.64</td>
+</tr>
+</tbody>
+</table>
+<p>If we want to make the information actionable then we need to combine these datasets. For example, perhaps we want to know the average purchase amount from an individual in the 57701 zip code. We cannot answer that question with either dataset since the zip code is in one dataset, and the price is in another. We need to merge the data.</p>
+<pre class="r"><code>merge( customer.info, purchases )   </code></pre>
+<pre><code>##   CUSTOMER.ID FIRST.NAME LAST.NAME       ADDRESS ZIP.CODE PRODUCT PRICE
+## 1         178     Alvaro    Jaurez  123 Park Ave    57701   video  5.38
+## 2         178     Alvaro    Jaurez  123 Park Ave    57701  shovel 12.00
+## 3         269    Latisha     Shane 1600 Penn Ave    20500    book  3.99
+## 4         269    Latisha     Shane 1600 Penn Ave    20500   purse  8.00
+## 5         934    Janette   Johnson  456 Candy Ln    57701  mirror  7.64</code></pre>
+<pre class="r"><code>full.dat &lt;- merge( customer.info, purchases ) 
+
+full.dat$PRICE[ full.dat$ZIP.CODE == &quot;57701&quot; ]</code></pre>
+<pre><code>## [1]  5.38 12.00  7.64</code></pre>
+<pre class="r"><code>mean( full.dat$PRICE[ full.dat$ZIP.CODE == &quot;57701&quot; ] )</code></pre>
+<pre><code>## [1] 8.34</code></pre>
+<p>In reality, each purchase would have a purchase ID that is linked to shipping addresses, customer complaints, seller ratings, etc. Each seller would have their own data table with info. Each purchase would be tied to a payment type, which has its own data table. The system gets quite complex, which is why it is important to pay attention to the details of putting the data back together again.</p>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="figures/SampleRetailDatabase.png" alt="Example of a relational database schema" width="80%" />
+<p class="caption">
+Figure 1.1: Example of a relational database schema
+</p>
+</div>
+<p>We will cover a few details of data merges that will help you avoid common and very subtle mistakes that can lead to incorrect inferences.</p>
+</div>
+<div id="set-theory" class="section level2">
+<h2><span class="header-section-number">1.3</span> Set Theory</h2>
+<p>In order to merge data <strong>correctly</strong> you need to understand some very basic principles of set theory.</p>
+<div id="set-theory-functions" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Set Theory Functions</h3>
+<p>Let’s assume we have two sets: set1=<em>[A,B]</em>, set2=<em>[B,C]</em>. Each element in this set represents a group of observations that occurs in the dataset. So B represents people that occur in both datasets, A represents people that occur only in the first dataset, and C represents people that only occur in the second dataset.</p>
+<p>We can then describe membership through three operations:</p>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="figures/xy.png" alt="Membership defined by two sets" width="60%" />
+<p class="caption">
+Figure 1.2: Membership defined by two sets
+</p>
+</div>
+<table>
+<colgroup>
+<col width="56%" />
+<col width="44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>union: X OR Y</td>
+<td>The universe of all elements across all both sets: [A,B,C]</td>
+</tr>
+<tr class="even">
+<td>intersection: X &amp; Y</td>
+<td>The elements shared by both sets: [B]</td>
+</tr>
+<tr class="odd">
+<td>difference: X &amp; ! Y</td>
+<td>The elements in my first set, not in my second [A] or [C]</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s see how this might work in practice with an example of members of a study:</p>
+<table style="width:40%;">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">group</th>
+<th align="center">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">frank</td>
+<td align="center">treat</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">wanda</td>
+<td align="center">treat</td>
+<td align="center">female</td>
+</tr>
+<tr class="odd">
+<td align="center">sanjay</td>
+<td align="center">control</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">nancy</td>
+<td align="center">control</td>
+<td align="center">female</td>
+</tr>
+</tbody>
+</table>
+<p>For this example let’s define set 1 as the treatment group, and set 2 as all women in the study. Note that set membership is always defined as binary (you are in the set or out), but it can include multiple criteria (the set of animals can contains cats, dogs, and mice).</p>
+<pre class="r"><code>treated &lt;- name[ group == &quot;treat&quot; ]
+
+treated </code></pre>
+<pre><code>## [1] &quot;frank&quot; &quot;wanda&quot;</code></pre>
+<pre class="r"><code>females &lt;- name[ gender == &quot;female&quot; ]
+
+females </code></pre>
+<pre><code>## [1] &quot;wanda&quot; &quot;nancy&quot;</code></pre>
+<p>Now we can specify group belonging using some convenient set theory functions: <strong>union()</strong>, <strong>setdiff()</strong>, and <strong>intersect()</strong>.</p>
+<pre class="r"><code>union( treated, females )</code></pre>
+<pre><code>## [1] &quot;frank&quot; &quot;wanda&quot; &quot;nancy&quot;</code></pre>
+<pre class="r"><code>intersect( treated, females )</code></pre>
+<pre><code>## [1] &quot;wanda&quot;</code></pre>
+<pre class="r"><code>setdiff( treated, females )</code></pre>
+<pre><code>## [1] &quot;frank&quot;</code></pre>
+<pre class="r"><code>setdiff( females, treated )</code></pre>
+<pre><code>## [1] &quot;nancy&quot;</code></pre>
+<p>It is very important to note that <strong>union()</strong> and <strong>intersect()</strong> are symmetric functions, meaning <em>intersect(x,y)</em> will give you the same result as <em>intersect(y,x)</em>. The <strong>setdiff()</strong> function is not symmetric, however.</p>
+</div>
+<div id="set-theory-using-logical-operators" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Set Theory Using Logical Operators</h3>
+<p>Typically you will define your groups using logical operators, which perform the exact same funciton as set theory functions but are a little more expressive and flexible.</p>
+<p>Let’s use the same example above where x=“treatment” and y=“female”, then consider these cases:</p>
+<p><img src="figures/set_theory.png" /></p>
+<p>Who belongs in each group?</p>
+<table style="width:40%;">
+<colgroup>
+<col width="12%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">name</th>
+<th align="center">group</th>
+<th align="center">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">frank</td>
+<td align="center">treat</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">wanda</td>
+<td align="center">treat</td>
+<td align="center">female</td>
+</tr>
+<tr class="odd">
+<td align="center">sanjay</td>
+<td align="center">control</td>
+<td align="center">male</td>
+</tr>
+<tr class="even">
+<td align="center">nancy</td>
+<td align="center">control</td>
+<td align="center">female</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>#   x
+
+name[ group == &quot;treat&quot; ]</code></pre>
+<pre><code>## [1] &quot;frank&quot; &quot;wanda&quot;</code></pre>
+<pre class="r"><code>#   x &amp; y
+
+name[ group == &quot;treat&quot; &amp; gender == &quot;female&quot; ]</code></pre>
+<pre><code>## [1] &quot;wanda&quot;</code></pre>
+<pre class="r"><code>#   x &amp; ! y
+
+name[ group == &quot;treat&quot; &amp; gender != &quot;female&quot; ]</code></pre>
+<pre><code>## [1] &quot;frank&quot;</code></pre>
+<pre class="r"><code>#  x | y
+
+name[ group == &quot;treat&quot; | gender == &quot;female&quot; ]</code></pre>
+<pre><code>## [1] &quot;frank&quot; &quot;wanda&quot; &quot;nancy&quot;</code></pre>
+<p>Who belongs in these groups?</p>
+<ul>
+<li>!x &amp; !y</li>
+<li>x &amp; ! ( x &amp; y )</li>
+<li>( x | y ) &amp; ! ( x &amp; y )</li>
+</ul>
+</div>
+</div>
+<div id="merging-data-1" class="section level2">
+<h2><span class="header-section-number">1.4</span> Merging Data</h2>
+<p><strong>The Merge Function</strong></p>
+<p>The merge function joins two datasets. The function requires two datasets as the arguments, and they need to share a unique ID variable. Recall the example from above:</p>
+<pre class="r"><code>merge( customer.info, purchases )</code></pre>
+<pre><code>##   CUSTOMER.ID FIRST.NAME LAST.NAME       ADDRESS ZIP.CODE PRODUCT PRICE
+## 1         178     Alvaro    Jaurez  123 Park Ave    57701   video  5.38
+## 2         178     Alvaro    Jaurez  123 Park Ave    57701  shovel 12.00
+## 3         269    Latisha     Shane 1600 Penn Ave    20500    book  3.99
+## 4         269    Latisha     Shane 1600 Penn Ave    20500   purse  8.00
+## 5         934    Janette   Johnson  456 Candy Ln    57701  mirror  7.64</code></pre>
+<p>The important thing to keep in mind is that the default merge operation uses the <strong>intersection</strong> of the two datasets. It will drop all elements that don’t occur in both datasets. We may want to fine-tune this as to not lose valuable data and potentially bias our analysis. As an example, no illegal immigrants will have social security numbers, so if you are merging using the SSN, you will drop this group from the data, which could impact your results.</p>
+<p><img src="figures/xy.png" /></p>
+<p>With a little help from the set theory examples above, we can think about which portions of the data we wish to drop and which portions we wish to keep.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Argument</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>all=F</td>
+<td>DEFAULT - new dataset contains intersection of X and Y (B only)</td>
+</tr>
+<tr class="even">
+<td>all=T</td>
+<td>New dataset contains union of X and Y (A, B &amp; C)</td>
+</tr>
+<tr class="odd">
+<td>all.x=T</td>
+<td>New dataset contains A and B, not C</td>
+</tr>
+<tr class="even">
+<td>all.y=T</td>
+<td>New dataset contains B and C, not A</td>
+</tr>
+</tbody>
+</table>
+<p>Here is some demonstrations with examples adapted from the R help file.</p>
+<pre class="r"><code>authors   </code></pre>
+<pre><code>##       surname nationality deceased
+## 1       Tukey          US      yes
+## 2     Tierney          US       no
+## 3      Ripley          UK       no
+## 4      McNeil   Australia       no
+## 5 Shakespeare     England      yes</code></pre>
+<pre class="r"><code>books    </code></pre>
+<pre><code>##          name                     title
+## 1       Tukey Exploratory Data Analysis
+## 2    Venables Modern Applied Statistics
+## 3      Ripley        Spatial Statistics
+## 4      Ripley     Stochastic Simulation
+## 5      McNeil Interactive Data Analysis
+## 6 R Core Team      An Introduction to R</code></pre>
+<pre class="r"><code># adding books to the author bios dataset  ( set B only )
+
+merge(authors, books, by.x = &quot;surname&quot;, by.y = &quot;name&quot;)    </code></pre>
+<pre><code>##   surname nationality deceased                     title
+## 1  McNeil   Australia       no Interactive Data Analysis
+## 2  Ripley          UK       no        Spatial Statistics
+## 3  Ripley          UK       no     Stochastic Simulation
+## 4   Tukey          US      yes Exploratory Data Analysis</code></pre>
+<pre class="r"><code># adding author bios to the books dataset  ( set B only )
+
+merge(books, authors, by.x = &quot;name&quot;, by.y = &quot;surname&quot;)    </code></pre>
+<pre><code>##     name                     title nationality deceased
+## 1 McNeil Interactive Data Analysis   Australia       no
+## 2 Ripley        Spatial Statistics          UK       no
+## 3 Ripley     Stochastic Simulation          UK       no
+## 4  Tukey Exploratory Data Analysis          US      yes</code></pre>
+<pre class="r"><code># keep books without author bios, lose authors without books  ( sets A and B )
+
+merge( books, authors, by.x = &quot;name&quot;, by.y = &quot;surname&quot;, all.x=T )     </code></pre>
+<pre><code>##          name                     title nationality deceased
+## 1      McNeil Interactive Data Analysis   Australia       no
+## 2 R Core Team      An Introduction to R        &lt;NA&gt;     &lt;NA&gt;
+## 3      Ripley        Spatial Statistics          UK       no
+## 4      Ripley     Stochastic Simulation          UK       no
+## 5       Tukey Exploratory Data Analysis          US      yes
+## 6    Venables Modern Applied Statistics        &lt;NA&gt;     &lt;NA&gt;</code></pre>
+<pre class="r"><code># keep authors without book listed, lose books without author bios   ( sets B and C )
+
+merge( books, authors, by.x = &quot;name&quot;, by.y = &quot;surname&quot;, all.y=T )    </code></pre>
+<pre><code>##          name                     title nationality deceased
+## 1      McNeil Interactive Data Analysis   Australia       no
+## 2      Ripley        Spatial Statistics          UK       no
+## 3      Ripley     Stochastic Simulation          UK       no
+## 4 Shakespeare                      &lt;NA&gt;     England      yes
+## 5     Tierney                      &lt;NA&gt;          US       no
+## 6       Tukey Exploratory Data Analysis          US      yes</code></pre>
+<pre class="r"><code># dont&#39; throw out any data   ( sets A and B and C )
+
+merge( books, authors, by.x = &quot;name&quot;, by.y = &quot;surname&quot;, all=T )   </code></pre>
+<pre><code>##          name                     title nationality deceased
+## 1      McNeil Interactive Data Analysis   Australia       no
+## 2 R Core Team      An Introduction to R        &lt;NA&gt;     &lt;NA&gt;
+## 3      Ripley        Spatial Statistics          UK       no
+## 4      Ripley     Stochastic Simulation          UK       no
+## 5 Shakespeare                      &lt;NA&gt;     England      yes
+## 6     Tierney                      &lt;NA&gt;          US       no
+## 7       Tukey Exploratory Data Analysis          US      yes
+## 8    Venables Modern Applied Statistics        &lt;NA&gt;     &lt;NA&gt;</code></pre>
+<p>Also note that the order of your datasets in the argument list will impact the inclusion or exclusion of elements.</p>
+<p>merge( x, y, all=F ) EQUALS merge( y, x, all=F )</p>
+<p>merge( x, y, all.x=T ) DOES NOT EQUAL merge( y, x, all.x=T )</p>
+<div id="the-by.x-and-by.y-arguments" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> The by.x and by.y Arguments</h3>
+<p>When you use the default <strong>merge()</strong> function without specifying the variables to merge upon, the function will check for common variable names across the two datasets. If there are multiple, it will join the shared variables to create a new unique key. This might be problematic if that was not the intent.</p>
+<p>Take the example of combining fielding and salary data in the Lahman package. If we are not explicit about the merge variable, we may get odd results. Note that they two datasets share four ID variables.</p>
+<pre class="r"><code>library( Lahman )
+data( Fielding )
+data( Salaries )</code></pre>
+<pre class="r"><code>intersect( names(Fielding), names(Salaries) )</code></pre>
+<pre><code>## [1] &quot;playerID&quot; &quot;yearID&quot;   &quot;teamID&quot;   &quot;lgID&quot;</code></pre>
+<pre class="r"><code># merge id
+
+int &lt;- intersect( names(Fielding), names(Salaries) )
+
+paste( int[1],int[2],int[3],int[4], sep=&quot;.&quot; )</code></pre>
+<pre><code>## [1] &quot;playerID.yearID.teamID.lgID&quot;</code></pre>
+<p>To avoid problems, be explicit using the <em>by.x</em> and <em>by.x</em> arguments to control which variable is used for the merge.</p>
+<pre class="r"><code>head( merge( Salaries, Fielding ) )</code></pre>
+<pre><code>##   yearID teamID lgID  playerID salary stint POS  G GS InnOuts  PO  A E DP
+## 1   1985    ATL   NL barkele01 870000     1   P 20 18     221   2  9 1  0
+## 2   1985    ATL   NL bedrost01 550000     1   P 37 37     620  13 23 4  3
+## 3   1985    ATL   NL benedbr01 545000     1   C 70 67    1698 314 35 4  1
+## 4   1985    ATL   NL  campri01 633333     1   P 66  2     383   7 13 4  3
+## 5   1985    ATL   NL ceronri01 625000     1   C 91 76    2097 384 48 6  4
+## 6   1985    ATL   NL chambch01 800000     1  1B 39 27     814 299 25 1 31
+##   PB WP SB CS ZR
+## 1 NA NA NA NA NA
+## 2 NA NA NA NA NA
+## 3  1  9 65 24  1
+## 4 NA NA NA NA NA
+## 5  6 20 69 29  1
+## 6 NA NA NA NA NA</code></pre>
+<pre class="r"><code>head( merge( Salaries, Fielding, by.x=&quot;playerID&quot;, by.y=&quot;playerID&quot; ) )</code></pre>
+<pre><code>##    playerID yearID.x teamID.x lgID.x  salary yearID.y stint teamID.y
+## 1 aardsda01     2010      SEA     AL 2750000     2009     1      SEA
+## 2 aardsda01     2010      SEA     AL 2750000     2015     1      ATL
+## 3 aardsda01     2010      SEA     AL 2750000     2006     1      CHN
+## 4 aardsda01     2010      SEA     AL 2750000     2008     1      BOS
+## 5 aardsda01     2010      SEA     AL 2750000     2013     1      NYN
+## 6 aardsda01     2010      SEA     AL 2750000     2012     1      NYA
+##   lgID.y POS  G GS InnOuts PO A E DP PB WP SB CS ZR
+## 1     AL   P 73  0     214  2 5 0  1 NA NA NA NA NA
+## 2     NL   P 33  0      92  0 1 1  0 NA NA NA NA NA
+## 3     NL   P 45  0     159  1 5 0  1 NA NA NA NA NA
+## 4     AL   P 47  0     146  3 6 0  0 NA NA NA NA NA
+## 5     NL   P 43  0     119  1 5 0  0 NA NA NA NA NA
+## 6     AL   P  1  0       3  0 0 0  0 NA NA NA NA NA</code></pre>
+</div>
+</div>
+<div id="non-unique-observations-in-id-variables" class="section level2">
+<h2><span class="header-section-number">1.5</span> Non-Unique Observations in ID Variables</h2>
+<p>In some rare instances, you will need to merge to datasets that have non-singular elements in the unique key ID variables, meaning each observation / individual appears more than one time in the data. Note that in this case, for each occurance of an observation / individual in your X dataset, you will merge once with each occurance of the same observation / individual in the Y dataset. The result will be a multiplicative expansion of the size of your dataset.</p>
+<p>For example, if John appears on four separate rows of X, and three seperate rows of Y, the new dataset will contain 12 rows of John (4 x 3 = 12).</p>
+<p>dataset X contains four separate instances of an individual [ X1, X2, X3, X4 ]</p>
+<p>dataset Y contains three separate instances of an individual [ Y1, Y2, Y3 ]</p>
+<p>After the merge we have one row for each pair:</p>
+<p>X1-Y1<br />
+X1-Y2<br />
+X1-Y3<br />
+X2-Y1<br />
+X2-Y2<br />
+X2-Y3<br />
+X3-Y1<br />
+X3-Y2<br />
+X3-Y3<br />
+X4-Y1<br />
+X4-Y2<br />
+X4-Y3</p>
+<p>For example, perhaps a sales company has a database that keeps track of biographical data, and sales performance. Perhaps we want to see if there is peak age for sales performance. We need to merge these datasets.</p>
+<pre class="r"><code>bio &lt;- data.frame( name=c(&quot;John&quot;,&quot;John&quot;,&quot;John&quot;),
+                   year=c(2000,2001,2002),
+                   age=c(43,44,45) )
+
+performance &lt;- data.frame( name=c(&quot;John&quot;,&quot;John&quot;,&quot;John&quot;),
+                           year=c(2000,2001,2002),
+                           sales=c(&quot;15k&quot;,&quot;20k&quot;,&quot;17k&quot;) )
+
+# correct merge
+
+merge( bio, performance, by.x=c(&quot;name&quot;,&quot;year&quot;), by.y=c(&quot;name&quot;,&quot;year&quot;) ) </code></pre>
+<pre><code>##   name year age sales
+## 1 John 2000  43   15k
+## 2 John 2001  44   20k
+## 3 John 2002  45   17k</code></pre>
+<pre class="r"><code># incorrect merge
+
+merge( bio, performance, by.x=c(&quot;name&quot;), by.y=c(&quot;name&quot;) )  </code></pre>
+<pre><code>##   name year.x age year.y sales
+## 1 John   2000  43   2000   15k
+## 2 John   2000  43   2001   20k
+## 3 John   2000  43   2002   17k
+## 4 John   2001  44   2000   15k
+## 5 John   2001  44   2001   20k
+## 6 John   2001  44   2002   17k
+## 7 John   2002  45   2000   15k
+## 8 John   2002  45   2001   20k
+## 9 John   2002  45   2002   17k</code></pre>
+<p><strong>It is good practice to check the size (number of rows) of your dataset before and after a merge. If it has expanded, chances are you either used the wrong unique IDs, or your dataset contains duplicates.</strong></p>
+<div id="example-of-incorrect-merge" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> Example of Incorrect Merge</h3>
+<p>Here is a tangible example using the Lahman baseball dataset. Perhaps we want to examine the relationship between fielding position and salary. The <em>Fielding</em> dataset contains fielding position information, and the <em>Salaries</em> dataset contains salary information. We can merge these two datasets using the <em>playerID</em> field.</p>
+<p>If we are not thoughtful about this, however, we will end up causing problems. Let’s look at an example using Kirby Pucket.</p>
+<pre class="r"><code>kirby.fielding &lt;- Fielding[ Fielding$playerID == &quot;puckeki01&quot; , ]
+
+head( kirby.fielding )</code></pre>
+<pre><code>##        playerID yearID stint teamID lgID POS   G  GS InnOuts  PO  A E DP
+## 83848 puckeki01   1984     1    MIN   AL  OF 128 128    3377 438 16 3  4
+## 85157 puckeki01   1985     1    MIN   AL  OF 161 160    4213 465 19 8  5
+## 86489 puckeki01   1986     1    MIN   AL  OF 160 157    4155 429  8 6  3
+## 87896 puckeki01   1987     1    MIN   AL  OF 147 147    3820 341  8 5  2
+## 89264 puckeki01   1988     1    MIN   AL  OF 158 157    4049 450 12 3  4
+## 90685 puckeki01   1989     1    MIN   AL  OF 157 154    3985 438 13 4  3
+##       PB WP SB CS ZR
+## 83848 NA NA NA NA NA
+## 85157 NA NA NA NA NA
+## 86489 NA NA NA NA NA
+## 87896 NA NA NA NA NA
+## 89264 NA NA NA NA NA
+## 90685 NA NA NA NA NA</code></pre>
+<pre class="r"><code>nrow( kirby.fielding )</code></pre>
+<pre><code>## [1] 21</code></pre>
+<pre class="r"><code>kirby.salary &lt;- Salaries[ Salaries$playerID == &quot;puckeki01&quot; , ]
+
+head( kirby.salary )</code></pre>
+<pre><code>##      yearID teamID lgID  playerID  salary
+## 280    1985    MIN   AL puckeki01  130000
+## 917    1986    MIN   AL puckeki01  255000
+## 1610   1987    MIN   AL puckeki01  465000
+## 2244   1988    MIN   AL puckeki01 1090000
+## 2922   1989    MIN   AL puckeki01 2000000
+## 3717   1990    MIN   AL puckeki01 2816667</code></pre>
+<pre class="r"><code>nrow( kirby.salary )</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="r"><code>kirby.field.salary &lt;- merge( kirby.fielding, kirby.salary, by.x=&quot;playerID&quot;, by.y=&quot;playerID&quot; )
+
+head( select( kirby.field.salary, yearID.x, yearID.y,   POS,    G,  GS, salary ) )</code></pre>
+<pre><code>##   yearID.x yearID.y POS   G  GS  salary
+## 1     1984     1985  OF 128 128  130000
+## 2     1984     1986  OF 128 128  255000
+## 3     1984     1987  OF 128 128  465000
+## 4     1984     1988  OF 128 128 1090000
+## 5     1984     1989  OF 128 128 2000000
+## 6     1984     1990  OF 128 128 2816667</code></pre>
+<pre class="r"><code>nrow( kirby.field.salary )</code></pre>
+<pre><code>## [1] 273</code></pre>
+<pre class="r"><code>21*13</code></pre>
+<pre><code>## [1] 273</code></pre>
+<p>What we have done here is taken each year of fielding data, and matched it to <strong>every</strong> year of salary data. We can see that we have 21 fielding observations and 13 years of salary data, so our resulting dataset is 273 observation pairs.</p>
+<p>This merge also makes it difficult to answer the question of the relationship between fielding position and salary if players change positions over time.</p>
+<p>The correct merge in this case would be a merge on a playerID-yearID pair. We can create a unique key by combining playerID and yearID using <strong>paste()</strong>:</p>
+<pre class="r"><code>head( paste( kirby.fielding$playerID, kirby.fielding$yearID, sep=&quot;.&quot;) )</code></pre>
+<pre><code>## [1] &quot;puckeki01.1984&quot; &quot;puckeki01.1985&quot; &quot;puckeki01.1986&quot; &quot;puckeki01.1987&quot;
+## [5] &quot;puckeki01.1988&quot; &quot;puckeki01.1989&quot;</code></pre>
+<p>But there is a simple solution as the merge function also allows for multiple variables to be used for a <strong>merge()</strong> command.</p>
+<pre class="r"><code>kirby.field.salary &lt;- merge( kirby.fielding, kirby.salary, 
+                            by.x=c(&quot;playerID&quot;,&quot;yearID&quot;), 
+                            by.y=c(&quot;playerID&quot;,&quot;yearID&quot;)   )
+
+nrow( kirby.field.salary )</code></pre>
+<pre><code>## [1] 20</code></pre>
+</div>
+</div>
+<div id="the-in-function" class="section level2">
+<h2><span class="header-section-number">1.6</span> The %in% function</h2>
+<p>Since we are talking about intersections and matches, I want to briefly introduce the <strong>%in%</strong> function. It is a combination of the two.</p>
+<p>The <strong>intersect()</strong> function returns a list of unique matches between two vectors.</p>
+<pre class="r"><code>data(Salaries)
+data(Fielding)
+intersect( names(Salaries), names(Fielding) )</code></pre>
+<pre><code>## [1] &quot;yearID&quot;   &quot;teamID&quot;   &quot;lgID&quot;     &quot;playerID&quot;</code></pre>
+<p>The <strong>match()</strong> function returns the position of matched elements.</p>
+<pre class="r"><code>x &lt;- c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;B&quot;)
+
+y &lt;- c(&quot;B&quot;,&quot;D&quot;,&quot;A&quot;,&quot;F&quot;)
+
+match( x, y )</code></pre>
+<pre><code>## [1]  3  1 NA  1</code></pre>
+<p>The <strong>%in%</strong> function returns a logical vector, where TRUE signifies that the element in <em>y</em> also occurs in <em>x</em>. In other words, does a specific element in <em>y</em> belong to the intersection of <em>x</em>,<em>y</em>.</p>
+<p>This is very useful for creating subsets of data that belong to both sets.</p>
+<pre class="r"><code>x &lt;- c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;)
+
+y &lt;- c(&quot;B&quot;,&quot;D&quot;,&quot;A&quot;,&quot;B&quot;,&quot;F&quot;,&quot;B&quot;)
+
+y %in% x # does each element of y occur anywhere in x?</code></pre>
+<pre><code>## [1]  TRUE FALSE  TRUE  TRUE FALSE  TRUE</code></pre>
+<pre class="r"><code>y[ y %in% x] # keep only data that occurs in both</code></pre>
+<pre><code>## [1] &quot;B&quot; &quot;A&quot; &quot;B&quot; &quot;B&quot;</code></pre>
+</div>
+<div id="the-match-function" class="section level2">
+<h2><span class="header-section-number">1.7</span> The Match Function</h2>
+<p>Often times we do not need to merge data, we may just need sort data in one dataset so that it matches the order of another dataset. This is accomplished using the <strong>match()</strong> function.</p>
+<p>Note that we can rearrange the order of a dataset by referencing the desired position.</p>
+<pre class="r"><code>x &lt;- c(&quot;Second&quot;,&quot;Third&quot;,&quot;First&quot;)
+
+x</code></pre>
+<pre><code>## [1] &quot;Second&quot; &quot;Third&quot;  &quot;First&quot;</code></pre>
+<pre class="r"><code>x[ c(3,1,2) ]</code></pre>
+<pre><code>## [1] &quot;First&quot;  &quot;Second&quot; &quot;Third&quot;</code></pre>
+<p>The <strong>match()</strong> function returns the <em>positions</em> of matches of its <em>first</em> vector to the <em>second</em> vector listed in the arguments. Or in other words, the <em>order</em> that vector 2 would need to follow to match vector 1.</p>
+<pre class="r"><code>x &lt;- c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;)
+
+y &lt;- c(&quot;B&quot;,&quot;D&quot;,&quot;A&quot;)
+
+cbind( x, y )</code></pre>
+<pre><code>##      x   y  
+## [1,] &quot;A&quot; &quot;B&quot;
+## [2,] &quot;B&quot; &quot;D&quot;
+## [3,] &quot;C&quot; &quot;A&quot;</code></pre>
+<pre class="r"><code>match( x, y )</code></pre>
+<pre><code>## [1]  3  1 NA</code></pre>
+<pre class="r"><code>match( y, x) # not a symmetric operation!</code></pre>
+<pre><code>## [1]  2 NA  1</code></pre>
+<pre class="r"><code># In the y vector:
+#
+#  [3]=A
+#  [1]=B
+# [NA]=D (no match)
+
+order.y &lt;- match( x, y )
+
+y[ order.y ]</code></pre>
+<pre><code>## [1] &quot;A&quot; &quot;B&quot; NA</code></pre>
+<p>We can see that <strong>match()</strong> returns the correct order to put <em>y</em> in so that it matches the order of <em>x</em>. In the re-ordered vector, the first element is the original third element <em>A</em>, the second element is the original first element <em>B</em>, and there is no third element because <em>D</em> did not match anything in <em>x</em>.</p>
+<p>Note the order of arguments in the function:</p>
+<blockquote>
+<p>match( data I want to match to , data I need to re-order )</p>
+</blockquote>
+<p>We can use this position information to re-order <em>y</em> as follows:</p>
+<pre class="r"><code>x &lt;- sample( LETTERS[1:15], size=10 )
+
+y &lt;- sample( LETTERS[1:15], size=10 )
+
+cbind( x, y )</code></pre>
+<pre><code>##       x   y  
+##  [1,] &quot;O&quot; &quot;J&quot;
+##  [2,] &quot;J&quot; &quot;L&quot;
+##  [3,] &quot;G&quot; &quot;G&quot;
+##  [4,] &quot;H&quot; &quot;K&quot;
+##  [5,] &quot;C&quot; &quot;N&quot;
+##  [6,] &quot;F&quot; &quot;I&quot;
+##  [7,] &quot;A&quot; &quot;E&quot;
+##  [8,] &quot;L&quot; &quot;M&quot;
+##  [9,] &quot;B&quot; &quot;C&quot;
+## [10,] &quot;D&quot; &quot;D&quot;</code></pre>
+<pre class="r"><code>order.y &lt;- match( x, y )
+
+y.new &lt;- y[ order.y ]
+
+cbind( x, y.new )</code></pre>
+<pre><code>##       x   y.new
+##  [1,] &quot;O&quot; NA   
+##  [2,] &quot;J&quot; &quot;J&quot;  
+##  [3,] &quot;G&quot; &quot;G&quot;  
+##  [4,] &quot;H&quot; NA   
+##  [5,] &quot;C&quot; &quot;C&quot;  
+##  [6,] &quot;F&quot; NA   
+##  [7,] &quot;A&quot; NA   
+##  [8,] &quot;L&quot; &quot;L&quot;  
+##  [9,] &quot;B&quot; NA   
+## [10,] &quot;D&quot; &quot;D&quot;</code></pre>
+<pre class="r"><code># Note the result if you confuse the order or arguments
+
+order.y &lt;- match( y, x )
+
+y.new &lt;- y[ order.y ]
+
+cbind( x, y.new )</code></pre>
+<pre><code>##       x   y.new
+##  [1,] &quot;O&quot; &quot;L&quot;  
+##  [2,] &quot;J&quot; &quot;M&quot;  
+##  [3,] &quot;G&quot; &quot;G&quot;  
+##  [4,] &quot;H&quot; NA   
+##  [5,] &quot;C&quot; NA   
+##  [6,] &quot;F&quot; NA   
+##  [7,] &quot;A&quot; NA   
+##  [8,] &quot;L&quot; NA   
+##  [9,] &quot;B&quot; &quot;N&quot;  
+## [10,] &quot;D&quot; &quot;D&quot;</code></pre>
+<p>This comes in handy when we are matching information between two tables. For example, in GIS the map regions follow a specific order but your data does not. Create a color scheme for levels of your data, and then re-order the colors so they match the correct region on the map. In this example, we will look at unemployment levels by county.</p>
+<pre class="r"><code>library( maps )
+data( county.fips )
+data( unemp )
+
+map( database=&quot;county&quot; )</code></pre>
+<p><img src="p-075-merging-data_files/figure-html/unnamed-chunk-31-1.png" width="768" /></p>
+<pre class="r"><code># assign a color to each level of unemployment, red = high, gray = medium, blue = low
+
+color.function &lt;- colorRampPalette( c(&quot;steelblue&quot;, &quot;gray70&quot;, &quot;firebrick&quot;) )
+
+
+color.vector &lt;- cut( rank(unemp$unemp), breaks=7, labels=color.function( 7 ) )
+
+color.vector &lt;- as.character( color.vector )
+
+head( color.vector )</code></pre>
+<pre><code>## [1] &quot;#B28282&quot; &quot;#B28282&quot; &quot;#B22222&quot; &quot;#B25252&quot; &quot;#B28282&quot; &quot;#B22222&quot;</code></pre>
+<pre class="r"><code># doesn&#39;t look quite right
+
+map( database=&quot;county&quot;, col=color.vector, fill=T, lty=0 )</code></pre>
+<p><img src="p-075-merging-data_files/figure-html/unnamed-chunk-31-2.png" width="768" /></p>
+<pre class="r"><code># what went wrong here? 
+
+# our unemployment data (and thus the color vector) follows a different order
+
+cbind( map.id=county.fips$fips, data.id=unemp$fips, color.vector )[ 2500:2510 , ]</code></pre>
+<pre><code>##       map.id  data.id color.vector
+##  [1,] &quot;48011&quot; &quot;47149&quot; &quot;#B28282&quot;   
+##  [2,] &quot;48013&quot; &quot;47151&quot; &quot;#B22222&quot;   
+##  [3,] &quot;48015&quot; &quot;47153&quot; &quot;#B22222&quot;   
+##  [4,] &quot;48017&quot; &quot;47155&quot; &quot;#B28282&quot;   
+##  [5,] &quot;48019&quot; &quot;47157&quot; &quot;#B28282&quot;   
+##  [6,] &quot;48021&quot; &quot;47159&quot; &quot;#B22222&quot;   
+##  [7,] &quot;48023&quot; &quot;47161&quot; &quot;#B25252&quot;   
+##  [8,] &quot;48025&quot; &quot;47163&quot; &quot;#B3B3B3&quot;   
+##  [9,] &quot;48027&quot; &quot;47165&quot; &quot;#B28282&quot;   
+## [10,] &quot;48029&quot; &quot;47167&quot; &quot;#B25252&quot;   
+## [11,] &quot;48031&quot; &quot;47169&quot; &quot;#B25252&quot;</code></pre>
+<pre class="r"><code># place the color vector in the correct order
+
+this.order &lt;- match( county.fips$fips, unemp$fips )
+
+color.vec.ordered &lt;- color.vector[ this.order ]
+
+# colors now match their correct counties
+
+map( database=&quot;county&quot;, col=color.vec.ordered, fill=T, lty=0 )
+title( main=&quot;Unemployment Levels by County in 2009&quot;)</code></pre>
+<p><img src="p-075-merging-data_files/figure-html/unnamed-chunk-31-3.png" width="768" /></p>
+<p>Note that elements can be recycled from your <em>y</em> vector:</p>
+<pre class="r"><code>x &lt;- c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;B&quot;)
+
+y &lt;- c(&quot;B&quot;,&quot;D&quot;,&quot;A&quot;,&quot;F&quot;)
+
+cbind( x, y )</code></pre>
+<pre><code>##      x   y  
+## [1,] &quot;A&quot; &quot;B&quot;
+## [2,] &quot;B&quot; &quot;D&quot;
+## [3,] &quot;C&quot; &quot;A&quot;
+## [4,] &quot;B&quot; &quot;F&quot;</code></pre>
+<pre class="r"><code>match( x, y )</code></pre>
+<pre><code>## [1]  3  1 NA  1</code></pre>
+<pre class="r"><code>order.y &lt;- match( x, y )
+
+y.new &lt;- y[ order.y ]
+
+cbind( x, y.new )</code></pre>
+<pre><code>##      x   y.new
+## [1,] &quot;A&quot; &quot;A&quot;  
+## [2,] &quot;B&quot; &quot;B&quot;  
+## [3,] &quot;C&quot; NA   
+## [4,] &quot;B&quot; &quot;B&quot;</code></pre>
+</div>
+</div>
+
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

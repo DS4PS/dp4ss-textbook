@@ -1,0 +1,646 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    toc: true
+    toc_depth: 1
+    number_sections: true
+    self_contained: false
+    css: textbook.css
+---
+
+```{r, echo=F }
+knitr::opts_chunk$set( echo = TRUE, message=F, warning=F, fig.width=8 )
+```
+
+
+
+# Merging Data
+
+
+## Packages Used in This Chapter
+
+```{r}
+library( pander )
+library( dplyr )
+library( maps )
+```
+
+
+
+
+
+
+## Relational Databases
+
+Modern databases are huge - think about the amount of information stored at Amazon in the history of each transation, the database where Google logs every single search from every person around the world, or Twitter's database of all of the tweets (millions each day).
+
+When databases become large, flat spreadsheet style formats are not useful because they create a lot of redundant information, are large to store, and are not efficient to search. Large datasets are instead stored in relational databases - sets of tables that contain unique IDs that allow them to be joined when necessary.
+
+For example, consider a simple customer database. We don't want to store customer info with our transactions because we would be repeating their name and street address every time they make a new purchase. As a result, we store customer information and transaction information separately.
+
+
+```{r, echo=FALSE}
+
+customer.info <- data.frame(
+                    CUSTOMER.ID=c("178","934","269"),
+                    FIRST.NAME=c("Alvaro","Janette","Latisha"),
+                    LAST.NAME=c("Jaurez","Johnson","Shane"),
+                    ADDRESS=c("123 Park Ave","456 Candy Ln","1600 Penn Ave"),
+                    ZIP.CODE=c("57701","57701","20500"))
+
+purchases <- data.frame(
+                    CUSTOMER.ID=c("178","178","269","269","934"),
+                    PRODUCT=c("video","shovel","book","purse","mirror"),
+                    PRICE=c(5.38,12.00,3.99,8.00,7.64) )
+
+```
+
+**Customer Database**
+
+```{r, echo=F}
+customer.info %>% pander
+```
+
+**Transactions Database**
+
+```{r, echo=F}
+purchases  %>% pander   
+```
+
+
+If we want to make the information actionable then we need to combine these datasets. For example, perhaps we want to know the average purchase amount from an individual in the 57701 zip code. We cannot answer that question with either dataset since the zip code is in one dataset, and the price is in another. We need to merge the data.
+
+
+
+```{r}
+merge( customer.info, purchases )   
+
+full.dat <- merge( customer.info, purchases ) 
+
+full.dat$PRICE[ full.dat$ZIP.CODE == "57701" ]
+
+mean( full.dat$PRICE[ full.dat$ZIP.CODE == "57701" ] )
+```
+
+
+In reality, each purchase would have a purchase ID that is linked to shipping addresses, customer complaints, seller ratings, etc. Each seller would have their own data table with info. Each purchase would be tied to a payment type, which has its own data table. The system gets quite complex, which is why it is important to pay attention to the details of putting the data back together again.
+
+
+
+```{r, fig.cap="Example of a relational database schema", echo=F, out.width='80%' }
+knitr::include_graphics( "figures/SampleRetailDatabase.png" )
+```
+
+
+We will cover a few details of data merges that will help you avoid common and very subtle mistakes that can lead to incorrect inferences.
+
+
+
+## Set Theory
+
+In order to merge data **correctly** you need to understand some very basic principles of set theory. 
+
+
+
+
+### Set Theory Functions
+
+Let's assume we have two sets: set1=*[A,B]*, set2=*[B,C]*. Each element in this set represents a group of observations that occurs in the dataset. So B represents people that occur in both datasets, A represents people that occur only in the first dataset, and C represents people that only occur in the second dataset.
+
+We can then describe membership through three operations:
+
+```{r, fig.cap="Membership defined by two sets", echo=F, out.width='60%' }
+knitr::include_graphics( "figures/xy.png" )
+```
+
+Operation      | Description
+-------------- | -----------
+union: X OR Y          | The universe of all elements across all both sets: [A,B,C]
+intersection: X & Y   | The elements shared by both sets: [B]
+difference: X & ! Y     | The elements in my first set, not in my second [A] or [C]
+
+Let's see how this might work in practice with an example of members of a study:
+
+```{r, echo=F}
+name <- c("frank","wanda","sanjay","nancy")
+group <- c("treat","treat","control","control")
+gender <- c("male","female","male","female")
+```
+
+
+```{r, echo=F}
+data.frame( name, group, gender ) %>% pander
+```
+
+For this example let's define set 1 as the treatment group, and set 2 as all women in the study. Note that set membership is always defined as binary (you are in the set or out), but it can include multiple criteria (the set of animals can contains cats, dogs, and mice). 
+
+```{r}
+treated <- name[ group == "treat" ]
+
+treated 
+
+females <- name[ gender == "female" ]
+
+females 
+```
+
+
+Now we can specify group belonging using some convenient set theory functions: **union()**, **setdiff()**, and **intersect()**.
+
+
+```{r}
+union( treated, females )
+
+intersect( treated, females )
+
+setdiff( treated, females )
+
+setdiff( females, treated )
+```
+
+
+It is very important to note that **union()** and **intersect()** are symmetric functions, meaning *intersect(x,y)* will give you the same result as *intersect(y,x)*. The **setdiff()** function is not symmetric, however.
+
+
+
+
+### Set Theory Using Logical Operators
+
+Typically you will define your groups using logical operators, which perform the exact same funciton as set theory functions but are a little more expressive and flexible. 
+
+Let's use the same example above where x="treatment" and y="female", then consider these cases:
+
+![](figures/set_theory.png)
+
+
+Who belongs in each group? 
+
+```{r, echo=F}
+data.frame( name, group, gender ) %>% pander
+```
+
+```{r}
+#   x
+
+name[ group == "treat" ]
+
+#   x & y
+
+name[ group == "treat" & gender == "female" ]
+
+#   x & ! y
+
+name[ group == "treat" & gender != "female" ]
+
+#  x | y
+
+name[ group == "treat" | gender == "female" ]
+```
+
+
+Who belongs in these groups? 
+
+* !x & !y 
+* x & ! ( x & y ) 
+* ( x | y ) & ! ( x & y ) 
+
+
+
+
+
+
+
+## Merging Data
+
+
+**The Merge Function**
+
+The merge function joins two datasets. The function requires two datasets as the arguments, and they need to share a unique ID variable. Recall the example from above:
+
+```{r}
+merge( customer.info, purchases )
+```
+
+The important thing to keep in mind is that the default merge operation uses the **intersection** of the two datasets. It will drop all elements that don't occur in both datasets. We may want to fine-tune this as to not lose valuable data and potentially bias our analysis. As an example, no illegal immigrants will have social security numbers, so if you are merging using the SSN, you will drop this group from the data, which could impact your results.
+
+![](figures/xy.png)
+
+With a little help from the set theory examples above, we can think about which portions of the data we wish to drop and which portions we wish to keep.
+
+Argument       | Usage
+-------------- | -----------
+all=F          | DEFAULT - new dataset contains intersection of X and Y (B only)
+all=T          | New dataset contains union of X and Y (A, B & C)
+all.x=T        | New dataset contains A and B, not C
+all.y=T        | New dataset contains B and C, not A
+
+Here is some demonstrations with examples adapted from the R help file.
+
+```{r, echo=FALSE}
+## use character columns of names to get sensible sort order
+
+authors <- data.frame(
+    surname = I(c("Tukey", "Tierney", "Ripley", "McNeil","Shakespeare")),
+    nationality = c("US", "US", "UK", "Australia","England"),
+    deceased = c("yes", rep("no", 3),"yes"))
+
+books <- data.frame(
+                     name = I(c("Tukey", "Venables",
+                         "Ripley", "Ripley", "McNeil", "R Core Team")),
+                     title = c("Exploratory Data Analysis",
+                         "Modern Applied Statistics",
+                         "Spatial Statistics", "Stochastic Simulation",
+                         "Interactive Data Analysis",
+                         "An Introduction to R") )
+
+```
+
+
+```{r}
+authors   
+
+books    
+
+
+# adding books to the author bios dataset  ( set B only )
+
+merge(authors, books, by.x = "surname", by.y = "name")    
+
+
+
+# adding author bios to the books dataset  ( set B only )
+
+merge(books, authors, by.x = "name", by.y = "surname")    
+
+
+
+# keep books without author bios, lose authors without books  ( sets A and B )
+
+merge( books, authors, by.x = "name", by.y = "surname", all.x=T )     
+
+
+
+# keep authors without book listed, lose books without author bios   ( sets B and C )
+
+merge( books, authors, by.x = "name", by.y = "surname", all.y=T )    
+
+
+
+# dont' throw out any data   ( sets A and B and C )
+
+merge( books, authors, by.x = "name", by.y = "surname", all=T )   
+```
+
+Also note that the order of your datasets in the argument list will impact the inclusion or exclusion of elements.
+
+merge( x, y, all=F )  EQUALS  merge( y, x, all=F )
+
+merge( x, y, all.x=T )  DOES NOT EQUAL  merge( y, x, all.x=T )
+
+
+
+
+
+### The by.x and by.y Arguments
+
+When you use the default **merge()** function without specifying the variables to merge upon, the function will check for common variable names across the two datasets. If there are multiple, it will join the shared variables to create a new unique key. This might be problematic if that was not the intent.
+
+Take the example of combining fielding and salary data in the Lahman package. If we are not explicit about the merge variable, we may get odd results. Note that they two datasets share four ID variables.
+
+```{r, ech=F }
+library( Lahman )
+data( Fielding )
+data( Salaries )
+```
+
+
+
+```{r}
+intersect( names(Fielding), names(Salaries) )
+
+# merge id
+
+int <- intersect( names(Fielding), names(Salaries) )
+
+paste( int[1],int[2],int[3],int[4], sep="." )
+```
+
+
+
+To avoid problems, be explicit using the *by.x* and *by.x* arguments to control which variable is used for the merge.
+
+```{r}
+head( merge( Salaries, Fielding ) )
+head( merge( Salaries, Fielding, by.x="playerID", by.y="playerID" ) )
+```
+
+
+
+## Non-Unique Observations in ID Variables
+
+In some rare instances, you will need to merge to datasets that have non-singular elements in the unique key ID variables, meaning each observation / individual appears more than one time in the data. Note that in this case, for each occurance of an observation / individual in your X dataset, you will merge once with each occurance of the same observation / individual in the Y dataset. The result will be a multiplicative expansion of the size of your dataset.
+
+For example, if John appears on four separate rows of X, and three seperate rows of Y, the new dataset will contain 12 rows of John (4 x 3 = 12).
+
+dataset X contains four separate instances of an individual [ X1, X2, X3, X4 ]
+
+dataset Y contains three separate instances of an individual [ Y1, Y2, Y3 ]
+
+After the merge we have one row for each pair:
+
+X1-Y1  
+X1-Y2  
+X1-Y3  
+X2-Y1  
+X2-Y2  
+X2-Y3  
+X3-Y1  
+X3-Y2  
+X3-Y3  
+X4-Y1  
+X4-Y2  
+X4-Y3  
+
+
+For example, perhaps a sales company has a database that keeps track of biographical data, and sales performance. Perhaps we want to see if there is peak age for sales performance. We need to merge these datasets.
+
+```{r}
+bio <- data.frame( name=c("John","John","John"),
+                   year=c(2000,2001,2002),
+                   age=c(43,44,45) )
+
+performance <- data.frame( name=c("John","John","John"),
+                           year=c(2000,2001,2002),
+                           sales=c("15k","20k","17k") )
+
+# correct merge
+
+merge( bio, performance, by.x=c("name","year"), by.y=c("name","year") ) 
+
+
+# incorrect merge
+
+merge( bio, performance, by.x=c("name"), by.y=c("name") )  
+```
+
+
+
+
+**It is good practice to check the size (number of rows) of your dataset before and after a merge. If it has expanded, chances are you either used the wrong unique IDs, or your dataset contains duplicates.**
+
+### Example of Incorrect Merge
+
+Here is a tangible example using the Lahman baseball dataset. Perhaps we want to examine the relationship between fielding position and salary. The *Fielding* dataset contains fielding position information, and the *Salaries* dataset contains salary information. We can merge these two datasets using the *playerID* field.
+
+If we are not thoughtful about this, however, we will end up causing problems. Let's look at an example using Kirby Pucket.
+
+```{r}
+kirby.fielding <- Fielding[ Fielding$playerID == "puckeki01" , ]
+
+head( kirby.fielding )
+
+nrow( kirby.fielding )
+
+kirby.salary <- Salaries[ Salaries$playerID == "puckeki01" , ]
+
+head( kirby.salary )
+
+nrow( kirby.salary )
+
+kirby.field.salary <- merge( kirby.fielding, kirby.salary, by.x="playerID", by.y="playerID" )
+
+head( select( kirby.field.salary, yearID.x, yearID.y,	POS,	G,	GS,	salary ) )
+
+nrow( kirby.field.salary )
+
+21*13
+
+```
+
+What we have done here is taken each year of fielding data, and matched it to **every** year of salary data. We can see that we have 21 fielding observations and 13 years of salary data, so our resulting dataset is `r 21*13` observation pairs. 
+
+This merge also makes it difficult to answer the question of the relationship between fielding position and salary if players change positions over time. 
+
+The correct merge in this case would be a merge on a playerID-yearID pair. We can create a unique key by combining playerID and yearID using **paste()**:
+
+```{r}
+
+head( paste( kirby.fielding$playerID, kirby.fielding$yearID, sep=".") )
+
+```
+
+But there is a simple solution as the merge function also allows for multiple variables to be used for a **merge()** command.
+
+
+```{r}
+kirby.field.salary <- merge( kirby.fielding, kirby.salary, 
+                            by.x=c("playerID","yearID"), 
+                            by.y=c("playerID","yearID")   )
+
+nrow( kirby.field.salary )
+```
+
+
+
+
+## The %in% function
+
+Since we are talking about intersections and matches, I want to briefly introduce the **%in%** function. It is a combination of the two.
+
+The **intersect()** function returns a list of unique matches between two vectors.
+
+```{r}
+data(Salaries)
+data(Fielding)
+intersect( names(Salaries), names(Fielding) )
+```
+
+The **match()** function returns the position of matched elements.
+
+```{r}
+x <- c("A","B","C","B")
+
+y <- c("B","D","A","F")
+
+match( x, y )
+```
+
+The **%in%** function returns a logical vector, where TRUE signifies that the element in *y* also occurs in *x*. In other words, does a specific element in *y* belong to the intersection of *x*,*y*.
+
+This is very useful for creating subsets of data that belong to both sets.
+
+```{r}
+x <- c("A","B","C")
+
+y <- c("B","D","A","B","F","B")
+
+y %in% x # does each element of y occur anywhere in x?
+
+y[ y %in% x] # keep only data that occurs in both
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## The Match Function
+
+Often times we do not need to merge data, we may just need sort data in one dataset so that it matches the order of another dataset. This is accomplished using the **match()** function.
+
+Note that we can rearrange the order of a dataset by referencing the desired position.
+
+```{r}
+
+x <- c("Second","Third","First")
+
+x
+
+x[ c(3,1,2) ]
+```
+
+
+The **match()** function returns the *positions* of matches of its *first* vector to the *second* vector listed in the arguments. Or in other words, the *order* that vector 2 would need to follow to match vector 1. 
+
+```{r}
+
+x <- c("A","B","C")
+
+y <- c("B","D","A")
+
+cbind( x, y )
+
+match( x, y )
+
+match( y, x) # not a symmetric operation!
+
+# In the y vector:
+#
+#  [3]=A
+#  [1]=B
+# [NA]=D (no match)
+
+order.y <- match( x, y )
+
+y[ order.y ]
+
+
+```
+
+We can see that **match()** returns the correct order to put *y* in so that it matches the order of *x*. In the re-ordered vector, the first element is the original third element *A*, the second element is the original first element *B*, and there is no third element because *D* did not match anything in *x*.
+
+Note the order of arguments in the function:
+
+> match(   data I want to match to   ,   data I need to re-order   )
+
+We can use this position information to re-order *y* as follows:
+
+
+```{r}
+
+x <- sample( LETTERS[1:15], size=10 )
+
+y <- sample( LETTERS[1:15], size=10 )
+
+cbind( x, y )
+
+order.y <- match( x, y )
+
+y.new <- y[ order.y ]
+
+cbind( x, y.new )
+
+
+# Note the result if you confuse the order or arguments
+
+order.y <- match( y, x )
+
+y.new <- y[ order.y ]
+
+cbind( x, y.new )
+
+
+
+```
+
+This comes in handy when we are matching information between two tables. For example, in GIS the map regions follow a specific order but your data does not. Create a color scheme for levels of your data, and then re-order the colors so they match the correct region on the map. In this example, we will look at unemployment levels by county.
+
+
+```{r}
+
+library( maps )
+data( county.fips )
+data( unemp )
+
+map( database="county" )
+
+# assign a color to each level of unemployment, red = high, gray = medium, blue = low
+
+color.function <- colorRampPalette( c("steelblue", "gray70", "firebrick") )
+
+
+color.vector <- cut( rank(unemp$unemp), breaks=7, labels=color.function( 7 ) )
+
+color.vector <- as.character( color.vector )
+
+head( color.vector )
+
+# doesn't look quite right
+
+map( database="county", col=color.vector, fill=T, lty=0 )
+
+
+# what went wrong here? 
+
+# our unemployment data (and thus the color vector) follows a different order
+
+cbind( map.id=county.fips$fips, data.id=unemp$fips, color.vector )[ 2500:2510 , ]
+
+# place the color vector in the correct order
+
+this.order <- match( county.fips$fips, unemp$fips )
+
+color.vec.ordered <- color.vector[ this.order ]
+
+# colors now match their correct counties
+
+map( database="county", col=color.vec.ordered, fill=T, lty=0 )
+title( main="Unemployment Levels by County in 2009")
+
+```
+
+
+
+Note that elements can be recycled from your *y* vector:
+
+```{r}
+
+x <- c("A","B","C","B")
+
+y <- c("B","D","A","F")
+
+cbind( x, y )
+
+match( x, y )
+
+order.y <- match( x, y )
+
+y.new <- y[ order.y ]
+
+cbind( x, y.new )
+
+```
+
