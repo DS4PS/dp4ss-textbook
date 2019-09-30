@@ -1,0 +1,638 @@
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    self_contained: false
+    css: textbook.css
+---
+
+# Describing Data with Logical Variables
+
+<br>
+
+```{r echo=F, fig.align="center", out.width="100%"}
+
+knitr::include_graphics("https://media3.giphy.com/media/iXTrbbYMQBCMM/giphy.gif?cid=790b761106a88e0f92148d9d48b65a1b096928d1be508103&rid=giphy.gif")
+
+```
+
+<br>
+<br>
+
+<div class="tip">
+
+## A Motivating Introduction
+
+Getting the basics down for class "logical" vectors and variables is fundamental to introductory fluency in R. We use logical output for filtering, labeling, control structures (i.e. programming), and many other use cases. In particular, we use logical values in exploratory data analysis, i.e. learning about new data and the stories they tell. 
+
+<br>
+
+We'll use the basic techniques described herein in many future chapters - sometimes in passing or otherwise very invasively, and for that reason alone, we hope you delve into logical data with earnest. Even a rudimentary understanding of logical vectors and variables means that an inchoate understanding of these concepts will ensure future data exploration and manipulation will be off the chain. Guaranteed.
+
+<br>
+
+## Key Concepts
+
+In this chapter, we'll take a look at the following:
+
+* Refresher: On Class "Logical" Data
+* Logical Values "Under the Hood"
+* Logical Vectors & Conditional Statements
+* Summarizing Logical Vectors with Arithmetic
+    - Total Occurences
+    - Percentages, Proportions, and Probabilities
+* Indexing Logical Vectors by Row
+* Conditional Labeling & Filtering
+* Use Cases for Non-Numeric Condition Statements
+    - Date-Based Conditions
+    - Date Unit-Based Conditions
+    - Text- & Pattern-Based Conditions
+    - Conditions with Missing Values
+    - Conditions with Incomplete Records
+
+## New Packages
+
+This chapter uses [package *lubridate*](https://lubridate.tidyverse.org/) (but just a little).
+
+## Key Takeaways
+
+Too long; didn't read? Here's what you need to know:
+
+* Class "logical" variables are vectors of `TRUE` and `FALSE` values
+* "Under the hood", `TRUE` is just "1", and `FALSE` is just "2"
+    - Ergo, we can use `sum()` and `mean()` to find total and percent `TRUE`
+* Use function `which()` to determine which rows are, in fact, `TRUE`
+    - Assign row numbers output from `which()` to use them as an index
+    - In this sense, the format `dataset[index, ]` returns all `TRUE` rows
+    - Use indices to label `TRUE` and `FALSE` variables differently
+    - More easily, use function `ifelse()` to streamline labeling
+* There are many non-numeric use cases that return logical values
+    - Function `grepl()` returns `TRUE` if it detects a pattern in text
+    - Function `is.na()` returns `TRUE` if a value is missing (`NA`)
+    - Function `complete.cases()` returnes `TRUE` if a row has 1+ `NA` values
+    
+We want our analyses to be off the chain, however. So we recommend you read this in earnest.
+
+<br>
+<br>
+<br>
+
+</div>
+
+```{r echo=F}
+
+# ATTENTION : GLOBAL CHUNK DEFAULTS
+
+knitr::opts_chunk$set(message = FALSE, 
+                      warning = FALSE)
+
+```
+
+```{r include=F}
+
+tutorial::go_interactive(greedy = FALSE)
+
+```
+
+<br>
+<br>
+
+## On Logical Variables
+
+Class **logical** variables are typically comprised of one of two values: `TRUE` or `FALSE`.
+
+<br>
+<br>
+
+### Quick Refresher on Class Logical
+
+We can create **logical** variables manually. Determine their class with function `class()`:
+
+```{r}
+
+x <- TRUE
+
+class(x)
+
+```
+
+<br>
+
+While not considered a best practice, we can use `T` and `F` as abbreviated values:
+
+```{r}
+
+y <- F
+
+print(y)
+
+```
+
+<br>
+
+Often, **logical** values simply indicate "yes" or "no" for your criteria:
+
+```{r}
+
+character <- c("Raskolnikov", "Marmeladov", "Razumikhin")
+criminal <- c(TRUE, FALSE, FALSE)
+
+data.frame(character,
+           criminal)        # Create data frame of characters and crime status
+
+```
+
+<br>
+
+Typically, **logical** values result from conditional statements on:
+
+* Variables within a dataset, using `data$variable` or `data[i, j]` format
+* Independent **vectors** created using `c()`
+
+<br>
+
+Let's read in the first 100 rows of [Atlanta, Georgia poverty by census tract, 2016](https://opendata.atlantaregional.com/datasets/poverty-2016):
+
+```{r}
+
+library(readr)
+library(dplyr)
+
+url <- paste0("https://opendata.arcgis.com",
+              "/datasets/73c0eca114c440208",
+              "b268bf9431e428c_240.csv")        # Atlanta's open data portal URL
+
+atl <- read_csv(url)[1:100, c(3:5, 9)] %>%      # Read 100 rows, 4 variables
+  arrange(County, Area_Name)                    # Arrange by county, tract
+
+head(atl)                                       # Print first 6 observations
+
+```
+
+<br>
+
+Here we use logical operator `>` to create a conditional statement:
+
+*Which census tracts have populations larger than 7,000?*
+
+```{r}
+
+atl$Total_Population > 7000
+
+```
+
+The result is a **vector** of logical values, or `TRUE` and `FALSE`.
+
+<br>
+
+Here's a more complex conditional statement with two criteria using `&`:
+
+*Which tracts have more than 7,000 residents but less the 2,000 in poverty?*
+
+```{r}
+
+atl$Total_Population > 7000 & atl$Pop_below_poverty < 2000
+
+```
+
+<br>
+<br>
+
+### Logical Values: Under the Hood
+
+Under the hood, **logical** statements are represented in binary. That is:
+
+* `TRUE` equals "1"
+* `FALSE` equals "0"
+
+<br>
+
+We can prove this in a number of ways, like converting them to numeric values:
+
+```{r}
+
+as.numeric(TRUE)            # Coerce logicals to class "numeric"
+as.numeric(FALSE)           # Coerce logicals to class "numeric"
+
+```
+
+<br>
+
+Or we can simply use a conditional statement with logical operator `==`:
+
+```{r}
+
+TRUE == 1
+FALSE == 0
+
+```
+
+<br>
+
+Or we can use arithmetic functions like `sum()`:
+
+```{r}
+
+z <- c(TRUE, TRUE, TRUE)
+sum(z)
+
+```
+
+<br>
+
+**Conclusions:** Since **logical** values are numeric, this opens a world of possibilities for summarizing datasets and vectors that meet specified criteria, and we'll check some out in the next section.
+
+<br>
+<br>
+
+## Summarizing Logical Vectors with Arithmetic
+
+Because **logical** vectors are really just ones and zeros, we can determine:
+
+* Matching criteria with function `sum()`
+* Non-matching criteria with functions `length()` and `sum()`
+* Proportionality, percentage, and/or probability with `mean()`
+
+<br>
+
+**Total All TRUE Instances:** Use function `sum()` and a conditional statement:
+
+*Of our 100 tracts, how many have more than 1,000 residents in poverty?*
+
+```{r}
+
+atl$Pop_below_poverty > 1000                # Conditional statement
+
+impov <- atl$Pop_below_poverty > 1000       # Store vector: "impov"
+
+sum(impov)                                  # Summing all TRUE values
+
+```
+
+<br>
+
+**Total All FALSE Instances:** We can do this with a little arithmetic: 
+
+* Determine total number of elements with function `length()`
+* Use `-` to subtract `TRUE` instances calculated with `sum()` 
+
+*Of our 100 tracts, how many do not have more than 1,000 residents in poverty?*
+
+```{r}
+
+length(impov) - sum(impov)                  # Total elements - TRUE elements
+
+```
+
+<br>
+
+**Percent of TRUE Instances:** Use `mean()` to calculate the proportion of `TRUE` values:
+
+*Of our 100 tracts, what is the proportion with more than 1,000 residents in poverty?*
+
+```{r}
+
+mean(impov)                                 # Average of all ones and zeros
+
+```
+
+<br>
+<br>
+
+<div class="quiz">
+
+<h3> 
+
+**Your Turn:** Summarizing Logical Vectors 
+
+</h3>
+
+**Instructions:** Use the dataset `economics` from package *ggplot2*. 
+
+1. Use `sum()` to calculate which months have:
+
+    * More then 3 M unemployed residents (`unemploy > 3000`)
+
+2. Use `length() - sum()` to calculate which months do not have:
+
+    * Less than 3 M unemployed residents (`unemploy < 3000`)
+
+3. Use `mean()` to calculate the proportion of months that have:
+
+    * Greater than or equal to 3 M residents (`unemploy >= 3000`)
+
+<br>
+<br>
+<br>
+
+</div>
+
+```{r ex="practice-01", type="sample-code", tut=TRUE}
+
+library(ggplot2)      # Load ggplot2
+head(economics, 3)    # Print first 3 rows
+
+# Total months where unemployed > 3000 K
+sum(economics$___ > ___)
+
+# Total months where unemployed not > 3000 K
+___(economics$___) - sum(___$unemploy > 3000)
+
+# Percent of months where unemployed 3000 K or more
+___(___$unemploy >= 3000)
+
+```
+
+<br>
+<br>
+
+## Labels: Categorizing Logical Vectors
+
+When you create **logical vectors** from conditional statements, we can:
+
+* Categorize `TRUE` and `FALSE` values with labels
+* More clearly summarize our data by labeling *how* they satisfy conditions
+
+<br>
+
+### Determining Which Rows Match Your Condition(s)
+
+You can create a new **vector** of row numbers that are `TRUE` using `which()`:
+
+*Which census tracts have more than 1,000 residents in poverty?*
+
+```{r}
+
+impov <- atl$Pop_below_poverty > 1000   # Store logical vector: `impov`
+
+which(impov)                            # Determine row number of TRUE values
+
+```
+
+<br>
+
+### Indexing & Labeling Rows that Match Your Condition(s)
+
+By assigning which rows match your conditional statement (using `which()`):
+
+1. You can create an index of rows and assign them to an object
+2. Then, you can operate *only on the rows that satisfy your conditions*
+
+<br>
+
+**Indexing Matching Rows:** Use assignment with `<-` to create an index of rows:
+
+```{r}
+
+impov <- atl$Pop_below_poverty > 1000   # Assign logical vector: `impov`
+
+index <- which(impov)                   # Assign row numbers: "index"
+
+print(index)                            # Print row numbers that are TRUE
+
+```
+
+<br>
+
+**Filter Matching Rows:** Using row numbers assigned to object `index`, we can **filter**:
+
+* Rows which return `FALSE` vis-à-vis our conditions
+* Rows which return `TRUE` vis-à-vis our conditions
+
+```{r}
+
+atl[index, ]            # Keep rows with TRUE (more than 1K in poverty)
+atl[-index, ]           # Remove rows with TRUE (less than 1K in poverty)
+
+```
+
+<br>
+
+**Labeling Rows:** Categorize rows by assigning labels to those that match your condition(s).
+
+1. First, add a variable of missing (`NA`) values: i.e. `dataframe$new_variable <- NA`
+2. Next, assign a text string of class "character" to matching rows (`TRUE`)
+3. Lastly, assign a text string to non-matching rows (`FALSE`)
+
+```{r}
+
+atl$poverty_threshold <- NA                   # Initialize variable of all NAs
+
+atl[index, "poverty_threshold"] <- "Over"     # Assign label for rows with TRUE
+
+atl[-index, "poverty_threshold"] <- "Under"   # Assign label for rows with FALSE
+
+head(atl, 10)
+
+```
+
+<br>
+
+**If-Else Labeling:** Function `ifelse()` streamlines condition-based labeling of **logical** output.
+
+```{r}
+
+atl$poverty_threshold <- NA                           # Initialize variable of all NAs
+
+label <- ifelse(test = atl$Pop_below_poverty > 1000,  # Specify conditional statement
+                yes = "Over",                         # If TRUE, label "Over"
+                no = "Under")                         # If FALSE, label "under"
+
+atl$poverty_threshold <- label                        # Replace NAs with labels
+
+head(atl, 10)
+
+```
+
+```{r echo=F}
+atl <- atl[ , -5]
+```
+
+<br>
+
+**Categorizing with Multiple Labels:** Multiple labels require multiple conditional statements.
+
+While there are many ways to do this, we've broken it down step by step here:
+
+```{r}
+
+# Initialize a variable of all NA values: "population_size"
+
+atl$population_size <- NA
+
+# Assign multiple indices of row numbers, from multiple conditions, to new objects
+
+sml <- which(atl$Total_Population < 3000)
+med <- which(atl$Total_Population >= 3000 & atl$Total_Population < 6000)
+lrg <- which(atl$Total_Population >= 6000 & atl$Total_Population < 10000)
+wow <- which(atl$Total_Population >= 10000)
+
+# Use each index of row numbers to assign a unique label
+
+atl[sml, "population_size"] <- "Small"
+atl[med, "population_size"] <- "Medium"
+atl[lrg, "population_size"] <- "Large"
+atl[wow, "population_size"] <- "Massive"
+
+# Print first 10 rows
+
+head(atl, 10)
+
+```
+
+<br>
+<br>
+
+## Logical Vectors & Non-Numeric Conditionals
+
+**Logical** vectors result from any conditional statement, even if not quantitative.
+
+Below are a few use cases for **logical** values based on non-numeric conditions.
+
+These data come from [New York City's medallian-authorized cab drivers](https://data.cityofnewyork.us/Transportation/Medallion-Drivers-Active/jb3k-j3gp/data).
+
+```{r cache=T}
+
+library(readr)
+library(dplyr)
+library(lubridate)
+
+url <- paste0("https://data.cityofnewyork.us/api/views",
+              "/jb3k-j3gp/rows.csv?accessType=DOWNLOAD")    # Assign URL
+
+taxi <- read_csv(url) %>%                                   # Read in 1,000 rows
+  mutate(`Expiration Date` = mdy(`Expiration Date`),
+         `Last Date Updated` = mdy(`Last Date Updated`),
+         `Last Time Updated` = hms(`Last Time Updated`))    # Convert dates, times
+
+```
+
+<br>
+
+**Date-Based Conditions:** Let's extract medallians expiring on [palindrome](https://en.wikipedia.org/wiki/Palindrome) 2020-02-02:
+
+```{r}
+
+index <- which( taxi$`Expiration Date` == "2020-02-02")   # Index rows where TRUE
+
+palindrome <- taxi[index, ]                               # Filter by indexed rows
+
+head(palindrome)
+
+```
+
+<br>
+
+**Date Unit-Based Conditions:** Here, we use function `year()` from package *lubridate*:
+
+* Function `year()` extracts the year from date objects
+* Our logical statement returns `TRUE` if `year()` returns "2021"
+* Function `sum()` is used to tally all medallians expiring in 2021
+* Function `mean()` is used to calculate the percent of 2021 expirations
+
+```{r}
+
+library(lubridate)
+
+expire_21 <- year(taxi$`Expiration Date`) == 2021     # TRUE if expires in 2021
+
+sum(expire_21)                                        # Sum of 2021 expirations
+
+mean(expire_21)                                       # Percent of 2021 expirations
+
+```
+
+<br>
+
+**Text-Based Conditions**: Use core R function `grepl()` for conditional pattern-matching.
+
+* The 'l' in 'grepl()' stands for "logical" - it's designed to output **logical** values!
+* Here, we'll search for all records beginning with common Indian surname "Singh"
+* The pattern matching method is called "regular expressions"
+    - `^` indicates that the pattern is at the beginning of the string
+    - `.` indicates "any character" and `*` indicates "any number of times"
+    - Therefore, we only retrieve records that begin with `Singh`
+
+```{r}
+
+surname_match <- grepl(pattern = "^SINGH.*",    # Regular expressions pattern  
+                       x = taxi$Name)           # Specify dataset and variable
+
+head(surname_match, 10)                         # Return first 10 TRUE or FALSE
+
+sum(surname_match)                              # Total TRUE
+
+mean(surname_match)                             # Percent TRUE
+
+```
+
+<br>
+
+Compare these results to the most common Indian surname in London: "Patel". Wow!
+
+```{r}
+
+surname_match <- grepl(pattern = "^PATEL.*",    # Regular expressions pattern  
+                       x = taxi$Name)           # Specify dataset and variable
+
+head(surname_match, 10)                         # Return first 10 TRUE or FALSE
+
+sum(surname_match)                              # Total TRUE
+
+mean(surname_match)                             # Percent TRUE
+
+```
+
+<br>
+
+**Conditions with Missing Values:** It's very common to condition on missing values (`NA`).
+
+* Function `is.na()` returns a **logical** vector of `TRUE` or `FALSE`
+* This is similar to any `is.*()` function, all of which return **logical** values
+* Since these data have no missing data, remove all drivers with surname "Singh"
+
+```{r}
+
+index <- grepl(pattern = "^SINGH.*",    # Regular expressions pattern  
+               x = taxi$Name)           # Specify dataset and variable
+
+taxi[index, "Name"] <- NA               # Remove names
+
+missing <- is.na(taxi$Name)             # Detect, store missing values
+
+sum(missing)                            # Total NA values in vector
+
+```
+
+<br>
+
+**Detecting Incomplete Records:** Function `complete.cases()`: 
+
+* Like `grepl()` or `is.na()` functions, always returns **logical** vector
+* Any row containing one or more `NA` value will return `FALSE`
+* Used on entire data frames and checks all variables
+
+Dataset `taxi` is incomplete; we detect how many of the first 100 rows have an `NA`:
+
+```{r}
+
+complete.cases(taxi[1:100, ])           # Check for NAs in first 100 rows
+
+sum(complete.cases(taxi[1:100, ]))      # How many don't have NA values?
+
+```
+
+<br>
+
+**Conclusions:** Class **logical** vectors are extremely common in exploratory data analyses and its use cases are many and varied. We use them for labeling, filtering, control flow structures, detection, etc. You're now equipped to use **logical** output for the same ends, and mastering this data class is fundamental for basic fluency in R.
+
+Future chapters will be no stranger to the basic techniques described above, so come back and visit!
+
+<br>
+<br>
+
+## Further Resources
+
+* [Intro to R: Operators](http://rpubs.com/JamisonCrawford/operators) (Crawford, 2018): See *Section 6.1: Filtering with Logic*
+* [Intro to R: Subsets & Indices](http://rpubs.com/JamisonCrawford/subsets) (Crawford, 2018): See *Section 6.4: Conditional Subsetting*

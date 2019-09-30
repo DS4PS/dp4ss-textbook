@@ -11,7 +11,7 @@
 
 
 
-<title>ch-180-vectors.utf8.md</title>
+<title>ch-181-logicals.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -309,62 +309,84 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#summarizing-vectors"><span class="toc-section-number">1</span> Summarizing Vectors</a><ul>
-<li><a href="#logical-variables"><span class="toc-section-number">1.1</span> Logical Variables:</a></li>
+<li><a href="#describing-data-with-logical-variables"><span class="toc-section-number">1</span> Describing Data with Logical Variables</a><ul>
+<li><a href="#on-logical-variables"><span class="toc-section-number">1.1</span> On Logical Variables</a></li>
 <li><a href="#summarizing-logical-vectors-with-arithmetic"><span class="toc-section-number">1.2</span> Summarizing Logical Vectors with Arithmetic</a></li>
-<li><a href="#creating-factors-categorizing-logical-vectors"><span class="toc-section-number">1.3</span> Creating Factors: Categorizing Logical Vectors</a></li>
-<li><a href="#describing-vectors-of-class-character"><span class="toc-section-number">1.4</span> Describing Vectors of Class “Character”</a></li>
-<li><a href="#converting-labels-into-factors"><span class="toc-section-number">1.5</span> Converting Labels into Factors</a></li>
-<li><a href="#summarizing-factors-describing-categorical-data"><span class="toc-section-number">1.6</span> Summarizing Factors: Describing Categorical Data</a></li>
+<li><a href="#labels-categorizing-logical-vectors"><span class="toc-section-number">1.3</span> Labels: Categorizing Logical Vectors</a></li>
+<li><a href="#logical-vectors-non-numeric-conditionals"><span class="toc-section-number">1.4</span> Logical Vectors &amp; Non-Numeric Conditionals</a></li>
+<li><a href="#further-resources"><span class="toc-section-number">1.5</span> Further Resources</a></li>
 </ul></li>
 </ul>
 </div>
 
 <script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
-<div id="summarizing-vectors" class="section level1">
-<h1><span class="header-section-number">1</span> Summarizing Vectors</h1>
+<div id="describing-data-with-logical-variables" class="section level1">
+<h1><span class="header-section-number">1</span> Describing Data with Logical Variables</h1>
+<p><br></p>
+<p><img src="https://media3.giphy.com/media/iXTrbbYMQBCMM/giphy.gif?cid=790b761106a88e0f92148d9d48b65a1b096928d1be508103&rid=giphy.gif" width="100%" style="display: block; margin: auto;" /></p>
 <p><br>
 <br></p>
 <div class="tip">
+<h2 id="a-motivating-introduction"><span class="header-section-number">1</span> A Motivating Introduction</h2>
+<p>Getting the basics down for class “logical” vectors and variables is fundamental to introductory fluency in R. We use logical output for filtering, labeling, control structures (i.e. programming), and many other use cases. In particular, we use logical values in exploratory data analysis, i.e. learning about new data and the stories they tell.</p>
+<p><br></p>
+<p>We’ll use the basic techniques described herein in many future chapters - sometimes in passing or otherwise very invasively, and for that reason alone, we hope you delve into logical data with earnest. Even a rudimentary understanding of logical vectors and variables means that an inchoate understanding of these concepts will ensure future data exploration and manipulation will be off the chain. Guaranteed.</p>
+<p><br></p>
 <h2 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h2>
-<p>In this chapter, we’ll explore the following key concepts:</p>
+<p>In this chapter, we’ll take a look at the following:</p>
 <ul>
-<li>Counting Logical Values: Function <code>sum()</code></li>
-<li>Tallying Categorical Variables: <code>table()</code></li>
-<li>Determining Missing Values: <code>is.na()</code></li>
-<li>Table Proportionality: <code>prop.table()</code></li>
-<li>Table Margins: <code>margin.table()</code></li>
-<li>Functions for Descriptive Stats:
+<li>Refresher: On Class “Logical” Data</li>
+<li>Logical Values “Under the Hood”</li>
+<li>Logical Vectors &amp; Conditional Statements</li>
+<li>Summarizing Logical Vectors with Arithmetic
 <ul>
-<li><code>min()</code></li>
-<li><code>max()</code></li>
-<li><code>mean()</code></li>
-<li><code>summary()</code></li>
-<li><code>quantile()</code></li>
+<li>Total Occurences</li>
+<li>Percentages, Proportions, and Probabilities</li>
 </ul></li>
-<li>Combining Functions <code>summary()</code> &amp; <code>data.frame()</code></li>
-<li>Creating Tables of Descriptives: Factor &amp; Numeric Variables</li>
+<li>Indexing Logical Vectors by Row</li>
+<li>Conditional Labeling &amp; Filtering</li>
+<li>Use Cases for Non-Numeric Condition Statements
+<ul>
+<li>Date-Based Conditions</li>
+<li>Date Unit-Based Conditions</li>
+<li>Text- &amp; Pattern-Based Conditions</li>
+<li>Conditions with Missing Values</li>
+<li>Conditions with Incomplete Records</li>
+</ul></li>
 </ul>
 <h2 id="new-packages"><span class="header-section-number">1</span> New Packages</h2>
-<p>This chapter uses the following packages:</p>
-<ul>
-<li>Package A</li>
-</ul>
+<p>This chapter uses <a href="https://lubridate.tidyverse.org/">package <em>lubridate</em></a> (but just a little).</p>
 <h2 id="key-takeaways"><span class="header-section-number">1</span> Key Takeaways</h2>
 <p>Too long; didn’t read? Here’s what you need to know:</p>
 <ul>
-<li>Item A</li>
-<li>Item B</li>
-<li>Item C</li>
+<li>Class “logical” variables are vectors of <code>TRUE</code> and <code>FALSE</code> values</li>
+<li>“Under the hood”, <code>TRUE</code> is just “1”, and <code>FALSE</code> is just “2”
+<ul>
+<li>Ergo, we can use <code>sum()</code> and <code>mean()</code> to find total and percent <code>TRUE</code></li>
+</ul></li>
+<li>Use function <code>which()</code> to determine which rows are, in fact, <code>TRUE</code>
+<ul>
+<li>Assign row numbers output from <code>which()</code> to use them as an index</li>
+<li>In this sense, the format <code>dataset[index, ]</code> returns all <code>TRUE</code> rows</li>
+<li>Use indices to label <code>TRUE</code> and <code>FALSE</code> variables differently</li>
+<li>More easily, use function <code>ifelse()</code> to streamline labeling</li>
+</ul></li>
+<li>There are many non-numeric use cases that return logical values
+<ul>
+<li>Function <code>grepl()</code> returns <code>TRUE</code> if it detects a pattern in text</li>
+<li>Function <code>is.na()</code> returns <code>TRUE</code> if a value is missing (<code>NA</code>)</li>
+<li>Function <code>complete.cases()</code> returnes <code>TRUE</code> if a row has 1+ <code>NA</code> values</li>
+</ul></li>
 </ul>
+<p>We want our analyses to be off the chain, however. So we recommend you read this in earnest.</p>
 <p><br>
 <br>
 <br></p>
 </div>
 <p><br>
 <br></p>
-<div id="logical-variables" class="section level2">
-<h2><span class="header-section-number">1.1</span> Logical Variables:</h2>
+<div id="on-logical-variables" class="section level2">
+<h2><span class="header-section-number">1.1</span> On Logical Variables</h2>
 <p>Class <strong>logical</strong> variables are typically comprised of one of two values: <code>TRUE</code> or <code>FALSE</code>.</p>
 <p><br>
 <br></p>
@@ -491,7 +513,7 @@ sum(z)</code></pre>
 <li>Proportionality, percentage, and/or probability with <code>mean()</code></li>
 </ul>
 <p><br></p>
-<p><strong>Total All TRUE Values:</strong> Use function <code>sum()</code> and a conditional statement:</p>
+<p><strong>Total All TRUE Instances:</strong> Use function <code>sum()</code> and a conditional statement:</p>
 <p><em>Of our 100 tracts, how many have more than 1,000 residents in poverty?</em></p>
 <pre class="r"><code>atl$Pop_below_poverty &gt; 1000                # Conditional statement</code></pre>
 <pre><code>##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE
@@ -518,7 +540,7 @@ sum(impov)                                  # Summing all TRUE values</code></pr
 <pre class="r"><code>length(impov) - sum(impov)                  # Total elements - TRUE elements</code></pre>
 <pre><code>## [1] 57</code></pre>
 <p><br></p>
-<p><strong>Percent of TRUE Values:</strong> Use <code>mean()</code> to calculate the proportion of <code>TRUE</code> values:</p>
+<p><strong>Percent of TRUE Instances:</strong> Use <code>mean()</code> to calculate the proportion of <code>TRUE</code> values:</p>
 <p><em>Of our 100 tracts, what is the proportion with more than 1,000 residents in poverty?</em></p>
 <pre class="r"><code>mean(impov)                                 # Average of all ones and zeros</code></pre>
 <pre><code>## [1] 0.43</code></pre>
@@ -553,13 +575,12 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsaWJyYXJ5KGdncGxvdDIpICAgICAgIyBMb2FkIGdncGxv
 <p><br>
 <br></p>
 </div>
-<div id="creating-factors-categorizing-logical-vectors" class="section level2">
-<h2><span class="header-section-number">1.3</span> Creating Factors: Categorizing Logical Vectors</h2>
+<div id="labels-categorizing-logical-vectors" class="section level2">
+<h2><span class="header-section-number">1.3</span> Labels: Categorizing Logical Vectors</h2>
 <p>When you create <strong>logical vectors</strong> from conditional statements, we can:</p>
 <ul>
-<li>Categorize <code>TRUE</code> and <code>FALSE</code> values</li>
-<li>Create categorical variables, or <strong>factors</strong></li>
-<li>More clearly summarize our data by specifying <em>how</em> they satisfy conditions</li>
+<li>Categorize <code>TRUE</code> and <code>FALSE</code> values with labels</li>
+<li>More clearly summarize our data by labeling <em>how</em> they satisfy conditions</li>
 </ul>
 <p><br></p>
 <div id="determining-which-rows-match-your-conditions" class="section level3">
@@ -628,7 +649,7 @@ print(index)                            # Print row numbers that are TRUE</code>
 ## 10  13057 Census Tract 910.06, Cherokee ~             4951              212
 ## # ... with 47 more rows</code></pre>
 <p><br></p>
-<p><strong>Label Matching Rows:</strong> We can categorize matching rows by assigning labels to them.</p>
+<p><strong>Labeling Rows:</strong> Categorize rows by assigning labels to those that match your condition(s).</p>
 <ol style="list-style-type: decimal">
 <li>First, add a variable of missing (<code>NA</code>) values: i.e. <code>dataframe$new_variable &lt;- NA</code></li>
 <li>Next, assign a text string of class “character” to matching rows (<code>TRUE</code>)</li>
@@ -654,66 +675,200 @@ head(atl, 10)</code></pre>
 ##  8  13045 Census Tract ~             8052             1309 Over            
 ##  9  13045 Census Tract ~             8743             1681 Over            
 ## 10  13045 Census Tract ~             4188              619 Under</code></pre>
+<p><br></p>
+<p><strong>If-Else Labeling:</strong> Function <code>ifelse()</code> streamlines condition-based labeling of <strong>logical</strong> output.</p>
+<pre class="r"><code>atl$poverty_threshold &lt;- NA                           # Initialize variable of all NAs
+
+label &lt;- ifelse(test = atl$Pop_below_poverty &gt; 1000,  # Specify conditional statement
+                yes = &quot;Over&quot;,                         # If TRUE, label &quot;Over&quot;
+                no = &quot;Under&quot;)                         # If FALSE, label &quot;under&quot;
+
+atl$poverty_threshold &lt;- label                        # Replace NAs with labels
+
+head(atl, 10)</code></pre>
+<pre><code>## # A tibble: 10 x 5
+##    County Area_Name      Total_Population Pop_below_pover~ poverty_thresho~
+##     &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;           
+##  1  13013 Census Tract ~             2032              544 Under           
+##  2  13013 Census Tract ~             2773              462 Under           
+##  3  13013 Census Tract ~             5434              774 Under           
+##  4  13013 Census Tract ~             4960              348 Under           
+##  5  13015 Census Tract ~             6714              893 Under           
+##  6  13015 Census Tract ~            10043              962 Under           
+##  7  13015 Census Tract ~             8758              838 Under           
+##  8  13045 Census Tract ~             8052             1309 Over            
+##  9  13045 Census Tract ~             8743             1681 Over            
+## 10  13045 Census Tract ~             4188              619 Under</code></pre>
+<p><br></p>
+<p><strong>Categorizing with Multiple Labels:</strong> Multiple labels require multiple conditional statements.</p>
+<p>While there are many ways to do this, we’ve broken it down step by step here:</p>
+<pre class="r"><code># Initialize a variable of all NA values: &quot;population_size&quot;
+
+atl$population_size &lt;- NA
+
+# Assign multiple indices of row numbers, from multiple conditions, to new objects
+
+sml &lt;- which(atl$Total_Population &lt; 3000)
+med &lt;- which(atl$Total_Population &gt;= 3000 &amp; atl$Total_Population &lt; 6000)
+lrg &lt;- which(atl$Total_Population &gt;= 6000 &amp; atl$Total_Population &lt; 10000)
+wow &lt;- which(atl$Total_Population &gt;= 10000)
+
+# Use each index of row numbers to assign a unique label
+
+atl[sml, &quot;population_size&quot;] &lt;- &quot;Small&quot;
+atl[med, &quot;population_size&quot;] &lt;- &quot;Medium&quot;
+atl[lrg, &quot;population_size&quot;] &lt;- &quot;Large&quot;
+atl[wow, &quot;population_size&quot;] &lt;- &quot;Massive&quot;
+
+# Print first 10 rows
+
+head(atl, 10)</code></pre>
+<pre><code>## # A tibble: 10 x 5
+##    County Area_Name       Total_Population Pop_below_pover~ population_size
+##     &lt;dbl&gt; &lt;chr&gt;                      &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;          
+##  1  13013 Census Tract 1~             2032              544 Small          
+##  2  13013 Census Tract 1~             2773              462 Small          
+##  3  13013 Census Tract 1~             5434              774 Medium         
+##  4  13013 Census Tract 1~             4960              348 Medium         
+##  5  13015 Census Tract 9~             6714              893 Large          
+##  6  13015 Census Tract 9~            10043              962 Massive        
+##  7  13015 Census Tract 9~             8758              838 Large          
+##  8  13045 Census Tract 9~             8052             1309 Large          
+##  9  13045 Census Tract 9~             8743             1681 Large          
+## 10  13045 Census Tract 9~             4188              619 Medium</code></pre>
 <p><br>
 <br></p>
 </div>
 </div>
-<div id="describing-vectors-of-class-character" class="section level2">
-<h2><span class="header-section-number">1.4</span> Describing Vectors of Class “Character”</h2>
-<p>R <em>describes</em> quantitative (<strong>numeric</strong>) and qualitative (<strong>character</strong> or <strong>factor</strong>) data differently.</p>
-<p>Notably, it <em>describes</em> <strong>character</strong> data and <strong>factor</strong> (categorical) data differently.</p>
-<p><br>
-<br></p>
-<div id="exploratory-analytic-descriptive-functions" class="section level3">
-<h3><span class="header-section-number">1.4.1</span> Exploratory Analytic &amp; Descriptive Functions</h3>
-<p>You can explore and summarize <strong>character</strong> vectors with various exploratory functions.</p>
+<div id="logical-vectors-non-numeric-conditionals" class="section level2">
+<h2><span class="header-section-number">1.4</span> Logical Vectors &amp; Non-Numeric Conditionals</h2>
+<p><strong>Logical</strong> vectors result from any conditional statement, even if not quantitative.</p>
+<p>Below are a few use cases for <strong>logical</strong> values based on non-numeric conditions.</p>
+<p>These data come from <a href="https://data.cityofnewyork.us/Transportation/Medallion-Drivers-Active/jb3k-j3gp/data">New York City’s medallian-authorized cab drivers</a>.</p>
+<pre class="r"><code>library(readr)
+library(dplyr)
+library(lubridate)
+
+url &lt;- paste0(&quot;https://data.cityofnewyork.us/api/views&quot;,
+              &quot;/jb3k-j3gp/rows.csv?accessType=DOWNLOAD&quot;)    # Assign URL
+
+taxi &lt;- read_csv(url) %&gt;%                                   # Read in 1,000 rows
+  mutate(`Expiration Date` = mdy(`Expiration Date`),
+         `Last Date Updated` = mdy(`Last Date Updated`),
+         `Last Time Updated` = hms(`Last Time Updated`))    # Convert dates, times</code></pre>
 <p><br></p>
-<p><strong>Structure:</strong> Function <code>str()</code> prints an object’s class, dimensions, and first observations.</p>
-<pre class="r"><code>str(atl$poverty_threshold)</code></pre>
-<pre><code>##  chr [1:100] &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; ...</code></pre>
+<p><strong>Date-Based Conditions:</strong> Let’s extract medallians expiring on <a href="https://en.wikipedia.org/wiki/Palindrome">palindrome</a> 2020-02-02:</p>
+<pre class="r"><code>index &lt;- which( taxi$`Expiration Date` == &quot;2020-02-02&quot;)   # Index rows where TRUE
+
+palindrome &lt;- taxi[index, ]                               # Filter by indexed rows
+
+head(palindrome)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   `License Number` Name  Type  `Expiration Dat~ `Last Date Upda~
+##              &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;date&gt;           &lt;date&gt;          
+## 1           662602 CHAU~ MEDA~ 2020-02-02       2019-09-29      
+## 2           692710 TEJA~ MEDA~ 2020-02-02       2019-09-29      
+## 3           678010 XU,C~ MEDA~ 2020-02-02       2019-09-29      
+## 4           678820 LIRA~ MEDA~ 2020-02-02       2019-09-29      
+## 5           695806 CHEK~ MEDA~ 2020-02-02       2019-09-29      
+## 6           677474 ESPI~ MEDA~ 2020-02-02       2019-09-29      
+## # ... with 1 more variable: `Last Time Updated` &lt;S4: Period&gt;</code></pre>
 <p><br></p>
-<p><strong>Summary:</strong> Function <code>summary()</code> also prints the class, mode, and length of a <strong>character</strong> vector.</p>
-<pre class="r"><code>summary(atl$poverty_threshold)</code></pre>
-<pre><code>##    Length     Class      Mode 
-##       100 character character</code></pre>
-<p><br></p>
-<p><strong>Value Frequency:</strong> Function <code>table()</code> tallies the frequency of each <strong>character</strong> value.</p>
-<pre class="r"><code>table(atl$poverty_threshold)</code></pre>
-<pre><code>## 
-##  Over Under 
-##    43    57</code></pre>
-<p><br></p>
-<p><strong>Proportions:</strong> Function <code>prop.table()</code> calculates the percentage of each <strong>character</strong> value.</p>
-<pre class="r"><code>prop.table(atl$poverty_threshold)</code></pre>
-<p><br>
-<br></p>
-</div>
-</div>
-<div id="converting-labels-into-factors" class="section level2">
-<h2><span class="header-section-number">1.5</span> Converting Labels into Factors</h2>
-<p>Any variable of class “character” can easily be converted into class <strong>“factor”</strong>.</p>
+<p><strong>Date Unit-Based Conditions:</strong> Here, we use function <code>year()</code> from package <em>lubridate</em>:</p>
 <ul>
-<li>Use functions <code>factor()</code> or <code>as.factor()</code></li>
-<li>Recall that <strong>factors</strong> tell R that a variable is categorical</li>
-<li>Typically, coerce to or create <strong>factors</strong> with limited unique labels</li>
-<li>A <strong>factor</strong> vector or variable makes it easier to summarize its data</li>
-<li>You must reassign a <strong>factor</strong> to the original vector or variable to replace it</li>
+<li>Function <code>year()</code> extracts the year from date objects</li>
+<li>Our logical statement returns <code>TRUE</code> if <code>year()</code> returns “2021”</li>
+<li>Function <code>sum()</code> is used to tally all medallians expiring in 2021</li>
+<li>Function <code>mean()</code> is used to calculate the percent of 2021 expirations</li>
 </ul>
-<pre class="r"><code>my_factor &lt;- factor(x = atl$poverty_threshold,    # Specify vector
-                    ordered = FALSE)              # Tell R if order matters
+<pre class="r"><code>library(lubridate)
 
-atl$poverty_threshold &lt;- my_factor                # Replace existing vector
+expire_21 &lt;- year(taxi$`Expiration Date`) == 2021     # TRUE if expires in 2021
 
-class(atl$poverty_threshold)</code></pre>
-<pre><code>## [1] &quot;factor&quot;</code></pre>
+sum(expire_21)                                        # Sum of 2021 expirations</code></pre>
+<pre><code>## [1] 37152</code></pre>
+<pre class="r"><code>mean(expire_21)                                       # Percent of 2021 expirations</code></pre>
+<pre><code>## [1] 0.2007912</code></pre>
+<p><br></p>
+<p><strong>Text-Based Conditions</strong>: Use core R function <code>grepl()</code> for conditional pattern-matching.</p>
+<ul>
+<li>The ‘l’ in ‘grepl()’ stands for “logical” - it’s designed to output <strong>logical</strong> values!</li>
+<li>Here, we’ll search for all records beginning with common Indian surname “Singh”</li>
+<li>The pattern matching method is called “regular expressions”
+<ul>
+<li><code>^</code> indicates that the pattern is at the beginning of the string</li>
+<li><code>.</code> indicates “any character” and <code>*</code> indicates “any number of times”</li>
+<li>Therefore, we only retrieve records that begin with <code>Singh</code></li>
+</ul></li>
+</ul>
+<pre class="r"><code>surname_match &lt;- grepl(pattern = &quot;^SINGH.*&quot;,    # Regular expressions pattern  
+                       x = taxi$Name)           # Specify dataset and variable
+
+head(surname_match, 10)                         # Return first 10 TRUE or FALSE</code></pre>
+<pre><code>##  [1]  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>sum(surname_match)                              # Total TRUE</code></pre>
+<pre><code>## [1] 7516</code></pre>
+<pre class="r"><code>mean(surname_match)                             # Percent TRUE</code></pre>
+<pre><code>## [1] 0.04062088</code></pre>
+<p><br></p>
+<p>Compare these results to the most common Indian surname in London: “Patel”. Wow!</p>
+<pre class="r"><code>surname_match &lt;- grepl(pattern = &quot;^PATEL.*&quot;,    # Regular expressions pattern  
+                       x = taxi$Name)           # Specify dataset and variable
+
+head(surname_match, 10)                         # Return first 10 TRUE or FALSE</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>sum(surname_match)                              # Total TRUE</code></pre>
+<pre><code>## [1] 92</code></pre>
+<pre class="r"><code>mean(surname_match)                             # Percent TRUE</code></pre>
+<pre><code>## [1] 0.000497222</code></pre>
+<p><br></p>
+<p><strong>Conditions with Missing Values:</strong> It’s very common to condition on missing values (<code>NA</code>).</p>
+<ul>
+<li>Function <code>is.na()</code> returns a <strong>logical</strong> vector of <code>TRUE</code> or <code>FALSE</code></li>
+<li>This is similar to any <code>is.*()</code> function, all of which return <strong>logical</strong> values</li>
+<li>Since these data have no missing data, remove all drivers with surname “Singh”</li>
+</ul>
+<pre class="r"><code>index &lt;- grepl(pattern = &quot;^SINGH.*&quot;,    # Regular expressions pattern  
+               x = taxi$Name)           # Specify dataset and variable
+
+taxi[index, &quot;Name&quot;] &lt;- NA               # Remove names
+
+missing &lt;- is.na(taxi$Name)             # Detect, store missing values
+
+sum(missing)                            # Total NA values in vector</code></pre>
+<pre><code>## [1] 7516</code></pre>
+<p><br></p>
+<p><strong>Detecting Incomplete Records:</strong> Function <code>complete.cases()</code>:</p>
+<ul>
+<li>Like <code>grepl()</code> or <code>is.na()</code> functions, always returns <strong>logical</strong> vector</li>
+<li>Any row containing one or more <code>NA</code> value will return <code>FALSE</code></li>
+<li>Used on entire data frames and checks all variables</li>
+</ul>
+<p>Dataset <code>taxi</code> is incomplete; we detect how many of the first 100 rows have an <code>NA</code>:</p>
+<pre class="r"><code>complete.cases(taxi[1:100, ])           # Check for NAs in first 100 rows</code></pre>
+<pre><code>##   [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [12]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [23]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [34] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [45]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [56]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [67]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [78]  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [89]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [100]  TRUE</code></pre>
+<pre class="r"><code>sum(complete.cases(taxi[1:100, ]))      # How many don&#39;t have NA values?</code></pre>
+<pre><code>## [1] 95</code></pre>
+<p><br></p>
+<p><strong>Conclusions:</strong> Class <strong>logical</strong> vectors are extremely common in exploratory data analyses and its use cases are many and varied. We use them for labeling, filtering, control flow structures, detection, etc. You’re now equipped to use <strong>logical</strong> output for the same ends, and mastering this data class is fundamental for basic fluency in R.</p>
+<p>Future chapters will be no stranger to the basic techniques described above, so come back and visit!</p>
 <p><br>
 <br></p>
 </div>
-<div id="summarizing-factors-describing-categorical-data" class="section level2">
-<h2><span class="header-section-number">1.6</span> Summarizing Factors: Describing Categorical Data</h2>
-<p>Summarizing categorical data is understandably different from quantitative data.</p>
+<div id="further-resources" class="section level2">
+<h2><span class="header-section-number">1.5</span> Further Resources</h2>
 <ul>
-<li>Function</li>
+<li><a href="http://rpubs.com/JamisonCrawford/operators">Intro to R: Operators</a> (Crawford, 2018): See <em>Section 6.1: Filtering with Logic</em></li>
+<li><a href="http://rpubs.com/JamisonCrawford/subsets">Intro to R: Subsets &amp; Indices</a> (Crawford, 2018): See <em>Section 6.4: Conditional Subsetting</em></li>
 </ul>
 </div>
 </div>

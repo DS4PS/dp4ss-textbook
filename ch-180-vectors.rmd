@@ -63,34 +63,47 @@ knitr::opts_chunk$set(message = FALSE,
 
 ```{r include=F}
 
-tutorial::go_interactive( greedy=FALSE )
+tutorial::go_interactive(greedy = FALSE)
 
 ```
 
 <br>
 <br>
 
-## Logical Variables
+## Logical Variables:
 
-Class **logical** variables are comprised of one of two values: `TRUE` or `FALSE`.
+Class **logical** variables are typically comprised of one of two values: `TRUE` or `FALSE`.
 
 <br>
+<br>
+
+### Quick Refresher on Class Logical
 
 We can create **logical** variables manually. Determine their class with function `class()`:
 
 ```{r}
 
 x <- TRUE
-y <- FALSE
 
 class(x)
-class(y)
 
 ```
 
 <br>
 
-Often, **logical** values simply indicate "yes" or "no"
+While not considered a best practice, we can use `T` and `F` as abbreviated values:
+
+```{r}
+
+y <- F
+
+print(y)
+
+```
+
+<br>
+
+Often, **logical** values simply indicate "yes" or "no" for your criteria:
 
 ```{r}
 
@@ -104,34 +117,377 @@ data.frame(character,
 
 <br>
 
-Most common, however, is that **logical** values result from conditional statements.
+Typically, **logical** values result from conditional statements on:
 
-Observe the function call `head()` on *ggplot2* dataset `economics`:
+* Variables within a dataset, using `data$variable` or `data[i, j]` format
+* Independent **vectors** created using `c()`
+
+<br>
+
+Let's read in the first 100 rows of [Atlanta, Georgia poverty by census tract, 2016](https://opendata.atlantaregional.com/datasets/poverty-2016):
 
 ```{r}
 
-library(ggplot2)
+library(readr)
+library(dplyr)
 
-head(economics)             # First 6 rows of "economics" dataset
+url <- paste0("https://opendata.arcgis.com",
+              "/datasets/73c0eca114c440208",
+              "b268bf9431e428c_240.csv")        # Atlanta's open data portal URL
+
+atl <- read_csv(url)[1:100, c(3:5, 9)] %>%      # Read 100 rows, 4 variables
+  arrange(County, Area_Name)                    # Arrange by county, tract
+
+head(atl)                                       # Print first 6 observations
 
 ```
 
 <br>
 
-Here we use the operator `>` to determine months with more than 10 M unemployed:
+Here we use logical operator `>` to create a conditional statement:
+
+*Which census tracts have populations larger than 7,000?*
 
 ```{r}
 
-economics$unemploy > 10000  # Condition: Is unemployment greater than 10 M?
+atl$Total_Population > 7000
+
+```
+
+The result is a **vector** of logical values, or `TRUE` and `FALSE`.
+
+<br>
+
+Here's a more complex conditional statement with two criteria using `&`:
+
+*Which tracts have more than 7,000 residents but less the 2,000 in poverty?*
+
+```{r}
+
+atl$Total_Population > 7000 & atl$Pop_below_poverty < 2000
+
+```
+
+<br>
+<br>
+
+### Logical Values: Under the Hood
+
+Under the hood, **logical** statements are represented in binary. That is:
+
+* `TRUE` equals "1"
+* `FALSE` equals "0"
+
+<br>
+
+We can prove this in a number of ways, like converting them to numeric values:
+
+```{r}
+
+as.numeric(TRUE)            # Coerce logicals to class "numeric"
+as.numeric(FALSE)           # Coerce logicals to class "numeric"
 
 ```
 
 <br>
 
-Here's a more complex conditional statement: More than 5 M but less than 10 M:
+Or we can simply use a conditional statement with logical operator `==`:
 
 ```{r}
 
-economics$unemploy > 5000 & economics$unemploy < 10000
+TRUE == 1
+FALSE == 0
 
 ```
+
+<br>
+
+Or we can use arithmetic functions like `sum()`:
+
+```{r}
+
+z <- c(TRUE, TRUE, TRUE)
+sum(z)
+
+```
+
+<br>
+
+**Conclusions:** Since **logical** values are numeric, this opens a world of possibilities for summarizing datasets and vectors that meet specified criteria, and we'll check some out in the next section.
+
+<br>
+<br>
+
+## Summarizing Logical Vectors with Arithmetic
+
+Because **logical** vectors are really just ones and zeros, we can determine:
+
+* Matching criteria with function `sum()`
+* Non-matching criteria with functions `length()` and `sum()`
+* Proportionality, percentage, and/or probability with `mean()`
+
+<br>
+
+**Total All TRUE Values:** Use function `sum()` and a conditional statement:
+
+*Of our 100 tracts, how many have more than 1,000 residents in poverty?*
+
+```{r}
+
+atl$Pop_below_poverty > 1000                # Conditional statement
+
+impov <- atl$Pop_below_poverty > 1000       # Store vector: "impov"
+
+sum(impov)                                  # Summing all TRUE values
+
+```
+
+<br>
+
+**Total All FALSE Instances:** We can do this with a little arithmetic: 
+
+* Determine total number of elements with function `length()`
+* Use `-` to subtract `TRUE` instances calculated with `sum()` 
+
+*Of our 100 tracts, how many do not have more than 1,000 residents in poverty?*
+
+```{r}
+
+length(impov) - sum(impov)                  # Total elements - TRUE elements
+
+```
+
+<br>
+
+**Percent of TRUE Values:** Use `mean()` to calculate the proportion of `TRUE` values:
+
+*Of our 100 tracts, what is the proportion with more than 1,000 residents in poverty?*
+
+```{r}
+
+mean(impov)                                 # Average of all ones and zeros
+
+```
+
+<br>
+<br>
+
+<div class="quiz">
+
+<h3> 
+
+**Your Turn:** Summarizing Logical Vectors 
+
+</h3>
+
+**Instructions:** Use the dataset `economics` from package *ggplot2*. 
+
+1. Use `sum()` to calculate which months have:
+
+    * More then 3 M unemployed residents (`unemploy > 3000`)
+
+2. Use `length() - sum()` to calculate which months do not have:
+
+    * Less than 3 M unemployed residents (`unemploy < 3000`)
+
+3. Use `mean()` to calculate the proportion of months that have:
+
+    * Greater than or equal to 3 M residents (`unemploy >= 3000`)
+
+<br>
+<br>
+<br>
+
+</div>
+
+```{r ex="practice-01", type="sample-code", tut=TRUE}
+
+library(ggplot2)      # Load ggplot2
+head(economics, 3)    # Print first 3 rows
+
+# Total months where unemployed > 3000 K
+sum(economics$___ > ___)
+
+# Total months where unemployed not > 3000 K
+___(economics$___) - sum(___$unemploy > 3000)
+
+# Percent of months where unemployed 3000 K or more
+___(___$unemploy >= 3000)
+
+```
+
+<br>
+<br>
+
+## Creating Factors: Categorizing Logical Vectors
+
+When you create **logical vectors** from conditional statements, we can:
+
+* Categorize `TRUE` and `FALSE` values
+* Create categorical variables, or **factors**
+* More clearly summarize our data by specifying *how* they satisfy conditions
+
+<br>
+
+### Determining Which Rows Match Your Condition(s)
+
+You can create a new **vector** of row numbers that are `TRUE` using `which()`:
+
+*Which census tracts have more than 1,000 residents in poverty?*
+
+```{r}
+
+impov <- atl$Pop_below_poverty > 1000   # Store logical vector: `impov`
+
+which(impov)                            # Determine row number of TRUE values
+
+```
+
+<br>
+
+### Indexing & Labeling Rows that Match Your Condition(s)
+
+By assigning which rows match your conditional statement (using `which()`):
+
+1. You can create an index of rows and assign them to an object
+2. Then, you can operate *only on the rows that satisfy your conditions*
+
+<br>
+
+**Indexing Matching Rows:** Use assignment with `<-` to create an index of rows:
+
+```{r}
+
+impov <- atl$Pop_below_poverty > 1000   # Assign logical vector: `impov`
+
+index <- which(impov)                   # Assign row numbers: "index"
+
+print(index)                            # Print row numbers that are TRUE
+
+```
+
+<br>
+
+**Filter Matching Rows:** Using row numbers assigned to object `index`, we can **filter**:
+
+* Rows which return `FALSE` vis-à-vis our conditions
+* Rows which return `TRUE` vis-à-vis our conditions
+
+```{r}
+
+atl[index, ]            # Keep rows with TRUE (more than 1K in poverty)
+atl[-index, ]           # Remove rows with TRUE (less than 1K in poverty)
+
+```
+
+<br>
+
+**Label Matching Rows:** We can categorize matching rows by assigning labels to them.
+
+1. First, add a variable of missing (`NA`) values: i.e. `dataframe$new_variable <- NA`
+2. Next, assign a text string of class "character" to matching rows (`TRUE`)
+3. Lastly, assign a text string to non-matching rows (`FALSE`)
+
+```{r}
+
+atl$poverty_threshold <- NA                   # Initialize variable of all NAs
+
+atl[index, "poverty_threshold"] <- "Over"     # Assign label for rows with TRUE
+
+atl[-index, "poverty_threshold"] <- "Under"   # Assign label for rows with FALSE
+
+head(atl, 10)
+
+```
+
+<br>
+<br>
+
+## Describing Vectors of Class "Character"
+
+R *describes* quantitative (**numeric**) and qualitative (**character** or **factor**) data differently.
+
+Notably, it *describes* **character** data and **factor** (categorical) data differently. 
+
+<br>
+<br>
+
+### Exploratory Analytic & Descriptive Functions
+
+You can explore and summarize **character** vectors with various exploratory functions.
+
+<br>
+
+**Structure:** Function `str()` prints an object's class, dimensions, and first observations.
+
+```{r}
+
+str(atl$poverty_threshold)
+
+```
+
+<br>
+
+**Summary:** Function `summary()` also prints the class, mode, and length of a **character** vector.
+
+```{r}
+
+summary(atl$poverty_threshold)
+
+```
+
+<br>
+
+**Value Frequency:** Function `table()` tallies the frequency of each **character** value.
+
+```{r}
+
+table(atl$poverty_threshold)
+
+```
+
+<br>
+
+**Proportions:** Function `prop.table()` calculates proportions of tables from `table()`.
+
+```{r}
+
+tbl <- table(atl$poverty_threshold)
+
+prop.table(tbl)
+
+```
+
+<br>
+<br>
+
+## Converting Labels into Factors
+
+Any variable of class "character" can easily be converted into class **"factor"**.
+
+* Use functions `factor()` or `as.factor()`
+* Recall that **factors** tell R that a variable is categorical
+* Typically, coerce to or create **factors** with limited unique labels
+* A **factor** vector or variable makes it easier to summarize its data
+* You must reassign a **factor** to the original vector or variable to replace it
+
+```{r}
+
+my_factor <- factor(x = atl$poverty_threshold,    # Specify vector
+                    ordered = FALSE)              # Tell R if order matters
+
+atl$poverty_threshold <- my_factor                # Replace existing vector
+
+class(atl$poverty_threshold)
+
+```
+
+<br>
+<br>
+
+## Summarizing Factors: Describing Categorical Data
+
+Summarizing categorical data is understandably different from quantitative data.
+
+* Function 
+
