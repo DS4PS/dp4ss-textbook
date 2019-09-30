@@ -1,12 +1,21 @@
-# Analysis with Groups
+---
+output:
+  html_document:
+    theme: readable
+    highlight: tango
+    toc: true
+    toc_depth: 1
+    number_sections: true
+    self_contained: false
+    css: textbook.css
+---
 
-
-```{r setup, include=FALSE}
-
-knitr::opts_chunk$set(echo = TRUE, warning=F, message=F, fig.width=8)
-
+```{r, echo=F }
+knitr::opts_chunk$set( echo = TRUE, message=F, warning=F, fig.width=8 )
 ```
 
+
+# Efficient Use of Group Structure 
 
 
 ## Packages Used in this Chapter

@@ -80,8 +80,10 @@ Mark McGuire before and after alleged steroid use.
 
 
 ```{r, echo=F}
+# install.packages( "dplyr" )
 # install.packages( "Lahman" )
-library( Lahman )
+library( dplyr )   # data wrangling
+library( Lahman )  # baseball data
 data( Master )
 ```
 
@@ -194,8 +196,10 @@ The Lahman package is an example of a data package in R - one that does not incl
 Datasets are loaded from R packages using the **data()** function.
 
 ```{r, eval=F}
+# install.packages( "dplyr" )
 # install.packages( "Lahman" )
-library( Lahman )
+library( dplyr )   # data wrangling
+library( Lahman )  # baseball data
 data( Master )
 ```
 

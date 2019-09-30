@@ -1,0 +1,1577 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>p-073-group-structure.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#efficient-use-of-group-structure"><span class="toc-section-number">1</span> Efficient Use of Group Structure</a><ul>
+<li><a href="#packages-used-in-this-chapter"><span class="toc-section-number">1.1</span> Packages Used in this Chapter</a></li>
+<li><a href="#hypothetical-experimental-data"><span class="toc-section-number">1.2</span> Hypothetical Experimental Data</a></li>
+<li><a href="#group-structure"><span class="toc-section-number">1.3</span> Group Structure</a></li>
+<li><a href="#analysis-by-group"><span class="toc-section-number">1.4</span> Analysis by Group</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="efficient-use-of-group-structure" class="section level1">
+<h1><span class="header-section-number">1</span> Efficient Use of Group Structure</h1>
+<div id="packages-used-in-this-chapter" class="section level2">
+<h2><span class="header-section-number">1.1</span> Packages Used in this Chapter</h2>
+<pre class="r"><code>library( pander )
+library( dplyr )
+library( tidyr )
+library( reshape2 )
+library( scales )
+library( ggplot2 )
+library( Lahman )</code></pre>
+</div>
+<div id="hypothetical-experimental-data" class="section level2">
+<h2><span class="header-section-number">1.2</span> Hypothetical Experimental Data</h2>
+<p>We will demonstrate some functions using this hypothetical dataset:</p>
+<pre class="r"><code>head( d ) %&gt;% pander</code></pre>
+<table style="width:88%;">
+<colgroup>
+<col width="6%" />
+<col width="11%" />
+<col width="18%" />
+<col width="12%" />
+<col width="8%" />
+<col width="19%" />
+<col width="11%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">id</th>
+<th align="center">race</th>
+<th align="center">blood.type</th>
+<th align="center">gender</th>
+<th align="center">age</th>
+<th align="center">study.group</th>
+<th align="center">speed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">asian</td>
+<td align="center">A</td>
+<td align="center">male</td>
+<td align="center">29</td>
+<td align="center">treatment</td>
+<td align="center">582.2</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">black</td>
+<td align="center">B</td>
+<td align="center">female</td>
+<td align="center">48</td>
+<td align="center">treatment</td>
+<td align="center">655</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">white</td>
+<td align="center">A</td>
+<td align="center">female</td>
+<td align="center">34</td>
+<td align="center">treatment</td>
+<td align="center">534.3</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">black</td>
+<td align="center">A</td>
+<td align="center">female</td>
+<td align="center">28</td>
+<td align="center">treatment</td>
+<td align="center">608.5</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">white</td>
+<td align="center">B</td>
+<td align="center">female</td>
+<td align="center">44</td>
+<td align="center">treatment</td>
+<td align="center">666.2</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">black</td>
+<td align="center">A</td>
+<td align="center">female</td>
+<td align="center">41</td>
+<td align="center">treatment</td>
+<td align="center">677.7</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="group-structure" class="section level2">
+<h2><span class="header-section-number">1.3</span> Group Structure</h2>
+<p>The two most important skills as you first learn a data programming language are:</p>
+<ol style="list-style-type: decimal">
+<li>Translating English phrases into computer code using logical statements<br />
+</li>
+<li>Organizing your data into groups</li>
+</ol>
+<p>This lecture focuses on efficienty splitting your data into groups, and then analyzing your data by group.</p>
+<div id="what-are-groups" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> What Are Groups?</h3>
+<p>A group represents a set of elements with identical characteristics - mice all belong to one group and elephants belong to another. Easy enough, right?</p>
+<p>In data analysis, it is a little more complicated because a group is defined by a set of features. Each group still represents a set of elements with identical characteristics, but when we have multiple features there is a unique group for each combination of features.</p>
+<p>The simple way to think about this is that the cross-tab of features generates a grid (table), and each cell represents a unique group:</p>
+<p><img src="p-073-group-structure_files/figure-html/unnamed-chunk-6-1.png" width="288" /></p>
+<p>We might be interested in simple groups (treatment cases versus control cases), or complex groups (does the treatment effect women and men differently?).</p>
+<p>In previous lectures you have learned to identify a group with a logical statement, and analyze that group discretely.</p>
+<pre class="r"><code>mean( speed[ study.group == &quot;treatment&quot; &amp; gender==&quot;female&quot; ] )</code></pre>
+<pre><code>## [1] 613.0477</code></pre>
+<p>In this lecture you will learn to define a group structure, then analyze all of your data using that structure.</p>
+<pre class="r"><code>tapply( speed, INDEX = list( study.group, gender ), FUN = mean )</code></pre>
+<table style="width:47%;">
+<colgroup>
+<col width="22%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">female</th>
+<th align="center">male</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>control</strong></td>
+<td align="center">468.7</td>
+<td align="center">364.6</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>treatment</strong></td>
+<td align="center">613</td>
+<td align="center">509.4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="main-take-away" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Main Take-Away</h3>
+<p>R has been designed to do efficient data analysis by defining a group structure, then quickly applying a function to all unique members.</p>
+<p><img src="figures/group_plus_function.png" width="300"></p>
+<p>The base R packages do this with a set of functions in the <strong>apply()</strong> family. The <strong>tapply()</strong> function allows you to specify an outcome to analyze and a group, then ask for results from a function.</p>
+<pre class="r"><code>tapply( X=speed, INDEX=list( study.group, gender ), FUN=mean ) </code></pre>
+<table style="width:47%;">
+<colgroup>
+<col width="22%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">female</th>
+<th align="center">male</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>control</strong></td>
+<td align="center">468.7</td>
+<td align="center">364.6</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>treatment</strong></td>
+<td align="center">613</td>
+<td align="center">509.4</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>dplyr</strong> package makes this process easier using some simple verbs and the “pipe” operator.</p>
+<pre class="r"><code>dat  %&gt;%  group_by( study.group, gender )  %&gt;%  summarize( ave.speed = mean(speed) )</code></pre>
+<table style="width:49%;">
+<colgroup>
+<col width="19%" />
+<col width="12%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">study.group</th>
+<th align="center">gender</th>
+<th align="center">ave.speed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">control</td>
+<td align="center">male</td>
+<td align="center">364.6</td>
+</tr>
+<tr class="even">
+<td align="center">control</td>
+<td align="center">female</td>
+<td align="center">468.7</td>
+</tr>
+<tr class="odd">
+<td align="center">treatment</td>
+<td align="center">male</td>
+<td align="center">509.4</td>
+</tr>
+<tr class="even">
+<td align="center">treatment</td>
+<td align="center">female</td>
+<td align="center">613</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="example" class="section level3">
+<h3><span class="header-section-number">1.3.3</span> Example</h3>
+<p>Let’s think about a study looking at reading speed. The treatment is a workshop that teaches some speed-reading techniques. In this study we have data on:</p>
+<ul>
+<li>gender (male,female)</li>
+<li>race (black,white,asian)</li>
+<li>blood.type (A,B)</li>
+<li>age (from 18 to 93)</li>
+</ul>
+<p>Examining descriptive statistics we can see that reading speed varies by gender and the treatment group, but not by race or blood type:</p>
+<p><img src="p-073-group-structure_files/figure-html/unnamed-chunk-15-1.png" width="768" /></p>
+<p>The question is, how many unique groups can we create with these four factors?</p>
+<p>Each individual factor contains a small number of levels (only 2 or 3 in this case), which makes the group structure look deceptively simple at first glance. When we start to examine combinations of factors we see that group structure can get complicated pretty quickly.</p>
+<p>If we look at gender alone, we have two levels: male and female. So we have two groups. If we look at our study groups alone we have two groups: treatment and control.</p>
+<p>If we look at gender and the study groups together, we now have a 2 x 2 grid, or four unique groups.</p>
+<p>If the race factor has three levels, how many unique groups will we have considering the study design, gender, and race together?</p>
+<p><img src="p-073-group-structure_files/figure-html/unnamed-chunk-16-1.png" width="768" /></p>
+<p>We can calculate the size of the grid by multiplying number of levels for each factor. We see here we have 12 unique groups:</p>
+<pre class="r"><code>nlevels( gender ) * nlevels( study.group ) * nlevels( race )</code></pre>
+<pre><code>## [1] 12</code></pre>
+<p>If we add blood type, a factor with two levels (A and B), we now have 24 unique groups:</p>
+<pre class="r"><code>p + facet_grid( race + study.group ~ gender + blood.type) </code></pre>
+<p><img src="p-073-group-structure_files/figure-html/unnamed-chunk-18-1.png" width="768" /></p>
+<p>What about age? It is a continuous variable, so it’s a little more tricky.</p>
+<p>We can certainly analyze the relationship between age and speed using correlation tools.</p>
+<pre class="r"><code>plot( age, speed, bty=&quot;n&quot;, main=&quot;Age&quot; )</code></pre>
+<p><img src="p-073-group-structure_files/figure-html/unnamed-chunk-19-1.png" width="768" /></p>
+<p>But we can also incorporate this independent variable into a group structure. We can treat each distinct age as a separate group. The ages in this study range from 18 to 93, so we have 65 distinct ages represented.</p>
+<pre class="r"><code>plot( factor(age), speed, las=2, frame.plot=F, outline=F, main=&quot;Age&quot;, xaxt=&quot;n&quot;  )</code></pre>
+<p><img src="p-073-group-structure_files/figure-html/unnamed-chunk-20-1.png" width="768" /></p>
+<p>If we think about the overall group structure, then, we have unique groups defined by gender, race, blood type, and study design, and another 65 age groups. So in total we now have 24 x 65 = 1,560 groups! That is getting complicated.</p>
+<p>This group design is problematic for two reasons. From a pragmatic standpoint, we can’t report results from 1,500 groups in a table. From a more substantive perspective, we although we have 1,500 distinct cells in our grid, many may not include observations that represent the unique combination of all factors. So this group design is not very practical.</p>
+<p>A similar problem arises if our data includes time. If our data includes the time of events recorded by hours, days of the week, months, and years, we can have generate complicated group structures if we try to analyze every unique combination.</p>
+<p>We can simplify our analysis by thinking about age ranges instead of ages, or in other words by binning our continuous data. If we split it into five-year ranges, for example, we have gone from 65 distinct ages to 12 distinct age groups.</p>
+<pre class="r"><code>age.group &lt;- cut( age, 
+                  breaks=seq(from=20,to=80,by=5),
+                  labels=paste( seq(from=20,to=75,by=5), 
+                                &quot;to&quot;, seq(from=25,to=80,by=5) ) )
+
+group.structure &lt;- formula( speed ~ age.group )
+
+boxplot( group.structure, las=2, frame.plot=F, outline=F, main=&quot;Age Group&quot;  )</code></pre>
+<p><img src="p-073-group-structure_files/figure-html/unnamed-chunk-21-1.png" width="768" /></p>
+<p>We have now simplified our analysis from 1,560 to 288 possible groups. Combinations of groups will also be easier:</p>
+<pre class="r"><code>group.structure &lt;- formula( speed ~ gender * age.group )
+
+boxplot( group.structure, 
+         las=2, frame.plot=F, outline=F, main=&quot;Age Group by Gender&quot;,
+         col=c(&quot;firebrick&quot;,&quot;steelblue&quot;), xaxt=&quot;n&quot; )</code></pre>
+<p><img src="p-073-group-structure_files/figure-html/unnamed-chunk-22-1.png" width="768" /></p>
+</div>
+</div>
+<div id="analysis-by-group" class="section level2">
+<h2><span class="header-section-number">1.4</span> Analysis by Group</h2>
+<p>Let’s demonstrate some analysis of groups using the Lahman package and some <strong>dplyr</strong> verbs. Let’s do some analysis of player salaries (<em>Salaries</em> dataset), and start with a simple group structure - teams in the National League and time.</p>
+<ol style="list-style-type: decimal">
+<li>Which team has the highest average player salary?</li>
+<li>Which team has the most players paid over $5 million a season?</li>
+<li>Which team has raised it’s pay the most over the past decade?</li>
+</ol>
+<p>Let’s start by thinking about group structure. We have teams, and we have seasons. Teams is stored as a factor, and seasons as a numeric value, so we can consider group for each by counting levels and unique values:</p>
+<pre class="r"><code>nlevels( Salaries$teamID )</code></pre>
+<pre><code>## [1] 46</code></pre>
+<pre class="r"><code>length( unique( Salaries$yearID ) )</code></pre>
+<pre><code>## [1] 32</code></pre>
+<p>So we can potentially calculate 32 x 46 = 1,472 average player salaries.</p>
+<div id="highest-ave-player-salary" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Highest Ave Player Salary</h3>
+<p>For our first question, we will select only teams from the National League. Let’s use the most recent year of data to calculate average pay.</p>
+<pre class="r"><code>Salaries %&gt;% filter( lgID == &quot;NL&quot;, yearID == 2016 ) %&gt;% 
+             group_by( teamID) %&gt;% 
+             summarize( Ave_Salary = mean(salary) )</code></pre>
+<pre><code>## # A tibble: 15 x 2
+##    teamID Ave_Salary
+##    &lt;fct&gt;       &lt;dbl&gt;
+##  1 ARI      3363041.
+##  2 ATL      2362010.
+##  3 CHC      5312678.
+##  4 CIN      3066899.
+##  5 COL      3413487 
+##  6 LAD      6322525.
+##  7 MIA      2761222.
+##  8 MIL      2292508.
+##  9 NYM      4958857.
+## 10 PHI      2033793.
+## 11 PIT      3706387.
+## 12 SDP      3756475.
+## 13 SFG      6890151.
+## 14 STL      4614629.
+## 15 WSN      5448179.</code></pre>
+<p>Since the salaries are large, they are a little hard to read. Let’s clean up the table a bit.</p>
+<pre class="r"><code>Salaries  %&gt;% 
+             filter( lgID == &quot;NL&quot;, yearID == 2016 ) %&gt;% 
+             group_by( teamID ) %&gt;% 
+             summarize( Ave_Salary=dollar( mean(salary,na.rm=T) ) ) %&gt;%
+             arrange( desc(Ave_Salary) ) %&gt;%
+             pander()</code></pre>
+<table style="width:31%;">
+<colgroup>
+<col width="12%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">teamID</th>
+<th align="center">Ave_Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">SFG</td>
+<td align="center">$6,890,151</td>
+</tr>
+<tr class="even">
+<td align="center">LAD</td>
+<td align="center">$6,322,525</td>
+</tr>
+<tr class="odd">
+<td align="center">WSN</td>
+<td align="center">$5,448,179</td>
+</tr>
+<tr class="even">
+<td align="center">CHC</td>
+<td align="center">$5,312,678</td>
+</tr>
+<tr class="odd">
+<td align="center">NYM</td>
+<td align="center">$4,958,857</td>
+</tr>
+<tr class="even">
+<td align="center">STL</td>
+<td align="center">$4,614,629</td>
+</tr>
+<tr class="odd">
+<td align="center">SDP</td>
+<td align="center">$3,756,475</td>
+</tr>
+<tr class="even">
+<td align="center">PIT</td>
+<td align="center">$3,706,387</td>
+</tr>
+<tr class="odd">
+<td align="center">COL</td>
+<td align="center">$3,413,487</td>
+</tr>
+<tr class="even">
+<td align="center">ARI</td>
+<td align="center">$3,363,041</td>
+</tr>
+<tr class="odd">
+<td align="center">CIN</td>
+<td align="center">$3,066,899</td>
+</tr>
+<tr class="even">
+<td align="center">MIA</td>
+<td align="center">$2,761,222</td>
+</tr>
+<tr class="odd">
+<td align="center">ATL</td>
+<td align="center">$2,362,010</td>
+</tr>
+<tr class="even">
+<td align="center">MIL</td>
+<td align="center">$2,292,508</td>
+</tr>
+<tr class="odd">
+<td align="center">PHI</td>
+<td align="center">$2,033,793</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="most-players-paid-over-5-million" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Most Players Paid Over $5 Million</h3>
+<p>This question requires you to utilize a logical statement in order to translate from the question to code. We need to inspect each salary, determine whether it is over the $5m threshold, then count all of the cases. The operation will look something like this:</p>
+<pre class="r"><code>sum( Salaries$salary &gt; 5000000 )</code></pre>
+<pre><code>## [1] 3175</code></pre>
+<p>It gets a little trickier when we want to do the operation simultaneously across groups. Our team group structure is already defined, so let’s define our logical vector and count cases that match:</p>
+<pre class="r"><code>dat.NL &lt;- filter( Salaries, yearID == 2010 &amp; lgID == &quot;NL&quot; ) %&gt;% droplevels()
+
+gt.5m &lt;- dat.NL$salary &gt; 5000000
+
+table( dat.NL$teamID, gt.5m )</code></pre>
+<pre><code>##      gt.5m
+##       FALSE TRUE
+##   ARI    23    3
+##   ATL    21    6
+##   CHN    19    8
+##   CIN    21    5
+##   COL    23    6
+##   FLO    23    4
+##   HOU    24    4
+##   LAN    20    7
+##   MIL    25    4
+##   NYN    19    9
+##   PHI    18   10
+##   PIT    27    0
+##   SDN    25    1
+##   SFN    21    7
+##   SLN    19    6
+##   WAS    26    4</code></pre>
+<p>This solution works, but the table provides too much information. We can use dply to simplify and format the table nicely for our report:</p>
+<pre class="r"><code>Salaries %&gt;% 
+   filter( yearID == 2010 &amp; lgID == &quot;NL&quot; ) %&gt;%
+   group_by( teamID ) %&gt;% 
+   summarise( gt_five_million = sum( salary &gt; 5000000 ) ) %&gt;% 
+   arrange( desc(gt_five_million) ) %&gt;%
+   pander</code></pre>
+<table style="width:38%;">
+<colgroup>
+<col width="12%" />
+<col width="25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">teamID</th>
+<th align="center">gt_five_million</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">PHI</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center">NYN</td>
+<td align="center">9</td>
+</tr>
+<tr class="odd">
+<td align="center">CHN</td>
+<td align="center">8</td>
+</tr>
+<tr class="even">
+<td align="center">LAN</td>
+<td align="center">7</td>
+</tr>
+<tr class="odd">
+<td align="center">SFN</td>
+<td align="center">7</td>
+</tr>
+<tr class="even">
+<td align="center">ATL</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">COL</td>
+<td align="center">6</td>
+</tr>
+<tr class="even">
+<td align="center">SLN</td>
+<td align="center">6</td>
+</tr>
+<tr class="odd">
+<td align="center">CIN</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">FLO</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">HOU</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">MIL</td>
+<td align="center">4</td>
+</tr>
+<tr class="odd">
+<td align="center">WAS</td>
+<td align="center">4</td>
+</tr>
+<tr class="even">
+<td align="center">ARI</td>
+<td align="center">3</td>
+</tr>
+<tr class="odd">
+<td align="center">SDN</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">PIT</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="fielding-positions" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Fielding Positions</h3>
+<p>Which fielding position is the highest paid?</p>
+<pre class="r"><code>merge( Salaries, Fielding ) %&gt;%
+  filter( yearID == 2016 ) %&gt;%
+  group_by( POS ) %&gt;%
+  summarize( Mean_Salary = dollar( mean(salary) ) ) %&gt;%
+  pander</code></pre>
+<table style="width:28%;">
+<colgroup>
+<col width="8%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">POS</th>
+<th align="center">Mean_Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1B</td>
+<td align="center">$5,570,032</td>
+</tr>
+<tr class="even">
+<td align="center">2B</td>
+<td align="center">$3,162,075</td>
+</tr>
+<tr class="odd">
+<td align="center">3B</td>
+<td align="center">$3,579,088</td>
+</tr>
+<tr class="even">
+<td align="center">C</td>
+<td align="center">$2,521,903</td>
+</tr>
+<tr class="odd">
+<td align="center">OF</td>
+<td align="center">$3,546,115</td>
+</tr>
+<tr class="even">
+<td align="center">P</td>
+<td align="center">$3,401,676</td>
+</tr>
+<tr class="odd">
+<td align="center">SS</td>
+<td align="center">$2,510,833</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="country-of-birth" class="section level3">
+<h3><span class="header-section-number">1.4.4</span> Country of Birth</h3>
+<p>Which country has produced the highest paid baseball players?</p>
+<pre class="r"><code>merge( Salaries, Master ) %&gt;%
+  filter( yearID == 2016 ) %&gt;%
+  group_by( birthCountry ) %&gt;%
+  summarize( Mean_Salary = dollar( mean(salary) ) ) %&gt;% 
+  pander</code></pre>
+<table style="width:42%;">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">birthCountry</th>
+<th align="center">Mean_Salary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Aruba</td>
+<td align="center">$650,000</td>
+</tr>
+<tr class="even">
+<td align="center">Australia</td>
+<td align="center">$523,400</td>
+</tr>
+<tr class="odd">
+<td align="center">Brazil</td>
+<td align="center">$1,548,792</td>
+</tr>
+<tr class="even">
+<td align="center">CAN</td>
+<td align="center">$7,854,167</td>
+</tr>
+<tr class="odd">
+<td align="center">Colombia</td>
+<td align="center">$3,125,289</td>
+</tr>
+<tr class="even">
+<td align="center">Cuba</td>
+<td align="center">$5,532,484</td>
+</tr>
+<tr class="odd">
+<td align="center">Curacao</td>
+<td align="center">$5,724,167</td>
+</tr>
+<tr class="even">
+<td align="center">D.R.</td>
+<td align="center">$5,102,318</td>
+</tr>
+<tr class="odd">
+<td align="center">Germany</td>
+<td align="center">$511,500</td>
+</tr>
+<tr class="even">
+<td align="center">Japan</td>
+<td align="center">$8,247,012</td>
+</tr>
+<tr class="odd">
+<td align="center">Mexico</td>
+<td align="center">$4,617,038</td>
+</tr>
+<tr class="even">
+<td align="center">Netherlands</td>
+<td align="center">$2,425,000</td>
+</tr>
+<tr class="odd">
+<td align="center">Nicaragua</td>
+<td align="center">$2,375,000</td>
+</tr>
+<tr class="even">
+<td align="center">P.R.</td>
+<td align="center">$3,241,378</td>
+</tr>
+<tr class="odd">
+<td align="center">Panama</td>
+<td align="center">$2,946,550</td>
+</tr>
+<tr class="even">
+<td align="center">Saudi Arabia</td>
+<td align="center">$522,500</td>
+</tr>
+<tr class="odd">
+<td align="center">South Korea</td>
+<td align="center">$5,326,190</td>
+</tr>
+<tr class="even">
+<td align="center">Taiwan</td>
+<td align="center">$6,750,000</td>
+</tr>
+<tr class="odd">
+<td align="center">USA</td>
+<td align="center">$4,189,640</td>
+</tr>
+<tr class="even">
+<td align="center">V.I.</td>
+<td align="center">$507,500</td>
+</tr>
+<tr class="odd">
+<td align="center">Venezuela</td>
+<td align="center">$4,521,051</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="pay-raises" class="section level3">
+<h3><span class="header-section-number">1.4.5</span> Pay Raises</h3>
+<p>To examine pay raises, we will now use more than one year of data. Since the question asks about pay raises over the past decade, we will filter the last ten years of data.</p>
+<p>And how since we are looking at patterns over teams and over time, we need to define a group structure with two variables:</p>
+<pre class="r"><code>Salaries %&gt;% filter( yearID &gt; 2006 &amp; lgID == &quot;NL&quot; ) %&gt;% 
+             group_by( teamID, yearID ) %&gt;% 
+             summarize( mean= dollar(mean(salary)) ) %&gt;%
+             head( 20 ) %&gt;% pander</code></pre>
+<table style="width:43%;">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">teamID</th>
+<th align="center">yearID</th>
+<th align="center">mean</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">ARI</td>
+<td align="center">2007</td>
+<td align="center">$1,859,555</td>
+</tr>
+<tr class="even">
+<td align="center">ARI</td>
+<td align="center">2008</td>
+<td align="center">$2,364,383</td>
+</tr>
+<tr class="odd">
+<td align="center">ARI</td>
+<td align="center">2009</td>
+<td align="center">$2,812,141</td>
+</tr>
+<tr class="even">
+<td align="center">ARI</td>
+<td align="center">2010</td>
+<td align="center">$2,335,314</td>
+</tr>
+<tr class="odd">
+<td align="center">ARI</td>
+<td align="center">2011</td>
+<td align="center">$1,986,660</td>
+</tr>
+<tr class="even">
+<td align="center">ARI</td>
+<td align="center">2012</td>
+<td align="center">$2,733,512</td>
+</tr>
+<tr class="odd">
+<td align="center">ARI</td>
+<td align="center">2013</td>
+<td align="center">$3,004,400</td>
+</tr>
+<tr class="even">
+<td align="center">ARI</td>
+<td align="center">2014</td>
+<td align="center">$3,763,904</td>
+</tr>
+<tr class="odd">
+<td align="center">ARI</td>
+<td align="center">2015</td>
+<td align="center">$2,034,250</td>
+</tr>
+<tr class="even">
+<td align="center">ARI</td>
+<td align="center">2016</td>
+<td align="center">$3,363,041</td>
+</tr>
+<tr class="odd">
+<td align="center">ATL</td>
+<td align="center">2007</td>
+<td align="center">$3,117,530</td>
+</tr>
+<tr class="even">
+<td align="center">ATL</td>
+<td align="center">2008</td>
+<td align="center">$3,412,189</td>
+</tr>
+<tr class="odd">
+<td align="center">ATL</td>
+<td align="center">2009</td>
+<td align="center">$3,335,385</td>
+</tr>
+<tr class="even">
+<td align="center">ATL</td>
+<td align="center">2010</td>
+<td align="center">$3,126,802</td>
+</tr>
+<tr class="odd">
+<td align="center">ATL</td>
+<td align="center">2011</td>
+<td align="center">$3,346,257</td>
+</tr>
+<tr class="even">
+<td align="center">ATL</td>
+<td align="center">2012</td>
+<td align="center">$2,856,205</td>
+</tr>
+<tr class="odd">
+<td align="center">ATL</td>
+<td align="center">2013</td>
+<td align="center">$3,254,501</td>
+</tr>
+<tr class="even">
+<td align="center">ATL</td>
+<td align="center">2014</td>
+<td align="center">$4,067,042</td>
+</tr>
+<tr class="odd">
+<td align="center">ATL</td>
+<td align="center">2015</td>
+<td align="center">$2,990,885</td>
+</tr>
+<tr class="even">
+<td align="center">ATL</td>
+<td align="center">2016</td>
+<td align="center">$2,362,010</td>
+</tr>
+</tbody>
+</table>
+<p>This might seem like an odd format. We might expect something that looks more like our grid structure:</p>
+<pre class="r"><code>dat.NL &lt;- filter( Salaries, yearID &gt; 2010 &amp; lgID == &quot;NL&quot; ) %&gt;% droplevels()
+
+tapply( dat.NL$salary, 
+        INDEX=list(dat.NL$teamID, dat.NL$yearID), 
+        FUN=mean, na.rm=T ) %&gt;% pander()</code></pre>
+<table style="width:97%;">
+<colgroup>
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">2011</th>
+<th align="center">2012</th>
+<th align="center">2013</th>
+<th align="center">2014</th>
+<th align="center">2015</th>
+<th align="center">2016</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>ARI</strong></td>
+<td align="center">1986660</td>
+<td align="center">2733512</td>
+<td align="center">3004400</td>
+<td align="center">3763904</td>
+<td align="center">2034250</td>
+<td align="center">3363041</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>ATL</strong></td>
+<td align="center">3346257</td>
+<td align="center">2856205</td>
+<td align="center">3254501</td>
+<td align="center">4067042</td>
+<td align="center">2990885</td>
+<td align="center">2362010</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>CHC</strong></td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">5312678</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>CHN</strong></td>
+<td align="center">5001893</td>
+<td align="center">3392194</td>
+<td align="center">3867989</td>
+<td align="center">2426759</td>
+<td align="center">4138547</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>CIN</strong></td>
+<td align="center">2531571</td>
+<td align="center">2935843</td>
+<td align="center">4256178</td>
+<td align="center">3864911</td>
+<td align="center">4187862</td>
+<td align="center">3066899</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>CLE</strong></td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">4500000</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>COL</strong></td>
+<td align="center">3390310</td>
+<td align="center">2692054</td>
+<td align="center">2976363</td>
+<td align="center">3180117</td>
+<td align="center">3827544</td>
+<td align="center">3413487</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>FLO</strong></td>
+<td align="center">2190154</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>HOU</strong></td>
+<td align="center">2437724</td>
+<td align="center">2332731</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>LAD</strong></td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">6322525</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>LAN</strong></td>
+<td align="center">3472967</td>
+<td align="center">3171453</td>
+<td align="center">6980069</td>
+<td align="center">6781706</td>
+<td align="center">7441103</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>MIA</strong></td>
+<td align="center">NA</td>
+<td align="center">4373259</td>
+<td align="center">1400079</td>
+<td align="center">1549515</td>
+<td align="center">2835688</td>
+<td align="center">2761222</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>MIL</strong></td>
+<td align="center">2849911</td>
+<td align="center">3755921</td>
+<td align="center">3077881</td>
+<td align="center">3748778</td>
+<td align="center">3477586</td>
+<td align="center">2292508</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>NYM</strong></td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">4958857</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>NYN</strong></td>
+<td align="center">4401752</td>
+<td align="center">3457555</td>
+<td align="center">1648278</td>
+<td align="center">3168777</td>
+<td align="center">3870667</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>PHI</strong></td>
+<td align="center">5765879</td>
+<td align="center">5817965</td>
+<td align="center">6533200</td>
+<td align="center">5654530</td>
+<td align="center">4295885</td>
+<td align="center">2033793</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>PIT</strong></td>
+<td align="center">1553345</td>
+<td align="center">2248286</td>
+<td align="center">2752214</td>
+<td align="center">2756357</td>
+<td align="center">3065259</td>
+<td align="center">3706387</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>SDN</strong></td>
+<td align="center">1479650</td>
+<td align="center">1973025</td>
+<td align="center">2342339</td>
+<td align="center">2703061</td>
+<td align="center">4555435</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>SDP</strong></td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">3756475</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>SFG</strong></td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">6890151</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>SFN</strong></td>
+<td align="center">4377716</td>
+<td align="center">3920689</td>
+<td align="center">5006441</td>
+<td align="center">5839649</td>
+<td align="center">6100056</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>SLN</strong></td>
+<td align="center">3904947</td>
+<td align="center">3939317</td>
+<td align="center">3295004</td>
+<td align="center">4310464</td>
+<td align="center">4586212</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>STL</strong></td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">4614629</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>WAS</strong></td>
+<td align="center">2201963</td>
+<td align="center">2695171</td>
+<td align="center">4548131</td>
+<td align="center">4399456</td>
+<td align="center">5365085</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>WSN</strong></td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">5448179</td>
+</tr>
+</tbody>
+</table>
+<p>Later on we will look at the benefits of “tidy data”, but the basic idea is that you can “facet” your analysis easily when your groups are represented as factors instead of arranged as a table. For example, here is a time series graph that is faceted by teams:</p>
+<pre class="r"><code>Salaries %&gt;% filter( yearID &gt; 2000 &amp; lgID == &quot;AL&quot; ) %&gt;% 
+             group_by( teamID, yearID ) %&gt;% 
+             summarize( Mean_Player_Salary=mean(salary) ) -&gt; t1
+
+qplot( data=t1, x=yearID, y=Mean_Player_Salary, 
+       geom=c(&quot;point&quot;, &quot;smooth&quot;)  ) + 
+       facet_wrap( ~ teamID, ncol=5 )</code></pre>
+<p><img src="p-073-group-structure_files/figure-html/unnamed-chunk-33-1.png" width="768" /></p>
+<p>Now you can quickly see that Detroit is the team that has raised salaries most aggressively.</p>
+<p>If we need to, we can easily convert a tidy dataset into something that looks like a table using the <strong>spread()</strong> function:</p>
+<pre class="r"><code>Salaries %&gt;% filter( yearID &gt; 2006 &amp; lgID == &quot;NL&quot; ) %&gt;% 
+             group_by( teamID, yearID ) %&gt;% 
+             summarize( mean = dollar(mean(salary)) ) %&gt;%
+             spread( key=yearID, value=mean, sep=&quot;_&quot; ) %&gt;% 
+             select( 1:6 ) %&gt;% na.omit() %&gt;%
+             pander</code></pre>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">teamID</th>
+<th align="center">yearID_2007</th>
+<th align="center">yearID_2008</th>
+<th align="center">yearID_2009</th>
+<th align="center">yearID_2010</th>
+<th align="center">yearID_2011</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">ARI</td>
+<td align="center">$1,859,555</td>
+<td align="center">$2,364,383</td>
+<td align="center">$2,812,141</td>
+<td align="center">$2,335,314</td>
+<td align="center">$1,986,660</td>
+</tr>
+<tr class="even">
+<td align="center">ATL</td>
+<td align="center">$3,117,530</td>
+<td align="center">$3,412,189</td>
+<td align="center">$3,335,385</td>
+<td align="center">$3,126,802</td>
+<td align="center">$3,346,257</td>
+</tr>
+<tr class="odd">
+<td align="center">CHN</td>
+<td align="center">$3,691,494</td>
+<td align="center">$4,383,179</td>
+<td align="center">$5,392,360</td>
+<td align="center">$5,429,963</td>
+<td align="center">$5,001,893</td>
+</tr>
+<tr class="even">
+<td align="center">CIN</td>
+<td align="center">$2,210,483</td>
+<td align="center">$2,647,061</td>
+<td align="center">$3,198,196</td>
+<td align="center">$2,760,059</td>
+<td align="center">$2,531,571</td>
+</tr>
+<tr class="odd">
+<td align="center">COL</td>
+<td align="center">$2,078,500</td>
+<td align="center">$2,640,596</td>
+<td align="center">$2,785,222</td>
+<td align="center">$2,904,379</td>
+<td align="center">$3,390,310</td>
+</tr>
+<tr class="even">
+<td align="center">FLO</td>
+<td align="center">$984,097</td>
+<td align="center">$660,955</td>
+<td align="center">$1,315,500</td>
+<td align="center">$2,112,212</td>
+<td align="center">$2,190,154</td>
+</tr>
+<tr class="odd">
+<td align="center">HOU</td>
+<td align="center">$3,250,333</td>
+<td align="center">$3,293,719</td>
+<td align="center">$3,814,682</td>
+<td align="center">$3,298,411</td>
+<td align="center">$2,437,724</td>
+</tr>
+<tr class="even">
+<td align="center">LAN</td>
+<td align="center">$3,739,811</td>
+<td align="center">$4,089,260</td>
+<td align="center">$4,016,584</td>
+<td align="center">$3,531,778</td>
+<td align="center">$3,472,967</td>
+</tr>
+<tr class="odd">
+<td align="center">MIL</td>
+<td align="center">$2,629,130</td>
+<td align="center">$2,790,948</td>
+<td align="center">$3,083,942</td>
+<td align="center">$2,796,837</td>
+<td align="center">$2,849,911</td>
+</tr>
+<tr class="even">
+<td align="center">NYN</td>
+<td align="center">$3,841,055</td>
+<td align="center">$4,593,113</td>
+<td align="center">$5,334,785</td>
+<td align="center">$4,800,819</td>
+<td align="center">$4,401,752</td>
+</tr>
+<tr class="odd">
+<td align="center">PHI</td>
+<td align="center">$2,980,940</td>
+<td align="center">$3,495,710</td>
+<td align="center">$4,185,335</td>
+<td align="center">$5,068,871</td>
+<td align="center">$5,765,879</td>
+</tr>
+<tr class="even">
+<td align="center">PIT</td>
+<td align="center">$1,427,327</td>
+<td align="center">$1,872,684</td>
+<td align="center">$1,872,808</td>
+<td align="center">$1,294,185</td>
+<td align="center">$1,553,345</td>
+</tr>
+<tr class="odd">
+<td align="center">SDN</td>
+<td align="center">$2,235,022</td>
+<td align="center">$2,376,697</td>
+<td align="center">$1,604,952</td>
+<td align="center">$1,453,819</td>
+<td align="center">$1,479,650</td>
+</tr>
+<tr class="even">
+<td align="center">SFN</td>
+<td align="center">$3,469,964</td>
+<td align="center">$2,641,190</td>
+<td align="center">$2,965,230</td>
+<td align="center">$3,522,905</td>
+<td align="center">$4,377,716</td>
+</tr>
+<tr class="odd">
+<td align="center">SLN</td>
+<td align="center">$3,224,529</td>
+<td align="center">$3,018,923</td>
+<td align="center">$3,278,830</td>
+<td align="center">$3,741,630</td>
+<td align="center">$3,904,947</td>
+</tr>
+<tr class="even">
+<td align="center">WAS</td>
+<td align="center">$1,319,554</td>
+<td align="center">$1,895,207</td>
+<td align="center">$2,140,286</td>
+<td align="center">$2,046,667</td>
+<td align="center">$2,201,963</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>Salaries %&gt;% filter( yearID &gt; 2006 &amp; lgID == &quot;NL&quot; ) %&gt;% 
+             group_by( teamID, yearID ) %&gt;% 
+             summarize( mean = dollar(mean(salary)) ) %&gt;%
+             spread( key=teamID, value=mean, sep=&quot;_&quot; ) %&gt;% 
+             select( 1:6 ) %&gt;% 
+             pander</code></pre>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+<col width="17%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">yearID</th>
+<th align="center">teamID_ARI</th>
+<th align="center">teamID_ATL</th>
+<th align="center">teamID_CHC</th>
+<th align="center">teamID_CHN</th>
+<th align="center">teamID_CIN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">2007</td>
+<td align="center">$1,859,555</td>
+<td align="center">$3,117,530</td>
+<td align="center">NA</td>
+<td align="center">$3,691,494</td>
+<td align="center">$2,210,483</td>
+</tr>
+<tr class="even">
+<td align="center">2008</td>
+<td align="center">$2,364,383</td>
+<td align="center">$3,412,189</td>
+<td align="center">NA</td>
+<td align="center">$4,383,179</td>
+<td align="center">$2,647,061</td>
+</tr>
+<tr class="odd">
+<td align="center">2009</td>
+<td align="center">$2,812,141</td>
+<td align="center">$3,335,385</td>
+<td align="center">NA</td>
+<td align="center">$5,392,360</td>
+<td align="center">$3,198,196</td>
+</tr>
+<tr class="even">
+<td align="center">2010</td>
+<td align="center">$2,335,314</td>
+<td align="center">$3,126,802</td>
+<td align="center">NA</td>
+<td align="center">$5,429,963</td>
+<td align="center">$2,760,059</td>
+</tr>
+<tr class="odd">
+<td align="center">2011</td>
+<td align="center">$1,986,660</td>
+<td align="center">$3,346,257</td>
+<td align="center">NA</td>
+<td align="center">$5,001,893</td>
+<td align="center">$2,531,571</td>
+</tr>
+<tr class="even">
+<td align="center">2012</td>
+<td align="center">$2,733,512</td>
+<td align="center">$2,856,205</td>
+<td align="center">NA</td>
+<td align="center">$3,392,194</td>
+<td align="center">$2,935,843</td>
+</tr>
+<tr class="odd">
+<td align="center">2013</td>
+<td align="center">$3,004,400</td>
+<td align="center">$3,254,501</td>
+<td align="center">NA</td>
+<td align="center">$3,867,989</td>
+<td align="center">$4,256,178</td>
+</tr>
+<tr class="even">
+<td align="center">2014</td>
+<td align="center">$3,763,904</td>
+<td align="center">$4,067,042</td>
+<td align="center">NA</td>
+<td align="center">$2,426,759</td>
+<td align="center">$3,864,911</td>
+</tr>
+<tr class="odd">
+<td align="center">2015</td>
+<td align="center">$2,034,250</td>
+<td align="center">$2,990,885</td>
+<td align="center">NA</td>
+<td align="center">$4,138,547</td>
+<td align="center">$4,187,862</td>
+</tr>
+<tr class="even">
+<td align="center">2016</td>
+<td align="center">$3,363,041</td>
+<td align="center">$2,362,010</td>
+<td align="center">$5,312,678</td>
+<td align="center">NA</td>
+<td align="center">$3,066,899</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

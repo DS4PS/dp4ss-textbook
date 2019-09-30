@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>p-070-data-verbs.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
+    <span class="fa fa-sun fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#data-verbs"><span class="toc-section-number">1</span> DATA VERBS</a></li>
+<li><a href="#the-dplyr-package"><span class="toc-section-number">2</span> The <strong>dplyr</strong> Package</a><ul>
+<li><a href="#packages-used-in-this-chapter"><span class="toc-section-number">2.1</span> Packages Used in This Chapter</a></li>
+<li><a href="#key-concepts"><span class="toc-section-number">2.2</span> Key Concepts</a></li>
+<li><a href="#the-dplyr-package-1"><span class="toc-section-number">2.3</span> The <strong>dplyr</strong> Package</a></li>
+<li><a href="#use-filter-to-subset-rows"><span class="toc-section-number">2.4</span> Use <strong>filter()</strong> to Subset Rows</a></li>
+<li><a href="#select-columns"><span class="toc-section-number">2.5</span> <strong>select()</strong> Columns</a></li>
+<li><a href="#arrange-sorts-data"><span class="toc-section-number">2.6</span> <strong>arrange()</strong> Sorts Data</a></li>
+<li><a href="#variable-transforms-with-mutate"><span class="toc-section-number">2.7</span> Variable Transforms with <strong>mutate()</strong></a></li>
+<li><a href="#rename-variables"><span class="toc-section-number">2.8</span> <strong>rename()</strong> Variables</a></li>
+<li><a href="#summarize-variables"><span class="toc-section-number">2.9</span> <strong>summarize()</strong> Variables</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="data-verbs" class="section level1">
+<h1><span class="header-section-number">1</span> DATA VERBS</h1>
+<p>In this section we are shifting the focus from vector operations to dataset operations.</p>
+<p>Some of the most popular packages for building and manipulating datasets come from what is affectionately referred to as the “tidyverse”, a set of packages developed by Hadley Wickam and the R Studio team. They are designed to make basic dataset operations more intuitive and robust.</p>
+<p>These packages were created with a common framework for data design called “tidy data”. When datasets are built as or wrangled into the tidy format they are much easier to analyze, and they will play nicely with a large set of packages the follow the same philosophy of data design.</p>
+<p>The core R packages contain all of the functions necessary to wrangle datasets, but they are sometimes counter-intuitive or clumbsy in the sense that they might start with a data frame and return a table or a list, making them hard to use in data recipes. All of the “data verbs” that we will cover in this section start with a data frame and return a data frame, making them easier to use as data steps within a larger project.</p>
+<p>We will begin with some extremely useful verbs contained within the <code>dplyr</code> package.</p>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="figures/data_verbs.png" alt="A data verb requires a dataset as input, and returns a transformed dataset." width="60%" />
+<p class="caption">
+Figure 1.1: A data verb requires a dataset as input, and returns a transformed dataset.
+</p>
+</div>
+</div>
+<div id="the-dplyr-package" class="section level1">
+<h1><span class="header-section-number">2</span> The <strong>dplyr</strong> Package</h1>
+<style>
+th {
+    text-align: left;
+}
+td {
+    text-align: left;
+}
+</style>
+<div id="packages-used-in-this-chapter" class="section level2">
+<h2><span class="header-section-number">2.1</span> Packages Used in This Chapter</h2>
+<pre class="r"><code>library( dplyr )
+library( pander )</code></pre>
+</div>
+<div id="key-concepts" class="section level2">
+<h2><span class="header-section-number">2.2</span> Key Concepts</h2>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="figures/dataset_verbs.png" alt="Data verbs are functions that require a dataframe as the primary argument, perform some transformation on the data, then return a new dataframe." width="60%" />
+<p class="caption">
+Figure 2.1: Data verbs are functions that require a dataframe as the primary argument, perform some transformation on the data, then return a new dataframe.
+</p>
+</div>
+<p>For a nice overview of all of the dataset verbs in <code>dplyr</code> check out <a href="https://ugoproto.github.io/ugo_r_doc/dplyr.pdf">The <code>dplyr</code> Cheatsheet</a>.</p>
+</div>
+<div id="the-dplyr-package-1" class="section level2">
+<h2><span class="header-section-number">2.3</span> The <strong>dplyr</strong> Package</h2>
+<p>This chapter will demonstrate a few basic dataset functions contained within the <strong>dplyr</strong> package. There are a few things to note as you get started:</p>
+<ul>
+<li><code>dplyr</code> functions are all data verbs that accept a dataset as the argument, transform the data, and return a new dataset.</li>
+<li>The first argument is always the dataset name, and variables (columns) can be referenced directly by name without quotation marks.</li>
+<li><code>dplyr</code> functions will return data as a “tibble” (<em>tbl_df</em> class), which is a regular data frame wrapped in a nice print method that includes metadata in the printout.</li>
+</ul>
+<p>For example, here is the regular data frame preview:</p>
+<pre><code>##    weight group
+## 1    4.17  ctrl
+## 2    5.58  ctrl
+## 3    5.18  ctrl
+## 4    6.11  ctrl
+## 5    4.50  ctrl
+## 6    4.61  ctrl
+## 7    5.17  ctrl
+## 8    4.53  ctrl
+## 9    5.33  ctrl
+## 10   5.14  ctrl</code></pre>
+<p>The tibble will print the first few rows and columns of a dataset, and includes dataset dimensions and vector classes:</p>
+<pre><code>## # A tibble: 30 x 2
+##    weight group
+##     &lt;dbl&gt; &lt;fct&gt;
+##  1   4.17 ctrl 
+##  2   5.58 ctrl 
+##  3   5.18 ctrl 
+##  4   6.11 ctrl 
+##  5   4.5  ctrl 
+##  6   4.61 ctrl 
+##  7   5.17 ctrl 
+##  8   4.53 ctrl 
+##  9   5.33 ctrl 
+## 10   5.14 ctrl 
+## # ... with 20 more rows</code></pre>
+<p>We will cover the following <strong><em>dplyr</em></strong> functions in this section of the textbook:</p>
+<table>
+<colgroup>
+<col width="47%" />
+<col width="52%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>DATA VERB</th>
+<th>ACTION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>filter()</td>
+<td>Select rows</td>
+</tr>
+<tr class="even">
+<td>select()</td>
+<td>Select columns</td>
+</tr>
+<tr class="odd">
+<td>arrage()</td>
+<td>Sort the dataset by one or more columns</td>
+</tr>
+<tr class="even">
+<td>mutate()</td>
+<td>Create a new variable by transforming an existing variable or variables</td>
+</tr>
+<tr class="odd">
+<td>summarize()</td>
+<td>Create summary statistics for specified variables</td>
+</tr>
+<tr class="even">
+<td>group_by()</td>
+<td>Split the dataset (implicitly) into a separate dataset for each group</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="use-filter-to-subset-rows" class="section level2">
+<h2><span class="header-section-number">2.4</span> Use <strong>filter()</strong> to Subset Rows</h2>
+<p><img src="figures/filter.png" width="60%" /></p>
+<p>In the last chapter we learned how to use operators to translate from plain English questions to data queries.</p>
+<p>As an example, a city manager might want to know the average amount owed on a delinquent property tax.</p>
+<table style="width:32%;">
+<colgroup>
+<col width="12%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">tax.id</th>
+<th align="center">amount.owed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">$0</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">$5,549</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">$0</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">$1,709</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">$0</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">$634</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">$0</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">$0</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center">$0</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">$9,353</td>
+</tr>
+</tbody>
+</table>
+<p>We could write the query as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Define the group.</li>
+<li>Select the data that belongs to the group.</li>
+<li>Analyze the group subset.</li>
+</ol>
+<pre class="r"><code>these.late &lt;- taxdat$amount.owed &gt; 0                 # 1. Define group
+overdue.amounts &lt;- taxdat$amount.owed[ these.late ]  # 2. Select data
+overdue.amounts</code></pre>
+<pre><code>## [1] 5549 1709  634 9353 1366</code></pre>
+<pre class="r"><code>mean( overdue.amounts )                              # 3. Analyze data</code></pre>
+<pre><code>## [1] 3722.2</code></pre>
+<p>The <strong>filter()</strong> function in the <strong><em>dplyr</em></strong> package is a slightly more elegant verb for selecting the group and subsetting the data by rows.</p>
+<blockquote>
+<p>filter( dataset name , logical expression )</p>
+</blockquote>
+<pre class="r"><code>filter( taxdat, amount.owed &gt; 0 )</code></pre>
+<pre><code>##   tax.id amount.owed
+## 1      2        5549
+## 2      4        1709
+## 3      6         634
+## 4     10        9353
+## 5     12        1366</code></pre>
+<p>Note that we do not need to reference the dat$ references inside <strong>dplyr</strong> functions.</p>
+</div>
+<div id="select-columns" class="section level2">
+<h2><span class="header-section-number">2.5</span> <strong>select()</strong> Columns</h2>
+<p><img src="figures/select.png" width="60%" /></p>
+<p>In the core R operators, we select colums from a dataset using the subset function:</p>
+<pre class="r"><code>data( USArrests ) # historic data on crime rates in the US</code></pre>
+<table style="width:75%;">
+<colgroup>
+<col width="23%" />
+<col width="12%" />
+<col width="13%" />
+<col width="15%" />
+<col width="9%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Murder</th>
+<th align="center">Assault</th>
+<th align="center">UrbanPop</th>
+<th align="center">Rape</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Alabama</strong></td>
+<td align="center">13.2</td>
+<td align="center">236</td>
+<td align="center">58</td>
+<td align="center">21.2</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Alaska</strong></td>
+<td align="center">10</td>
+<td align="center">263</td>
+<td align="center">48</td>
+<td align="center">44.5</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Arizona</strong></td>
+<td align="center">8.1</td>
+<td align="center">294</td>
+<td align="center">80</td>
+<td align="center">31</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Arkansas</strong></td>
+<td align="center">8.8</td>
+<td align="center">190</td>
+<td align="center">50</td>
+<td align="center">19.5</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>California</strong></td>
+<td align="center">9</td>
+<td align="center">276</td>
+<td align="center">91</td>
+<td align="center">40.6</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Colorado</strong></td>
+<td align="center">7.9</td>
+<td align="center">204</td>
+<td align="center">78</td>
+<td align="center">38.7</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>USArrests[ , c(&quot;Murder&quot;,&quot;Assault&quot;) ]</code></pre>
+<table style="width:50%;">
+<colgroup>
+<col width="23%" />
+<col width="12%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Murder</th>
+<th align="center">Assault</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Alabama</strong></td>
+<td align="center">13.2</td>
+<td align="center">236</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Alaska</strong></td>
+<td align="center">10</td>
+<td align="center">263</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Arizona</strong></td>
+<td align="center">8.1</td>
+<td align="center">294</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Arkansas</strong></td>
+<td align="center">8.8</td>
+<td align="center">190</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>California</strong></td>
+<td align="center">9</td>
+<td align="center">276</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Colorado</strong></td>
+<td align="center">7.9</td>
+<td align="center">204</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong><em>select()</em></strong> function converts this oeration into a data verb:</p>
+<pre class="r"><code>select( USArrests, Murder, Assault )</code></pre>
+<table style="width:50%;">
+<colgroup>
+<col width="23%" />
+<col width="12%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">Murder</th>
+<th align="center">Assault</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>Alabama</strong></td>
+<td align="center">13.2</td>
+<td align="center">236</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Alaska</strong></td>
+<td align="center">10</td>
+<td align="center">263</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>Arizona</strong></td>
+<td align="center">8.1</td>
+<td align="center">294</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Arkansas</strong></td>
+<td align="center">8.8</td>
+<td align="center">190</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>California</strong></td>
+<td align="center">9</td>
+<td align="center">276</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>Colorado</strong></td>
+<td align="center">7.9</td>
+<td align="center">204</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong><em>select()</em></strong> function adds a lot of additional arguments that make it easy to quickly identify and keep only the necessary variables. We can demonstrate a few using the built-in <em>iris</em> dataset in R.</p>
+<pre class="r"><code>head( iris ) %&gt;% pander()</code></pre>
+<table style="width:94%;">
+<colgroup>
+<col width="20%" />
+<col width="19%" />
+<col width="20%" />
+<col width="19%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Sepal.Length</th>
+<th align="center">Sepal.Width</th>
+<th align="center">Petal.Length</th>
+<th align="center">Petal.Width</th>
+<th align="center">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">5.1</td>
+<td align="center">3.5</td>
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="even">
+<td align="center">4.9</td>
+<td align="center">3</td>
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="odd">
+<td align="center">4.7</td>
+<td align="center">3.2</td>
+<td align="center">1.3</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="even">
+<td align="center">4.6</td>
+<td align="center">3.1</td>
+<td align="center">1.5</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">3.6</td>
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="even">
+<td align="center">5.4</td>
+<td align="center">3.9</td>
+<td align="center">1.7</td>
+<td align="center">0.4</td>
+<td align="center">setosa</td>
+</tr>
+</tbody>
+</table>
+<p>Exclude a column with the negative sign:</p>
+<pre class="r"><code>select( iris, -Species ) </code></pre>
+<table style="width:82%;">
+<colgroup>
+<col width="20%" />
+<col width="19%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Sepal.Length</th>
+<th align="center">Sepal.Width</th>
+<th align="center">Petal.Length</th>
+<th align="center">Petal.Width</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">5.1</td>
+<td align="center">3.5</td>
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="even">
+<td align="center">4.9</td>
+<td align="center">3</td>
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="odd">
+<td align="center">4.7</td>
+<td align="center">3.2</td>
+<td align="center">1.3</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="even">
+<td align="center">4.6</td>
+<td align="center">3.1</td>
+<td align="center">1.5</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">3.6</td>
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="even">
+<td align="center">5.4</td>
+<td align="center">3.9</td>
+<td align="center">1.7</td>
+<td align="center">0.4</td>
+</tr>
+</tbody>
+</table>
+<p>Select by variable names:</p>
+<pre class="r"><code>select( iris, ends_with( &quot;Length&quot; ) ) </code></pre>
+<table style="width:42%;">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Sepal.Length</th>
+<th align="center">Petal.Length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">5.1</td>
+<td align="center">1.4</td>
+</tr>
+<tr class="even">
+<td align="center">4.9</td>
+<td align="center">1.4</td>
+</tr>
+<tr class="odd">
+<td align="center">4.7</td>
+<td align="center">1.3</td>
+</tr>
+<tr class="even">
+<td align="center">4.6</td>
+<td align="center">1.5</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">1.4</td>
+</tr>
+<tr class="even">
+<td align="center">5.4</td>
+<td align="center">1.7</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>select( iris, starts_with( &quot;Petal&quot; ) ) </code></pre>
+<table style="width:42%;">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Petal.Length</th>
+<th align="center">Petal.Width</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="even">
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="odd">
+<td align="center">1.3</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="even">
+<td align="center">1.5</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="odd">
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="even">
+<td align="center">1.7</td>
+<td align="center">0.4</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>select( iris, matches(&quot;pal&quot;) ) </code></pre>
+<table style="width:42%;">
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Sepal.Length</th>
+<th align="center">Sepal.Width</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">5.1</td>
+<td align="center">3.5</td>
+</tr>
+<tr class="even">
+<td align="center">4.9</td>
+<td align="center">3</td>
+</tr>
+<tr class="odd">
+<td align="center">4.7</td>
+<td align="center">3.2</td>
+</tr>
+<tr class="even">
+<td align="center">4.6</td>
+<td align="center">3.1</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">3.6</td>
+</tr>
+<tr class="even">
+<td align="center">5.4</td>
+<td align="center">3.9</td>
+</tr>
+</tbody>
+</table>
+<p>Or we can select by a range of variables by placing a colon between the first and last:</p>
+<pre class="r"><code>select( iris, Sepal.Length:Petal.Width ) </code></pre>
+<table style="width:54%;">
+<colgroup>
+<col width="20%" />
+<col width="19%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Petal.Length</th>
+<th align="center">Petal.Width</th>
+<th align="center">Species</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="even">
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="odd">
+<td align="center">1.3</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="even">
+<td align="center">1.5</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="odd">
+<td align="center">1.4</td>
+<td align="center">0.2</td>
+<td align="center">setosa</td>
+</tr>
+<tr class="even">
+<td align="center">1.7</td>
+<td align="center">0.4</td>
+<td align="center">setosa</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="arrange-sorts-data" class="section level2">
+<h2><span class="header-section-number">2.6</span> <strong>arrange()</strong> Sorts Data</h2>
+<p><img src="figures/arrange.png" width="60%" /></p>
+<p>The <strong><em>arrange()</em></strong> function sorts a dataset by one or more columns. By default, it sorts from smallest to largest.</p>
+<pre class="r"><code>arrange( PlantGrowth, weight ) </code></pre>
+<table style="width:25%;">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">weight</th>
+<th align="center">group</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">3.59</td>
+<td align="center">trt1</td>
+</tr>
+<tr class="even">
+<td align="center">3.83</td>
+<td align="center">trt1</td>
+</tr>
+<tr class="odd">
+<td align="center">4.17</td>
+<td align="center">ctrl</td>
+</tr>
+<tr class="even">
+<td align="center">4.17</td>
+<td align="center">trt1</td>
+</tr>
+<tr class="odd">
+<td align="center">4.32</td>
+<td align="center">trt1</td>
+</tr>
+</tbody>
+</table>
+<p>If we prefer the dataset be sorted from largest to smallest, we can applyr the descending function <strong>desc()</strong> to the sort variable.</p>
+<pre class="r"><code>arrange( PlantGrowth, desc(weight) ) </code></pre>
+<table style="width:25%;">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">weight</th>
+<th align="center">group</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">6.31</td>
+<td align="center">trt2</td>
+</tr>
+<tr class="even">
+<td align="center">6.15</td>
+<td align="center">trt2</td>
+</tr>
+<tr class="odd">
+<td align="center">6.11</td>
+<td align="center">ctrl</td>
+</tr>
+<tr class="even">
+<td align="center">6.03</td>
+<td align="center">trt1</td>
+</tr>
+<tr class="odd">
+<td align="center">5.87</td>
+<td align="center">trt1</td>
+</tr>
+</tbody>
+</table>
+<p>Or alternatively we can use the shortcut syntax of adding a negative sign in front of the variable:</p>
+<pre class="r"><code>arrange( PlantGrowth, -weight ) </code></pre>
+<p>We can also sort by multiple columns at once:</p>
+<pre class="r"><code>arrange( PlantGrowth, group, weight ) </code></pre>
+<table style="width:24%;">
+<colgroup>
+<col width="11%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">group</th>
+<th align="center">weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">ctrl</td>
+<td align="center">5.17</td>
+</tr>
+<tr class="even">
+<td align="center">ctrl</td>
+<td align="center">5.18</td>
+</tr>
+<tr class="odd">
+<td align="center">ctrl</td>
+<td align="center">5.33</td>
+</tr>
+<tr class="even">
+<td align="center">ctrl</td>
+<td align="center">5.58</td>
+</tr>
+<tr class="odd">
+<td align="center">ctrl</td>
+<td align="center">6.11</td>
+</tr>
+<tr class="even">
+<td align="center">trt1</td>
+<td align="center">4.69</td>
+</tr>
+<tr class="odd">
+<td align="center">trt1</td>
+<td align="center">4.81</td>
+</tr>
+<tr class="even">
+<td align="center">trt1</td>
+<td align="center">4.89</td>
+</tr>
+<tr class="odd">
+<td align="center">trt1</td>
+<td align="center">5.87</td>
+</tr>
+<tr class="even">
+<td align="center">trt1</td>
+<td align="center">6.03</td>
+</tr>
+</tbody>
+</table>
+<p>NOTE, the equivalent core R functions would use <strong>subset[]</strong> and <strong>order()</strong> functions together. You might see examples on Stack Overflow written like this:</p>
+<pre class="r"><code>PlantGrowth[ order(PlantGrowth$weight, decreasing=TRUE) , ]</code></pre>
+<table style="width:38%;">
+<colgroup>
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">weight</th>
+<th align="center">group</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>21</strong></td>
+<td align="center">6.31</td>
+<td align="center">trt2</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>28</strong></td>
+<td align="center">6.15</td>
+<td align="center">trt2</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>4</strong></td>
+<td align="center">6.11</td>
+<td align="center">ctrl</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>17</strong></td>
+<td align="center">6.03</td>
+<td align="center">trt1</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>15</strong></td>
+<td align="center">5.87</td>
+<td align="center">trt1</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>29</strong></td>
+<td align="center">5.8</td>
+<td align="center">trt2</td>
+</tr>
+</tbody>
+</table>
+<p>As you can see, the <code>dplyr</code> versions are typically more intuitive and concise!</p>
+</div>
+<div id="variable-transforms-with-mutate" class="section level2">
+<h2><span class="header-section-number">2.7</span> Variable Transforms with <strong>mutate()</strong></h2>
+<p>One of the most common operations in data analysis is to create a new variable from one or more existing variables, a “variable transformation”. Some examples include:</p>
+<pre class="r"><code>x_squared &lt;-  x * x
+
+celsius &lt;-  ( fereinheit - 32 ) * ( 5/9 )
+
+body.mass.index &lt;-  kg / meters^2
+
+per.capita.income &lt;-  income / population</code></pre>
+<p>The <strong><em>mutate()</em></strong> function creates a new transformed variable from the forumala you specify and adds it to the original dataset.</p>
+<p>As an example, perhaps we have data on the number of nonprofits located in each US city. If we look at the raw count of nonprofits, it makes it look as though the large cities have the most vibrant nonprofit sectors:</p>
+<table style="width:40%;">
+<colgroup>
+<col width="22%" />
+<col width="18%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">city</th>
+<th align="center">nonprofits</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">NEW YORK</td>
+<td align="center">26503</td>
+</tr>
+<tr class="even">
+<td align="center">LOS ANGELES</td>
+<td align="center">17417</td>
+</tr>
+<tr class="odd">
+<td align="center">WASHINGTON</td>
+<td align="center">15701</td>
+</tr>
+<tr class="even">
+<td align="center">SAN FRANCISCO</td>
+<td align="center">12149</td>
+</tr>
+<tr class="odd">
+<td align="center">BOSTON</td>
+<td align="center">10536</td>
+</tr>
+<tr class="even">
+<td align="center">CHICAGO</td>
+<td align="center">10247</td>
+</tr>
+<tr class="odd">
+<td align="center">PHILADELPHIA</td>
+<td align="center">8538</td>
+</tr>
+<tr class="even">
+<td align="center">DALLAS</td>
+<td align="center">6008</td>
+</tr>
+<tr class="odd">
+<td align="center">SEATTLE</td>
+<td align="center">5830</td>
+</tr>
+<tr class="even">
+<td align="center">ATLANTA</td>
+<td align="center">5438</td>
+</tr>
+</tbody>
+</table>
+<p>But these numbers may be misleading. Once we account for the population size through a new nonprofit density metric (nonprofits per 1,000 residents), we can see that some smaller cities have higher densities per capita.</p>
+<pre class="r"><code>dat.npos &lt;- mutate( dat.npos, density = nonprofits / (pop/1000) )</code></pre>
+<table style="width:36%;">
+<colgroup>
+<col width="22%" />
+<col width="13%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">city</th>
+<th align="center">density</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">PORTLAND</td>
+<td align="center">2.65</td>
+</tr>
+<tr class="even">
+<td align="center">MADISON</td>
+<td align="center">2.415</td>
+</tr>
+<tr class="odd">
+<td align="center">ANCHORAGE</td>
+<td align="center">2.156</td>
+</tr>
+<tr class="even">
+<td align="center">SANTA BARBARA</td>
+<td align="center">1.928</td>
+</tr>
+<tr class="odd">
+<td align="center">LINCOLN</td>
+<td align="center">1.886</td>
+</tr>
+<tr class="even">
+<td align="center">WASHINGTON</td>
+<td align="center">1.866</td>
+</tr>
+<tr class="odd">
+<td align="center">ASHEVILLE</td>
+<td align="center">1.805</td>
+</tr>
+<tr class="even">
+<td align="center">TALLAHASSEE</td>
+<td align="center">1.785</td>
+</tr>
+<tr class="odd">
+<td align="center">BOSTON</td>
+<td align="center">1.692</td>
+</tr>
+<tr class="even">
+<td align="center">ALBANY</td>
+<td align="center">1.685</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="rename-variables" class="section level2">
+<h2><span class="header-section-number">2.8</span> <strong>rename()</strong> Variables</h2>
+<p>More often than not you will read in a dataset that has strange or meaningless variable names:</p>
+<pre class="r"><code>x1 &lt;- c(&quot;male&quot;,&quot;male&quot;,&quot;female&quot;,&quot;female&quot;)
+x2 &lt;- c(&quot;treatment&quot;,&quot;control&quot;,&quot;treatment&quot;,&quot;control&quot;)
+dat &lt;- data.frame( x1, x2 )</code></pre>
+<table style="width:29%;">
+<colgroup>
+<col width="12%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">x1</th>
+<th align="center">x2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">male</td>
+<td align="center">treatment</td>
+</tr>
+<tr class="even">
+<td align="center">male</td>
+<td align="center">control</td>
+</tr>
+<tr class="odd">
+<td align="center">female</td>
+<td align="center">treatment</td>
+</tr>
+<tr class="even">
+<td align="center">female</td>
+<td align="center">control</td>
+</tr>
+</tbody>
+</table>
+<p>The core R functions make it a little awkward to rename these variables.</p>
+<pre class="r"><code>names( dat ) &lt;- c(&quot;gender&quot;,&quot;study.group&quot;)</code></pre>
+<table style="width:32%;">
+<colgroup>
+<col width="12%" />
+<col width="19%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">gender</th>
+<th align="center">study.group</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">male</td>
+<td align="center">treatment</td>
+</tr>
+<tr class="even">
+<td align="center">male</td>
+<td align="center">control</td>
+</tr>
+<tr class="odd">
+<td align="center">female</td>
+<td align="center">treatment</td>
+</tr>
+<tr class="even">
+<td align="center">female</td>
+<td align="center">control</td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>rename()</strong> function provides a more intuitive syntax:</p>
+<pre class="r"><code>rename( dat, gender=x1, study.group=x2 )</code></pre>
+</div>
+<div id="summarize-variables" class="section level2">
+<h2><span class="header-section-number">2.9</span> <strong>summarize()</strong> Variables</h2>
+<p>The next chapter will cover descriptive statistics in more depth, including some useful packages and functions for generating statistics for a variety of variable types and and reporting nice tables.</p>
+<p>Most descriptive functions, however, are not data verbs in the sense that they accept a data frame as the input and return a transformed data frame or tibble. The <strong>dplyr</strong> function <strong>summarize()</strong> is the primary function that will be used in data recipes (see the next chapter).</p>
+<p>Like other data verbs, the first argument will be the input dataset. In this case, there is no pre-determined set of descriptive statistics. The user needs to specify the desired metrics.</p>
+<table style="width:44%;">
+<colgroup>
+<col width="16%" />
+<col width="12%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">group</th>
+<th align="center">gender</th>
+<th align="center">strength</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">control</td>
+<td align="center">male</td>
+<td align="center">86</td>
+</tr>
+<tr class="even">
+<td align="center">treatment</td>
+<td align="center">female</td>
+<td align="center">110</td>
+</tr>
+<tr class="odd">
+<td align="center">control</td>
+<td align="center">female</td>
+<td align="center">92</td>
+</tr>
+<tr class="even">
+<td align="center">treatment</td>
+<td align="center">male</td>
+<td align="center">100</td>
+</tr>
+<tr class="odd">
+<td align="center">treatment</td>
+<td align="center">female</td>
+<td align="center">110</td>
+</tr>
+<tr class="even">
+<td align="center">treatment</td>
+<td align="center">male</td>
+<td align="center">73</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>summarize( dat, n=n(), min=min(strength), mean=mean(strength), max=max(strength) )</code></pre>
+<pre><code>##     n min  mean max
+## 1 100  33 97.53 158</code></pre>
+<p>Similarly, the native <strong>table()</strong> function is useful, but returns a table object. The <strong>dplyr</strong> <strong>count()</strong> function will function almost identically, but it will return a data frame.</p>
+<pre class="r"><code>dplyr::count( dat, group, gender )</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   group     gender     n
+##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;
+## 1 control   female    24
+## 2 control   male      27
+## 3 treatment female    27
+## 4 treatment male      22</code></pre>
+<p>The real power of this function is the ability to use it with the <strong>group_by()</strong> function to analyze outcomes for many data subsets at once.</p>
+<pre class="r"><code>grouped.dat &lt;- group_by( dat, group, gender )
+dplyr::summarize( grouped.dat, 
+                  n=n(), 
+                  min=min(strength), 
+                  mean=round( mean(strength), 1 ), 
+                  max=max(strength) ) </code></pre>
+<pre><code>## # A tibble: 4 x 6
+## # Groups:   group [?]
+##   group     gender     n   min  mean   max
+##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 control   female    24    82 106.    142
+## 2 control   male      27    33  78.3   104
+## 3 treatment female    27    86 120.    158
+## 4 treatment male      22    54  84.4   113</code></pre>
+<p>We will discuss this functionality in-depth two chapters from now.</p>
+</div>
+</div>
+
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
