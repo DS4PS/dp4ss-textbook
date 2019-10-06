@@ -309,53 +309,108 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#summarizing-vectors"><span class="toc-section-number">1</span> Summarizing Vectors</a><ul>
-<li><a href="#logical-variables"><span class="toc-section-number">1.1</span> Logical Variables:</a></li>
-<li><a href="#summarizing-logical-vectors-with-arithmetic"><span class="toc-section-number">1.2</span> Summarizing Logical Vectors with Arithmetic</a></li>
-<li><a href="#creating-factors-categorizing-logical-vectors"><span class="toc-section-number">1.3</span> Creating Factors: Categorizing Logical Vectors</a></li>
-<li><a href="#describing-vectors-of-class-character"><span class="toc-section-number">1.4</span> Describing Vectors of Class “Character”</a></li>
-<li><a href="#converting-labels-into-factors"><span class="toc-section-number">1.5</span> Converting Labels into Factors</a></li>
-<li><a href="#summarizing-factors-describing-categorical-data"><span class="toc-section-number">1.6</span> Summarizing Factors: Describing Categorical Data</a></li>
+<li><a href="#exploring-summarizing-data"><span class="toc-section-number">1</span> Exploring &amp; Summarizing Data</a><ul>
+<li><a href="#exploratory-data-analysis"><span class="toc-section-number">1.1</span> Exploratory Data Analysis</a></li>
+<li><a href="#exploratory-data-visualization"><span class="toc-section-number">1.2</span> Exploratory Data Visualization</a></li>
+<li><a href="#descriptive-statistics"><span class="toc-section-number">1.3</span> Descriptive Statistics</a></li>
+<li><a href="#group-wise-summaries-in-base-r"><span class="toc-section-number">1.4</span> Group-Wise Summaries in Base R</a></li>
+<li><a href="#group-wise-operations-with-dplyr"><span class="toc-section-number">1.5</span> Group-Wise Operations with dplyr</a></li>
+<li><a href="#further-resources"><span class="toc-section-number">1.6</span> Further Resources</a></li>
 </ul></li>
 </ul>
 </div>
 
-<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
-<div id="summarizing-vectors" class="section level1">
-<h1><span class="header-section-number">1</span> Summarizing Vectors</h1>
+<div id="exploring-summarizing-data" class="section level1">
+<h1><span class="header-section-number">1</span> Exploring &amp; Summarizing Data</h1>
 <p><br>
 <br></p>
 <div class="tip">
 <h2 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h2>
-<p>In this chapter, we’ll explore the following key concepts:</p>
+<p>In this chapter, we’ll explore the following key concepts and functions:</p>
 <ul>
-<li>Counting Logical Values: Function <code>sum()</code></li>
-<li>Tallying Categorical Variables: <code>table()</code></li>
-<li>Determining Missing Values: <code>is.na()</code></li>
-<li>Table Proportionality: <code>prop.table()</code></li>
-<li>Table Margins: <code>margin.table()</code></li>
+<li>Exploratory Data Analysis (EDA) &amp; Initial Data Analysis (IDA)
+<ul>
+<li><code>str()</code></li>
+<li><code>nrow()</code></li>
+<li><code>ncol()</code></li>
+<li><code>dim()</code></li>
+<li><code>length()</code></li>
+<li><code>rownames()</code></li>
+<li><code>colnames()</code></li>
+<li><code>names()</code></li>
+<li><code>class()</code></li>
+<li><code>levels()</code></li>
+<li><code>head()</code></li>
+<li><code>tail()</code></li>
+<li><code>summary()</code></li>
+<li><code>View()</code></li>
+<li><code>?</code> &amp; <code>help()</code></li>
+<li><code>Desc()</code></li>
+<li><code>glimpse()</code></li>
+</ul></li>
+<li>Contingency Tables for Frequency &amp; Proportionality
+<ul>
+<li><code>table()</code></li>
+<li><code>prop.table()</code></li>
+<li><code>ftable()</code></li>
+</ul></li>
+<li>Exploratory Data Visualization (EDV)
+<ul>
+<li><code>hist()</code></li>
+<li><code>boxplot()</code></li>
+<li><code>plot()</code></li>
+<li><code>pairs()</code></li>
+<li><code>par()</code></li>
+<li><code>ggpairs()</code> (<strong>GGally</strong>)</li>
+</ul></li>
 <li>Functions for Descriptive Stats:
 <ul>
+<li><code>mean()</code></li>
+<li><code>median()</code></li>
 <li><code>min()</code></li>
 <li><code>max()</code></li>
-<li><code>mean()</code></li>
-<li><code>summary()</code></li>
+<li><code>var()</code></li>
 <li><code>quantile()</code></li>
 </ul></li>
-<li>Combining Functions <code>summary()</code> &amp; <code>data.frame()</code></li>
-<li>Creating Tables of Descriptives: Factor &amp; Numeric Variables</li>
+<li>Tabulating Summary Output</li>
+<li>Grouping &amp; Summary Operations with <strong>dplyr</strong>
+<ul>
+<li><code>%&gt;%</code></li>
+<li><code>filter()</code></li>
+<li><code>select()</code></li>
+<li><code>group_by()</code></li>
+<li><code>summarize()</code></li>
+<li><code>ungroup()</code></li>
+</ul></li>
 </ul>
 <h2 id="new-packages"><span class="header-section-number">1</span> New Packages</h2>
-<p>This chapter uses the following packages:</p>
+<p>This chapter uses the following packages (in order of appearance):</p>
 <ul>
-<li>Package A</li>
+<li><a href="https://cran.r-project.org/web/packages/DescTools/index.html">DescTools</a></li>
+<li><a href="https://cran.r-project.org/web/packages/GGally/index.html">GGally</a></li>
+<li><a href="https://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a></li>
 </ul>
 <h2 id="key-takeaways"><span class="header-section-number">1</span> Key Takeaways</h2>
 <p>Too long; didn’t read? Here’s what you need to know:</p>
 <ul>
-<li>Item A</li>
-<li>Item B</li>
-<li>Item C</li>
+<li>Initial and Exploratory Data Analysis (IDA; EDA) are key to exploring new data
+<ul>
+<li>Key functions: <code>str()</code> for structure, <code>summary()</code> for descriptive stats</li>
+</ul></li>
+<li>Exploratory Data Visualization (EDV) is critical for exploratory analysis
+<ul>
+<li>Key functions: <code>plot()</code>, <code>hist()</code>, <code>boxplot()</code>, <code>pairs()</code></li>
+</ul></li>
+<li>Descriptive statistics functions describe quantitative data
+<ul>
+<li>Key functions: <code>mean()</code>, <code>median()</code>, <code>min()</code>, <code>max()</code></li>
+</ul></li>
+<li>Package <strong>dplyr</strong> makes it easy to summarize grouped variables
+<ul>
+<li>Key functions: <code>%&gt;%</code> pipes data, <code>group_by()</code>, <code>summarize()</code></li>
+<li>Example: <code>data %&gt;% group_by(variable) %&gt;% summarize(count = n())</code></li>
+<li>Don’t forget to use <code>ungroup()</code></li>
+</ul></li>
 </ul>
 <p><br>
 <br>
@@ -363,357 +418,851 @@ $(document).ready(function () {
 </div>
 <p><br>
 <br></p>
-<div id="logical-variables" class="section level2">
-<h2><span class="header-section-number">1.1</span> Logical Variables:</h2>
-<p>Class <strong>logical</strong> variables are typically comprised of one of two values: <code>TRUE</code> or <code>FALSE</code>.</p>
-<p><br>
-<br></p>
-<div id="quick-refresher-on-class-logical" class="section level3">
-<h3><span class="header-section-number">1.1.1</span> Quick Refresher on Class Logical</h3>
-<p>We can create <strong>logical</strong> variables manually. Determine their class with function <code>class()</code>:</p>
-<pre class="r"><code>x &lt;- TRUE
-
-class(x)</code></pre>
-<pre><code>## [1] &quot;logical&quot;</code></pre>
+<div id="exploratory-data-analysis" class="section level2">
+<h2><span class="header-section-number">1.1</span> Exploratory Data Analysis</h2>
+<p><strong>Exploratory Data Analysis</strong> (<strong>EDA</strong>) is the implementation of exploratory techniques to better understand <em>new data</em>. Typically, <strong>EDA</strong> uses visualizing and summarizing functions to detect patterns and anomalies in data beyond initial hypotheses and research questions.</p>
 <p><br></p>
-<p>While not considered a best practice, we can use <code>T</code> and <code>F</code> as abbreviated values:</p>
-<pre class="r"><code>y &lt;- F
-
-print(y)</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<p><br></p>
-<p>Often, <strong>logical</strong> values simply indicate “yes” or “no” for your criteria:</p>
-<pre class="r"><code>character &lt;- c(&quot;Raskolnikov&quot;, &quot;Marmeladov&quot;, &quot;Razumikhin&quot;)
-criminal &lt;- c(TRUE, FALSE, FALSE)
-
-data.frame(character,
-           criminal)        # Create data frame of characters and crime status</code></pre>
-<pre><code>##     character criminal
-## 1 Raskolnikov     TRUE
-## 2  Marmeladov    FALSE
-## 3  Razumikhin    FALSE</code></pre>
-<p><br></p>
-<p>Typically, <strong>logical</strong> values result from conditional statements on:</p>
-<ul>
-<li>Variables within a dataset, using <code>data$variable</code> or <code>data[i, j]</code> format</li>
-<li>Independent <strong>vectors</strong> created using <code>c()</code></li>
-</ul>
-<p><br></p>
-<p>Let’s read in the first 100 rows of <a href="https://opendata.atlantaregional.com/datasets/poverty-2016">Atlanta, Georgia poverty by census tract, 2016</a>:</p>
+<p><strong>Practice Data:</strong> To demonstrate, we’ll use <a href="https://data.ny.gov/Recreation/State-Park-Annual-Attendance-Figures-by-Facility-B/8f3n-xj78">state park annual attendance</a> from the State of New York’s <em>Office for Parks, Recreation, and Historic Preservation</em> (OPRHP).</p>
 <pre class="r"><code>library(readr)
-library(dplyr)
 
-url &lt;- paste0(&quot;https://opendata.arcgis.com&quot;,
-              &quot;/datasets/73c0eca114c440208&quot;,
-              &quot;b268bf9431e428c_240.csv&quot;)        # Atlanta&#39;s open data portal URL
+url &lt;- paste0(&quot;https://data.ny.gov/api/views/8f3n&quot;,
+              &quot;-xj78/rows.csv?accessType=DOWNLOAD&quot;)   # Assign URL: &quot;url&quot;
 
-atl &lt;- read_csv(url)[1:100, c(3:5, 9)] %&gt;%      # Read 100 rows, 4 variables
-  arrange(County, Area_Name)                    # Arrange by county, tract
-
-head(atl)                                       # Print first 6 observations</code></pre>
-<pre><code>## # A tibble: 6 x 4
-##   County Area_Name                        Total_Population Pop_below_pover~
-##    &lt;dbl&gt; &lt;chr&gt;                                       &lt;dbl&gt;            &lt;dbl&gt;
-## 1  13013 Census Tract 1801.04, Barrow Co~             2032              544
-## 2  13013 Census Tract 1801.06, Barrow Co~             2773              462
-## 3  13013 Census Tract 1803.02, Barrow Co~             5434              774
-## 4  13013 Census Tract 1805.03, Barrow Co~             4960              348
-## 5  13015 Census Tract 9603, Bartow County             6714              893
-## 6  13015 Census Tract 9604.01, Bartow Co~            10043              962</code></pre>
-<p><br></p>
-<p>Here we use logical operator <code>&gt;</code> to create a conditional statement:</p>
-<p><em>Which census tracts have populations larger than 7,000?</em></p>
-<pre class="r"><code>atl$Total_Population &gt; 7000</code></pre>
-<pre><code>##   [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE
-##  [12]  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
-##  [23] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [34] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
-##  [45]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE
-##  [56] FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE
-##  [67] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE
-##  [78] FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
-##  [89] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE
-## [100] FALSE</code></pre>
-<p>The result is a <strong>vector</strong> of logical values, or <code>TRUE</code> and <code>FALSE</code>.</p>
-<p><br></p>
-<p>Here’s a more complex conditional statement with two criteria using <code>&amp;</code>:</p>
-<p><em>Which tracts have more than 7,000 residents but less the 2,000 in poverty?</em></p>
-<pre class="r"><code>atl$Total_Population &gt; 7000 &amp; atl$Pop_below_poverty &lt; 2000</code></pre>
-<pre><code>##   [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE
-##  [12]  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
-##  [23] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [34] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
-##  [45]  TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE
-##  [56] FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
-##  [67] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE
-##  [78] FALSE FALSE  TRUE FALSE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE
-##  [89] FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE
-## [100] FALSE</code></pre>
+parks &lt;- read_csv(url)                                # Read in data: &quot;parks&quot;</code></pre>
 <p><br>
 <br></p>
-</div>
-<div id="logical-values-under-the-hood" class="section level3">
-<h3><span class="header-section-number">1.1.2</span> Logical Values: Under the Hood</h3>
-<p>Under the hood, <strong>logical</strong> statements are represented in binary. That is:</p>
+<div id="common-initial-analysis-techniques" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Common Initial Analysis Techniques</h3>
+<p><strong>Base R</strong> has a litany of functions commonly used in <strong>Initial Data Analysis</strong>, or <strong>IDA</strong>.</p>
 <ul>
-<li><code>TRUE</code> equals “1”</li>
-<li><code>FALSE</code> equals “0”</li>
+<li><strong>IDA</strong> is the opening salvo of functions in <strong>Exploratory Data Analysis</strong>.</li>
+<li><strong>IDA</strong> techniques aid in understanding the nuances of your data.</li>
 </ul>
 <p><br></p>
-<p>We can prove this in a number of ways, like converting them to numeric values:</p>
-<pre class="r"><code>as.numeric(TRUE)            # Coerce logicals to class &quot;numeric&quot;</code></pre>
-<pre><code>## [1] 1</code></pre>
-<pre class="r"><code>as.numeric(FALSE)           # Coerce logicals to class &quot;numeric&quot;</code></pre>
-<pre><code>## [1] 0</code></pre>
-<p><br></p>
-<p>Or we can simply use a conditional statement with logical operator <code>==</code>:</p>
-<pre class="r"><code>TRUE == 1</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>FALSE == 0</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<p><br></p>
-<p>Or we can use arithmetic functions like <code>sum()</code>:</p>
-<pre class="r"><code>z &lt;- c(TRUE, TRUE, TRUE)
-sum(z)</code></pre>
-<pre><code>## [1] 3</code></pre>
-<p><br></p>
-<p><strong>Conclusions:</strong> Since <strong>logical</strong> values are numeric, this opens a world of possibilities for summarizing datasets and vectors that meet specified criteria, and we’ll check some out in the next section.</p>
-<p><br>
-<br></p>
-</div>
-</div>
-<div id="summarizing-logical-vectors-with-arithmetic" class="section level2">
-<h2><span class="header-section-number">1.2</span> Summarizing Logical Vectors with Arithmetic</h2>
-<p>Because <strong>logical</strong> vectors are really just ones and zeros, we can determine:</p>
+<p><strong>Data Structure:</strong> Function <code>str()</code> is a go-to function for understanding:</p>
 <ul>
-<li>Matching criteria with function <code>sum()</code></li>
-<li>Non-matching criteria with functions <code>length()</code> and <code>sum()</code></li>
-<li>Proportionality, percentage, and/or probability with <code>mean()</code></li>
+<li>The <em>class</em> of the dataset, e.g. <strong>matrix</strong> or <strong>data.frame</strong></li>
+<li>The <em>dimensions</em> of a dataset (rows and columns)</li>
+<li>The <em>class</em> of each variable in the dataset</li>
+<li>The first several values of each variable</li>
+<li>The <strong>levels</strong> in each <strong>factor</strong> variable</li>
 </ul>
+<pre class="r"><code>str(parks)</code></pre>
+<pre><code>## Classes &#39;spec_tbl_df&#39;, &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;: 3764 obs. of  5 variables:
+##  $ Year        : num  2018 2017 2016 2015 2014 ...
+##  $ OPRHP Region: chr  &quot;Finger Lakes&quot; &quot;Finger Lakes&quot; &quot;Finger Lakes&quot; &quot;Finger Lakes&quot; ...
+##  $ County      : chr  &quot;Tompkins&quot; &quot;Tompkins&quot; &quot;Tompkins&quot; &quot;Tompkins&quot; ...
+##  $ Facility    : chr  &quot;Allan Treman Marina&quot; &quot;Allan Treman Marina&quot; &quot;Allan Treman Marina&quot; &quot;Allan Treman Marina&quot; ...
+##  $ Attendance  : num  291507 311260 318309 266112 210543 ...
+##  - attr(*, &quot;spec&quot;)=List of 3
+##   ..$ cols   :List of 5
+##   .. ..$ Year        : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
+##   .. ..$ OPRHP Region: list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ County      : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Facility    : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_character&quot; &quot;collector&quot;
+##   .. ..$ Attendance  : list()
+##   .. .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_double&quot; &quot;collector&quot;
+##   ..$ default: list()
+##   .. ..- attr(*, &quot;class&quot;)= chr  &quot;collector_guess&quot; &quot;collector&quot;
+##   ..$ skip   : num 1
+##   ..- attr(*, &quot;class&quot;)= chr &quot;col_spec&quot;</code></pre>
 <p><br></p>
-<p><strong>Total All TRUE Values:</strong> Use function <code>sum()</code> and a conditional statement:</p>
-<p><em>Of our 100 tracts, how many have more than 1,000 residents in poverty?</em></p>
-<pre class="r"><code>atl$Pop_below_poverty &gt; 1000                # Conditional statement</code></pre>
-<pre><code>##   [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE
-##  [12]  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [23] FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [34] FALSE  TRUE FALSE FALSE  TRUE  TRUE FALSE  TRUE FALSE  TRUE  TRUE
-##  [45]  TRUE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [56] FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [67]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE  TRUE  TRUE FALSE
-##  [78] FALSE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE
-##  [89]  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE  TRUE  TRUE
-## [100]  TRUE</code></pre>
-<pre class="r"><code>impov &lt;- atl$Pop_below_poverty &gt; 1000       # Store vector: &quot;impov&quot;
-
-sum(impov)                                  # Summing all TRUE values</code></pre>
-<pre><code>## [1] 43</code></pre>
-<p><br></p>
-<p><strong>Total All FALSE Instances:</strong> We can do this with a little arithmetic:</p>
+<p><strong>Dimensions:</strong> Like measuring width and height, we can do the same with datasets:</p>
 <ul>
-<li>Determine total number of elements with function <code>length()</code></li>
-<li>Use <code>-</code> to subtract <code>TRUE</code> instances calculated with <code>sum()</code></li>
+<li>Function <code>nrow()</code> prints the total number of rows</li>
+<li>Function <code>ncol()</code> prints the total number of columns</li>
+<li>Function <code>dim()</code> prints the total number of rows and columns</li>
 </ul>
-<p><em>Of our 100 tracts, how many do not have more than 1,000 residents in poverty?</em></p>
-<pre class="r"><code>length(impov) - sum(impov)                  # Total elements - TRUE elements</code></pre>
-<pre><code>## [1] 57</code></pre>
+<p>Recall that in R, dimensions are printed or specified with rows first, then columns.</p>
+<pre class="r"><code>nrow(parks)     # Print total rows</code></pre>
+<pre><code>## [1] 3764</code></pre>
+<pre class="r"><code>ncol(parks)     # Print total columns</code></pre>
+<pre><code>## [1] 5</code></pre>
+<pre class="r"><code>dim(parks)      # Print rows and columns</code></pre>
+<pre><code>## [1] 3764    5</code></pre>
 <p><br></p>
-<p><strong>Percent of TRUE Values:</strong> Use <code>mean()</code> to calculate the proportion of <code>TRUE</code> values:</p>
-<p><em>Of our 100 tracts, what is the proportion with more than 1,000 residents in poverty?</em></p>
-<pre class="r"><code>mean(impov)                                 # Average of all ones and zeros</code></pre>
-<pre><code>## [1] 0.43</code></pre>
-<p><br>
-<br></p>
-<div class="quiz">
-<h3>
-<p><strong>Your Turn:</strong> Summarizing Logical Vectors</p>
-</h3>
-<p><strong>Instructions:</strong> Use the dataset <code>economics</code> from package <em>ggplot2</em>.</p>
-<ol style="list-style-type: decimal">
-<li><p>Use <code>sum()</code> to calculate which months have:</p>
+<p><strong>Length:</strong> Function <code>length()</code> prints the number of values for a single variable or vector.</p>
+<pre class="r"><code>length(parks$Facility)</code></pre>
+<pre><code>## [1] 3764</code></pre>
+<p><br></p>
+<p><strong>Row &amp; Column Names:</strong> Three functions are ideal for printing row and column names:</p>
 <ul>
-<li>More then 3 M unemployed residents (<code>unemploy &gt; 3000</code>)</li>
-</ul></li>
-<li><p>Use <code>length() - sum()</code> to calculate which months do not have:</p>
-<ul>
-<li>Less than 3 M unemployed residents (<code>unemploy &lt; 3000</code>)</li>
-</ul></li>
-<li><p>Use <code>mean()</code> to calculate the proportion of months that have:</p>
-<ul>
-<li>Greater than or equal to 3 M residents (<code>unemploy &gt;= 3000</code>)</li>
-</ul></li>
-</ol>
-<p><br>
-<br>
-<br></p>
-</div>
-<div data-datacamp-exercise="" data-height="300" data-encoded="true">
-eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJsaWJyYXJ5KGdncGxvdDIpICAgICAgIyBMb2FkIGdncGxvdDJcbmhlYWQoZWNvbm9taWNzLCAzKSAgICAjIFByaW50IGZpcnN0IDMgcm93c1xuXG4jIFRvdGFsIG1vbnRocyB3aGVyZSB1bmVtcGxveWVkID4gMzAwMCBLXG5zdW0oZWNvbm9taWNzJF9fXyA+IF9fXylcblxuIyBUb3RhbCBtb250aHMgd2hlcmUgdW5lbXBsb3llZCBub3QgPiAzMDAwIEtcbl9fXyhlY29ub21pY3MkX19fKSAtIHN1bShfX18kdW5lbXBsb3kgPiAzMDAwKVxuXG4jIFBlcmNlbnQgb2YgbW9udGhzIHdoZXJlIHVuZW1wbG95ZWQgMzAwMCBLIG9yIG1vcmVcbl9fXyhfX18kdW5lbXBsb3kgPj0gMzAwMCkifQ==
-</div>
-<p><br>
-<br></p>
-</div>
-<div id="creating-factors-categorizing-logical-vectors" class="section level2">
-<h2><span class="header-section-number">1.3</span> Creating Factors: Categorizing Logical Vectors</h2>
-<p>When you create <strong>logical vectors</strong> from conditional statements, we can:</p>
-<ul>
-<li>Categorize <code>TRUE</code> and <code>FALSE</code> values</li>
-<li>Create categorical variables, or <strong>factors</strong></li>
-<li>More clearly summarize our data by specifying <em>how</em> they satisfy conditions</li>
+<li>Function <code>rownames()</code> prints the names of each row, though rows are rarely named</li>
+<li>Function <code>colnames()</code> prints the names of each column (i.e. variable)</li>
+<li>Function <code>names()</code> also prints the names of each variable</li>
+<li>Rename variables by assigning new names to their output</li>
 </ul>
-<p><br></p>
-<div id="determining-which-rows-match-your-conditions" class="section level3">
-<h3><span class="header-section-number">1.3.1</span> Determining Which Rows Match Your Condition(s)</h3>
-<p>You can create a new <strong>vector</strong> of row numbers that are <code>TRUE</code> using <code>which()</code>:</p>
-<p><em>Which census tracts have more than 1,000 residents in poverty?</em></p>
-<pre class="r"><code>impov &lt;- atl$Pop_below_poverty &gt; 1000   # Store logical vector: `impov`
+<pre class="r"><code>rownames(parks)[1:5]                              # Print row names 1-5</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
+<pre class="r"><code>colnames(parks)                                   # Print variable names</code></pre>
+<pre><code>## [1] &quot;Year&quot;         &quot;OPRHP Region&quot; &quot;County&quot;       &quot;Facility&quot;    
+## [5] &quot;Attendance&quot;</code></pre>
+<pre class="r"><code>names(parks)                                      # Print variable names</code></pre>
+<pre><code>## [1] &quot;Year&quot;         &quot;OPRHP Region&quot; &quot;County&quot;       &quot;Facility&quot;    
+## [5] &quot;Attendance&quot;</code></pre>
+<pre class="r"><code>names(parks) &lt;- c(&quot;Year&quot;, &quot;Region&quot;, &quot;County&quot;, 
+                  &quot;Facility&quot;, &quot;Attendance&quot;)       # Reassign new names
 
-which(impov)                            # Determine row number of TRUE values</code></pre>
-<pre><code>##  [1]   8   9  12  13  14  25  26  27  35  38  39  41  43  44  45  46  49
-## [18]  58  59  60  67  68  69  70  71  75  76  80  81  83  84  85  87  88
-## [35]  89  91  92  93  94  95  98  99 100</code></pre>
+names(parks)                                      # Print new names</code></pre>
+<pre><code>## [1] &quot;Year&quot;       &quot;Region&quot;     &quot;County&quot;     &quot;Facility&quot;   &quot;Attendance&quot;</code></pre>
 <p><br></p>
-</div>
-<div id="indexing-labeling-rows-that-match-your-conditions" class="section level3">
-<h3><span class="header-section-number">1.3.2</span> Indexing &amp; Labeling Rows that Match Your Condition(s)</h3>
-<p>By assigning which rows match your conditional statement (using <code>which()</code>):</p>
-<ol style="list-style-type: decimal">
-<li>You can create an index of rows and assign them to an object</li>
-<li>Then, you can operate <em>only on the rows that satisfy your conditions</em></li>
-</ol>
-<p><br></p>
-<p><strong>Indexing Matching Rows:</strong> Use assignment with <code>&lt;-</code> to create an index of rows:</p>
-<pre class="r"><code>impov &lt;- atl$Pop_below_poverty &gt; 1000   # Assign logical vector: `impov`
-
-index &lt;- which(impov)                   # Assign row numbers: &quot;index&quot;
-
-print(index)                            # Print row numbers that are TRUE</code></pre>
-<pre><code>##  [1]   8   9  12  13  14  25  26  27  35  38  39  41  43  44  45  46  49
-## [18]  58  59  60  67  68  69  70  71  75  76  80  81  83  84  85  87  88
-## [35]  89  91  92  93  94  95  98  99 100</code></pre>
-<p><br></p>
-<p><strong>Filter Matching Rows:</strong> Using row numbers assigned to object <code>index</code>, we can <strong>filter</strong>:</p>
+<p><strong>Classes:</strong> We can determine the class of any object using function <code>class()</code>.</p>
 <ul>
-<li>Rows which return <code>FALSE</code> vis-à-vis our conditions</li>
-<li>Rows which return <code>TRUE</code> vis-à-vis our conditions</li>
+<li>Determine classes of entire datasets</li>
+<li>Determine classes of individual variables</li>
+<li>Determine classes of other objects, e.g. models</li>
 </ul>
-<pre class="r"><code>atl[index, ]            # Keep rows with TRUE (more than 1K in poverty)</code></pre>
-<pre><code>## # A tibble: 43 x 4
-##    County Area_Name                       Total_Population Pop_below_pover~
-##     &lt;dbl&gt; &lt;chr&gt;                                      &lt;dbl&gt;            &lt;dbl&gt;
-##  1  13045 Census Tract 9107.02, Carroll ~             8052             1309
-##  2  13045 Census Tract 9107.03, Carroll ~             8743             1681
-##  3  13057 Census Tract 904, Cherokee Cou~            10088             1937
-##  4  13057 Census Tract 906.02, Cherokee ~             7952             1339
-##  5  13057 Census Tract 907.01, Cherokee ~            20202             1963
-##  6  13067 Census Tract 304.05, Cobb Coun~             6020             1058
-##  7  13067 Census Tract 304.13, Cobb Coun~             6215             1675
-##  8  13067 Census Tract 311.01, Cobb Coun~             5255             1531
-##  9  13089 Census Tract 213.08, DeKalb Co~             4148             1047
-## 10  13089 Census Tract 220.04, DeKalb Co~             5794             1131
-## # ... with 33 more rows</code></pre>
-<pre class="r"><code>atl[-index, ]           # Remove rows with TRUE (less than 1K in poverty)</code></pre>
-<pre><code>## # A tibble: 57 x 4
-##    County Area_Name                       Total_Population Pop_below_pover~
-##     &lt;dbl&gt; &lt;chr&gt;                                      &lt;dbl&gt;            &lt;dbl&gt;
-##  1  13013 Census Tract 1801.04, Barrow C~             2032              544
-##  2  13013 Census Tract 1801.06, Barrow C~             2773              462
-##  3  13013 Census Tract 1803.02, Barrow C~             5434              774
-##  4  13013 Census Tract 1805.03, Barrow C~             4960              348
-##  5  13015 Census Tract 9603, Bartow Coun~             6714              893
-##  6  13015 Census Tract 9604.01, Bartow C~            10043              962
-##  7  13015 Census Tract 9604.02, Bartow C~             8758              838
-##  8  13045 Census Tract 9108, Carroll Cou~             4188              619
-##  9  13045 Census Tract 9110, Carroll Cou~             6083              916
-## 10  13057 Census Tract 910.06, Cherokee ~             4951              212
-## # ... with 47 more rows</code></pre>
+<pre class="r"><code>class(parks)                                      # Dataset class</code></pre>
+<pre><code>## [1] &quot;spec_tbl_df&quot; &quot;tbl_df&quot;      &quot;tbl&quot;         &quot;data.frame&quot;</code></pre>
+<pre class="r"><code>class(parks$Year)                                 # Variable class</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>model &lt;- lm(Attendance ~ Year + Region, 
+            data = parks)                         # Assign linear model
+
+class(model)                                      # Model class</code></pre>
+<pre><code>## [1] &quot;lm&quot;</code></pre>
 <p><br></p>
-<p><strong>Label Matching Rows:</strong> We can categorize matching rows by assigning labels to them.</p>
-<ol style="list-style-type: decimal">
-<li>First, add a variable of missing (<code>NA</code>) values: i.e. <code>dataframe$new_variable &lt;- NA</code></li>
-<li>Next, assign a text string of class “character” to matching rows (<code>TRUE</code>)</li>
-<li>Lastly, assign a text string to non-matching rows (<code>FALSE</code>)</li>
-</ol>
-<pre class="r"><code>atl$poverty_threshold &lt;- NA                   # Initialize variable of all NAs
+<p><strong>Categorical Levels:</strong> Print each category (“level”) of <strong>factor</strong> variables with <code>levels()</code>:</p>
+<pre class="r"><code>fctr &lt;- as.factor(parks$Region)                   # Coerce to &quot;factor&quot;
 
-atl[index, &quot;poverty_threshold&quot;] &lt;- &quot;Over&quot;     # Assign label for rows with TRUE
+levels(fctr)                                      # Print levels</code></pre>
+<pre><code>##  [1] &quot;Allegany&quot;         &quot;Central&quot;          &quot;Finger Lakes&quot;    
+##  [4] &quot;Genesee&quot;          &quot;Long Island&quot;      &quot;New York City&quot;   
+##  [7] &quot;Niagara&quot;          &quot;Palisades&quot;        &quot;Saratoga&quot;        
+## [10] &quot;Saratoga/Capital&quot; &quot;Taconic&quot;          &quot;Thousand Islands&quot;</code></pre>
+<p><br></p>
+<p><strong>First &amp; Last Observations</strong>: Functions <code>head()</code> and <code>tail()</code> print first and last rows:</p>
+<ul>
+<li>Function <code>head()</code> prints the first rows of your data</li>
+<li>Function <code>tail()</code> prints the last rows of your data</li>
+<li>Specify the number of rows with argument <code>n =</code></li>
+<li>By default, six rows are printed</li>
+</ul>
+<pre class="r"><code>head(parks, n = 3)      # Print first 3 rows</code></pre>
+<pre><code>##   Year       Region   County            Facility Attendance
+## 1 2018 Finger Lakes Tompkins Allan Treman Marina     291507
+## 2 2017 Finger Lakes Tompkins Allan Treman Marina     311260
+## 3 2016 Finger Lakes Tompkins Allan Treman Marina     318309</code></pre>
+<pre class="r"><code>tail(parks, n = 3)      # Print last 3 rows</code></pre>
+<pre><code>##      Year  Region County       Facility Attendance
+## 3762 2005 Niagara   Erie Woodlawn Beach     169049
+## 3763 2004 Niagara   Erie Woodlawn Beach     151359
+## 3764 2003 Niagara   Erie Woodlawn Beach     150093</code></pre>
+<p><br></p>
+<p><strong>Summaries:</strong> Function <code>summary()</code> describes individual variables according to their class:</p>
+<ul>
+<li>Class <strong>numeric</strong>, <strong>integer</strong>, or <strong>double</strong> prints descriptive statistics</li>
+<li>Class <strong>character</strong> includes total values and missing values</li>
+<li>Class <strong>factor</strong> tallies the total occurences in each level</li>
+</ul>
+<pre class="r"><code>summary(parks)</code></pre>
+<pre><code>##       Year         Region             County            Facility        
+##  Min.   :2003   Length:3764        Length:3764        Length:3764       
+##  1st Qu.:2007   Class :character   Class :character   Class :character  
+##  Median :2011   Mode  :character   Mode  :character   Mode  :character  
+##  Mean   :2011                                                           
+##  3rd Qu.:2015                                                           
+##  Max.   :2018                                                           
+##    Attendance     
+##  Min.   :      0  
+##  1st Qu.:  19605  
+##  Median :  60574  
+##  Mean   : 255272  
+##  3rd Qu.: 188450  
+##  Max.   :9529325</code></pre>
+<p><br></p>
+<p><strong>View Interactively:</strong> In RStudio, function <code>View()</code> presents data in an interactive table.</p>
+<pre class="r"><code>View(parks)</code></pre>
+<center>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-13"></span>
+<img src="figures/function_view.jpg" alt="*An interactive table resulting from function `View()` in RStudio's IDE.*" width="90%" />
+<p class="caption">
+Figure 1.1: <em>An interactive table resulting from function <code>View()</code> in RStudio’s IDE.</em>
+</p>
+</div>
+</center>
+<p><br></p>
+<p><strong>Documentation:</strong> If data are from an R package, <code>?</code> or <code>help()</code> opens documentation.</p>
+<pre class="r"><code>library(ggplot2)            # Load package containing data
 
-atl[-index, &quot;poverty_threshold&quot;] &lt;- &quot;Under&quot;   # Assign label for rows with FALSE
+?economics                  # Open documentation with `?`
 
-head(atl, 10)</code></pre>
-<pre><code>## # A tibble: 10 x 5
-##    County Area_Name      Total_Population Pop_below_pover~ poverty_thresho~
-##     &lt;dbl&gt; &lt;chr&gt;                     &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;           
-##  1  13013 Census Tract ~             2032              544 Under           
-##  2  13013 Census Tract ~             2773              462 Under           
-##  3  13013 Census Tract ~             5434              774 Under           
-##  4  13013 Census Tract ~             4960              348 Under           
-##  5  13015 Census Tract ~             6714              893 Under           
-##  6  13015 Census Tract ~            10043              962 Under           
-##  7  13015 Census Tract ~             8758              838 Under           
-##  8  13045 Census Tract ~             8052             1309 Over            
-##  9  13045 Census Tract ~             8743             1681 Over            
-## 10  13045 Census Tract ~             4188              619 Under</code></pre>
+help(economics)             # Open documentation with help()</code></pre>
+<center>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-15"></span>
+<img src="figures/help_documentation.jpg" alt="*Interactive documentation in RStudio using `?` or `help()`.*" width="90%" />
+<p class="caption">
+Figure 1.2: <em>Interactive documentation in RStudio using <code>?</code> or <code>help()</code>.</em>
+</p>
+</div>
+</center>
 <p><br>
 <br></p>
 </div>
-</div>
-<div id="describing-vectors-of-class-character" class="section level2">
-<h2><span class="header-section-number">1.4</span> Describing Vectors of Class “Character”</h2>
-<p>R <em>describes</em> quantitative (<strong>numeric</strong>) and qualitative (<strong>character</strong> or <strong>factor</strong>) data differently.</p>
-<p>Notably, it <em>describes</em> <strong>character</strong> data and <strong>factor</strong> (categorical) data differently.</p>
-<p><br>
-<br></p>
-<div id="exploratory-analytic-descriptive-functions" class="section level3">
-<h3><span class="header-section-number">1.4.1</span> Exploratory Analytic &amp; Descriptive Functions</h3>
-<p>You can explore and summarize <strong>character</strong> vectors with various exploratory functions.</p>
+<div id="techniques-for-tallies-proportions" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Techniques for Tallies &amp; Proportions</h3>
+<p>Many functions allow tallying frequencies and proportions for <strong>character</strong> and <strong>factor</strong> variables.</p>
 <p><br></p>
-<p><strong>Structure:</strong> Function <code>str()</code> prints an object’s class, dimensions, and first observations.</p>
-<pre class="r"><code>str(atl$poverty_threshold)</code></pre>
-<pre><code>##  chr [1:100] &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; &quot;Under&quot; ...</code></pre>
-<p><br></p>
-<p><strong>Summary:</strong> Function <code>summary()</code> also prints the class, mode, and length of a <strong>character</strong> vector.</p>
-<pre class="r"><code>summary(atl$poverty_threshold)</code></pre>
-<pre><code>##    Length     Class      Mode 
-##       100 character character</code></pre>
-<p><br></p>
-<p><strong>Value Frequency:</strong> Function <code>table()</code> tallies the frequency of each <strong>character</strong> value.</p>
-<pre class="r"><code>table(atl$poverty_threshold)</code></pre>
+<p><strong>Contingency Tables:</strong> Function <code>table()</code> prints total of occurences for qualitative values.</p>
+<p>These tables are also called <strong>Contingency Tables</strong>.</p>
+<pre class="r"><code>table(parks$Region)</code></pre>
 <pre><code>## 
-##  Over Under 
-##    43    57</code></pre>
+##         Allegany          Central     Finger Lakes          Genesee 
+##               86              414              446              190 
+##      Long Island    New York City          Niagara        Palisades 
+##              468              144              288              516 
+##         Saratoga Saratoga/Capital          Taconic Thousand Islands 
+##              322               42              290              558</code></pre>
 <p><br></p>
-<p><strong>Proportions:</strong> Function <code>prop.table()</code> calculates the percentage of each <strong>character</strong> value.</p>
-<pre class="r"><code>prop.table(atl$poverty_threshold)</code></pre>
+<p><strong>Proportionality:</strong> Function <code>prop.table()</code>, with <code>table()</code> output, shows proportionality.</p>
+<pre class="r"><code>regions &lt;- table(parks$Region)      # Assign `table()` output: &quot;regions&quot;
+
+prop.table(regions)                 # Print proportionality</code></pre>
+<pre><code>## 
+##         Allegany          Central     Finger Lakes          Genesee 
+##       0.02284803       0.10998937       0.11849097       0.05047821 
+##      Long Island    New York City          Niagara        Palisades 
+##       0.12433581       0.03825717       0.07651435       0.13708820 
+##         Saratoga Saratoga/Capital          Taconic Thousand Islands 
+##       0.08554729       0.01115834       0.07704570       0.14824655</code></pre>
+<p><br></p>
+<p>Functions <code>table()</code> or <code>prop.table()</code> can also weigh variables against eachother.</p>
+<pre class="r"><code>subset &lt;- parks[, c(&quot;Year&quot;, &quot;Region&quot;)]    # Subset two variables
+
+table(subset)[, 1:5]                      # Frequency of &quot;regions&quot; 1-5</code></pre>
+<pre><code>##       Region
+## Year   Allegany Central Finger Lakes Genesee Long Island
+##   2003        5      26           28      12          29
+##   2004        5      26           28      12          29
+##   2005        5      26           28      12          29
+##   2006        5      26           28      12          29
+##   2007        5      26           28      12          29
+##   2008        5      26           28      12          29
+##   2009        5      26           28      12          29
+##   2010        5      26           28      12          29
+##   2011        5      26           28      12          29
+##   2012        5      26           28      12          29
+##   2013        5      26           28      12          29
+##   2014        5      26           28      12          29
+##   2015        6      26           28      12          29
+##   2016        6      26           28      12          29
+##   2017        7      25           27      11          31
+##   2018        7      25           27      11          31</code></pre>
+<pre class="r"><code>output &lt;- table(subset)                   # Assign `table()` output
+
+prop.table(output)[, 1:5]                 # Proportionality of &quot;regions&quot; 1-5</code></pre>
+<pre><code>##       Region
+## Year      Allegany     Central Finger Lakes     Genesee Long Island
+##   2003 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2004 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2005 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2006 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2007 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2008 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2009 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2010 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2011 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2012 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2013 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2014 0.001328374 0.006907545  0.007438895 0.003188098 0.007704570
+##   2015 0.001594049 0.006907545  0.007438895 0.003188098 0.007704570
+##   2016 0.001594049 0.006907545  0.007438895 0.003188098 0.007704570
+##   2017 0.001859724 0.006641870  0.007173220 0.002922423 0.008235919
+##   2018 0.001859724 0.006641870  0.007173220 0.002922423 0.008235919</code></pre>
+<p><br>
+<br></p>
+</div>
+<div id="initial-analysis-techniques-from-packages" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Initial Analysis Techniques from Packages</h3>
+<p>Many R packages are helpful in <strong>Initial Data Analysis</strong>, e.g. <strong>DescTools</strong> and <strong>dplyr</strong>.</p>
+<p><br></p>
+<p><strong>Advanced Summaries:</strong> In <strong>DescTools</strong>, function <code>Desc()</code> is an enhanced <code>summary()</code>.</p>
+<pre class="r"><code>library(DescTools)
+
+Desc(parks$Year)          # Function `Desc()` on a quantitative variable</code></pre>
+<pre><code>## ------------------------------------------------------------------------- 
+## parks$Year (numeric)
+## 
+##     length         n       NAs    unique        0s      mean    meanCI
+##      3&#39;764     3&#39;764         0        16         0  2&#39;010.50  2&#39;010.36
+##               100.0%      0.0%                0.0%            2&#39;010.65
+##                                                                       
+##        .05       .10       .25    median       .75       .90       .95
+##   2&#39;003.00  2&#39;004.00  2&#39;007.00  2&#39;011.00  2&#39;015.00  2&#39;017.00  2&#39;018.00
+##                                                                       
+##      range        sd     vcoef       mad       IQR      skew      kurt
+##      15.00      4.61      0.00      5.93      8.00     -0.00     -1.21
+##                                                                       
+## lowest : 2&#39;003.0 (235), 2&#39;004.0 (235), 2&#39;005.0 (235), 2&#39;006.0 (235), 2&#39;007.0 (235)
+## highest: 2&#39;014.0 (235), 2&#39;015.0 (238), 2&#39;016.0 (238), 2&#39;017.0 (234), 2&#39;018.0 (234)</code></pre>
+<p><img src="ch-180-vectors_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<pre class="r"><code>Desc(parks$Region)        # Function `Desc()` on a qualitative variable</code></pre>
+<pre><code>## ------------------------------------------------------------------------- 
+## parks$Region (character)
+## 
+##   length      n    NAs unique levels  dupes
+##    3&#39;764  3&#39;764      0     12     12      y
+##          100.0%   0.0%                     
+## 
+##                level  freq   perc  cumfreq  cumperc
+## 1   Thousand Islands   558  14.8%      558    14.8%
+## 2          Palisades   516  13.7%    1&#39;074    28.5%
+## 3        Long Island   468  12.4%    1&#39;542    41.0%
+## 4       Finger Lakes   446  11.8%    1&#39;988    52.8%
+## 5            Central   414  11.0%    2&#39;402    63.8%
+## 6           Saratoga   322   8.6%    2&#39;724    72.4%
+## 7            Taconic   290   7.7%    3&#39;014    80.1%
+## 8            Niagara   288   7.7%    3&#39;302    87.7%
+## 9            Genesee   190   5.0%    3&#39;492    92.8%
+## 10     New York City   144   3.8%    3&#39;636    96.6%
+## 11          Allegany    86   2.3%    3&#39;722    98.9%
+## 12  Saratoga/Capital    42   1.1%    3&#39;764   100.0%</code></pre>
+<p><img src="ch-180-vectors_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
+<p><br></p>
+<p><strong>Advanced Structures:</strong> In <strong>dplyr</strong>, function <code>glimpse()</code> is a more organized <code>str()</code>.</p>
+<pre class="r"><code>library(dplyr)
+
+glimpse(parks)</code></pre>
+<pre><code>## Observations: 3,764
+## Variables: 5
+## $ Year       &lt;dbl&gt; 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 201...
+## $ Region     &lt;chr&gt; &quot;Finger Lakes&quot;, &quot;Finger Lakes&quot;, &quot;Finger Lakes&quot;, &quot;Fi...
+## $ County     &lt;chr&gt; &quot;Tompkins&quot;, &quot;Tompkins&quot;, &quot;Tompkins&quot;, &quot;Tompkins&quot;, &quot;To...
+## $ Facility   &lt;chr&gt; &quot;Allan Treman Marina&quot;, &quot;Allan Treman Marina&quot;, &quot;Alla...
+## $ Attendance &lt;dbl&gt; 291507, 311260, 318309, 266112, 210543, 292200, 162...</code></pre>
 <p><br>
 <br></p>
 </div>
 </div>
-<div id="converting-labels-into-factors" class="section level2">
-<h2><span class="header-section-number">1.5</span> Converting Labels into Factors</h2>
-<p>Any variable of class “character” can easily be converted into class <strong>“factor”</strong>.</p>
+<div id="exploratory-data-visualization" class="section level2">
+<h2><span class="header-section-number">1.2</span> Exploratory Data Visualization</h2>
+<p><strong>Exploratory Data Visualization</strong> or <strong>EDV</strong> is critical to exploratory analyses.</p>
 <ul>
-<li>Use functions <code>factor()</code> or <code>as.factor()</code></li>
-<li>Recall that <strong>factors</strong> tell R that a variable is categorical</li>
-<li>Typically, coerce to or create <strong>factors</strong> with limited unique labels</li>
-<li>A <strong>factor</strong> vector or variable makes it easier to summarize its data</li>
-<li>You must reassign a <strong>factor</strong> to the original vector or variable to replace it</li>
+<li>Allows “quick and dirty” visualizations of your new data’s variables</li>
+<li>Used internally to benefit yourself, collaborators, or specialized audiences</li>
+<li>Assists analysts in decoding and identifying patterns and anomalies in new data</li>
 </ul>
-<pre class="r"><code>my_factor &lt;- factor(x = atl$poverty_threshold,    # Specify vector
-                    ordered = FALSE)              # Tell R if order matters
+<p><br>
+<br></p>
+<div id="common-exploratory-visualization-techniques" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Common Exploratory Visualization Techniques</h3>
+<p>Several functions exist for exploring data visually in base R.</p>
+<p><br></p>
+<p><strong>Histograms:</strong> Quickly view the distribution of quantitative variables with <code>hist()</code>.</p>
+<ul>
+<li>Histograms are univariate and show the freqency of a range of numeric values</li>
+<li>Increase their resolution by increasing the number of ranges (<code>breaks =</code>)</li>
+</ul>
+<pre class="r"><code>hist(parks$Attendance,        # Specify a single variable
+     breaks = 100)            # Specify number of breaks and &quot;bins&quot;</code></pre>
+<p><img src="ch-180-vectors_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><br></p>
+<p><strong>Box Plots:</strong> View several distributions across categorical variables with <code>boxplot()</code>.</p>
+<ul>
+<li>The beginning and end of boxplots represent the first and third quartiles, resp.</li>
+<li>The width of the box, itself, is the <strong>Interquartile Range</strong>, or <strong>IQR</strong></li>
+<li>The middle of each boxplot represents the median (50%)</li>
+<li>“Whiskers” are calculated by <code>1.5 * IQR</code></li>
+<li>Outliers are demarcated beyond whiskers</li>
+<li>Both variables are separated with <code>~</code></li>
+</ul>
+<pre class="r"><code>boxplot(parks$Attendance ~ parks$Region)</code></pre>
+<p><img src="ch-180-vectors_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><br></p>
+<p><strong>Scatter Plots:</strong> View relationships between quantitative variables with <code>plot()</code>.</p>
+<p>Since <code>parks</code> only contains one quantitative variable, we use <code>economics</code> from <strong>ggplot2</strong>.</p>
+<pre class="r"><code>library(ggplot2)
 
-atl$poverty_threshold &lt;- my_factor                # Replace existing vector
+plot(x = economics$uempmed,     # Median duration of unemployment, in weeks
+     y = economics$unemploy)    # Number of unemployed, in thousands</code></pre>
+<p><img src="ch-180-vectors_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><br></p>
+<p><strong>Pairs Plots:</strong> Pairs plots create a matrix of small multiples for each variable.</p>
+<ul>
+<li>Small multiples allow multiple side-by-side comparisons of plots on common axes</li>
+<li>Depending on the <strong>class</strong> of each variable, different plot methods are used</li>
+</ul>
+<p>Again, for want of class <strong>numeric</strong> variables, we use <code>economics</code> from <strong>ggplot2</strong>.</p>
+<pre class="r"><code>library(ggplot2)
 
-class(atl$poverty_threshold)</code></pre>
-<pre><code>## [1] &quot;factor&quot;</code></pre>
+pairs(x = economics)</code></pre>
+<p><img src="ch-180-vectors_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><br></p>
+<p><strong>Model Summaries:</strong> Function <code>plot()</code>, used with a model, produces four summary plots.</p>
+<ul>
+<li>By adjusting the global graphics parameters of base R, we can print all four</li>
+<li>In function <code>par()</code>, specify total rows and columns in function <code>c()</code></li>
+<li>Argument <code>mfrow =</code> accepts these two values in function <code>par()</code></li>
+</ul>
+<pre class="r"><code>model &lt;- lm(Attendance ~ Year + Region, 
+            data = parks)                   # Create linear model: &quot;model&quot;
+
+par(mfrow = c(2, 2))                        # Specify dimensions in `par()`
+
+plot(model)                                 # Call `plot()` on model</code></pre>
+<p><img src="ch-180-vectors_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><br></p>
+<p><strong>Advanced Pairs Plots:</strong> Use package <strong>ggplot2</strong> extension <strong>GGally</strong> and <code>ggpairs()</code>.</p>
+<p>As a more colorful example, we’ll use base R dataset <code>iris</code>.</p>
+<pre class="r"><code>library(ggplot2)
+library(GGally)                     # Load packages
+
+ggpairs(iris,                       # Specify dataset
+        aes(color = Species)) +     # Map colors to variable &quot;Species&quot;
+  theme_minimal()                   # Preset theme cleans output</code></pre>
+<p><img src="ch-180-vectors_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p><br>
 <br></p>
 </div>
-<div id="summarizing-factors-describing-categorical-data" class="section level2">
-<h2><span class="header-section-number">1.6</span> Summarizing Factors: Describing Categorical Data</h2>
-<p>Summarizing categorical data is understandably different from quantitative data.</p>
+</div>
+<div id="descriptive-statistics" class="section level2">
+<h2><span class="header-section-number">1.3</span> Descriptive Statistics</h2>
+<p><strong>Descriptive</strong> or <strong>Summary Statistics</strong> concisely <em>describe</em> datasets or individual variables with summary information, e.g. mean, median, mode, minimum value, maxium value, variance, and more.</p>
+<p>While <strong>descriptive statistics</strong> can be the be-all and end-all of a descriptive analysis, they’re also integral to <strong>exploratory data analysis</strong>.</p>
+<p><br>
+<br></p>
+<div id="common-functions-for-descriptive-statistics" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Common Functions for Descriptive Statistics</h3>
+<p>Again, base R has no shortage of functions for <strong>descriptive</strong> or <strong>summary statistics</strong>.</p>
+<p><br></p>
+<p><strong>Mean:</strong> The average or <strong>mean</strong> value of quantitative data is calculated with <code>mean()</code>.</p>
+<pre class="r"><code>mean(parks$Attendance)</code></pre>
+<pre><code>## [1] 255272.1</code></pre>
+<p><br></p>
+<p><strong>Median:</strong> Find the value of the 50th percentile, or <strong>median</strong>, with <code>median()</code>.</p>
+<pre class="r"><code>median(parks$Attendance)</code></pre>
+<pre><code>## [1] 60574.5</code></pre>
+<p><br></p>
+<p><strong>Minima &amp; Maxima:</strong> Find the smallest and largest values with <code>min()</code> and <code>max()</code>.</p>
+<pre class="r"><code>min(parks$Attendance)   # The smallest value in variable &quot;Attendance&quot;</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>max(parks$Attendance)   # The largest value in variable &quot;Attendance&quot;</code></pre>
+<pre><code>## [1] 9529325</code></pre>
+<p><br></p>
+<p><strong>Variance:</strong> Determine the <strong>variance</strong> of quantitative values with <code>var()</code>.</p>
+<pre class="r"><code>var(parks$Attendance)</code></pre>
+<pre><code>## [1] 612450885211</code></pre>
+<p><br></p>
+<p><strong>Quantiles:</strong> Get <strong>quantiles</strong>, or the value at 0, 25, 50, 75, and 100%, with <code>quantile()</code>.</p>
+<pre class="r"><code>quantile(parks$Attendance)</code></pre>
+<pre><code>##        0%       25%       50%       75%      100% 
+##       0.0   19605.0   60574.5  188449.8 9529325.0</code></pre>
+<p><br>
+<br></p>
+<div class="warning">
+<p>WARNING: SUMMARY STATISTICS &amp; MISSING VALUES</p>
 <ul>
-<li>Function</li>
+<li><p>If the quantitative data you intend to summarize contains missing values (<code>NA</code>), the output may not appear as expected.</p></li>
+<li><p>To tell R that missing values exist, and to exclude them from calculation, simply set argument <code>na.rm =</code> to <code>TRUE</code>.</p></li>
+</ul>
+</div>
+<p><br>
+<br></p>
+</div>
+<div id="tabulating-descriptive-statistics" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Tabulating Descriptive Statistics</h3>
+<p>Tabulate descriptive statistics from <code>summary()</code> output with <code>data.frame()</code>.</p>
+<p><em>Why?</em> This provides an easy method to tabulate and write summary statistics to a file.</p>
+<pre class="r"><code>sumstats &lt;- summary(parks)          # Assign summary() output: &quot;park_stats&quot;
+
+sumstats &lt;- data.frame(sumstats)    # Coerce to data frame
+
+sumstats[, 2:3]                     # Print data frame</code></pre>
+<pre><code>##            Var2               Freq
+## 1          Year     Min.   :2003  
+## 2          Year     1st Qu.:2007  
+## 3          Year     Median :2011  
+## 4          Year     Mean   :2011  
+## 5          Year     3rd Qu.:2015  
+## 6          Year     Max.   :2018  
+## 7        Region Length:3764       
+## 8        Region Class :character  
+## 9        Region Mode  :character  
+## 10       Region               &lt;NA&gt;
+## 11       Region               &lt;NA&gt;
+## 12       Region               &lt;NA&gt;
+## 13       County Length:3764       
+## 14       County Class :character  
+## 15       County Mode  :character  
+## 16       County               &lt;NA&gt;
+## 17       County               &lt;NA&gt;
+## 18       County               &lt;NA&gt;
+## 19     Facility Length:3764       
+## 20     Facility Class :character  
+## 21     Facility Mode  :character  
+## 22     Facility               &lt;NA&gt;
+## 23     Facility               &lt;NA&gt;
+## 24     Facility               &lt;NA&gt;
+## 25   Attendance  Min.   :      0  
+## 26   Attendance  1st Qu.:  19605  
+## 27   Attendance  Median :  60574  
+## 28   Attendance  Mean   : 255272  
+## 29   Attendance  3rd Qu.: 188450  
+## 30   Attendance  Max.   :9529325</code></pre>
+<p><br>
+<br></p>
+</div>
+</div>
+<div id="group-wise-summaries-in-base-r" class="section level2">
+<h2><span class="header-section-number">1.4</span> Group-Wise Summaries in Base R</h2>
+<p>So far, we’ve look at a veriety of ways to explore and summarize datasets and individual variables.</p>
+<p>However, you may often seek to summarize and compare subsets of data that are <strong>grouped</strong> by some common value, category, or label. The following explores how to group and describe data by one or more specified characteristics.</p>
+<p><br>
+<br></p>
+<div id="tabulating-contingency-tables" class="section level3">
+<h3><span class="header-section-number">1.4.1</span> Tabulating Contingency Tables</h3>
+<p>In <em>Section 1.1: Exploratory Data Analysis</em>, we learned about <strong>contingency tables</strong>.</p>
+<ul>
+<li><strong>Contingency tables</strong> tally the frequency of values for each category in your data
+<ul>
+<li>Calculated with function <code>table()</code></li>
+</ul></li>
+<li><strong>Proportional contingency tables</strong> tally the proportion of each category
+<ul>
+<li>Calulated with the output of <code>table()</code> in function <code>prop.table()</code></li>
+</ul></li>
+</ul>
+<p><br></p>
+<p>In order to tabulate <strong>contingency tables</strong> in their own data frames:</p>
+<ol style="list-style-type: decimal">
+<li>Flatten them with <code>ftable()</code> instead of <code>table()</code></li>
+<li>Convert the output to a data frame with <code>data.frame()</code></li>
+</ol>
+<pre class="r"><code>reg_freq &lt;- ftable(parks$Region)    # Assign `ftable()` output: &quot;reg_freq&quot;
+
+data.frame(reg_freq)                # Enter output in `data.frame()`</code></pre>
+<pre><code>##                Var1 Freq
+## 1          Allegany   86
+## 2           Central  414
+## 3      Finger Lakes  446
+## 4           Genesee  190
+## 5       Long Island  468
+## 6     New York City  144
+## 7           Niagara  288
+## 8         Palisades  516
+## 9          Saratoga  322
+## 10 Saratoga/Capital   42
+## 11          Taconic  290
+## 12 Thousand Islands  558</code></pre>
+<p><br></p>
+<p>Likewise, for <strong>proportional contingency tables</strong>:</p>
+<ol style="list-style-type: decimal">
+<li>Flatten them with <code>ftable()</code> instead of <code>table()</code></li>
+<li>Call <code>prop.table()</code> on the output of <code>ftable()</code></li>
+<li>Convert to a data frame with <code>data.frame()</code></li>
+</ol>
+<pre class="r"><code>reg_freq &lt;- ftable(parks$Region)    # Assign `ftable()` output: &quot;reg_freq&quot;
+
+reg_prop &lt;- prop.table(reg_freq)    # Assign `prop.table()` output: &quot;reg_prop&quot;
+
+data.frame(reg_prop)                # Enter output in `data.frame()`</code></pre>
+<pre><code>##                Var1       Freq
+## 1          Allegany 0.02284803
+## 2           Central 0.10998937
+## 3      Finger Lakes 0.11849097
+## 4           Genesee 0.05047821
+## 5       Long Island 0.12433581
+## 6     New York City 0.03825717
+## 7           Niagara 0.07651435
+## 8         Palisades 0.13708820
+## 9          Saratoga 0.08554729
+## 10 Saratoga/Capital 0.01115834
+## 11          Taconic 0.07704570
+## 12 Thousand Islands 0.14824655</code></pre>
+<p><br>
+<br></p>
+</div>
+<div id="contingency-tables-group-wise-frequencies" class="section level3">
+<h3><span class="header-section-number">1.4.2</span> Contingency Tables &amp; Group-Wise Frequencies</h3>
+<p>Comign soon…</p>
+<p><br>
+<br></p>
+</div>
+<div id="apply-functions-group-wise-operations" class="section level3">
+<h3><span class="header-section-number">1.4.3</span> Apply Functions &amp; Group-Wise Operations</h3>
+<p>Comign soon…</p>
+<p><br>
+<br></p>
+</div>
+<div id="aggregation-group-wise-operations" class="section level3">
+<h3><span class="header-section-number">1.4.4</span> Aggregation &amp; Group-Wise Operations</h3>
+<p>Comign soon…</p>
+<p><br>
+<br></p>
+</div>
+</div>
+<div id="group-wise-operations-with-dplyr" class="section level2">
+<h2><span class="header-section-number">1.5</span> Group-Wise Operations with dplyr</h2>
+<p>Package <strong>dplyr</strong> is a unified framework built explicitly for data manipulation in R, e.g.:</p>
+<ul>
+<li>Reordering rows based on one or more variables</li>
+<li>Performing complex filtering and additive joins</li>
+<li>Selecting, reordering, and renaming variables in a data frame</li>
+<li>Filtering rows by specified conditional statements and logical operators</li>
+<li>Grouping rows by one or more specified variables and summarizing their values</li>
+</ul>
+<p>We explore most of theis elsewhere. Here, we focus on group-wise operations.</p>
+<p>But first, we’ll provide a brief overview of <strong>dplyr</strong> syntax.</p>
+<p><br>
+<br></p>
+<div id="package-dplyr-syntax" class="section level3">
+<h3><span class="header-section-number">1.5.1</span> Package dplyr Syntax</h3>
+<p>Package <strong>dplyr</strong> has a somewhat nuanced syntax that is easy to master. Pay attention:</p>
+<p><br></p>
+<p><strong>Piping:</strong> Package <strong>dplyr</strong> uses the <strong>pipe operator</strong>, or <code>%&gt;%</code>, which:</p>
+<ul>
+<li>Passes data frames through some new function, emerging as an altered data frame</li>
+<li>Begins with a data frame input in the left hand side</li>
+<li>Ends with a data frame output from the right hand side</li>
+</ul>
+<pre class="r"><code>parks %&gt;%                                         # Specify data frame and pipe
+  filter(Facility == &quot;Allegany Red House Area&quot;)   # Pass via function `filter()`</code></pre>
+<pre><code>## # A tibble: 16 x 5
+##     Year Region   County      Facility                Attendance
+##    &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;                        &lt;dbl&gt;
+##  1  2018 Allegany Cattaraugus Allegany Red House Area     712217
+##  2  2017 Allegany Cattaraugus Allegany Red House Area     730926
+##  3  2016 Allegany Cattaraugus Allegany Red House Area     715179
+##  4  2015 Allegany Cattaraugus Allegany Red House Area     750751
+##  5  2014 Allegany Cattaraugus Allegany Red House Area     686068
+##  6  2013 Allegany Cattaraugus Allegany Red House Area     790645
+##  7  2012 Allegany Cattaraugus Allegany Red House Area     729189
+##  8  2011 Allegany Cattaraugus Allegany Red House Area     717013
+##  9  2010 Allegany Cattaraugus Allegany Red House Area     728728
+## 10  2009 Allegany Cattaraugus Allegany Red House Area     748255
+## 11  2008 Allegany Cattaraugus Allegany Red House Area     785967
+## 12  2007 Allegany Cattaraugus Allegany Red House Area     800376
+## 13  2006 Allegany Cattaraugus Allegany Red House Area     776633
+## 14  2005 Allegany Cattaraugus Allegany Red House Area     755990
+## 15  2004 Allegany Cattaraugus Allegany Red House Area     761212
+## 16  2003 Allegany Cattaraugus Allegany Red House Area     754291</code></pre>
+<p><br></p>
+<p><strong>Bare Variable Names:</strong> Once the dataset is named, you need not type it again.</p>
+<ul>
+<li>R recognizes when the data frame has been called</li>
+<li>Therefore, variables need only be named, without the <code>dataset$x</code> notation</li>
+</ul>
+<pre class="r"><code>names(parks)</code></pre>
+<pre><code>## [1] &quot;Year&quot;       &quot;Region&quot;     &quot;County&quot;     &quot;Facility&quot;   &quot;Attendance&quot;</code></pre>
+<pre class="r"><code>parks %&gt;%                             # Call dataset object name
+  select(Year, Region, Attendance)    # Use bare variable names</code></pre>
+<pre><code>## # A tibble: 3,764 x 3
+##     Year Region       Attendance
+##    &lt;dbl&gt; &lt;chr&gt;             &lt;dbl&gt;
+##  1  2018 Finger Lakes     291507
+##  2  2017 Finger Lakes     311260
+##  3  2016 Finger Lakes     318309
+##  4  2015 Finger Lakes     266112
+##  5  2014 Finger Lakes     210543
+##  6  2013 Finger Lakes     292200
+##  7  2012 Finger Lakes     162986
+##  8  2011 Finger Lakes     172579
+##  9  2010 Finger Lakes     205460
+## 10  2009 Finger Lakes     184372
+## # ... with 3,754 more rows</code></pre>
+<p><br></p>
+<p><strong>Tibbles:</strong> When passed through <strong>dplyr</strong> functions, they become <strong>tibbles</strong>.</p>
+<ul>
+<li><strong>Tibbles</strong> are truncated printouts of data frames</li>
+<li>Typically, <strong>tibbles</strong> print the first ten observations</li>
+<li><strong>Tibbles</strong> also provide both dimensions and variable classes</li>
+<li>Any unprinted observations are summarized underneath the first ten</li>
+<li>With a large amount of variables, <strong>tibbles</strong> print only what fits on-screen</li>
+<li>Like unprinted observations, variables that do not fit on-screen are summarized</li>
+</ul>
+<p><br>
+<br></p>
+</div>
+<div id="grouping-by-variables" class="section level3">
+<h3><span class="header-section-number">1.5.2</span> Grouping by Variables</h3>
+<p>In <strong>dplyr</strong>, function <code>group_by()</code> accepts the bare names of one or more variables.</p>
+<p>Notably, <strong>grouping</strong> does nothing by itself. Data must be <strong>piped</strong> into a new function.</p>
+<pre class="r"><code>parks %&gt;%
+  group_by(Year)            # Grouping by a single variable: &quot;Year&quot;
+
+parks %&gt;%
+  group_by(Region, Year)    # Grouping by two variables: &quot;Region&quot;, &quot;Year&quot;</code></pre>
+<p><br>
+<br></p>
+</div>
+<div id="group-by-summarize-operations" class="section level3">
+<h3><span class="header-section-number">1.5.3</span> Group By-Summarize Operations</h3>
+<p>As noted, we must use a function to operate on <strong>grouped</strong> data.</p>
+<ul>
+<li>Function <code>summarize()</code> allows us to make new variables on grouped data</li>
+<li>Within <code>summarize()</code>, the basic formula is: <code>new_variable = function(existing_variable)</code></li>
+</ul>
+<p>Here, we create new variable <code>Average</code> from existing variable <code>Attendance</code>:</p>
+<pre class="r"><code>parks %&gt;%                                 # Invoke &quot;parks&quot;
+  group_by(Year) %&gt;%                      # Group by &quot;Year&quot;
+  summarize(Average = mean(Attendance))   # Create &quot;Average&quot; with `mean()`</code></pre>
+<pre><code>## # A tibble: 16 x 2
+##     Year Average
+##    &lt;dbl&gt;   &lt;dbl&gt;
+##  1  2003 221030.
+##  2  2004 224557.
+##  3  2005 236424.
+##  4  2006 231387.
+##  5  2007 241475.
+##  6  2008 232762.
+##  7  2009 241125.
+##  8  2010 245525.
+##  9  2011 243497.
+## 10  2012 256640.
+## 11  2013 255906.
+## 12  2014 264439.
+## 13  2015 275063.
+## 14  2016 291394.
+## 15  2017 305861.
+## 16  2018 317033.</code></pre>
+<p><br></p>
+<p><strong>Multiple Summary Variables:</strong> Create multiple new variables in one <code>summarize()</code> call.</p>
+<pre class="r"><code>parks %&gt;%
+  group_by(Year) %&gt;%
+  summarize(Mean = mean(Attendance),
+            Median = median(Attendance),
+            Maximum = max(Attendance),
+            Records = n())                # Create multiple new variables</code></pre>
+<pre><code>## # A tibble: 16 x 5
+##     Year    Mean Median Maximum Records
+##    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
+##  1  2003 221030. 48230  7390268     235
+##  2  2004 224557. 48304  7779887     235
+##  3  2005 236424. 50642  7762999     235
+##  4  2006 231387. 50868  7756133     235
+##  5  2007 241475. 62697  7924083     235
+##  6  2008 232762. 58626  7925725     235
+##  7  2009 241125. 61527  8130765     235
+##  8  2010 245525. 59480  8274942     235
+##  9  2011 243497. 56084  8448914     235
+## 10  2012 256640. 66184  8690962     235
+## 11  2013 255906. 60107  8863301     235
+## 12  2014 264439. 61392  9011709     235
+## 13  2015 275063. 68521  9296962     238
+## 14  2016 291394. 68198. 9529325     238
+## 15  2017 305861. 79600  9435285     234
+## 16  2018 317033. 77894. 9516147     234</code></pre>
+<p><br></p>
+<p><strong>Multiple Grouping Variables:</strong> We can use multiple variables in <code>group_by()</code>.</p>
+<ul>
+<li>Creates summaries for each permutation of unique values
+<ul>
+<li>Suppose we group by one variable with 5 categories and one with 10</li>
+<li>Total permutations equals <code>5 * 10</code>, or 50 groups</li>
+</ul></li>
+<li>Note, also, that <em>not grouping on variables will drop ungrouped variables</em>
+<ul>
+<li>In other words, grouping by <code>X</code>, not <code>Y</code>, means <code>Y</code> is then excluded</li>
+</ul></li>
+</ul>
+<pre class="r"><code>parks %&gt;%
+  group_by(Year, Region) %&gt;%              # Group on variables &quot;Year&quot;, &quot;Region&quot;
+  summarize(Mean = mean(Attendance),
+            Median = median(Attendance))</code></pre>
+<pre><code>## # A tibble: 176 x 4
+## # Groups:   Year [16]
+##     Year Region           Mean  Median
+##    &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;
+##  1  2003 Allegany      351875  192079 
+##  2  2003 Central        88790.  41128.
+##  3  2003 Finger Lakes   93691.  42539 
+##  4  2003 Genesee        92704.  15320 
+##  5  2003 Long Island   624115. 196520 
+##  6  2003 New York City 332013. 118444 
+##  7  2003 Niagara       536725.  93284 
+##  8  2003 Palisades     205155.  20650.
+##  9  2003 Saratoga      100925.  48230 
+## 10  2003 Taconic       161300.  93131 
+## # ... with 166 more rows</code></pre>
+<p><br></p>
+<p><strong>Creating Summaries of Summaries:</strong> Use variables from <code>summarize()</code> in the same call!</p>
+<pre class="r"><code>parks %&gt;%
+  group_by(Year) %&gt;%
+  summarize(Mean = mean(Attendance),
+            Total = sum(Attendance),                      # Create &quot;Total&quot;
+            Proportion = Total / sum(parks$Attendance))   # Use &quot;Total&quot; in formula</code></pre>
+<pre><code>## # A tibble: 16 x 4
+##     Year    Mean    Total Proportion
+##    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+##  1  2003 221030. 51942100     0.0541
+##  2  2004 224557. 52770940     0.0549
+##  3  2005 236424. 55559694     0.0578
+##  4  2006 231387. 54375864     0.0566
+##  5  2007 241475. 56746576     0.0591
+##  6  2008 232762. 54698971     0.0569
+##  7  2009 241125. 56664442     0.0590
+##  8  2010 245525. 57698351     0.0600
+##  9  2011 243497. 57221809     0.0596
+## 10  2012 256640. 60310499     0.0628
+## 11  2013 255906. 60137898     0.0626
+## 12  2014 264439. 62143120     0.0647
+## 13  2015 275063. 65465017     0.0681
+## 14  2016 291394. 69351725     0.0722
+## 15  2017 305861. 71571568     0.0745
+## 16  2018 317033. 74185653     0.0772</code></pre>
+<p><br></p>
+<p><strong>Assigning Summary Output:</strong> Preface <code>summarize()</code> calles with assignment, <code>&lt;-</code>.</p>
+<pre class="r"><code>mean_att &lt;- parks %&gt;%                 # Assign expression to &quot;mean_att&quot;
+  group_by(Year) %&gt;%
+  summarize(Mean = mean(Attendance))
+
+mean_att                              # Autoprint results</code></pre>
+<pre><code>## # A tibble: 16 x 2
+##     Year    Mean
+##    &lt;dbl&gt;   &lt;dbl&gt;
+##  1  2003 221030.
+##  2  2004 224557.
+##  3  2005 236424.
+##  4  2006 231387.
+##  5  2007 241475.
+##  6  2008 232762.
+##  7  2009 241125.
+##  8  2010 245525.
+##  9  2011 243497.
+## 10  2012 256640.
+## 11  2013 255906.
+## 12  2014 264439.
+## 13  2015 275063.
+## 14  2016 291394.
+## 15  2017 305861.
+## 16  2018 317033.</code></pre>
+<p><br></p>
+<p><strong>Ungrouping:</strong> As a rule, consider whether to use function <code>ungroup()</code> after <code>group_by()</code>.</p>
+<ul>
+<li>If you use <strong>grouped</strong> summaries for later analysis, they remain grouped under the hood</li>
+<li>This is particularly annoying to troubleshoot when far downstream in analyses</li>
+<li>Don’t suffer as so many have - use <code>ungroup()</code></li>
+</ul>
+<pre class="r"><code>mean_att &lt;- parks %&gt;%
+  group_by(Year) %&gt;%
+  summarize(Mean = mean(Attendance)) %&gt;%
+  ungroup()                               # Don&#39;t enter a world of pain</code></pre>
+<p><br>
+<br></p>
+<div class="warning">
+<p>WARNING: SERIOUSLY, DON’T FORGET UNGROUP()</p>
+<ul>
+<li>Want to know why your summary data aren’t merging correctly?</li>
+<li>There’s a litany of possible reasons.</li>
+<li>Often: You didn’t use <code>ungroup()</code>.</li>
+</ul>
+<p>Use <code>ungroup()</code>.</p>
+</div>
+<p><br>
+<br></p>
+</div>
+</div>
+<div id="further-resources" class="section level2">
+<h2><span class="header-section-number">1.6</span> Further Resources</h2>
+<p>The following resources may prove helpful to the curious learner.</p>
+<ul>
+<li><a href="https://stat545.com/dplyr-single.html#group_by-is-a-mighty-weapon">Bryan, J. “Single Table dplyr Functions” STAT 545.</a></li>
+<li><a href="http://rpubs.com/JamisonCrawford/manipulation">Crawford, J (2019). “Intro to R: Data Manipulation”.</a></li>
+<li><a href="https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">RStudio (2015). “Data Wrangling Cheat Sheet”.</a></li>
 </ul>
 </div>
 </div>

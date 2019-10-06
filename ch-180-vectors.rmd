@@ -7,7 +7,7 @@ output:
     css: textbook.css
 ---
 
-# Summarizing Vectors
+# Exploring & Summarizing Data
 
 <br>
 <br>
@@ -16,35 +16,75 @@ output:
 
 ## Key Concepts
 
-In this chapter, we'll explore the following key concepts:
+In this chapter, we'll explore the following key concepts and functions:
 
-* Counting Logical Values: Function `sum()`
-* Tallying Categorical Variables: `table()`
-* Determining Missing Values: `is.na()`
-* Table Proportionality: `prop.table()`
-* Table Margins: `margin.table()`
+* Exploratory Data Analysis (EDA) & Initial Data Analysis (IDA)
+    - `str()`
+    - `nrow()`
+    - `ncol()`
+    - `dim()`
+    - `length()`
+    - `rownames()`
+    - `colnames()`
+    - `names()`
+    - `class()`
+    - `levels()`
+    - `head()`
+    - `tail()`
+    - `summary()`
+    - `View()`
+    - `?` & `help()`
+    - `Desc()`
+    - `glimpse()`
+* Contingency Tables for Frequency & Proportionality
+    - `table()`
+    - `prop.table()`
+    - `ftable()`
+* Exploratory Data Visualization (EDV)
+    - `hist()`
+    - `boxplot()`
+    - `plot()`
+    - `pairs()`
+    - `par()`
+    - `ggpairs()` (**GGally**)
 * Functions for Descriptive Stats: 
+    - `mean()`
+    - `median()`
     - `min()`
     - `max()`
-    - `mean()`
-    - `summary()`
+    - `var()`
     - `quantile()`
-* Combining Functions `summary()` & `data.frame()`
-* Creating Tables of Descriptives: Factor & Numeric Variables
+* Tabulating Summary Output
+* Grouping & Summary Operations with **dplyr**
+    - `%>%`
+    - `filter()`
+    - `select()`
+    - `group_by()`
+    - `summarize()`
+    - `ungroup()`
 
 ## New Packages
 
-This chapter uses the following packages:
+This chapter uses the following packages (in order of appearance):
 
-* Package A
+* [DescTools](https://cran.r-project.org/web/packages/DescTools/index.html)
+* [GGally](https://cran.r-project.org/web/packages/GGally/index.html)
+* [dplyr](https://cran.r-project.org/web/packages/dplyr/index.html)
 
 ## Key Takeaways
 
 Too long; didn't read? Here's what you need to know:
 
-* Item A
-* Item B
-* Item C
+* Initial and Exploratory Data Analysis (IDA; EDA) are key to exploring new data
+    - Key functions: `str()` for structure, `summary()` for descriptive stats
+* Exploratory Data Visualization (EDV) is critical for exploratory analysis
+    - Key functions: `plot()`, `hist()`, `boxplot()`, `pairs()`
+* Descriptive statistics functions describe quantitative data
+    - Key functions: `mean()`, `median()`, `min()`, `max()`
+* Package **dplyr** makes it easy to summarize grouped variables
+    - Key functions: `%>%` pipes data, `group_by()`, `summarize()`
+    - Example: `data %>% group_by(variable) %>% summarize(count = n())`
+    - Don't forget to use `ungroup()`
 
 <br>
 <br>
@@ -70,424 +110,815 @@ tutorial::go_interactive(greedy = FALSE)
 <br>
 <br>
 
-## Logical Variables:
+## Exploratory Data Analysis
 
-Class **logical** variables are typically comprised of one of two values: `TRUE` or `FALSE`.
-
-<br>
-<br>
-
-### Quick Refresher on Class Logical
-
-We can create **logical** variables manually. Determine their class with function `class()`:
-
-```{r}
-
-x <- TRUE
-
-class(x)
-
-```
+**Exploratory Data Analysis** (**EDA**) is the implementation of exploratory techniques to better understand *new data*. Typically, **EDA** uses visualizing and summarizing functions to detect patterns and anomalies in data beyond initial hypotheses and research questions.
 
 <br>
 
-While not considered a best practice, we can use `T` and `F` as abbreviated values:
+**Practice Data:** To demonstrate, we'll use [state park annual attendance](https://data.ny.gov/Recreation/State-Park-Annual-Attendance-Figures-by-Facility-B/8f3n-xj78) from the State of New York's *Office for Parks, Recreation, and Historic Preservation* (OPRHP). 
 
-```{r}
-
-y <- F
-
-print(y)
-
-```
-
-<br>
-
-Often, **logical** values simply indicate "yes" or "no" for your criteria:
-
-```{r}
-
-character <- c("Raskolnikov", "Marmeladov", "Razumikhin")
-criminal <- c(TRUE, FALSE, FALSE)
-
-data.frame(character,
-           criminal)        # Create data frame of characters and crime status
-
-```
-
-<br>
-
-Typically, **logical** values result from conditional statements on:
-
-* Variables within a dataset, using `data$variable` or `data[i, j]` format
-* Independent **vectors** created using `c()`
-
-<br>
-
-Let's read in the first 100 rows of [Atlanta, Georgia poverty by census tract, 2016](https://opendata.atlantaregional.com/datasets/poverty-2016):
-
-```{r}
+```{r cache=T}
 
 library(readr)
+
+url <- paste0("https://data.ny.gov/api/views/8f3n",
+              "-xj78/rows.csv?accessType=DOWNLOAD")   # Assign URL: "url"
+
+parks <- read_csv(url)                                # Read in data: "parks"
+
+```
+
+<br>
+<br>
+
+### Common Initial Analysis Techniques
+
+**Base R** has a litany of functions commonly used in **Initial Data Analysis**, or **IDA**.
+
+* **IDA** is the opening salvo of functions in **Exploratory Data Analysis**.
+* **IDA** techniques aid in understanding the nuances of your data. 
+
+
+
+<br>
+
+**Data Structure:** Function `str()` is a go-to function for understanding:
+
+* The *class* of the dataset, e.g. **matrix** or **data.frame**
+* The *dimensions* of a dataset (rows and columns)
+* The *class* of each variable in the dataset
+* The first several values of each variable
+* The **levels** in each **factor** variable
+
+```{r}
+
+str(parks)
+
+```
+
+<br>
+
+**Dimensions:** Like measuring width and height, we can do the same with datasets:
+
+* Function `nrow()` prints the total number of rows
+* Function `ncol()` prints the total number of columns
+* Function `dim()` prints the total number of rows and columns
+
+Recall that in R, dimensions are printed or specified with rows first, then columns.
+
+```{r}
+
+nrow(parks)     # Print total rows
+
+ncol(parks)     # Print total columns
+
+dim(parks)      # Print rows and columns
+
+```
+
+<br>
+
+**Length:** Function `length()` prints the number of values for a single variable or vector.
+
+```{r}
+
+length(parks$Facility)
+
+```
+
+<br>
+
+**Row & Column Names:** Three functions are ideal for printing row and column names:
+
+* Function `rownames()` prints the names of each row, though rows are rarely named
+* Function `colnames()` prints the names of each column (i.e. variable)
+* Function `names()` also prints the names of each variable
+* Rename variables by assigning new names to their output
+
+```{r}
+
+rownames(parks)[1:5]                              # Print row names 1-5
+
+colnames(parks)                                   # Print variable names
+
+names(parks)                                      # Print variable names
+
+names(parks) <- c("Year", "Region", "County", 
+                  "Facility", "Attendance")       # Reassign new names
+
+names(parks)                                      # Print new names
+
+```
+
+<br>
+
+**Classes:** We can determine the class of any object using function `class()`.
+
+* Determine classes of entire datasets
+* Determine classes of individual variables
+* Determine classes of other objects, e.g. models
+
+```{r}
+
+class(parks)                                      # Dataset class
+
+class(parks$Year)                                 # Variable class
+
+model <- lm(Attendance ~ Year + Region, 
+            data = parks)                         # Assign linear model
+
+class(model)                                      # Model class
+
+```
+
+<br>
+
+**Categorical Levels:** Print each category ("level") of **factor** variables with `levels()`:
+
+```{r}
+
+fctr <- as.factor(parks$Region)                   # Coerce to "factor"
+
+levels(fctr)                                      # Print levels
+
+```
+
+<br>
+
+**First & Last Observations**: Functions `head()` and `tail()` print first and last rows:
+
+* Function `head()` prints the first rows of your data
+* Function `tail()` prints the last rows of your data
+* Specify the number of rows with argument `n =`
+* By default, six rows are printed
+
+```{r}
+
+head(parks, n = 3)      # Print first 3 rows
+
+tail(parks, n = 3)      # Print last 3 rows
+
+```
+
+<br>
+
+**Summaries:** Function `summary()` describes individual variables according to their class:
+
+* Class **numeric**, **integer**, or **double** prints descriptive statistics
+* Class **character** includes total values and missing values
+* Class **factor** tallies the total occurences in each level
+
+```{r}
+
+summary(parks)
+
+```
+
+<br>
+
+**View Interactively:** In RStudio, function `View()` presents data in an interactive table.
+
+```{r eval=F}
+
+View(parks)
+
+```
+
+<center>
+
+```{r echo=F, fig.align="center", fig.cap="*An interactive table resulting from function `View()` in RStudio's IDE.*", out.width="90%"}
+
+knitr::include_graphics("~/Projects/DS4PS/DS4PS Repo/dp4ss-textbook/figures/function_view.jpg")
+
+```
+
+</center>
+
+<br>
+
+**Documentation:** If data are from an R package, `?` or `help()` opens documentation.
+
+```{r eval=F}
+
+library(ggplot2)            # Load package containing data
+
+?economics                  # Open documentation with `?`
+
+help(economics)             # Open documentation with help()
+
+```
+
+<center>
+
+```{r echo=F, fig.align="center", fig.cap="*Interactive documentation in RStudio using `?` or `help()`.*", out.width="90%"}
+
+knitr::include_graphics("~/Projects/DS4PS/DS4PS Repo/dp4ss-textbook/figures/help_documentation.jpg")
+
+```
+
+</center>
+
+<br>
+<br>
+
+### Techniques for Tallies & Proportions
+
+Many functions allow tallying frequencies and proportions for **character** and **factor** variables.
+
+<br>
+
+**Contingency Tables:** Function `table()` prints total of occurences for qualitative values.
+
+These tables are also called **Contingency Tables**. 
+
+```{r}
+
+table(parks$Region)
+
+```
+
+<br>
+
+**Proportionality:** Function `prop.table()`, with `table()` output, shows proportionality.
+
+```{r}
+
+regions <- table(parks$Region)      # Assign `table()` output: "regions"
+
+prop.table(regions)                 # Print proportionality
+
+```
+
+<br>
+
+Functions `table()` or `prop.table()` can also weigh variables against eachother.
+
+```{r}
+
+subset <- parks[, c("Year", "Region")]    # Subset two variables
+
+table(subset)[, 1:5]                      # Frequency of "regions" 1-5
+
+output <- table(subset)                   # Assign `table()` output
+
+prop.table(output)[, 1:5]                 # Proportionality of "regions" 1-5
+
+```
+
+<br>
+<br>
+
+### Initial Analysis Techniques from Packages
+
+Many R packages are helpful in **Initial Data Analysis**, e.g. **DescTools** and **dplyr**.
+
+<br>
+
+**Advanced Summaries:** In **DescTools**, function `Desc()` is an enhanced `summary()`.
+
+```{r}
+
+library(DescTools)
+
+Desc(parks$Year)          # Function `Desc()` on a quantitative variable
+
+Desc(parks$Region)        # Function `Desc()` on a qualitative variable
+
+```
+
+<br>
+
+**Advanced Structures:** In **dplyr**, function `glimpse()` is a more organized `str()`.
+
+```{r}
+
 library(dplyr)
 
-url <- paste0("https://opendata.arcgis.com",
-              "/datasets/73c0eca114c440208",
-              "b268bf9431e428c_240.csv")        # Atlanta's open data portal URL
-
-atl <- read_csv(url)[1:100, c(3:5, 9)] %>%      # Read 100 rows, 4 variables
-  arrange(County, Area_Name)                    # Arrange by county, tract
-
-head(atl)                                       # Print first 6 observations
+glimpse(parks)
 
 ```
 
 <br>
+<br>
 
-Here we use logical operator `>` to create a conditional statement:
+## Exploratory Data Visualization
 
-*Which census tracts have populations larger than 7,000?*
+**Exploratory Data Visualization** or **EDV** is critical to exploratory analyses.
+
+* Allows "quick and dirty" visualizations of your new data's variables
+* Used internally to benefit yourself, collaborators, or specialized audiences
+* Assists analysts in decoding and identifying patterns and anomalies in new data 
+
+<br>
+<br>
+
+### Common Exploratory Visualization Techniques
+
+Several functions exist for exploring data visually in base R.
+
+<br>
+
+**Histograms:** Quickly view the distribution of quantitative variables with `hist()`.
+
+* Histograms are univariate and show the freqency of a range of numeric values
+* Increase their resolution by increasing the number of ranges (`breaks =`)
 
 ```{r}
 
-atl$Total_Population > 7000
+hist(parks$Attendance,        # Specify a single variable
+     breaks = 100)            # Specify number of breaks and "bins"
 
 ```
 
-The result is a **vector** of logical values, or `TRUE` and `FALSE`.
-
 <br>
 
-Here's a more complex conditional statement with two criteria using `&`:
+**Box Plots:** View several distributions across categorical variables with `boxplot()`.
 
-*Which tracts have more than 7,000 residents but less the 2,000 in poverty?*
+* The beginning and end of boxplots represent the first and third quartiles, resp.
+* The width of the box, itself, is the **Interquartile Range**, or **IQR**
+* The middle of each boxplot represents the median (50%)
+* "Whiskers" are calculated by `1.5 * IQR`
+* Outliers are demarcated beyond whiskers
+* Both variables are separated with `~`
 
 ```{r}
 
-atl$Total_Population > 7000 & atl$Pop_below_poverty < 2000
+boxplot(parks$Attendance ~ parks$Region)
 
 ```
 
 <br>
-<br>
 
-### Logical Values: Under the Hood
+**Scatter Plots:** View relationships between quantitative variables with `plot()`.
 
-Under the hood, **logical** statements are represented in binary. That is:
-
-* `TRUE` equals "1"
-* `FALSE` equals "0"
-
-<br>
-
-We can prove this in a number of ways, like converting them to numeric values:
+Since `parks` only contains one quantitative variable, we use `economics` from **ggplot2**.
 
 ```{r}
 
-as.numeric(TRUE)            # Coerce logicals to class "numeric"
-as.numeric(FALSE)           # Coerce logicals to class "numeric"
+library(ggplot2)
+
+plot(x = economics$uempmed,     # Median duration of unemployment, in weeks
+     y = economics$unemploy)    # Number of unemployed, in thousands
 
 ```
 
 <br>
 
-Or we can simply use a conditional statement with logical operator `==`:
+**Pairs Plots:** Pairs plots create a matrix of small multiples for each variable.
+
+* Small multiples allow multiple side-by-side comparisons of plots on common axes
+* Depending on the **class** of each variable, different plot methods are used
+
+Again, for want of class **numeric** variables, we use `economics` from **ggplot2**.
 
 ```{r}
 
-TRUE == 1
-FALSE == 0
+library(ggplot2)
+
+pairs(x = economics)
 
 ```
 
 <br>
 
-Or we can use arithmetic functions like `sum()`:
+**Model Summaries:** Function `plot()`, used with a model, produces four summary plots.
+
+* By adjusting the global graphics parameters of base R, we can print all four
+* In function `par()`, specify total rows and columns in function `c()`
+* Argument `mfrow =` accepts these two values in function `par()`
 
 ```{r}
 
-z <- c(TRUE, TRUE, TRUE)
-sum(z)
+model <- lm(Attendance ~ Year + Region, 
+            data = parks)                   # Create linear model: "model"
+
+par(mfrow = c(2, 2))                        # Specify dimensions in `par()`
+
+plot(model)                                 # Call `plot()` on model
 
 ```
 
 <br>
 
-**Conclusions:** Since **logical** values are numeric, this opens a world of possibilities for summarizing datasets and vectors that meet specified criteria, and we'll check some out in the next section.
+**Advanced Pairs Plots:** Use package **ggplot2** extension **GGally** and `ggpairs()`.
+
+As a more colorful example, we'll use base R dataset `iris`.
+
+```{r eval=F}
+
+library(ggplot2)
+library(GGally)                     # Load packages
+
+ggpairs(iris,                       # Specify dataset
+        aes(color = Species)) +     # Map colors to variable "Species"
+  theme_minimal()                   # Preset theme cleans output
+
+```
+
+```{r include=F, cache=T}
+
+library(ggplot2)
+library(GGally)
+
+plot <- ggpairs(iris,
+                aes(color = Species)) +
+  theme_minimal()
+
+```
+
+```{r echo=F}
+
+library(ggplot2)
+library(GGally)
+
+plot
+
+```
 
 <br>
 <br>
 
-## Summarizing Logical Vectors with Arithmetic
+## Descriptive Statistics
 
-Because **logical** vectors are really just ones and zeros, we can determine:
+**Descriptive** or **Summary Statistics** concisely *describe* datasets or individual variables with summary information, e.g. mean, median, mode, minimum value, maxium value, variance, and more.
 
-* Matching criteria with function `sum()`
-* Non-matching criteria with functions `length()` and `sum()`
-* Proportionality, percentage, and/or probability with `mean()`
+While **descriptive statistics** can be the be-all and end-all of a descriptive analysis, they're also integral to **exploratory data analysis**. 
+
+<br>
+<br>
+
+### Common Functions for Descriptive Statistics
+
+Again, base R has no shortage of functions for **descriptive** or **summary statistics**.
 
 <br>
 
-**Total All TRUE Values:** Use function `sum()` and a conditional statement:
-
-*Of our 100 tracts, how many have more than 1,000 residents in poverty?*
+**Mean:** The average or **mean** value of quantitative data is calculated with `mean()`.
 
 ```{r}
 
-atl$Pop_below_poverty > 1000                # Conditional statement
-
-impov <- atl$Pop_below_poverty > 1000       # Store vector: "impov"
-
-sum(impov)                                  # Summing all TRUE values
+mean(parks$Attendance)
 
 ```
 
 <br>
 
-**Total All FALSE Instances:** We can do this with a little arithmetic: 
-
-* Determine total number of elements with function `length()`
-* Use `-` to subtract `TRUE` instances calculated with `sum()` 
-
-*Of our 100 tracts, how many do not have more than 1,000 residents in poverty?*
+**Median:** Find the value of the 50th percentile, or **median**, with `median()`.
 
 ```{r}
 
-length(impov) - sum(impov)                  # Total elements - TRUE elements
+median(parks$Attendance)
 
 ```
 
 <br>
 
-**Percent of TRUE Values:** Use `mean()` to calculate the proportion of `TRUE` values:
-
-*Of our 100 tracts, what is the proportion with more than 1,000 residents in poverty?*
+**Minima & Maxima:** Find the smallest and largest values with `min()` and `max()`.
 
 ```{r}
 
-mean(impov)                                 # Average of all ones and zeros
+min(parks$Attendance)   # The smallest value in variable "Attendance"
+
+max(parks$Attendance)   # The largest value in variable "Attendance"
+
+```
+
+<br>
+
+**Variance:** Determine the **variance** of quantitative values with `var()`.
+
+```{r}
+
+var(parks$Attendance)
+
+```
+
+<br>
+
+**Quantiles:** Get **quantiles**, or the value at 0, 25, 50, 75, and 100%, with `quantile()`.
+
+```{r}
+
+quantile(parks$Attendance)
 
 ```
 
 <br>
 <br>
 
-<div class="quiz">
+<div class="warning">
 
-<h3> 
+WARNING: SUMMARY STATISTICS & MISSING VALUES
 
-**Your Turn:** Summarizing Logical Vectors 
+* If the quantitative data you intend to summarize contains missing values (`NA`), the output may not appear as expected.
 
-</h3>
-
-**Instructions:** Use the dataset `economics` from package *ggplot2*. 
-
-1. Use `sum()` to calculate which months have:
-
-    * More then 3 M unemployed residents (`unemploy > 3000`)
-
-2. Use `length() - sum()` to calculate which months do not have:
-
-    * Less than 3 M unemployed residents (`unemploy < 3000`)
-
-3. Use `mean()` to calculate the proportion of months that have:
-
-    * Greater than or equal to 3 M residents (`unemploy >= 3000`)
-
-<br>
-<br>
-<br>
+* To tell R that missing values exist, and to exclude them from calculation, simply set argument `na.rm =` to `TRUE`. 
 
 </div>
 
-```{r ex="practice-01", type="sample-code", tut=TRUE}
-
-library(ggplot2)      # Load ggplot2
-head(economics, 3)    # Print first 3 rows
-
-# Total months where unemployed > 3000 K
-sum(economics$___ > ___)
-
-# Total months where unemployed not > 3000 K
-___(economics$___) - sum(___$unemploy > 3000)
-
-# Percent of months where unemployed 3000 K or more
-___(___$unemploy >= 3000)
-
-```
-
 <br>
 <br>
 
-## Creating Factors: Categorizing Logical Vectors
+### Tabulating Descriptive Statistics
 
-When you create **logical vectors** from conditional statements, we can:
+Tabulate descriptive statistics from `summary()` output with `data.frame()`.
 
-* Categorize `TRUE` and `FALSE` values
-* Create categorical variables, or **factors**
-* More clearly summarize our data by specifying *how* they satisfy conditions
-
-<br>
-
-### Determining Which Rows Match Your Condition(s)
-
-You can create a new **vector** of row numbers that are `TRUE` using `which()`:
-
-*Which census tracts have more than 1,000 residents in poverty?*
+*Why?* This provides an easy method to tabulate and write summary statistics to a file.
 
 ```{r}
 
-impov <- atl$Pop_below_poverty > 1000   # Store logical vector: `impov`
+sumstats <- summary(parks)          # Assign summary() output: "park_stats"
 
-which(impov)                            # Determine row number of TRUE values
+sumstats <- data.frame(sumstats)    # Coerce to data frame
+
+sumstats[, 2:3]                     # Print data frame
 
 ```
 
 <br>
+<br>
 
-### Indexing & Labeling Rows that Match Your Condition(s)
+## Group-Wise Summaries in Base R
 
-By assigning which rows match your conditional statement (using `which()`):
+So far, we've look at a veriety of ways to explore and summarize datasets and individual variables.
 
-1. You can create an index of rows and assign them to an object
-2. Then, you can operate *only on the rows that satisfy your conditions*
+However, you may often seek to summarize and compare subsets of data that are **grouped** by some common value, category, or label.  The following explores how to group and describe data by one or more specified characteristics.
+
+<br>
+<br>
+
+### Tabulating Contingency Tables
+
+In *Section 1.1: Exploratory Data Analysis*, we learned about **contingency tables**.
+
+* **Contingency tables** tally the frequency of values for each category in your data
+    - Calculated with function `table()`
+* **Proportional contingency tables** tally the proportion of each category
+    - Calulated with the output of `table()` in function `prop.table()`
 
 <br>
 
-**Indexing Matching Rows:** Use assignment with `<-` to create an index of rows:
+In order to tabulate **contingency tables** in their own data frames: 
+
+1. Flatten them with `ftable()` instead of `table()`
+2. Convert the output to a data frame with `data.frame()`
 
 ```{r}
 
-impov <- atl$Pop_below_poverty > 1000   # Assign logical vector: `impov`
+reg_freq <- ftable(parks$Region)    # Assign `ftable()` output: "reg_freq"
 
-index <- which(impov)                   # Assign row numbers: "index"
-
-print(index)                            # Print row numbers that are TRUE
+data.frame(reg_freq)                # Enter output in `data.frame()`
 
 ```
 
 <br>
 
-**Filter Matching Rows:** Using row numbers assigned to object `index`, we can **filter**:
+Likewise, for **proportional contingency tables**:
 
-* Rows which return `FALSE` vis-à-vis our conditions
-* Rows which return `TRUE` vis-à-vis our conditions
+1. Flatten them with `ftable()` instead of `table()`
+2. Call `prop.table()` on the output of `ftable()`
+3. Convert to a data frame with `data.frame()`
 
 ```{r}
 
-atl[index, ]            # Keep rows with TRUE (more than 1K in poverty)
-atl[-index, ]           # Remove rows with TRUE (less than 1K in poverty)
+reg_freq <- ftable(parks$Region)    # Assign `ftable()` output: "reg_freq"
+
+reg_prop <- prop.table(reg_freq)    # Assign `prop.table()` output: "reg_prop"
+
+data.frame(reg_prop)                # Enter output in `data.frame()`
 
 ```
 
 <br>
+<br>
 
-**Label Matching Rows:** We can categorize matching rows by assigning labels to them.
+### Contingency Tables & Group-Wise Frequencies
 
-1. First, add a variable of missing (`NA`) values: i.e. `dataframe$new_variable <- NA`
-2. Next, assign a text string of class "character" to matching rows (`TRUE`)
-3. Lastly, assign a text string to non-matching rows (`FALSE`)
+Comign soon...
+
+<br>
+<br>
+
+
+### Apply Functions & Group-Wise Operations
+
+Comign soon...
+
+<br>
+<br>
+
+### Aggregation & Group-Wise Operations
+
+Comign soon...
+
+<br>
+<br>
+
+## Group-Wise Operations with dplyr
+
+Package **dplyr** is a unified framework built explicitly for data manipulation in R, e.g.:
+
+* Reordering rows based on one or more variables
+* Performing complex filtering and additive joins
+* Selecting, reordering, and renaming variables in a data frame
+* Filtering rows by specified conditional statements and logical operators
+* Grouping rows by one or more specified variables and summarizing their values
+
+We explore most of theis elsewhere. Here, we focus on group-wise operations.
+
+But first, we'll provide a brief overview of **dplyr** syntax.
+
+<br>
+<br>
+
+### Package dplyr Syntax
+
+Package **dplyr** has a somewhat nuanced syntax that is easy to master. Pay attention:
+
+<br>
+
+**Piping:** Package **dplyr** uses the **pipe operator**, or `%>%`, which:
+
+* Passes data frames through some new function, emerging as an altered data frame
+* Begins with a data frame input in the left hand side
+* Ends with a data frame output from the right hand side
 
 ```{r}
 
-atl$poverty_threshold <- NA                   # Initialize variable of all NAs
-
-atl[index, "poverty_threshold"] <- "Over"     # Assign label for rows with TRUE
-
-atl[-index, "poverty_threshold"] <- "Under"   # Assign label for rows with FALSE
-
-head(atl, 10)
+parks %>%                                         # Specify data frame and pipe
+  filter(Facility == "Allegany Red House Area")   # Pass via function `filter()`
 
 ```
 
 <br>
-<br>
 
-## Describing Vectors of Class "Character"
+**Bare Variable Names:** Once the dataset is named, you need not type it again.
 
-R *describes* quantitative (**numeric**) and qualitative (**character** or **factor**) data differently.
-
-Notably, it *describes* **character** data and **factor** (categorical) data differently. 
-
-<br>
-<br>
-
-### Exploratory Analytic & Descriptive Functions
-
-You can explore and summarize **character** vectors with various exploratory functions.
-
-<br>
-
-**Structure:** Function `str()` prints an object's class, dimensions, and first observations.
+* R recognizes when the data frame has been called
+* Therefore, variables need only be named, without the `dataset$x` notation
 
 ```{r}
 
-str(atl$poverty_threshold)
+names(parks)
+
+parks %>%                             # Call dataset object name
+  select(Year, Region, Attendance)    # Use bare variable names
 
 ```
 
 <br>
 
-**Summary:** Function `summary()` also prints the class, mode, and length of a **character** vector.
+**Tibbles:** When passed through **dplyr** functions, they become **tibbles**.
+
+* **Tibbles** are truncated printouts of data frames
+* Typically, **tibbles** print the first ten observations
+* **Tibbles** also provide both dimensions and variable classes
+* Any unprinted observations are summarized underneath the first ten
+* With a large amount of variables, **tibbles** print only what fits on-screen
+* Like unprinted observations, variables that do not fit on-screen are summarized
+
+<br>
+<br>
+
+### Grouping by Variables
+
+In **dplyr**, function `group_by()` accepts the bare names of one or more variables.
+
+Notably, **grouping** does nothing by itself. Data must be **piped** into a new function.
+
+```{r eval=F}
+
+parks %>%
+  group_by(Year)            # Grouping by a single variable: "Year"
+
+parks %>%
+  group_by(Region, Year)    # Grouping by two variables: "Region", "Year"
+
+```
+
+<br>
+<br>
+
+### Group By-Summarize Operations
+
+As noted, we must use a function to operate on **grouped** data.
+
+* Function `summarize()` allows us to make new variables on grouped data
+* Within `summarize()`, the basic formula is: `new_variable = function(existing_variable)`
+
+Here, we create new variable `Average` from existing variable `Attendance`:
 
 ```{r}
 
-summary(atl$poverty_threshold)
+parks %>%                                 # Invoke "parks"
+  group_by(Year) %>%                      # Group by "Year"
+  summarize(Average = mean(Attendance))   # Create "Average" with `mean()`
 
 ```
 
 <br>
 
-**Value Frequency:** Function `table()` tallies the frequency of each **character** value.
+
+**Multiple Summary Variables:** Create multiple new variables in one `summarize()` call.
 
 ```{r}
 
-table(atl$poverty_threshold)
+parks %>%
+  group_by(Year) %>%
+  summarize(Mean = mean(Attendance),
+            Median = median(Attendance),
+            Maximum = max(Attendance),
+            Records = n())                # Create multiple new variables
 
 ```
 
 <br>
 
-**Proportions:** Function `prop.table()` calculates proportions of tables from `table()`.
+**Multiple Grouping Variables:** We can use multiple variables in `group_by()`.
+
+* Creates summaries for each permutation of unique values
+    - Suppose we group by one variable with 5 categories and one with 10
+    - Total permutations equals `5 * 10`, or 50 groups
+* Note, also, that *not grouping on variables will drop ungrouped variables*
+    - In other words, grouping by `X`, not `Y`, means `Y` is then excluded
 
 ```{r}
 
-tbl <- table(atl$poverty_threshold)
-
-prop.table(tbl)
+parks %>%
+  group_by(Year, Region) %>%              # Group on variables "Year", "Region"
+  summarize(Mean = mean(Attendance),
+            Median = median(Attendance))
 
 ```
 
 <br>
-<br>
 
-## Converting Labels into Factors
-
-Any variable of class "character" can easily be converted into class **"factor"**.
-
-* Use functions `factor()` or `as.factor()`
-* Recall that **factors** tell R that a variable is categorical
-* Typically, coerce to or create **factors** with limited unique labels
-* A **factor** vector or variable makes it easier to summarize its data
-* You must reassign a **factor** to the original vector or variable to replace it
+**Creating Summaries of Summaries:** Use variables from `summarize()` in the same call!
 
 ```{r}
 
-my_factor <- factor(x = atl$poverty_threshold,    # Specify vector
-                    ordered = FALSE)              # Tell R if order matters
+parks %>%
+  group_by(Year) %>%
+  summarize(Mean = mean(Attendance),
+            Total = sum(Attendance),                      # Create "Total"
+            Proportion = Total / sum(parks$Attendance))   # Use "Total" in formula
 
-atl$poverty_threshold <- my_factor                # Replace existing vector
+```
 
-class(atl$poverty_threshold)
+<br>
+
+**Assigning Summary Output:** Preface `summarize()` calles with assignment, `<-`.
+
+```{r}
+
+mean_att <- parks %>%                 # Assign expression to "mean_att"
+  group_by(Year) %>%
+  summarize(Mean = mean(Attendance))
+
+mean_att                              # Autoprint results
+
+```
+
+<br>
+
+**Ungrouping:** As a rule, consider whether to use function `ungroup()` after `group_by()`.
+
+* If you use **grouped** summaries for later analysis, they remain grouped under the hood
+* This is particularly annoying to troubleshoot when far downstream in analyses
+* Don't suffer as so many have - use `ungroup()`
+
+```{r}
+
+mean_att <- parks %>%
+  group_by(Year) %>%
+  summarize(Mean = mean(Attendance)) %>%
+  ungroup()                               # Don't enter a world of pain
 
 ```
 
 <br>
 <br>
 
-## Summarizing Factors: Describing Categorical Data
+<div class="warning">
 
-Summarizing categorical data is understandably different from quantitative data.
+WARNING: SERIOUSLY, DON'T FORGET UNGROUP()
 
-* Function 
+* Want to know why your summary data aren't merging correctly?
+* There's a litany of possible reasons.
+* Often: You didn't use `ungroup()`.
 
+Use `ungroup()`.
+
+</div>
+
+<br>
+<br>
+
+## Further Resources
+
+The following resources may prove helpful to the curious learner.
+
+* [Bryan, J. "Single Table dplyr Functions" STAT 545.](https://stat545.com/dplyr-single.html#group_by-is-a-mighty-weapon)
+* [Crawford, J (2019). "Intro to R: Data Manipulation".](http://rpubs.com/JamisonCrawford/manipulation) 
+* [RStudio (2015). "Data Wrangling Cheat Sheet".](https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
