@@ -1,6 +1,12 @@
 # Data Programming for the Social Sciences
 
 
+To upload to LeadPub:
+
+http://help.leanpub.com/en/articles/2916385-getting-started-using-git-and-github-writing-mode
+
+
+
 
 ## p-010 The Data Programming Toolkit
 
