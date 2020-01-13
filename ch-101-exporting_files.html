@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -86,7 +87,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -247,18 +247,6 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -290,8 +278,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
-    <span class="fa fa-sun fa-2x"></span>
+  <a href="https://ds4ps.org/dp4ss/">
+    <span class="fa fa-university fa-2x"></span>
      
   </a>
 </li>
@@ -413,7 +401,7 @@ $(document).ready(function () {
 ##     Call[[1L]] &lt;- as.name(&quot;write.table&quot;)
 ##     eval.parent(Call)
 ## }
-## &lt;bytecode: 0x0000000013a9fa38&gt;
+## &lt;bytecode: 0x00000000131c4f20&gt;
 ## &lt;environment: namespace:utils&gt;</code></pre>
 <p><br></p>
 <p>If all else fails (and it probably won’t), you can depend on <code>write.table()</code>.</p>
@@ -662,6 +650,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

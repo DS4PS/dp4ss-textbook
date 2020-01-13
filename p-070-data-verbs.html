@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -22,9 +23,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -73,9 +73,7 @@ h6 {
 
 <link rel="stylesheet" href="textbook.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -89,7 +87,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -99,6 +96,9 @@ img {
 }
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -114,7 +114,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -134,6 +133,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -155,19 +191,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -188,8 +278,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
-    <span class="fa fa-sun fa-2x"></span>
+  <a href="https://ds4ps.org/dp4ss/">
+    <span class="fa fa-university fa-2x"></span>
      
   </a>
 </li>
@@ -1267,48 +1357,48 @@ dat &lt;- data.frame( x1, x2 )</code></pre>
 <tbody>
 <tr class="odd">
 <td align="center">control</td>
-<td align="center">male</td>
-<td align="center">86</td>
+<td align="center">female</td>
+<td align="center">137</td>
+</tr>
+<tr class="even">
+<td align="center">control</td>
+<td align="center">female</td>
+<td align="center">123</td>
+</tr>
+<tr class="odd">
+<td align="center">treatment</td>
+<td align="center">female</td>
+<td align="center">139</td>
 </tr>
 <tr class="even">
 <td align="center">treatment</td>
-<td align="center">female</td>
-<td align="center">110</td>
+<td align="center">male</td>
+<td align="center">126</td>
 </tr>
 <tr class="odd">
 <td align="center">control</td>
 <td align="center">female</td>
-<td align="center">92</td>
+<td align="center">120</td>
 </tr>
 <tr class="even">
-<td align="center">treatment</td>
+<td align="center">control</td>
 <td align="center">male</td>
-<td align="center">100</td>
-</tr>
-<tr class="odd">
-<td align="center">treatment</td>
-<td align="center">female</td>
-<td align="center">110</td>
-</tr>
-<tr class="even">
-<td align="center">treatment</td>
-<td align="center">male</td>
-<td align="center">73</td>
+<td align="center">81</td>
 </tr>
 </tbody>
 </table>
 <pre class="r"><code>summarize( dat, n=n(), min=min(strength), mean=mean(strength), max=max(strength) )</code></pre>
-<pre><code>##     n min  mean max
-## 1 100  33 97.53 158</code></pre>
+<pre><code>##     n min   mean max
+## 1 100  56 101.94 149</code></pre>
 <p>Similarly, the native <strong>table()</strong> function is useful, but returns a table object. The <strong>dplyr</strong> <strong>count()</strong> function will function almost identically, but it will return a data frame.</p>
 <pre class="r"><code>dplyr::count( dat, group, gender )</code></pre>
 <pre><code>## # A tibble: 4 x 3
 ##   group     gender     n
 ##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;
-## 1 control   female    24
-## 2 control   male      27
-## 3 treatment female    27
-## 4 treatment male      22</code></pre>
+## 1 control   female    33
+## 2 control   male      18
+## 3 treatment female    21
+## 4 treatment male      28</code></pre>
 <p>The real power of this function is the ability to use it with the <strong>group_by()</strong> function to analyze outcomes for many data subsets at once.</p>
 <pre class="r"><code>grouped.dat &lt;- group_by( dat, group, gender )
 dplyr::summarize( grouped.dat, 
@@ -1317,13 +1407,13 @@ dplyr::summarize( grouped.dat,
                   mean=round( mean(strength), 1 ), 
                   max=max(strength) ) </code></pre>
 <pre><code>## # A tibble: 4 x 6
-## # Groups:   group [?]
+## # Groups:   group [2]
 ##   group     gender     n   min  mean   max
 ##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 control   female    24    82 106.    142
-## 2 control   male      27    33  78.3   104
-## 3 treatment female    27    86 120.    158
-## 4 treatment male      22    54  84.4   113</code></pre>
+## 1 control   female    33    62 110.    140
+## 2 control   male      18    59  79.7    98
+## 3 treatment female    21    85 123.    149
+## 4 treatment male      28    56  90.6   128</code></pre>
 <p>We will discuss this functionality in-depth two chapters from now.</p>
 </div>
 </div>
@@ -1357,6 +1447,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

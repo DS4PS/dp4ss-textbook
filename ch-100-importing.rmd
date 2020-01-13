@@ -364,7 +364,7 @@ read.csv(file = "http://www.ds4ps.com/textbook/my_data.csv")
 
 We can read in [Syracuse, NY lead violations](http://data.syrgov.net/datasets/c15a39a8a00e48b1a60c826c8a2cb3e0_0) directly from the city's open data portal.
 
-```{r message=F, warning=F}
+```{r message=F, warning=F, eval=F}
 
   #' Put your URL in quotes; here, we name it "url"
   #' Use function paste0() to join long strings of text
@@ -381,7 +381,7 @@ lead_data <- read.csv(file = url,                  # Use object storing URL text
 
 Now, we have a locally-stored dataset:
 
-```{r message=F, warning=F}
+```{r message=F, warning=F, eval=F}
 
 lead_data[1:10, 1:4]      # Bracks specify rows and columns to include
 
@@ -489,7 +489,7 @@ The "readr" package improves on several functions in base R's reading toolkit, e
 
 Observe the output from the "tibble" data frame. What's different?
 
-```{r message=F, warning=F}
+```{r message=F, warning=F, eval=F}
 
 library(readr)
 

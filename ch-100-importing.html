@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -86,7 +87,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -247,18 +247,6 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -290,8 +278,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
-    <span class="fa fa-sun fa-2x"></span>
+  <a href="https://ds4ps.org/dp4ss/">
+    <span class="fa fa-university fa-2x"></span>
      
   </a>
 </li>
@@ -630,7 +618,7 @@ Source: <a href="https://xkcd.com/2116/">XKCD</a>
 ##     fill = TRUE, comment.char = &quot;&quot;, ...) 
 ## read.table(file = file, header = header, sep = sep, quote = quote, 
 ##     dec = dec, fill = fill, comment.char = comment.char, ...)
-## &lt;bytecode: 0x0000000013a30260&gt;
+## &lt;bytecode: 0x00000000132bda28&gt;
 ## &lt;environment: namespace:utils&gt;</code></pre>
 <p><br></p>
 <p>A <a href="https://stat.ethz.ch/pipermail/r-help/2008-March/158393.html"><strong>wrapper function</strong></a> is a modified version of a more powerful and versatile function.</p>
@@ -662,17 +650,6 @@ lead_data &lt;- read.csv(file = url,                  # Use object storing URL t
 <p><br></p>
 <p>Now, we have a locally-stored dataset:</p>
 <pre class="r"><code>lead_data[1:10, 1:4]      # Bracks specify rows and columns to include</code></pre>
-<pre><code>##         ï..X        Y                  property_address property_zip
-## 1  -76.14669 43.02176                     416 Cannon St      &quot;13205&quot;
-## 2  -76.16100 43.07128                    1106 Carbon St      &quot;13208&quot;
-## 3  -76.14960 43.02138               1815-17 Midland Ave      &quot;13205&quot;
-## 4  -76.16157 43.07151      1116 Carbon St &amp; Lemoyne Ave      &quot;13208&quot;
-## 5  -76.14939 43.02335                   159-61 Fage Ave      &quot;13205&quot;
-## 6  -76.16143 43.07733    3137 Grant Blvd &amp; Hiawatha Blv      &quot;13208&quot;
-## 7  -76.15006 43.02256 1629-31 Midland Ave &amp; Fernwood Av      &quot;13205&quot;
-## 8  -76.16143 43.07733    3137 Grant Blvd &amp; Hiawatha Blv      &quot;13208&quot;
-## 9  -76.15824 43.02256                    122 Bishop Ave      &quot;13207&quot;
-## 10 -76.15754 43.07989                      1012 Wolf St      &quot;13208&quot;</code></pre>
 <p><br></p>
 <p>Consider the following notable arguments for <code>read.csv()</code>:</p>
 <ul>
@@ -746,26 +723,6 @@ url &lt;- paste0(&quot;https://opendata.arcgis.com/datasets/&quot;,
               &quot;c15a39a8a00e48b1a60c826c8a2cb3e0_0.csv&quot;)
 
 read_csv(url)</code></pre>
-<pre><code>## # A tibble: 200 x 22
-##        X     Y property_address property_zip case_number property_owner_~
-##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;            &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;           
-##  1 -76.1  43.0 416 Cannon St    &quot;\&quot;13205\&quot;&quot;  L00472      Sylvester Fair  
-##  2 -76.2  43.1 1106 Carbon St   &quot;\&quot;13208\&quot;&quot;  L00477      Giovanni Canzano
-##  3 -76.1  43.0 1815-17 Midland~ &quot;\&quot;13205\&quot;&quot;  L00495      Michael Hemmer  
-##  4 -76.2  43.1 1116 Carbon St ~ &quot;\&quot;13208\&quot;&quot;  L00594      Lam Nguyen      
-##  5 -76.1  43.0 159-61 Fage Ave  &quot;\&quot;13205\&quot;&quot;  L00374      Jaulonda Smith  
-##  6 -76.2  43.1 3137 Grant Blvd~ &quot;\&quot;13208\&quot;&quot;  L00364      Jeffrey Fenocchi
-##  7 -76.2  43.0 1629-31 Midland~ &quot;\&quot;13205\&quot;&quot;  L00065      Maurice Krohl   
-##  8 -76.2  43.1 3137 Grant Blvd~ &quot;\&quot;13208\&quot;&quot;  L00471      Jeffrey Fenocchi
-##  9 -76.2  43.0 122 Bishop Ave   &quot;\&quot;13207\&quot;&quot;  L00142      Webster Ballant~
-## 10 -76.2  43.1 1012 Wolf St     &quot;\&quot;13208\&quot;&quot;  L00035      Michael Lembo   
-## # ... with 190 more rows, and 16 more variables: case_open_date &lt;dttm&gt;,
-## #   nature_of_complaint &lt;chr&gt;, case_type &lt;chr&gt;, case_status &lt;chr&gt;,
-## #   property_id &lt;chr&gt;, vacant_property &lt;chr&gt;,
-## #   property_owner_address &lt;chr&gt;, property_owner_city &lt;chr&gt;,
-## #   property_owner_state &lt;chr&gt;, property_owner_zip &lt;chr&gt;,
-## #   neighborhood &lt;chr&gt;, identifier &lt;chr&gt;, long &lt;dbl&gt;, lat &lt;dbl&gt;,
-## #   TNT_NAME &lt;chr&gt;, ObjectId &lt;dbl&gt;</code></pre>
 <p><br></p>
 <div class="tip">
 <p><strong>PRO TIP</strong></p>
@@ -958,6 +915,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
