@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -22,9 +23,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -73,9 +73,7 @@ h6 {
 
 <link rel="stylesheet" href="textbook.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -89,7 +87,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -99,6 +96,9 @@ img {
 }
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -114,7 +114,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -134,6 +133,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -155,19 +191,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -188,8 +278,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
-    <span class="fa fa-sun fa-2x"></span>
+  <a href="https://ds4ps.org/dp4ss/">
+    <span class="fa fa-university fa-2x"></span>
      
   </a>
 </li>
@@ -219,7 +309,8 @@ $(document).ready(function () {
 <h2><span class="header-section-number">1.1</span> Useful Packages</h2>
 <pre class="r"><code>library( stargazer )  # publication quality tables
 library( skimr )      # quick and comprehensive descriptive stats
-library( dplyr )      # data wrangling</code></pre>
+library( dplyr )      # data wrangling
+library( pander )</code></pre>
 <p>Descriptive statistics are hugely important for any analysis, but they can be challenging to produce because different classes of variable require different tables or statistics to be meaningful.</p>
 <p>The most general core R <strong>summary()</strong> function prints some basic descriptives about variables in a dataset, reporting statistics based upon data type:</p>
 <table style="width:81%;">
@@ -277,20 +368,20 @@ library( dplyr )      # data wrangling</code></pre>
 </tbody>
 </table>
 <pre class="r"><code>summary( dat )</code></pre>
-<pre><code>##      name                 group      gender      height     
-##  Length:4           control  :2   female:2   Min.   :62.00  
-##  Class :character   treatment:2   male  :2   1st Qu.:64.25  
-##  Mode  :character                            Median :66.00  
-##                                              Mean   :66.75  
-##                                              3rd Qu.:68.50  
-##                                              Max.   :73.00  
-##      weight         strength    
-##  Min.   :130.0   Min.   :119.0  
-##  1st Qu.:137.5   1st Qu.:136.2  
-##  Median :160.0   Median :154.5  
-##  Mean   :160.0   Mean   :153.2  
-##  3rd Qu.:182.5   3rd Qu.:171.5  
-##  Max.   :190.0   Max.   :185.0</code></pre>
+<pre><code>##      name                 group      gender      height          weight     
+##  Length:4           control  :2   female:2   Min.   :62.00   Min.   :130.0  
+##  Class :character   treatment:2   male  :2   1st Qu.:64.25   1st Qu.:137.5  
+##  Mode  :character                            Median :66.00   Median :160.0  
+##                                              Mean   :66.75   Mean   :160.0  
+##                                              3rd Qu.:68.50   3rd Qu.:182.5  
+##                                              Max.   :73.00   Max.   :190.0  
+##     strength    
+##  Min.   :119.0  
+##  1st Qu.:136.2  
+##  Median :154.5  
+##  Mean   :153.2  
+##  3rd Qu.:171.5  
+##  Max.   :185.0</code></pre>
 <p>These are not pretty enough to include in a report. Fortunately there are some functions that produce nice tables for R Markdown reports. We will use the <strong>stargazer</strong> package extensively for regression results and descriptive statistics.</p>
 <p><br></p>
 <pre class="r"><code>library( stargazer )
@@ -558,62 +649,401 @@ library( Lahman )
 
 data( Master )
 skim( Master )</code></pre>
-<pre><code>## Skim summary statistics
-##  n obs: 19105 
-##  n variables: 26 
-## 
-## -- Variable type:character --------------------------------------------------------------------------------------
-##      variable missing complete     n min max empty n_unique
-##       bbrefID       2    19103 19105   5   9     0    19103
-##     birthCity     180    18925 19105   3  26     0     4745
-##  birthCountry      69    19036 19105   3  14     0       53
-##    birthState     571    18534 19105   2  22     0      260
-##     deathCity    9674     9431 19105   2  28     0     2578
-##  deathCountry    9669     9436 19105   3  14     0       25
-##    deathState    9715     9390 19105   2  20     0      101
-##         debut     195    18910 19105  10  10     0    10155
-##     finalGame     195    18910 19105  10  10     0     9138
-##     nameFirst      37    19068 19105   2  12     0     2353
-##     nameGiven      37    19068 19105   2  43     0    12616
-##      nameLast       0    19105 19105   2  14     0     9831
-##      playerID       0    19105 19105   5   9     0    19105
-##       retroID      56    19049 19105   8   8     0    19049
-## 
-## -- Variable type:Date -------------------------------------------------------------------------------------------
-##   variable missing complete     n        min        max     median
-##  birthDate     449    18656 19105 1820-04-17 1996-08-12 1939-01-01
-##  deathDate    9666     9439 19105 1872-03-17 2017-02-19 1967-03-06
-##  n_unique
-##     15404
-##      8458
-## 
-## -- Variable type:factor -----------------------------------------------------------------------------------------
-##  variable missing complete     n n_unique
-##      bats    1185    17920 19105        3
-##    throws     979    18126 19105        3
-##                            top_counts ordered
-##  R: 11788, L: 4957, NA: 1185, B: 1175   FALSE
-##      R: 14472, L: 3653, NA: 979, S: 1   FALSE
-## 
-## -- Variable type:integer ----------------------------------------------------------------------------------------
-##    variable missing complete     n    mean    sd   p0  p25  p50  p75 p100
-##    birthDay     449    18656 19105   15.61  8.75    1    8   16   23   31
-##  birthMonth     302    18803 19105    6.63  3.47    1    4    7   10   12
-##   birthYear     132    18973 19105 1931.44 41.56 1820 1895 1937 1969 1996
-##    deathDay    9666     9439 19105   15.57  8.78    1    8   15   23   31
-##  deathMonth    9665     9440 19105    6.48  3.53    1    3    6   10   12
-##   deathYear    9664     9441 19105 1964.29 31.81 1872 1942 1967 1990 2017
-##      height     785    18320 19105   72.27  2.6    43   71   72   74   83
-##      weight     854    18251 19105  186.38 21.52   65  170  185  200  320
-##      hist
-##  &lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;
-##  &lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2586&gt;&lt;U+2583&gt;&lt;U+2583&gt;&lt;U+2587&gt;&lt;U+2585&gt;&lt;U+2587&gt;
-##  &lt;U+2581&gt;&lt;U+2582&gt;&lt;U+2585&gt;&lt;U+2586&gt;&lt;U+2585&gt;&lt;U+2586&gt;&lt;U+2587&gt;&lt;U+2587&gt;
-##  &lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;
-##  &lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2583&gt;&lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2587&gt;
-##  &lt;U+2581&gt;&lt;U+2582&gt;&lt;U+2583&gt;&lt;U+2585&gt;&lt;U+2587&gt;&lt;U+2587&gt;&lt;U+2586&gt;&lt;U+2586&gt;
-##  &lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2587&gt;&lt;U+2585&gt;&lt;U+2581&gt;
-##  &lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2582&gt;&lt;U+2587&gt;&lt;U+2583&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-6">Table 1.1: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">Master</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">19617</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">26</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">14</td>
+</tr>
+<tr class="odd">
+<td align="left">Date</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">factor</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">numeric</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">playerID</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">5</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">19617</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">birthCountry</td>
+<td align="right">64</td>
+<td align="right">1.00</td>
+<td align="right">3</td>
+<td align="right">14</td>
+<td align="right">0</td>
+<td align="right">56</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">birthState</td>
+<td align="right">527</td>
+<td align="right">0.97</td>
+<td align="right">2</td>
+<td align="right">22</td>
+<td align="right">0</td>
+<td align="right">288</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">birthCity</td>
+<td align="right">176</td>
+<td align="right">0.99</td>
+<td align="right">3</td>
+<td align="right">26</td>
+<td align="right">0</td>
+<td align="right">4811</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">deathCountry</td>
+<td align="right">9971</td>
+<td align="right">0.49</td>
+<td align="right">3</td>
+<td align="right">14</td>
+<td align="right">0</td>
+<td align="right">25</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">deathState</td>
+<td align="right">10019</td>
+<td align="right">0.49</td>
+<td align="right">2</td>
+<td align="right">20</td>
+<td align="right">0</td>
+<td align="right">105</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">deathCity</td>
+<td align="right">9976</td>
+<td align="right">0.49</td>
+<td align="right">2</td>
+<td align="right">26</td>
+<td align="right">0</td>
+<td align="right">2622</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">nameFirst</td>
+<td align="right">37</td>
+<td align="right">1.00</td>
+<td align="right">2</td>
+<td align="right">12</td>
+<td align="right">0</td>
+<td align="right">2445</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">nameLast</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">2</td>
+<td align="right">14</td>
+<td align="right">0</td>
+<td align="right">10034</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">nameGiven</td>
+<td align="right">37</td>
+<td align="right">1.00</td>
+<td align="right">2</td>
+<td align="right">43</td>
+<td align="right">0</td>
+<td align="right">12982</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">debut</td>
+<td align="right">197</td>
+<td align="right">0.99</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">10392</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">finalGame</td>
+<td align="right">197</td>
+<td align="right">0.99</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">9336</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">retroID</td>
+<td align="right">56</td>
+<td align="right">1.00</td>
+<td align="right">8</td>
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">19561</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">bbrefID</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">5</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">19616</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: Date</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">min</th>
+<th align="left">max</th>
+<th align="left">median</th>
+<th align="right">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">deathDate</td>
+<td align="right">9970</td>
+<td align="right">0.49</td>
+<td align="left">1872-03-17</td>
+<td align="left">2019-01-06</td>
+<td align="left">1967-12-31</td>
+<td align="right">8643</td>
+</tr>
+<tr class="even">
+<td align="left">birthDate</td>
+<td align="right">429</td>
+<td align="right">0.98</td>
+<td align="left">1820-04-17</td>
+<td align="left">1998-10-25</td>
+<td align="left">1941-06-29</td>
+<td align="right">15783</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: factor</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">ordered</th>
+<th align="right">n_unique</th>
+<th align="left">top_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bats</td>
+<td align="right">1184</td>
+<td align="right">0.94</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">R: 12115, L: 5113, B: 1205</td>
+</tr>
+<tr class="even">
+<td align="left">throws</td>
+<td align="right">979</td>
+<td align="right">0.95</td>
+<td align="left">FALSE</td>
+<td align="right">3</td>
+<td align="left">R: 14877, L: 3760, S: 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">birthYear</td>
+<td align="right">120</td>
+<td align="right">0.99</td>
+<td align="right">1932.98</td>
+<td align="right">42.18</td>
+<td align="right">1820</td>
+<td align="right">1896</td>
+<td align="right">1939</td>
+<td align="right">1971</td>
+<td align="right">1998</td>
+<td align="left">▁▅▅▆▇</td>
+</tr>
+<tr class="even">
+<td align="left">birthMonth</td>
+<td align="right">285</td>
+<td align="right">0.99</td>
+<td align="right">6.63</td>
+<td align="right">3.47</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">7</td>
+<td align="right">10</td>
+<td align="right">12</td>
+<td align="left">▇▅▅▆▇</td>
+</tr>
+<tr class="odd">
+<td align="left">birthDay</td>
+<td align="right">429</td>
+<td align="right">0.98</td>
+<td align="right">15.62</td>
+<td align="right">8.76</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">16</td>
+<td align="right">23</td>
+<td align="right">31</td>
+<td align="left">▇▇▇▇▆</td>
+</tr>
+<tr class="even">
+<td align="left">deathYear</td>
+<td align="right">9968</td>
+<td align="right">0.49</td>
+<td align="right">1965.24</td>
+<td align="right">32.38</td>
+<td align="right">1872</td>
+<td align="right">1942</td>
+<td align="right">1967</td>
+<td align="right">1992</td>
+<td align="right">2019</td>
+<td align="left">▁▃▆▇▇</td>
+</tr>
+<tr class="odd">
+<td align="left">deathMonth</td>
+<td align="right">9969</td>
+<td align="right">0.49</td>
+<td align="right">6.49</td>
+<td align="right">3.53</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">6</td>
+<td align="right">10</td>
+<td align="right">12</td>
+<td align="left">▇▅▅▅▇</td>
+</tr>
+<tr class="even">
+<td align="left">deathDay</td>
+<td align="right">9970</td>
+<td align="right">0.49</td>
+<td align="right">15.55</td>
+<td align="right">8.78</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">23</td>
+<td align="right">31</td>
+<td align="left">▇▇▇▆▆</td>
+</tr>
+<tr class="odd">
+<td align="left">weight</td>
+<td align="right">825</td>
+<td align="right">0.96</td>
+<td align="right">186.85</td>
+<td align="right">21.79</td>
+<td align="right">65</td>
+<td align="right">170</td>
+<td align="right">185</td>
+<td align="right">200</td>
+<td align="right">320</td>
+<td align="left">▁▂▇▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">height</td>
+<td align="right">742</td>
+<td align="right">0.96</td>
+<td align="right">72.31</td>
+<td align="right">2.61</td>
+<td align="right">43</td>
+<td align="right">71</td>
+<td align="right">72</td>
+<td align="right">74</td>
+<td align="right">83</td>
+<td align="left">▁▁▁▇▁</td>
+</tr>
+</tbody>
+</table>
 <p>For more functionality see:</p>
 <pre class="r"><code>vignette( &quot;Using_skimr&quot;, package = &quot;skimr&quot; )</code></pre>
 <p>There are many additional packages and tricks for producing descriptive statistics. Note, though, that most produce a print-out of summary statistics but do not return a useful “tidy” dataset that can be used in subsequent steps. For most data recipes, we will rely on the <strong>summarize()</strong> function in the <strong>dplyr</strong> package. It’s utility will become obvious in the next two chapters.</p>
@@ -649,6 +1079,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -24,6 +24,8 @@ knitr::opts_chunk$set( echo = TRUE, message=F, warning=F, fig.width=10)
 library( stargazer )  # publication quality tables
 library( skimr )      # quick and comprehensive descriptive stats
 library( dplyr )      # data wrangling
+library( pander )
+
 ```
 
 Descriptive statistics are hugely important for any analysis, but they can be challenging to produce because different classes of variable require different tables or statistics to be meaningful. 

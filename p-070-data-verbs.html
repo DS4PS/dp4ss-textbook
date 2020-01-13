@@ -1357,48 +1357,48 @@ dat &lt;- data.frame( x1, x2 )</code></pre>
 <tbody>
 <tr class="odd">
 <td align="center">control</td>
-<td align="center">female</td>
-<td align="center">137</td>
+<td align="center">male</td>
+<td align="center">72</td>
 </tr>
 <tr class="even">
 <td align="center">control</td>
 <td align="center">female</td>
-<td align="center">123</td>
+<td align="center">115</td>
+</tr>
+<tr class="odd">
+<td align="center">treatment</td>
+<td align="center">male</td>
+<td align="center">124</td>
+</tr>
+<tr class="even">
+<td align="center">control</td>
+<td align="center">female</td>
+<td align="center">91</td>
 </tr>
 <tr class="odd">
 <td align="center">treatment</td>
 <td align="center">female</td>
-<td align="center">139</td>
+<td align="center">113</td>
 </tr>
 <tr class="even">
 <td align="center">treatment</td>
-<td align="center">male</td>
-<td align="center">126</td>
-</tr>
-<tr class="odd">
-<td align="center">control</td>
 <td align="center">female</td>
-<td align="center">120</td>
-</tr>
-<tr class="even">
-<td align="center">control</td>
-<td align="center">male</td>
-<td align="center">81</td>
+<td align="center">122</td>
 </tr>
 </tbody>
 </table>
 <pre class="r"><code>summarize( dat, n=n(), min=min(strength), mean=mean(strength), max=max(strength) )</code></pre>
-<pre><code>##     n min   mean max
-## 1 100  56 101.94 149</code></pre>
+<pre><code>##     n min  mean max
+## 1 100  54 98.28 151</code></pre>
 <p>Similarly, the native <strong>table()</strong> function is useful, but returns a table object. The <strong>dplyr</strong> <strong>count()</strong> function will function almost identically, but it will return a data frame.</p>
 <pre class="r"><code>dplyr::count( dat, group, gender )</code></pre>
 <pre><code>## # A tibble: 4 x 3
 ##   group     gender     n
 ##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;
-## 1 control   female    33
-## 2 control   male      18
-## 3 treatment female    21
-## 4 treatment male      28</code></pre>
+## 1 control   female    20
+## 2 control   male      29
+## 3 treatment female    25
+## 4 treatment male      26</code></pre>
 <p>The real power of this function is the ability to use it with the <strong>group_by()</strong> function to analyze outcomes for many data subsets at once.</p>
 <pre class="r"><code>grouped.dat &lt;- group_by( dat, group, gender )
 dplyr::summarize( grouped.dat, 
@@ -1410,10 +1410,10 @@ dplyr::summarize( grouped.dat,
 ## # Groups:   group [2]
 ##   group     gender     n   min  mean   max
 ##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 control   female    33    62 110.    140
-## 2 control   male      18    59  79.7    98
-## 3 treatment female    21    85 123.    149
-## 4 treatment male      28    56  90.6   128</code></pre>
+## 1 control   female    20    82 110.    134
+## 2 control   male      29    54  79.5   117
+## 3 treatment female    25    91 117     151
+## 4 treatment male      26    62  92.1   125</code></pre>
 <p>We will discuss this functionality in-depth two chapters from now.</p>
 </div>
 </div>
