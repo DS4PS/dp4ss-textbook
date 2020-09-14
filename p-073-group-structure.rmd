@@ -448,7 +448,7 @@ merge( Salaries, Master ) %>%
 
 To examine pay raises, we will now use more than one year of data. Since the question asks about pay raises over the past decade, we will filter the last ten years of data.
 
-And how since we are looking at patterns over teams and over time, we need to define a group structure with two variables:
+And since we are looking at patterns over teams and over time, we need to define a group structure with two variables:
 
 ```{r}
 
