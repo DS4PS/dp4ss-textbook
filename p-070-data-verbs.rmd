@@ -96,7 +96,7 @@ DATA VERB | ACTION
 ---------|----------  
 filter() | Select rows  
 select() | Select columns 
-arrage() | Sort the dataset by one or more columns 
+arrange() | Sort the dataset by one or more columns 
 mutate() | Create a new variable by transforming an existing variable or variables 
 summarize() | Create summary statistics for specified variables 
 group_by() | Split the dataset (implicitly) into a separate dataset for each group 
