@@ -71,7 +71,7 @@ The two most important skills as you first learn a data programming language are
 1. Translating English phrases into computer code using logical statements  
 2. Organizing your data into groups  
 
-This lecture focuses on efficienty splitting your data into groups, and then analyzing your data by group.
+This lecture focuses on efficiently splitting your data into groups, and then analyzing your data by group.
 
 
 ### What Are Groups?
