@@ -175,7 +175,7 @@ USArrests[ , c("Murder","Assault") ]
 head( USArrests[ , c("Murder","Assault") ] ) %>% pander()
 ```
 
-The **_select()_** function converts this oeration into a data verb: 
+The **_select()_** function converts this operation into a data verb: 
 
 ```{r, eval=F}
 select( USArrests, Murder, Assault )
