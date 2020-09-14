@@ -212,7 +212,7 @@ names %>%
 Ryan Burge posted a [fun project on Kaggle](https://www.kaggle.com/ryanburge/hipster-names/notebook) about how to find hipster names using this historical data. He defines hipster names as those meeting the following criteria:
 
 * They were popular when your grandmother was young. 
-* They were unpopular when your parent were young. 
+* They were unpopular when your parents were young. 
 * They have recently become popular again.  
 
 Let's stick with women's names.
