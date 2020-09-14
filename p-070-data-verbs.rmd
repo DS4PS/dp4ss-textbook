@@ -327,7 +327,7 @@ body.mass.index <-  kg / meters^2
 per.capita.income <-  income / population
 ```
 
-The **_mutate()_** function creates a new transformed variable from the forumala you specify and adds it to the original dataset.
+The **_mutate()_** function creates a new transformed variable from the formula you specify and adds it to the original dataset.
 
 As an example, perhaps we have data on the number of nonprofits located in each US city. If we look at the raw count of nonprofits, it makes it look as though the large cities have the most vibrant nonprofit sectors:
 
