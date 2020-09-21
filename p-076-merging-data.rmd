@@ -134,7 +134,7 @@ Your "keys" are the shared IDs across your datasets used for the join. You can c
 intersect( names(dat1), names(dat2) )
 ```
 
-Thi works when the datasets were generated from a common system that uses standardized and identical ID names. In other cases, the same key may be spelled differently ('year' vs. 'YEAR') or have completely different names. 
+This works when the datasets were generated from a common system that uses standardized and identical ID names. In other cases, the same key may be spelled differently ('year' vs. 'YEAR') or have completely different names. 
 
 The check above at least allows you to catch instances where variable names would be repeated, and thus duplicated in the merged file. When this happens, like the 'year' variable in the example above, the merge operation will add an 'x' and 'y' to the end of the variable names to specify which dataset they originated from ('year.x' and 'year.y' in the example above). 
 
