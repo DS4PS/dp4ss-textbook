@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>ch-000-introduction-to-r.utf8</title>
+
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="textbook.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DATA SCIENCE I</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://ds4ps.org/dp4ss/">
+    <span class="fas fa-university fa-2x"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction-to-r"><span class="toc-section-number">1</span> Introduction to R</a>
+<ul>
+<li><a href="#navigation"><span class="toc-section-number">1.1</span> Navigation</a></li>
+<li><a href="#commenting-code"><span class="toc-section-number">1.2</span> Commenting Code</a></li>
+<li><a href="#help"><span class="toc-section-number">1.3</span> Help</a></li>
+<li><a href="#install-programs-packages"><span class="toc-section-number">1.4</span> Install Programs (packages)</a></li>
+<li><a href="#accessing-built-in-datasets-in-r"><span class="toc-section-number">1.5</span> Accessing Built-In Datasets in R</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="introduction-to-r" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Introduction to R</h1>
+<p>This lecture introduces you to basic operations when you first start using R such as navigation, the object-oriented framework, loading a package, and creating some data vectors.</p>
+<div id="navigation" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Navigation</h2>
+<p>You need to know a few operations to help you maneuver the R work environment, such as listing objects (datasets and functions) that are active, changing your working directory, listing available files, and finding help.</p>
+<div id="setting-your-working-directory" class="section level3" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Setting Your Working Directory</h3>
+<p>When you are ready to load data, R needs to know where to look for your files. You can check what is avaiable in the current directory (i.e. folder) by asking to list all of the current files using <strong>dir()</strong>.</p>
+<pre class="r"><code>dir()</code></pre>
+<p>If the file that you need is located in a different folder, you can change directories easily in R Studio by Session -&gt; Set working director -&gt; Choose directory (or Ctrl + Shift + H).</p>
+<p>If you are writing a script, you want to keep track of this step so that it can be reproduced. Use the function <strong>get.wd()</strong> to check your current working directory, and <strong>set.wd()</strong> to change. You need to specify your path as an argument to this function, such as.</p>
+<pre class="r"><code>setwd( &quot;C:/user/projects/financial model&quot; )</code></pre>
+<p>NOTE! R uses unix style notation with forward slashes, so if you copy and paste from Windows it will look like this, with back slashes:</p>
+<pre class="r"><code>setwd( &quot;C:\user\projects\financial model&quot; )</code></pre>
+<p>You will need to change them around for it to work.</p>
+<p>It is best to save all of your steps in your scripts so that the analysis can be reproduced by yourself or others. In some cases you are doing exploratory or summary work, and you may want to find a file a quickly. You can use the <strong>file.choose()</strong> function to open a GUI to select your file directly. This function is used as an argument inside of a load data function.</p>
+<pre class="r"><code>my.dat &lt;- read.csv( file.choose() )</code></pre>
+</div>
+</div>
+<div id="commenting-code" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Commenting Code</h2>
+<p>Most computer languages have a special character that is used to “comment out” lines so that it is not run by the program. It is used for two important purposes. First, we can add text to document our functions and it will not interfere with the program. And two, we can use it to run a program while ignoring some of the code, often for debugging purposes.</p>
+<p>The <strong>#</strong> hash tag is used for comments in R.</p>
+<pre class="r"><code>##==============================================
+##
+##  Here is some documentation for this script
+##
+##==============================================
+
+x &lt;- 1:10
+
+sum( x )</code></pre>
+<pre><code>## [1] 55</code></pre>
+<pre class="r"><code># y &lt;- 1:25     # not run
+
+# sum( y )      # not run</code></pre>
+</div>
+<div id="help" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Help</h2>
+<p>You will use the help functions frequently to figure out what arguments and values are needed for specific functions. Because R is very customizable, you will find that many functions have several or dozens of arguments, and it is difficult to remember the correct syntax and values. But don’t worry, to look them up all you need is the function name and a call for help:</p>
+<blockquote>
+<p>help( dotchart ) # opens an external helpfile</p>
+</blockquote>
+<p>If you just need to remind yourself which arguments are defined in a function, you can use the <em>args()</em> command:</p>
+<pre class="r"><code>args( dotchart )</code></pre>
+<pre><code>## function (x, labels = NULL, groups = NULL, gdata = NULL, offset = 1/8, 
+##     ann = par(&quot;ann&quot;), xaxt = par(&quot;xaxt&quot;), frame.plot = TRUE, 
+##     log = &quot;&quot;, cex = par(&quot;cex&quot;), pt.cex = cex, pch = 21, gpch = 21, 
+##     bg = par(&quot;bg&quot;), color = par(&quot;fg&quot;), gcolor = par(&quot;fg&quot;), lcolor = &quot;gray&quot;, 
+##     xlim = range(x[is.finite(x)]), main = NULL, xlab = NULL, 
+##     ylab = NULL, ...) 
+## NULL</code></pre>
+<p>If you can’t recall a function name, you can list all of the functions from a specific package as follows:</p>
+<blockquote>
+<p>help( package=“stats” ) # lists all functions in stats package</p>
+</blockquote>
+</div>
+<div id="install-programs-packages" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Install Programs (packages)</h2>
+<p>When you open R by default it will launch a core set of programs, called “packages” in R speak, that are use for most data operations. To see which packages are currently active use the <strong>search()</strong> function.</p>
+<pre class="r"><code>search()</code></pre>
+<pre><code>## [1] &quot;.GlobalEnv&quot;        &quot;package:stats&quot;     &quot;package:graphics&quot; 
+## [4] &quot;package:grDevices&quot; &quot;package:utils&quot;     &quot;package:datasets&quot; 
+## [7] &quot;package:methods&quot;   &quot;Autoloads&quot;         &quot;package:base&quot;</code></pre>
+<p>These programs manage the basic data operations, run the core graphics engine, and give you basic statistical methods.</p>
+<p>The real magic for R comes from the over 7,000 contributed packages available on the CRAN: <a href="https://cran.r-project.org/web/views/" class="uri">https://cran.r-project.org/web/views/</a></p>
+<p>A package consists of custom functions and datasets that are generated by users. They are <em>packaged</em> together so that they can be shared with others. A package also includes documentation that describes each function, defines all of the arguments, and documents any datasets that are included.</p>
+<p>If you know a package name, it is easy to install. In R Studio you can select Tools -&gt; Install Packages and a list of available packages will be generated. But it is easier to use the <strong>install.packages()</strong> command. We will use the Lahman Package in this course, so let’s install that now.</p>
+<p><strong>Description</strong> <em>This package provides the tables from Sean Lahman’s
+Baseball Database as a set of R data.frames. It uses the data
+on pitching, hitting and fielding performance and other tables
+from 1871 through 2013, as recorded in the 2014 version of the
+database.</em></p>
+<p>See the documentation here: <a href="https://cran.r-project.org/web/packages/Lahman/Lahman.pdf" class="uri">https://cran.r-project.org/web/packages/Lahman/Lahman.pdf</a></p>
+<pre class="r"><code>install.packages( &quot;Lahman&quot; )</code></pre>
+<p>You will be asked to select a “mirror”. In R speak this just means the server from which you will download the package (choose anything nearby). R is a community of developers and universities that create code and maintain the infrastructure. A couple of dozen universities around the world host servers that contain copies of the R packages so that they can be easily accessed everywhere.</p>
+<p>If the package is successfully installed you will get a message similar to this:</p>
+<blockquote>
+<p>package ‘Lahman’ successfully unpacked and MD5 sums checked</p>
+</blockquote>
+<p>Once a new program is installed you can now open (“load” in R speak) the package using the <strong>library()</strong> command:</p>
+<pre class="r"><code>library( &quot;Lahman&quot; )</code></pre>
+<p>If you now type <strong>search()</strong> you can see that Lahman has been added to the list of active programs. We can now access all of the functions and data that are available in the Lahman package.</p>
+</div>
+<div id="accessing-built-in-datasets-in-r" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Accessing Built-In Datasets in R</h2>
+<p>One nice feature of R is that is comes with a bunch of built-in datasets that have been contributed by users are are loaded automatically. You can see the list of available datasets by typing:</p>
+<pre class="r"><code>data()</code></pre>
+<p>This will list all of the default datasets in core R packages. If you want to see all of the datasets available in installed packages as well use:</p>
+<pre class="r"><code>data( package = .packages(all.available = TRUE) )</code></pre>
+<div id="basic-data-operations" class="section level3" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Basic Data Operations</h3>
+<p>Let’s ignore the underlying data structure right now and look at some ways that we might interact with data.</p>
+<p>We will use the <strong>USArrests</strong> dataset available in the core files.</p>
+<p>To access the data we need to load it into working memory. Anything that is active in R will be listed in the environment, which you can check using the <strong>ls()</strong> command. We will load the dataset using the <strong>data()</strong> command.</p>
+<pre class="r"><code>remove( list=ls() )</code></pre>
+<pre class="r"><code>ls() # nothing currently available</code></pre>
+<pre><code>## character(0)</code></pre>
+<pre class="r"><code>data( &quot;USArrests&quot; )
+
+ls() # data is now avaible for use</code></pre>
+<pre><code>## [1] &quot;USArrests&quot;</code></pre>
+<p>Now that we have loaded a dataset, we can start to access the variables and analyze relationships. Let’s get to know our dataset.</p>
+<pre class="r"><code>names( USArrests )  # what variables are in the dataset?</code></pre>
+<pre><code>## [1] &quot;Murder&quot;   &quot;Assault&quot;  &quot;UrbanPop&quot; &quot;Rape&quot;</code></pre>
+<pre class="r"><code>nrow( USArrests )   # how many observations are there?</code></pre>
+<pre><code>## [1] 50</code></pre>
+<pre class="r"><code>dim( USArrests )    # a quick way to see rows and columns - the dimensions of the dataset</code></pre>
+<pre><code>## [1] 50  4</code></pre>
+<pre class="r"><code>row.names( head( USArrests ) )   # what are the obsevations (rows) in our data</code></pre>
+<pre><code>## [1] &quot;Alabama&quot;    &quot;Alaska&quot;     &quot;Arizona&quot;    &quot;Arkansas&quot;   &quot;California&quot;
+## [6] &quot;Colorado&quot;</code></pre>
+<pre class="r"><code>summary( USArrests )   # summary statistics of variables</code></pre>
+<pre><code>##      Murder          Assault         UrbanPop          Rape      
+##  Min.   : 0.800   Min.   : 45.0   Min.   :32.00   Min.   : 7.30  
+##  1st Qu.: 4.075   1st Qu.:109.0   1st Qu.:54.50   1st Qu.:15.07  
+##  Median : 7.250   Median :159.0   Median :66.00   Median :20.10  
+##  Mean   : 7.788   Mean   :170.8   Mean   :65.54   Mean   :21.23  
+##  3rd Qu.:11.250   3rd Qu.:249.0   3rd Qu.:77.75   3rd Qu.:26.18  
+##  Max.   :17.400   Max.   :337.0   Max.   :91.00   Max.   :46.00</code></pre>
+<p>We can see that the dataset consists of four variables: Murder, Assault, UrbanPop, and Rape. We also see that our unit of analysis is the state. But where does the data come from, and how are these variables measured?</p>
+<p>To see the documentation for a specific dataset you will need to use the <strong>help()</strong> function:</p>
+<pre class="r"><code>help( &quot;USArrests&quot; )</code></pre>
+<p>We get valuable information about the source and metrics:</p>
+<p><strong>Description</strong> <em>This data set contains statistics, in arrests per 100,000 residents for assault, murder, and rape in each of the 50 US states in 1973. Also given is the percent of the population living in urban areas.</em></p>
+<p><strong>Format</strong> <em>A data frame with 50 observations on 4 variables.</em></p>
+<ul>
+<li><strong>Murder</strong>: numeric Murder arrests (per 100,000)</li>
+<li><strong>Assault</strong>: numeric Assault arrests (per 100,000)</li>
+<li><strong>UrbanPop</strong>: numeric Percent urban population</li>
+<li><strong>Rape</strong>: numeric Rape arrests (per 100,000)</li>
+</ul>
+<p>To access a specific variable inside of a dataset, you will use the <em>$</em> operator between the dataset name and the variable name:</p>
+<pre class="r"><code>summary( USArrests$Murder )</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.800   4.075   7.250   7.788  11.250  17.400</code></pre>
+<pre class="r"><code>summary( USArrests$Assault )</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    45.0   109.0   159.0   170.8   249.0   337.0</code></pre>
+<pre class="r"><code># Is there a relationship between urban density and crime?
+
+plot( USArrests$UrbanPop, USArrests$Murder, 
+      frame.plot=F, pch=19, col=&quot;gray&quot; )
+abline( lm( USArrests$Murder ~ USArrests$UrbanPop ), col=&quot;red&quot; )</code></pre>
+<p><img src="ch-000-introduction-to-r_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="using-the-lahman-data" class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Using the Lahman Data</h3>
+<p>Let’s take a look at some of the data available in the Lahman package.</p>
+<pre class="r"><code>data( package = &quot;Lahman&quot; ) # All datasets in package &quot;Lahman&quot;:</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>TABLE NAME</th>
+<th>DEFITION</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AllstarFull</td>
+<td>AllstarFull table</td>
+</tr>
+<tr class="even">
+<td>Appearances</td>
+<td>Appearances table</td>
+</tr>
+<tr class="odd">
+<td>AwardsManagers</td>
+<td>AwardsManagers table</td>
+</tr>
+<tr class="even">
+<td>AwardsPlayers</td>
+<td>AwardsPlayers table</td>
+</tr>
+<tr class="odd">
+<td>AwardsShareManagers</td>
+<td>AwardsShareManagers table</td>
+</tr>
+<tr class="even">
+<td>AwardsSharePlayers</td>
+<td>AwardsSharePlayers table</td>
+</tr>
+<tr class="odd">
+<td>Batting</td>
+<td>Batting table</td>
+</tr>
+<tr class="even">
+<td>BattingPost</td>
+<td>BattingPost table</td>
+</tr>
+<tr class="odd">
+<td>CollegePlaying</td>
+<td>CollegePlaying table</td>
+</tr>
+<tr class="even">
+<td>Fielding</td>
+<td>Fielding table</td>
+</tr>
+<tr class="odd">
+<td>FieldingOF</td>
+<td>FieldingOF table</td>
+</tr>
+<tr class="even">
+<td>FieldingPost</td>
+<td>FieldingPost data</td>
+</tr>
+<tr class="odd">
+<td>HallOfFame</td>
+<td>Hall of Fame Voting Data</td>
+</tr>
+<tr class="even">
+<td>LahmanData</td>
+<td>Lahman Datasets</td>
+</tr>
+<tr class="odd">
+<td>Managers</td>
+<td>Managers table</td>
+</tr>
+<tr class="even">
+<td>ManagersHalf</td>
+<td>ManagersHalf table</td>
+</tr>
+<tr class="odd">
+<td>Master</td>
+<td>Master table</td>
+</tr>
+<tr class="even">
+<td>Pitching</td>
+<td>Pitching table</td>
+</tr>
+<tr class="odd">
+<td>PitchingPost</td>
+<td>PitchingPost table</td>
+</tr>
+<tr class="even">
+<td>Salaries</td>
+<td>Salaries table</td>
+</tr>
+<tr class="odd">
+<td>Schools</td>
+<td>Schools table</td>
+</tr>
+<tr class="even">
+<td>SeriesPost</td>
+<td>SeriesPost table</td>
+</tr>
+<tr class="odd">
+<td>Teams</td>
+<td>Teams table</td>
+</tr>
+<tr class="even">
+<td>TeamsFranchises</td>
+<td>TeamFranchises table</td>
+</tr>
+<tr class="odd">
+<td>TeamsHalf</td>
+<td>TeamsHalf table</td>
+</tr>
+<tr class="even">
+<td>battingLabels</td>
+<td>Variable Labels</td>
+</tr>
+<tr class="odd">
+<td>fieldingLabels</td>
+<td>Variable Labels</td>
+</tr>
+<tr class="even">
+<td>pitchingLabels</td>
+<td>Variable Labels</td>
+</tr>
+</tbody>
+</table>
+<p>We see that we have lots of datasets to choose from here. I will use the Master dataset, which is a list of all of the Major League Baseball players over the past century, and their personal information.</p>
+<pre class="r"><code>library( Lahman )    # loads Lahman package
+data( Master )
+head( Master ) </code></pre>
+<p>Here are some common functions for exploring datasets:</p>
+<pre class="r"><code>names( Master )      # variable names
+nrow( Master )       # 18,354 players included
+summary( Master )    # descriptive statistics of variables</code></pre>
+<p>We can use <strong>help(Master)</strong> to get information about the dataset, including a data dictionary.</p>
+<pre class="r"><code>help( Master )</code></pre>
+<p><strong>MASTER TABLE</strong></p>
+<hr />
+<p><strong>Description</strong></p>
+<p>Master table - Player names, DOB, and biographical info. This file is to be used to get details about players listed in the Batting, Pitching, and other files where players are identified only by playerID.</p>
+<p><strong>Usage</strong></p>
+<p>data(Master)</p>
+<p><strong>Format</strong></p>
+<p>A data frame with 19105 observations on the following 26 variables.</p>
+<ul>
+<li><strong>playerID</strong>: A unique code asssigned to each player. The playerID links the data in this file with records on players in the other files.</li>
+<li><strong>birthYear</strong>: Year player was born</li>
+<li><strong>birthMonth</strong>: Month player was born</li>
+<li><strong>birthDay</strong>: Day player was born</li>
+<li><strong>birthCountry</strong>: Country where player was born</li>
+<li><strong>birthState</strong>: State where player was born</li>
+<li><strong>birthCity</strong>: City where player was born</li>
+<li><strong>deathYear</strong>: Year player died</li>
+<li><strong>deathMonth</strong>: Month player died</li>
+<li><strong>deathDay</strong>: Day player died</li>
+<li><strong>deathCountry</strong>: Country where player died</li>
+<li><strong>deathState</strong>: State where player died</li>
+<li><strong>deathCity</strong>: City where player died</li>
+<li><strong>nameFirst</strong>: Player’s first name</li>
+<li><strong>nameLast</strong>: Player’s last name</li>
+<li><strong>nameGiven</strong>: Player’s given name (typically first and middle)</li>
+<li><strong>weight</strong>: Player’s weight in pounds</li>
+<li><strong>height</strong>: Player’s height in inches</li>
+<li><strong>bats</strong>: a factor: Player’s batting hand (left (L), right (R), or both (B))</li>
+<li><strong>throws</strong>: a factor: Player’s throwing hand (left(L) or right(R))</li>
+<li><strong>debut</strong>: Date that player made first major league appearance</li>
+<li><strong>finalGame</strong>: Date that player made first major league appearance (blank if still active)</li>
+<li><strong>retroID</strong>: ID used by retrosheet, <a href="http://www.retrosheet.org/" class="uri">http://www.retrosheet.org/</a></li>
+<li><strong>bbrefID</strong>: ID used by Baseball Reference website, <a href="http://www.baseball-reference.com/" class="uri">http://www.baseball-reference.com/</a></li>
+<li><strong>birthDate</strong>: Player’s birthdate, in as.Date format</li>
+<li><strong>deathDate</strong>: Player’s deathdate, in as.Date format</li>
+</ul>
+<p><strong>Details</strong></p>
+<p>debut, finalGame were converted from character strings with as.Date.</p>
+<p><strong>Source</strong></p>
+<p>Lahman, S. (2016) Lahman’s Baseball Database, 1871-2015, 2015 version, <a href="http://www.seanlahman.com/baseball-archive/statistics/" class="uri">http://www.seanlahman.com/baseball-archive/statistics/</a></p>
+<pre class="r"><code>tab &lt;- prop.table( table( Master$birthMonth ) )
+names(tab) &lt;- c(&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;,&quot;Sep&quot;,&quot;Oct&quot;,&quot;Nov&quot;,&quot;Dec&quot;)
+dotchart( tab, pch=19, 
+          xlab = &quot;Proportion of MLB Players&quot;, 
+          ylab = &quot;Birth Month&quot; ) </code></pre>
+</div>
+</div>
+</div>
+
+<div class="footer">
+<div class="row"  align="center">
+
+  Notes for the <a href=http://ds4ps.org/ms-prog-eval-data-analytics/ target="_blank">MS in Program Evaluation and Data Analytics</a><br>
+  A program at <a href=https://asuonline.asu.edu/online-degree-programs/graduate/program-evaluation-and-data-analytics-ms/ target="_blank">Arizona State University</a><br>
+  Website powered by <a href=https://rmarkdown.rstudio.com/ target="_blank">R Markdown</a> and <a href=http://jekyllrb.com target="_blank">Jekyll</a>
+
+<br>
+<br>
+
+</div>
+</div>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

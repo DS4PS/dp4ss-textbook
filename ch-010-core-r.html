@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>ch-010-core-r.utf8.md</title>
+<title>ch-010-core-r.utf8</title>
 
+<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -44,38 +57,11 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="textbook.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -83,13 +69,8 @@ h6 {
   margin-left: auto;
   margin-right: auto;
 }
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -100,44 +81,56 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
+.dropdown-submenu {
+  position: relative;
 }
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
 }
-
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
 }
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
 }
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
 }
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu.pull-left {
+  float: none;
 }
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -148,26 +141,93 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
-
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -188,8 +248,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
-    <span class="fa fa-sun fa-2x"></span>
+  <a href="https://ds4ps.org/dp4ss/">
+    <span class="fas fa-university fa-2x"></span>
      
   </a>
 </li>
@@ -198,7 +258,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -207,25 +267,27 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#the-r-language"><span class="toc-section-number">1</span> The <strong>R</strong> Language</a><ul>
-<li><a href="#r-an-open-source-language-for-statistical-computing"><span class="toc-section-number">1.1</span> R: An Open Source Language for Statistical Computing</a></li>
-<li><a href="#r-as-a-social-network"><span class="toc-section-number">1.2</span> R as a Social Network</a></li>
-<li><a href="#r-as-an-operating-system"><span class="toc-section-number">1.3</span> R as an Operating System</a></li>
-<li><a href="#downloading-installing-r"><span class="toc-section-number">1.4</span> Downloading &amp; Installing R</a></li>
-<li><a href="#r-console"><span class="toc-section-number">1.5</span> R Console</a></li>
-<li><a href="#extending-rs-functionality-packages"><span class="toc-section-number">1.6</span> Extending R’s Functionality: Packages</a></li>
-<li><a href="#resources"><span class="toc-section-number">1.7</span> Resources</a></li>
+<li><a href="#the-r-language"><span class="toc-section-number">1</span> The <strong>R</strong> Language</a>
+<ul>
+<li><a href="#key-concepts"><span class="toc-section-number">1.1</span> Key Concepts</a></li>
+<li><a href="#r-an-open-source-language-for-statistical-computing"><span class="toc-section-number">1.2</span> R: An Open Source Language for Statistical Computing</a></li>
+<li><a href="#r-as-a-social-network"><span class="toc-section-number">1.3</span> R as a Social Network</a></li>
+<li><a href="#r-as-an-operating-system"><span class="toc-section-number">1.4</span> R as an Operating System</a></li>
+<li><a href="#downloading-installing-r"><span class="toc-section-number">1.5</span> Downloading &amp; Installing R</a></li>
+<li><a href="#r-console"><span class="toc-section-number">1.6</span> R Console</a></li>
+<li><a href="#extending-rs-functionality-packages"><span class="toc-section-number">1.7</span> Extending R’s Functionality: Packages</a></li>
+<li><a href="#resources"><span class="toc-section-number">1.8</span> Resources</a></li>
 </ul></li>
 </ul>
 </div>
 
-<div id="the-r-language" class="section level1">
+<div id="the-r-language" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> The <strong>R</strong> Language</h1>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/R_logo.svg/724px-R_logo.svg.png" width="30%" style="display: block; margin: auto auto auto 0;" /></p>
 <p><br>
 <br></p>
-<div class="tip">
-<h2 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h2>
+<div id="key-concepts" class="section level2 tip" number="1.1">
+<h2><span class="header-section-number">1.1</span> Key Concepts</h2>
 <p>R is a specialized programming language created by statisticians for data analysis and visualization.</p>
 <ul>
 <li>R Console</li>
@@ -236,8 +298,8 @@ $(document).ready(function () {
 <p><br>
 <br></p>
 </div>
-<div id="r-an-open-source-language-for-statistical-computing" class="section level2">
-<h2><span class="header-section-number">1.1</span> R: An Open Source Language for Statistical Computing</h2>
+<div id="r-an-open-source-language-for-statistical-computing" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> R: An Open Source Language for Statistical Computing</h2>
 <p>R is a language that was designed for <strong>statistical computing</strong>, the art of combining computer science tools for problem-solving with models from statistics. The goal is to turn raw data into useful, actionable insights. This field has come to be known as <strong>Data Science</strong>.</p>
 <p>R is an <strong>open source</strong> language, which means that applications built in R are not only free, but users are allowed to access and modify the <em>source code</em>.</p>
 <p>As a result of this design approach, it is extremely easy to develop and adapt code in R. Because of the freedom this provides, R users have expanded the power and functionality of <strong>Core R</strong> for nearly a quarter century.</p>
@@ -249,16 +311,16 @@ library( &quot;tidyverse&quot; )            # load the package</code></pre>
 <p><strong>Popular R Packages:</strong> [ <a href="https://support.rstudio.com/hc/en-us/articles/201057987-Quick-list-of-useful-R-packages"><strong>A RECENT LIST</strong></a> ]</p>
 <p><br></p>
 </div>
-<div id="r-as-a-social-network" class="section level2">
-<h2><span class="header-section-number">1.2</span> R as a Social Network</h2>
+<div id="r-as-a-social-network" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> R as a Social Network</h2>
 <p>The R Foundation is a nonprofit that maintains the R language and ensures it remains free and accessible to everyone in the world. Packages are shared through the Comprehensive R Archival Network (The <strong>CRAN</strong>), a group of servers housed primarily at universities that store R packages so they can be quickly downloaded and deployed.</p>
 <p>There are over 15,000 packages that users have created for R. They perform a wide variety of tasks such as data preparation, specialized statistical analysis, custom data visualizations, or specific analytical tasks such as text analysis or network analysis.</p>
 <p>This functionality is a primary reason R has become one of the most popular languages used by academics and data scientists. Provides a very simple way for people to develop cool tools and share them with the world. It became popular because it was built by smart and creative people, who attracted other smart and creative people, who created cool tools, which then attracted more smart and creative people.
 <a href="http://gallery.shinyapps.io/087-crandash"><strong>R Package Downloads</strong></a></p>
 <p><br></p>
 </div>
-<div id="r-as-an-operating-system" class="section level2">
-<h2><span class="header-section-number">1.3</span> R as an Operating System</h2>
+<div id="r-as-an-operating-system" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> R as an Operating System</h2>
 <p>R is a <strong>programming language</strong>. We can think of a programming languages as instructions that are evaluated and carried out by a computer. R, then, is simply one way to give instructions to computers.</p>
 <p>This is a limited view of R, though. It is better understood as an operating system for data science software. Just as Windows allows you to turn on your computer, open a web browser, moved files around, and write a paper using MS Word, R allows you to access the CRAN, install and run packages, and manage files while organizing large data projects. Just like Windows would be a very boring piece of software without all of the applications you run while on the computer, R would be a boring language without all of the packages it can run.</p>
 <div class="figure" style="text-align: center">
@@ -269,8 +331,8 @@ library( &quot;tidyverse&quot; )            # load the package</code></pre>
 </div>
 <p><br></p>
 </div>
-<div id="downloading-installing-r" class="section level2">
-<h2><span class="header-section-number">1.4</span> Downloading &amp; Installing R</h2>
+<div id="downloading-installing-r" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Downloading &amp; Installing R</h2>
 <p>You can download and install R quickly and easily from the <a href="https://cran.r-project.org/"><strong>Comprehensive R Archive Network</strong></a>, or <strong>CRAN</strong>. It is a decentralized website that’s hosted and updated by academic institutions all over the world. In other words, R would survive a semi-global catastrophic event. It contains:</p>
 <ul>
 <li>The latest version and past versions of R</li>
@@ -280,13 +342,13 @@ library( &quot;tidyverse&quot; )            # load the package</code></pre>
 </ul>
 <p><br></p>
 </div>
-<div id="r-console" class="section level2">
-<h2><span class="header-section-number">1.5</span> R Console</h2>
+<div id="r-console" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> R Console</h2>
 <p>After installing, when you open Base R directly you will see the <strong>command-line interface</strong>, or a <strong>console</strong>. This is used to type R code is directly evaluated by the environment, a process known as working <em>interactively</em>.</p>
 <p>While this is practice is a quick way to run some simple code, it is difficult to develop complex programs in real-time (it would be like writing a play while it is being acted out). A more typical and organized way to create data recipes is through <strong>scripting</strong>, which we address below.</p>
 </div>
-<div id="extending-rs-functionality-packages" class="section level2">
-<h2><span class="header-section-number">1.6</span> Extending R’s Functionality: Packages</h2>
+<div id="extending-rs-functionality-packages" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Extending R’s Functionality: Packages</h2>
 <p><strong>Packages</strong> are collections of new commands, a.k.a. <strong>functions</strong>, that are developed and shared by the worldwide R userbase. Packages greatly expand the power and functionality of <strong>base R</strong>, the “vanilla” or unmodified version of R. While <a href="https://cran.r-project.org/">CRAN</a> is the most popular package archive, others include <a href="http://www.bioconductor.org/">Bioconductor</a> and <a href="https://cran.r-project.org/web/packages/githubinstall/vignettes/githubinstall.html">GitHub</a>.</p>
 <p><br></p>
 <p>If R were the Constitution of a nation, packages would be its amendments - they not only provide more freedom for the user, they address new ideas and practices that were unforeseen by R’s founders. More on packages:</p>
@@ -320,23 +382,23 @@ library( &quot;tidyverse&quot; )            # load the package</code></pre>
 </div>
 <p><br></p>
 </div>
-<div id="resources" class="section level2">
-<h2><span class="header-section-number">1.7</span> Resources</h2>
+<div id="resources" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Resources</h2>
 <p>There’s a litany of online and print resources introducing the R language. Here are a few that we find instructive:</p>
 <p><br></p>
 <p><strong>I) Full-Length Introductions to R:</strong></p>
 <ul>
-<li><a href="https://ds4ps.org/Data-Science-Class/TEXTBOOK/docs/introduction-to-r.html">“Part I: Foundations, Introduction to R”</a> (Lecy, 2018)</li>
+<li><a href="http://ds4ps.org/dp4ss-textbook/ch-000-introduction-to-r">“Part I: Foundations, Introduction to R”</a> (Lecy, 2018)</li>
 <li><a href="https://rpubs.com/jamisoncrawford/nutsandbolts">“Intro to R: Nuts * Bolts”</a> (Crawford, 2018)</li>
 </ul>
 <p><strong>II) Publications &amp; Articles:</strong></p>
 <ul>
 <li><a href="https://www.r-project.org/about.html">“What is R? Introduction to R and the R Environment”</a> (CRAN, 2001)</li>
-<li><a href="http://srv2.lemig.umontreal.ca/donnees/geo1512/IHAKA_JCGS_1996_R_concepts_implementation.pdf">“R: A Language for Data Analysis and Graphics”</a> (Ihaka &amp; Gentleman, 1996)</li>
+<li><a href="https://www.tandfonline.com/doi/abs/10.1080/10618600.1996.10474713">“R: A Language for Data Analysis and Graphics”</a> (Ihaka &amp; Gentleman, 1996)</li>
 </ul>
 <p><strong>III) Handouts &amp; Cheat Sheets:</strong></p>
 <ul>
-<li><a href="https://github.com/jamisoncrawford/dp4ss-textbook/raw/master/ch-001-core_r_files/ch-001_handout1_r_vocabulary.pdf">“R: Some Helpful Vocabulary”</a> (Lecy, 2017)</li>
+<li><a href="https://github.com/DS4PS/dp4ss-textbook/raw/master/resources/ch-001_handout1_r_vocabulary.pdf">“R: Some Helpful Vocabulary”</a> (Lecy, 2017)</li>
 <li><a href="https://www.rstudio.com/wp-content/uploads/2016/05/base-r.pdf">“Base R Cheat Sheet”</a> (RStudio, 2016)</li>
 </ul>
 <p><strong>IV) Videos:</strong></p>
@@ -369,7 +431,7 @@ library( &quot;tidyverse&quot; )            # load the package</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -377,6 +439,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
