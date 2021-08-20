@@ -53,7 +53,7 @@ In this chapter, we'll learn about the four main types of vectors:
 
 * All data in R is an **object**
 * Objects have **classes** that specify what type of object it is 
-* Vectors can be numerica, character, factor or logical
+* Vectors can be numeric, character, factor or logical
 * Vectors are the building blocks of data frames - the columns of a dataset
 * They are created using constructors like the combine function **c()**
 * You can change data types using **casting**
