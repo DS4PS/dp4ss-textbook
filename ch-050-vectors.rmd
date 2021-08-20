@@ -431,7 +431,7 @@ When you type characters surrounded by quotes then R knows you are creating new 
 
 When you type characters that are not surrounded by quotes, R thinks that you are looking for an object in the environment, like the variables we have already created. It gets confused when it doesn't find the object that you typed.
 
-In generate, you will use quotes when you are creating character vectors, and for arguments in functions. You do not use quotes when you are referencing an active object. 
+In general, you will use quotes when you are creating character vectors and for arguments in functions. You do not use quotes when you are referencing an active object. 
 
 An active object is typically a dataset or vector that you have imported or created. You can print a list of all active objects with the `ls()` function.
 
@@ -683,7 +683,7 @@ abline( h=mean(iq), col="darkred" )
 
 ## Recycling
 
-When we create a new variable from existing variables, it is called a 'transformation'. This is very common in data science. Crime is measures by the number of assaults *per 100,000 people*, for example (crime / pop). A batting average is the number of hits divided by the number of at bats. 
+When we create a new variable from existing variables, it is called a "transformation". This is very common in data science. Crime is measures by the number of assaults *per 100,000 people*, for example (crime / pop). A batting average is the number of hits divided by the number of at bats. 
 
 In R, mathematical operations are *vectorized*, which means that operations are performed on the entire vector all at once. This makes transformations fast and easy.
 
