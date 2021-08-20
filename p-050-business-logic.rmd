@@ -227,7 +227,7 @@ gender == "female"  |  study.group == "treatment"
 
 ## Selector Vectors
 
-Note that we use operators to create logical vectors where TRUE designates observation that belong to the defined group, and FALSE designates observations outside the group. The term **"selector vector"** is a useful way to remember this purpose. 
+Note that we use operators to create logical vectors where TRUE designates observations that belong to the defined group, and FALSE designates observations outside the group. The term **"selector vector"** is a useful way to remember this purpose. 
 
 After you have defined a group by composing a logical statement, then the vector can be used to count group members and take subsets of other variables to calculate group statistics. 
 
@@ -395,7 +395,7 @@ dat[ these.women , ]
 
 We can combine multiple logical statements using the AND, OR, and NOT operators ( &, |, ! ). This functionality gives us an incredible ability to specify very granular groups within our analysis. This will be important as we begin to construct analysis in a way that we search for apples to apples comparisons within our data in order to make inferences about program effectiveness. 
 
-These statements require some precision, however. Use care when applying that AND, OR, and NOT operators as to not include unintended data in your sample. 
+These statements require some precision, however. Use care when applying the AND, OR, and NOT operators as to not include unintended data in your sample. 
 
 
 
@@ -456,7 +456,7 @@ dat[ these , ]
 # Care With Logical Statements
 
 
-A common mistake you will make when you first start constructing logical statements is define a group, and then since you are in a hurry you flip the logic and think you are making a valid comparison. 
+A common mistake you will make when you first start constructing logical statements is to define a group, and then since you are in a hurry you flip the logic and think you are making a valid comparison. 
 
 > Do bearded men earn more than men without beards? 
 
@@ -500,7 +500,7 @@ group == "treat" & gender == "male"
 Pay close attention to the order of operations when constructing logical statements. 
 
 
-Since all logical operators have the same precedence, the **opposite-of** operator will be applied first here, then the **and* operator. Thus these are not the same:
+Since all logical operators have the same precedence, the **opposite-of** operator will be applied first here, then the **and** operator. Thus these are not the same:
 
 
 
@@ -625,7 +625,7 @@ keep.these <- c(T,F,NA,F)
 dat[ keep.these , ]
 ```
 
-To remove these rows with missing values in your selector vector, replace all NAs with FALSE:
+To remove the rows with missing values in your selector vector, replace all NAs with FALSE:
 
 ```{r}
 keep.these[ is.na(keep.these) ] <- FALSE
@@ -641,7 +641,7 @@ Note the rules listed above about subsetting factors. After applying a subset, t
 
 ```{r}
 
-df <- data.frame( letters=LETTERS[1:5], numbers=seq(1:5) )
+df <- data.frame( letters=factor( LETTERS[1:5] ), numbers=seq(1:5) )
 
 levels( df$letters )
 
