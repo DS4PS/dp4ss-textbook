@@ -762,9 +762,9 @@ These chapters show how core R graphics can be used to create highly-customized 
 
 ## Margins
 
-It is sometimes helpful to include narrative in the margins instead of on actual graph. In these cases you need to expand your margins and use the **title()**, **axis()** and **mtext()** functions. The margins themselves are controlled by the inner margin **mar=c** argument and outer margin **oma=** arguments in the graphical parameters function **par()**, which is called prior to your plot function to change how a new plot will be laid out. 
+It is sometimes helpful to include narrative in the margins instead of on actual graph. In these cases you need to expand your margins and use the **title()**, **axis()** and **mtext()** functions. The margins themselves are controlled by the inner margin **mar=c** argument and outer margin **oma=c** arguments in the graphical parameters function **par()**, which is called prior to your plot function to change how a new plot will be laid out. 
 
-Similar to other parameters, the four argument values refer to the bottom, left, top and right regions on the graph. 
+Similar to other parameters, the four argument values refer to the bottom, left, top, and right regions on the graph. 
 
 ```{r, eval=F}
 par( mar=c(5,4,4,2), oma=c(3,3,3,3) )
