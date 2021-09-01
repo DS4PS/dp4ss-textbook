@@ -450,7 +450,7 @@ text( 63, 250, "Players form Iowa",
 ```
 
 
-Let's add another layer with only that data that falls within the 25th to 75th percentiles of BMI, what we might consider "averaged" sized players relative to their height.
+Let's add another layer with only the data that falls within the 25th to 75th percentiles of BMI, what we might consider "averaged" sized players relative to their height.
 
 
 ```{r, fig.height=6}
@@ -597,7 +597,7 @@ We add text to the graph through the x,y coordinate for the text, the text itsel
 
 You can see that we have a problem above. Our text above Eddie Gaedel is lopped off because it wanders outside of the plot window. We can add additional real estate by expanding plot window with the **xlim=** and **ylim=** arguments. 
 
-You can add a line break to a string by including the carriage return symbol "\n". 
+You can add a line break to a string by including the carriage return symbol '\n' in the string. 
 
 ```{r, fig.height=5}
 data( Master) 
