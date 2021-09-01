@@ -421,7 +421,7 @@ title( xlab="Height (inches)", ylab="Weight (lbs)",
 
 This is helpful, but maybe we want to highlight a group within the data. 
 
-Perhaps we have a theory that corn-fed players that grew up in Iowa 
+Perhaps we have a theory that corn-fed players that grew up in Iowa are taller and weigh more.
 
 ```{r, fig.height=6}
 plot.new()
