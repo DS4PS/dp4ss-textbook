@@ -53,7 +53,7 @@ knitr::include_graphics( "figures/data_verb_input_output.png" )
 
 <br><br>
 
-```{r, fig.cap="The pipe operator passes a data frame forward through a chain of data vergs. We only reference the dataset name once, and all other times it's implicitly called through through piping.", echo=F, out.width='90%' }
+```{r, fig.cap="The pipe operator passes a data frame forward through a chain of data vergs. We only reference the dataset name once, and all other times it's implicitly called through piping.", echo=F, out.width='90%' }
 knitr::include_graphics( "figures/chaining_data_verbs.png" )
 ```
 
