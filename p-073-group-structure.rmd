@@ -346,7 +346,7 @@ length( unique( Salaries$yearID ) )
 ```
 So we can potentially calculate 32 x 46 = 1,472 average player salaries. 
 
-### Highest Ave Player Salary
+### Highest Average Player Salary
 
 For our first question, we will select only teams from the National League. Let's use the most recent year of data to calculate average pay.
 
@@ -393,7 +393,7 @@ table( dat.NL$teamID, gt.5m )
 
 ```
 
-This solution works, but the table provides too much information. We can use dply to simplify and format the table nicely for our report:
+This solution works, but the table provides too much information. We can use **dplyr** to simplify and format the table nicely for our report:
 
 ```{r}
 
