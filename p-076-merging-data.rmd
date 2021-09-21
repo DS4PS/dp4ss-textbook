@@ -83,7 +83,7 @@ knitr::include_graphics( "figures/right_join.png" )
 
 ## Compound IDs
 
-It is often the case where a single ID does not unique specify observations needed to join data. For example, if you are looking at the relationship between employee eye color and their height, these are both variables that can only have one value per employee, so the employee ID would be sufficient to merge the eye color and height datasets.
+It is often the case where a single ID does not uniquely specify observations needed to join data. For example, if you are looking at the relationship between employee eye color and their height, these are both variables that can only have one value per employee, so the employee ID would be sufficient to merge the eye color and height datasets.
 
 If we want to look at the relationship between employee sick days in a given year and their performance, we now might have multiple years of data for each employee. To merge these two datasets we need to use both ID and YEAR. This is an example of a compound ID - two or more variables are needed to create a unique key for the join.
 
@@ -107,14 +107,14 @@ dat2 %>% pander()
 ```
 
 
-The RIGHT way to merge these tables is to specify the set of IDs that allow you to indentify unique observations. The employee ID is not sufficient in this case because there are separate observations for each year. As a result, 
+The RIGHT way to merge these tables is to specify the set of IDs that allow you to identify unique observations. The employee ID is not sufficient in this case because there are separate observations for each year. As a result: 
 
 ```{r}
 merge( dat1, dat2, by=c("id","year") )         %>% pander()
 ```
 
 
-The WRONG way to merge these two datasets is to use only the employee ID. In this case, since the rows are now no longer unique, the only choice the merge() function has is to join EVERY instance on the right to each instance on the left. It has the effect of blowing up the size of the database (notice we have increased from 6 to 12 rows), as well as duplicating fields and incorrectly aligning data.
+The WRONG way to merge these two datasets is to use only the employee ID. In this case, since the rows are now no longer unique, the only choice the **merge()** function has is to join EVERY instance on the right to each instance on the left. It has the effect of blowing up the size of the database (notice we have increased from 6 to 12 rows), as well as duplicating fields and incorrectly aligning data.
 
 Row number 2, for example, reports that employee A received a bonus on $54,000 in sales.
 
@@ -149,7 +149,7 @@ merge( dat1, dat2, by.x="fips", by.y="FIPS" )
 
 ## In Summary
 
-You will be using the merge() function in this lab to join datasets. You need to specify two arguments in each merge call.
+You will be using the **merge()** function in this lab to join datasets. You need to specify two arguments in each merge call.
 
 ```{r, eval=F}
 
