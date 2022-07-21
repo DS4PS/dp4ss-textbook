@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>ch-050-vectors.utf8.md</title>
+<title>ch-050-vectors.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -44,32 +57,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="textbook.css" type="text/css" />
 
@@ -80,10 +68,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -100,40 +84,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -161,7 +118,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -173,7 +130,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -184,10 +141,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -199,7 +169,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -235,6 +204,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -288,7 +258,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -297,21 +267,23 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#vectors-and-data-types"><span class="toc-section-number">1</span> VECTORS AND DATA TYPES</a><ul>
-<li><a href="#key-concepts"><span class="toc-section-number">1.1</span> Key Concepts</a></li>
+<li><a href="#vectors-and-data-types" id="toc-vectors-and-data-types"><span class="toc-section-number">1</span> VECTORS AND DATA TYPES</a>
+<ul>
+<li><a href="#key-concepts" id="toc-key-concepts"><span class="toc-section-number">1.1</span> Key Concepts</a></li>
 </ul></li>
-<li><a href="#vectors"><span class="toc-section-number">2</span> Vectors</a></li>
-<li><a href="#data-types"><span class="toc-section-number">3</span> Data Types</a><ul>
-<li><a href="#common-vectors-functions"><span class="toc-section-number">3.1</span> Common Vectors Functions</a></li>
-<li><a href="#casting"><span class="toc-section-number">3.2</span> Casting</a></li>
-<li><a href="#care-when-casting"><span class="toc-section-number">3.3</span> Care When Casting</a></li>
-<li><a href="#numeric-vectors"><span class="toc-section-number">3.4</span> Numeric Vectors</a></li>
-<li><a href="#character-vectors"><span class="toc-section-number">3.5</span> Character Vectors</a></li>
-<li><a href="#factors"><span class="toc-section-number">3.6</span> Factors</a></li>
-<li><a href="#logical-vectors"><span class="toc-section-number">3.7</span> Logical Vectors</a></li>
-<li><a href="#generating-vectors"><span class="toc-section-number">3.8</span> Generating Vectors</a></li>
-<li><a href="#recycling"><span class="toc-section-number">3.9</span> Recycling</a></li>
-<li><a href="#missing-values-nas"><span class="toc-section-number">3.10</span> Missing Values: NA’s</a></li>
+<li><a href="#vectors" id="toc-vectors"><span class="toc-section-number">2</span> Vectors</a></li>
+<li><a href="#data-types" id="toc-data-types"><span class="toc-section-number">3</span> Data Types</a>
+<ul>
+<li><a href="#common-vectors-functions" id="toc-common-vectors-functions"><span class="toc-section-number">3.1</span> Common Vectors Functions</a></li>
+<li><a href="#casting" id="toc-casting"><span class="toc-section-number">3.2</span> Casting</a></li>
+<li><a href="#care-when-casting" id="toc-care-when-casting"><span class="toc-section-number">3.3</span> Care When Casting</a></li>
+<li><a href="#numeric-vectors" id="toc-numeric-vectors"><span class="toc-section-number">3.4</span> Numeric Vectors</a></li>
+<li><a href="#character-vectors" id="toc-character-vectors"><span class="toc-section-number">3.5</span> Character Vectors</a></li>
+<li><a href="#factors" id="toc-factors"><span class="toc-section-number">3.6</span> Factors</a></li>
+<li><a href="#logical-vectors" id="toc-logical-vectors"><span class="toc-section-number">3.7</span> Logical Vectors</a></li>
+<li><a href="#generating-vectors" id="toc-generating-vectors"><span class="toc-section-number">3.8</span> Generating Vectors</a></li>
+<li><a href="#recycling" id="toc-recycling"><span class="toc-section-number">3.9</span> Recycling</a></li>
+<li><a href="#missing-values-nas" id="toc-missing-values-nas"><span class="toc-section-number">3.10</span> Missing Values: NA’s</a></li>
 </ul></li>
 </ul>
 </div>
@@ -324,12 +296,12 @@ $(document).ready(function () {
 <script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
 <script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
 <script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
-<div id="vectors-and-data-types" class="section level1">
+<div id="vectors-and-data-types" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> VECTORS AND DATA TYPES</h1>
 <p>Vectors are the building blocks of data programming in R, so they are extremely important concepts.</p>
 <p>This section will cover basic principles of working with vectors in the R language, including the different types of vectors (data types or “classes”), and common functions used on vectors.</p>
 <p><br><br></p>
-<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-1"></span>
 <img src="figures/vectors.png" alt="Components of a Vector" width="40%" />
 <p class="caption">
 Figure 1.1: Components of a Vector
@@ -352,7 +324,7 @@ Figure 1.1: Components of a Vector
 <ul>
 <li>All data in R is an <strong>object</strong></li>
 <li>Objects have <strong>classes</strong> that specify what type of object it is</li>
-<li>Vectors can be numerica, character, factor or logical</li>
+<li>Vectors can be numeric, character, factor or logical</li>
 <li>Vectors are the building blocks of data frames - the columns of a dataset</li>
 <li>They are created using constructors like the combine function <strong>c()</strong></li>
 <li>You can change data types using <strong>casting</strong></li>
@@ -362,15 +334,15 @@ Figure 1.1: Components of a Vector
 </div>
 <p><br>
 <br></p>
-<div id="key-concepts" class="section level2">
+<div id="key-concepts" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Key Concepts</h2>
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="figures/vectors.png" alt="Components of a Vector" width="60%" />
 <p class="caption">
 Figure 1.2: Components of a Vector
 </p>
 </div>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="figures/data_types.png" alt="Basic data types in R" width="836" />
 <p class="caption">
 Figure 1.3: Basic data types in R
@@ -378,7 +350,7 @@ Figure 1.3: Basic data types in R
 </div>
 </div>
 </div>
-<div id="vectors" class="section level1">
+<div id="vectors" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Vectors</h1>
 <p>Generally speaking a vector is a set of numbers, words, or other values stored sequentially:</p>
 <ul>
@@ -455,7 +427,7 @@ dat &lt;- data.frame( name, sex, study.group, is.treated, strength )</code></pre
 <li>The <em>is.treated</em> vector represents membership in a group.</li>
 </ul>
 </div>
-<div id="data-types" class="section level1">
+<div id="data-types" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Data Types</h1>
 <p>There are four primary vector types (“classes”) in R:</p>
 <table>
@@ -489,7 +461,7 @@ dat &lt;- data.frame( name, sex, study.group, is.treated, strength )</code></pre
 <li><strong>numeric</strong>: keep track of quantitative measures, counts, or orders of things</li>
 <li><strong>character</strong>: store non-numeric data, typically unstructured text</li>
 <li><strong>factor</strong>: represent distinct and mutually-exclusive categories</li>
-<li><strong>logical</strong>: designate cases that meet some criteria, usually group inclusion</li>
+<li><strong>logical</strong>: disignate cases that meet some criteria, usually group inclusion</li>
 </ul>
 <p>Each vector in R is stored as an <strong>object</strong>, a technical term in computer science that we will discuss more later. For now know that each object has a <strong>class</strong> that represents the data type. We can ask R for the data types using the <strong>class()</strong> function:</p>
 <pre class="r"><code>class( name )</code></pre>
@@ -502,17 +474,17 @@ dat &lt;- data.frame( name, sex, study.group, is.treated, strength )</code></pre
 <pre><code>## [1] &quot;logical&quot;</code></pre>
 <pre class="r"><code>class( dat )</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<div id="common-vectors-functions" class="section level2">
+<div id="common-vectors-functions" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Common Vectors Functions</h2>
 <p>You will spend a lot of time creating data vectors, transforming variables, generating subsets, cleaning data, and adding new observations. These are all accomplished through <strong>functions</strong> that act on vectors.</p>
 <p>Here are some common vector functions:</p>
-<div id="vector-length" class="section level3">
+<div id="vector-length" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> vector length</h3>
 <p>We often need to know how many elements belong to a vector, which we find with the <strong>length()</strong> function.</p>
 <pre class="r"><code>length( strength )</code></pre>
 <pre><code>## [1] 4</code></pre>
 </div>
-<div id="combine" class="section level3">
+<div id="combine" class="section level3" number="3.1.2">
 <h3><span class="header-section-number">3.1.2</span> combine</h3>
 <p>To combine several elements into a single vector, or combine two vectors to form one, use the <strong>c()</strong> function.</p>
 <pre class="r"><code>c( 1, 2, 3 )        # create a numeric vector</code></pre>
@@ -534,7 +506,7 @@ c( x, y )</code></pre>
 </div>
 </div>
 </div>
-<div id="casting" class="section level2">
+<div id="casting" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Casting</h2>
 <p>You can easily move from one data type to another by <strong>casting</strong> a specific type as another type:</p>
 <pre class="r"><code># character casting
@@ -563,7 +535,7 @@ z</code></pre>
 <p>NA’s are really important (and somewhat annoying). We will discuss missing values more in-depth later.</p>
 </div>
 </div>
-<div id="care-when-casting" class="section level2">
+<div id="care-when-casting" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Care When Casting</h2>
 <p>Casting will often be induced automatically when you try to combine different types of data. For example, when you add a character element to a numeric vector, the whole vector will be cast as a character vector.</p>
 <pre class="r"><code>x1 &lt;- 1:5
@@ -600,7 +572,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKDEsMiwzKSAgICAgICAgICAgICAgICAgICAg
 <p>TIP: When you read data in from outside sources, R will sometimes try to guess the data types and store numeric or character vectors as factors. To avoid corrupting your data see the section below on factors for special instructions on re-casting factors as numeric vectors.</p>
 </div>
 </div>
-<div id="numeric-vectors" class="section level2">
+<div id="numeric-vectors" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Numeric Vectors</h2>
 <p>There are some specific things to note about each vector type.</p>
 <p>Math operators will only work on numeric vectors.</p>
@@ -613,7 +585,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4MSA8LSBjKDEsMiwzKSAgICAgICAgICAgICAgICAgICAg
 <p><br></p>
 <p>Many functions in R are sensitive to the data type of vectors. Mathematical functions, for example, do not make sense when applied to text (character vectors). In many cases R will give an error.</p>
 <p>In some cases R will silently re-cast the variable, then perform the operation. Be watchful for when silent re-casting occurs because it might have unwanted side effects, such as deleting data or re-coding group levels in the wrong way.</p>
-<div id="integers" class="section level3">
+<div id="integers" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Integers</h3>
 <p>Integers are simple numeric vectors. The integer class is used to save memory since integers require less RAM space than numbers that contain decimals points (you need to allocate space for the numbers to the left and the numbers to the right of the decimal). Google “computer memory allocation” if you are interested in the specifics.</p>
 <p>If you are doing advanced programming you will be more sensitive to memory allocation and the speed of your code, but in the intro class we will not differentiate between the two types of number vectors. In <strong>most</strong> cases they result in the same results, unless you are doing advanced numerical analysis where rounding errors matter!</p>
@@ -629,7 +601,7 @@ n                # all elements converted to decimals</code></pre>
 <pre><code>## [1] &quot;numeric&quot;</code></pre>
 </div>
 </div>
-<div id="character-vectors" class="section level2">
+<div id="character-vectors" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Character Vectors</h2>
 <p>The most important rule to remember with this data type: when creating character vectors, all text must be enclosed by quotation marks.</p>
 <p>This one works:</p>
@@ -640,9 +612,9 @@ n                # all elements converted to decimals</code></pre>
 # Error: object &#39;a&#39; not found</code></pre>
 <p>When you type characters surrounded by quotes then R knows you are creating new text (<strong>“strings”</strong> of letters in programming speak).</p>
 <p>When you type characters that are not surrounded by quotes, R thinks that you are looking for an object in the environment, like the variables we have already created. It gets confused when it doesn’t find the object that you typed.</p>
-<p>In generate, you will use quotes when you are creating character vectors, and for arguments in functions. You do not use quotes when you are referencing an active object.</p>
+<p>In general, you will use quotes when you are creating character vectors and for arguments in functions. You do not use quotes when you are referencing an active object.</p>
 <p>An active object is typically a dataset or vector that you have imported or created. You can print a list of all active objects with the <code>ls()</code> function.</p>
-<div id="quotes-in-arguments" class="section level3">
+<div id="quotes-in-arguments" class="section level3" number="3.5.1">
 <h3><span class="header-section-number">3.5.1</span> Quotes in Arguments</h3>
 <p>When you first start using R it can be confusing about when quotes are needed around arguments. Take the following example of the color argument (<code>col=</code>) in the <code>plot()</code> function.</p>
 <pre class="r"><code>group &lt;- factor( sample( c(&quot;treatment&quot;,&quot;control&quot;), 100, replace=TRUE ) )
@@ -660,7 +632,7 @@ plot( strength, col=group,  pch=19, bty=&quot;n&quot;, cex=2 )</code></pre>
 <p>I know. I’m with you.</p>
 </div>
 </div>
-<div id="factors" class="section level2">
+<div id="factors" class="section level2" number="3.6">
 <h2><span class="header-section-number">3.6</span> Factors</h2>
 <p>When there are categorical variables within our data, or groups, then we use a special vector to keep track of these groups. We could just use numbers (1=female, 0=male) or characters (“male”,“female”), but factors are useful for two reasons.</p>
 <p>First, it saves memory. Text is very “expensive” in terms of memory allocation and processing speed, so using simpler data structure makes R faster.</p>
@@ -693,18 +665,18 @@ plot( sex, strength )              # factor + numeric: box and whisker plot     
 <p>In some instances a categorical variable might be represented by numbers. For example, grades 9-12 for high school kids. These can be tricky to re-cast.</p>
 <pre class="r"><code>grades &lt;- sample( x=9:12, size=10, replace=T )
 grades</code></pre>
-<pre><code>##  [1] 11  9 12 11  9 11 10 11 11 11</code></pre>
+<pre><code>##  [1] 10  9 10 11 10  9 10 11  9 11</code></pre>
 <pre class="r"><code>grades &lt;- as.factor( grades )
 grades</code></pre>
-<pre><code>##  [1] 11 9  12 11 9  11 10 11 11 11
-## Levels: 9 10 11 12</code></pre>
+<pre><code>##  [1] 10 9  10 11 10 9  10 11 9  11
+## Levels: 9 10 11</code></pre>
 <pre class="r"><code>as.numeric( grades )</code></pre>
-<pre><code>##  [1] 3 1 4 3 1 3 2 3 3 3</code></pre>
+<pre><code>##  [1] 2 1 2 3 2 1 2 3 1 3</code></pre>
 <pre class="r"><code>as.character( grades )</code></pre>
-<pre><code>##  [1] &quot;11&quot; &quot;9&quot;  &quot;12&quot; &quot;11&quot; &quot;9&quot;  &quot;11&quot; &quot;10&quot; &quot;11&quot; &quot;11&quot; &quot;11&quot;</code></pre>
+<pre><code>##  [1] &quot;10&quot; &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;10&quot; &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;9&quot;  &quot;11&quot;</code></pre>
 <pre class="r"><code># proper way to get back to the original numeric vector
 as.numeric( as.character( grades ))</code></pre>
-<pre><code>##  [1] 11  9 12 11  9 11 10 11 11 11</code></pre>
+<pre><code>##  [1] 10  9 10 11 10  9 10 11  9 11</code></pre>
 <p><br></p>
 <div class="tip">
 <p>The <strong>very important</strong> rule to remember with factors is you can’t move directly from the factor to numeric using the <strong>as.numeric()</strong> casting function. This will give you the underlying data structure, but will not give you the category names. To get these, you need the <strong>as.character</strong> casting function.</p>
@@ -714,7 +686,7 @@ as.numeric( as.character( grades ))</code></pre>
 <p>TIP: When reading data from Excel spreadsheets (usually saved in the comma separated value or CSV format), remember to include the following argument to prevent the creation of factors, which can produce some annoying behaviors.</p>
 <pre class="r"><code>dat &lt;- read.csv( &quot;filename.csv&quot;, stringsAsFactors=F )</code></pre>
 </div>
-<div id="logical-vectors" class="section level2">
+<div id="logical-vectors" class="section level2" number="3.7">
 <h2><span class="header-section-number">3.7</span> Logical Vectors</h2>
 <p>Logical vectors are collections of a set of TRUE and FALSE statements.</p>
 <p>Logical statements allow us to define groups based upon criteria, then decide whether observations belong to the group. A logical statement is one that contains a logical operator, and returns only TRUE, FALSE, or NA values.</p>
@@ -779,37 +751,37 @@ dat[ dat$sex == &quot;female&quot; , ]</code></pre>
 ## 4 sriti female   control      142</code></pre>
 <p>See the next chapter for more details on subsets.</p>
 </div>
-<div id="generating-vectors" class="section level2">
+<div id="generating-vectors" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Generating Vectors</h2>
 <p>You will often need to generate vectors for data transformations or simulations. Here are the most common functions that will be helpful.</p>
-<div id="repeated-values" class="section level3">
+<div id="repeated-values" class="section level3" number="3.8.1">
 <h3><span class="header-section-number">3.8.1</span> Repeated Values</h3>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIHJlcGVhdCBhIG51bWJlciwgb3Igc2VyaWVzIG9mIG51bWJlcnNcbnJlcCggeD05LCB0aW1lcz01IClcbnJlcCggeD1jKDUsNyksIHRpbWVzPTUgKVxucmVwKCB4PWMoNSw3KSwgZWFjaD01IClcblxuIyBhbHNvIHdvcmtzIHRvIGNyZWF0ZSBjYXRlZ29yaWVzXG5yZXAoIHg9YyhcInRyZWF0bWVudFwiLFwiY29udHJvbFwiKSwgZWFjaD01ICkgICJ9
 </div>
 </div>
-<div id="sequence-of-values" class="section level3">
+<div id="sequence-of-values" class="section level3" number="3.8.2">
 <h3><span class="header-section-number">3.8.2</span> Sequence of Values</h3>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBhIHNlcXVlbmNlIG9mIG51bWJlcnNcbnNlcSggZnJvbT0xLCB0bz0xNSwgYnk9MSApXG5zZXEoIGZyb209MSwgdG89MTUsIGJ5PTMgKVxuXG4jIHNob3J0aGFuZCBpZiBieT0xXG4xOjE1ICAgXG4zOjYifQ==
 </div>
 </div>
-<div id="random-sample" class="section level3">
+<div id="random-sample" class="section level3" number="3.8.3">
 <h3><span class="header-section-number">3.8.3</span> Random Sample</h3>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBhIHJhbmRvbSBzYW1wbGVcbmJhZy5vZi5sZXR0ZXJzIDwtIGMoXCJhXCIsXCJiXCIsXCJjXCIsXCJiXCIsXCJmXCIpXG5zYW1wbGUoIHg9YmFnLm9mLmxldHRlcnMsIHNpemU9MywgcmVwbGFjZT1GQUxTRSApXG5zYW1wbGUoIHg9YmFnLm9mLmxldHRlcnMsIHNpemU9MywgcmVwbGFjZT1GQUxTRSApXG5zYW1wbGUoIHg9YmFnLm9mLmxldHRlcnMsIHNpemU9MywgcmVwbGFjZT1GQUxTRSApXG5cbiMgZm9yIG11bHRpcGxlIHNhbXBsZXMgdXNlIHJlcGxhY2VtZW50XG5zYW1wbGUoIHg9YmFnLm9mLmxldHRlcnMsIHNpemU9MTAsIHJlcGxhY2U9VFJVRSApIn0=
 </div>
 </div>
-<div id="draw-from-a-normal-distribution" class="section level3">
+<div id="draw-from-a-normal-distribution" class="section level3" number="3.8.4">
 <h3><span class="header-section-number">3.8.4</span> Draw From a Normal Distribution</h3>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIGNyZWF0ZSBkYXRhIHRoYXQgZm9sbG93cyBhIG5vcm1hbCBjdXJ2ZVxuIyBJUSBmb2xsb3dzIGEgbm9ybWFsIGRpc3RyaWJ1dGlvblxuIyB3aXRoIGEgbWVhbiBvZiAxMDAgYW5kIHNkIG9mIDE1XG5cbmlxIDwtIHJub3JtKCBuPTEwMDAsIG1lYW49MTAwLCBzZD0xNSApXG5oaXN0KCBpcSwgY29sPVwiZ3JheVwiIClcbmFibGluZSggaD1tZWFuKGlxKSwgY29sPVwiZGFya3JlZFwiICkifQ==
 </div>
 </div>
 </div>
-<div id="recycling" class="section level2">
+<div id="recycling" class="section level2" number="3.9">
 <h2><span class="header-section-number">3.9</span> Recycling</h2>
-<p>When we create a new variable from existing variables, it is called a ‘transformation’. This is very common in data science. Crime is measures by the number of assaults <em>per 100,000 people</em>, for example (crime / pop). A batting average is the number of hits divided by the number of at bats.</p>
+<p>When we create a new variable from existing variables, it is called a “transformation”. This is very common in data science. Crime is measures by the number of assaults <em>per 100,000 people</em>, for example (crime / pop). A batting average is the number of hits divided by the number of at bats.</p>
 <p>In R, mathematical operations are <em>vectorized</em>, which means that operations are performed on the entire vector all at once. This makes transformations fast and easy.</p>
 <pre class="r"><code>x &lt;- 1:10
 x + 5</code></pre>
@@ -893,7 +865,7 @@ dat[ these , ]</code></pre>
 ## 3 linda female treatment      119
 ## 4 sriti female   control      142</code></pre>
 </div>
-<div id="missing-values-nas" class="section level2">
+<div id="missing-values-nas" class="section level2" number="3.10">
 <h2><span class="header-section-number">3.10</span> Missing Values: NA’s</h2>
 <p>Missing values are coded differently in each data analysis program. SPSS uses a period, for example. In R, missing values are coded as “NA”.</p>
 <p>The important thing to note is that R wants to make sure you know there are missing values if you are conducting analysis. As a result, it will give you the answer of “NA” when you try to do math with a vector that includes a missing value. You have to ask it explicitly to ignore the missing value.</p>
@@ -928,7 +900,7 @@ eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiJ4NSA8LSBjKCAxLCAyLCBOQSwgNCApXG5cbiMgd2hpY2gg
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -946,7 +918,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
