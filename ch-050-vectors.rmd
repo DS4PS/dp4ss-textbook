@@ -592,7 +592,7 @@ Typically logical vectors are used in combination with subset operators to ident
 dat[ dat$sex == "female" , ]
 ```
 
-See the next chapter for more details on subsets.
+See the [next chapter](http://ds4ps.org/dp4ss-textbook/p-050-business-logic.html) for more details on subsets.
 
 
 

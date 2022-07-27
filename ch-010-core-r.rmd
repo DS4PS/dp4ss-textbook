@@ -138,7 +138,7 @@ If R were the Constitution of a nation, packages would be its amendments - they 
 
 * Functions and packages are developed in response to identified needs
 * If your needs are unmet by base R, there's likely a package for it
-* Altogether, there are over 15,000 packages on CRAN, alone 
+* Altogether, there are over 18,000 packages on CRAN, alone 
 * There are tens of thousands of unpublished packages
 * Entire ecosystems of packages exist, e.g, *Tidyverse*
 

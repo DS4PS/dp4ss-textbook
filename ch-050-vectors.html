@@ -665,18 +665,18 @@ plot( sex, strength )              # factor + numeric: box and whisker plot     
 <p>In some instances a categorical variable might be represented by numbers. For example, grades 9-12 for high school kids. These can be tricky to re-cast.</p>
 <pre class="r"><code>grades &lt;- sample( x=9:12, size=10, replace=T )
 grades</code></pre>
-<pre><code>##  [1] 10  9 10 11 10  9 10 11  9 11</code></pre>
+<pre><code>##  [1]  9 11 12 12 11 11 11 10  9 11</code></pre>
 <pre class="r"><code>grades &lt;- as.factor( grades )
 grades</code></pre>
-<pre><code>##  [1] 10 9  10 11 10 9  10 11 9  11
-## Levels: 9 10 11</code></pre>
+<pre><code>##  [1] 9  11 12 12 11 11 11 10 9  11
+## Levels: 9 10 11 12</code></pre>
 <pre class="r"><code>as.numeric( grades )</code></pre>
-<pre><code>##  [1] 2 1 2 3 2 1 2 3 1 3</code></pre>
+<pre><code>##  [1] 1 3 4 4 3 3 3 2 1 3</code></pre>
 <pre class="r"><code>as.character( grades )</code></pre>
-<pre><code>##  [1] &quot;10&quot; &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;10&quot; &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;9&quot;  &quot;11&quot;</code></pre>
+<pre><code>##  [1] &quot;9&quot;  &quot;11&quot; &quot;12&quot; &quot;12&quot; &quot;11&quot; &quot;11&quot; &quot;11&quot; &quot;10&quot; &quot;9&quot;  &quot;11&quot;</code></pre>
 <pre class="r"><code># proper way to get back to the original numeric vector
 as.numeric( as.character( grades ))</code></pre>
-<pre><code>##  [1] 10  9 10 11 10  9 10 11  9 11</code></pre>
+<pre><code>##  [1]  9 11 12 12 11 11 11 10  9 11</code></pre>
 <p><br></p>
 <div class="tip">
 <p>The <strong>very important</strong> rule to remember with factors is you can’t move directly from the factor to numeric using the <strong>as.numeric()</strong> casting function. This will give you the underlying data structure, but will not give you the category names. To get these, you need the <strong>as.character</strong> casting function.</p>
@@ -749,7 +749,7 @@ dat[ dat$sex == &quot;female&quot; , ]</code></pre>
 <pre><code>##    name    sex     treat strength
 ## 3 linda female treatment      119
 ## 4 sriti female   control      142</code></pre>
-<p>See the next chapter for more details on subsets.</p>
+<p>See the <a href="http://ds4ps.org/dp4ss-textbook/p-050-business-logic.html">next chapter</a> for more details on subsets.</p>
 </div>
 <div id="generating-vectors" class="section level2" number="3.8">
 <h2><span class="header-section-number">3.8</span> Generating Vectors</h2>
