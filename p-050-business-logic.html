@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>p-050-business-logic.utf8.md</title>
+<title>p-050-business-logic.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -44,38 +57,11 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="textbook.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -83,13 +69,8 @@ h6 {
   margin-left: auto;
   margin-right: auto;
 }
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -100,44 +81,56 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
+.dropdown-submenu {
+  position: relative;
 }
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
 }
-
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
 }
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
 }
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
 }
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu.pull-left {
+  float: none;
 }
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -148,26 +141,93 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
-
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -188,8 +248,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
-    <span class="fa fa-sun fa-2x"></span>
+  <a href="https://ds4ps.org/dp4ss/">
+    <span class="fa fa-university fa-2x"></span>
      
   </a>
 </li>
@@ -198,7 +258,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -207,21 +267,25 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#constructing-groups"><span class="toc-section-number">1</span> Constructing Groups</a><ul>
-<li><a href="#logical-operators"><span class="toc-section-number">1.1</span> Logical Operators</a></li>
-<li><a href="#selector-vectors"><span class="toc-section-number">1.2</span> Selector Vectors</a></li>
-<li><a href="#usefulness-of-selector-vectors"><span class="toc-section-number">1.3</span> Usefulness of Selector Vectors</a></li>
+<li><a href="#constructing-groups" id="toc-constructing-groups"><span class="toc-section-number">1</span> Constructing Groups</a>
+<ul>
+<li><a href="#key-concepts" id="toc-key-concepts"><span class="toc-section-number">1.1</span> Key Concepts</a></li>
+<li><a href="#logical-operators" id="toc-logical-operators"><span class="toc-section-number">1.2</span> Logical Operators</a></li>
+<li><a href="#selector-vectors" id="toc-selector-vectors"><span class="toc-section-number">1.3</span> Selector Vectors</a></li>
+<li><a href="#usefulness-of-selector-vectors" id="toc-usefulness-of-selector-vectors"><span class="toc-section-number">1.4</span> Usefulness of Selector Vectors</a></li>
 </ul></li>
-<li><a href="#subsets"><span class="toc-section-number">2</span> Subsets</a><ul>
-<li><a href="#compound-logical-statements"><span class="toc-section-number">2.1</span> Compound Logical Statements</a></li>
-<li><a href="#the-opposite-of-operator"><span class="toc-section-number">2.2</span> The Opposite-Of Operator</a></li>
+<li><a href="#subsets" id="toc-subsets"><span class="toc-section-number">2</span> Subsets</a>
+<ul>
+<li><a href="#compound-logical-statements" id="toc-compound-logical-statements"><span class="toc-section-number">2.1</span> Compound Logical Statements</a></li>
+<li><a href="#the-opposite-of-operator" id="toc-the-opposite-of-operator"><span class="toc-section-number">2.2</span> The Opposite-Of Operator</a></li>
 </ul></li>
-<li><a href="#care-with-logical-statements"><span class="toc-section-number">3</span> Care With Logical Statements</a></li>
-<li><a href="#advanced-operations-with-logical-vectors"><span class="toc-section-number">4</span> Advanced Operations with Logical Vectors</a><ul>
-<li><a href="#find-and-replace"><span class="toc-section-number">4.1</span> Find and Replace</a></li>
-<li><a href="#nas-in-logical-statements"><span class="toc-section-number">4.2</span> NAs in Logical Statements</a></li>
+<li><a href="#care-with-logical-statements" id="toc-care-with-logical-statements"><span class="toc-section-number">3</span> Care With Logical Statements</a></li>
+<li><a href="#advanced-operations-with-logical-vectors" id="toc-advanced-operations-with-logical-vectors"><span class="toc-section-number">4</span> Advanced Operations with Logical Vectors</a>
+<ul>
+<li><a href="#find-and-replace" id="toc-find-and-replace"><span class="toc-section-number">4.1</span> Find and Replace</a></li>
+<li><a href="#nas-in-logical-statements" id="toc-nas-in-logical-statements"><span class="toc-section-number">4.2</span> NAs in Logical Statements</a></li>
 </ul></li>
-<li><a href="#subsets-with-factors"><span class="toc-section-number">5</span> Subsets with Factors</a></li>
+<li><a href="#subsets-with-factors" id="toc-subsets-with-factors"><span class="toc-section-number">5</span> Subsets with Factors</a></li>
 </ul>
 </div>
 
@@ -235,10 +299,10 @@ td {
     text-align: left;
 }
 </style>
-<div id="constructing-groups" class="section level1">
+<div id="constructing-groups" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Constructing Groups</h1>
-<div class="tip">
-<h2 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h2>
+<div id="key-concepts" class="section level2 tip" number="1.1">
+<h2><span class="header-section-number">1.1</span> Key Concepts</h2>
 <p>We translate questions from plain English into computer code using <strong>logical statements</strong>.</p>
 <p>Logical statements generate logical vectors or “selector vectors” where:</p>
 <ul>
@@ -260,7 +324,7 @@ td {
 <p>What percentage of women over 30 have graduate degrees?</p>
 </blockquote>
 <p><br></p>
-<p>To be an effective data analyst we need to know how to translate question from our native human language into phrases a computer will understand.</p>
+<p>To be an effective data analyst we need to know how to translate a question from our native human language into phrases a computer will understand.</p>
 <p><strong>Group of Interest:</strong></p>
 <ul>
 <li>female</li>
@@ -270,14 +334,14 @@ td {
 <p><strong>In R as a logical statement:</strong></p>
 <pre class="r"><code>gender == &quot;female&quot; &amp; age &gt; 30 &amp; grad.degree == TRUE</code></pre>
 <p>Logical statements help us translate our research questions from human languages into computer code.</p>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="figures/group_selection.png" alt="Logical statements define group membership" width="70%" />
 <p class="caption">
 Figure 1.1: Logical statements define group membership
 </p>
 </div>
-<div id="logical-operators" class="section level2">
-<h2><span class="header-section-number">1.1</span> Logical Operators</h2>
+<div id="logical-operators" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Logical Operators</h2>
 <p>Similar to mathematical operators, logical operators are a basic building block of data programming. Most often when working with data we are not creating complicated statistical models. We are identifying members of a group (print all of the females from the study), and describing a subset of the data (compare the average price of houses with a pool to houses without a pool).</p>
 <p>In order to accomplish these simple tasks we need to use logic statements. A logic statement answers the question, does an observation belong to our group?</p>
 <p>Many times groups are simple: identify all professions that have average salaries over $100k a year, for example.</p>
@@ -397,9 +461,9 @@ x1</code></pre>
 <pre class="r"><code>gender == &quot;female&quot;  |  study.group == &quot;treatment&quot;</code></pre>
 <p><em>TRUE</em>, <em>FALSE</em>, <em>TRUE</em> and <em>TRUE</em></p>
 </div>
-<div id="selector-vectors" class="section level2">
-<h2><span class="header-section-number">1.2</span> Selector Vectors</h2>
-<p>Note that we use operators to create logical vectors where TRUE designates observation that belong to the defined group, and FALSE designates observations outside the group. The term <strong>“selector vector”</strong> is a useful way to remember this purpose.</p>
+<div id="selector-vectors" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Selector Vectors</h2>
+<p>Note that we use operators to create logical vectors where TRUE designates observations that belong to the defined group, and FALSE designates observations outside the group. The term <strong>“selector vector”</strong> is a useful way to remember this purpose.</p>
 <p>After you have defined a group by composing a logical statement, then the vector can be used to count group members and take subsets of other variables to calculate group statistics.</p>
 <table style="width:54%;">
 <colgroup>
@@ -457,8 +521,8 @@ sum( these.female )                   # number of women in the study</code></pre
 <pre><code>## [1] 50.5</code></pre>
 <p>I will consistently name my logical vectors “these.GROUP” throughout the chapters, where GROUP represents the group label. For example, I selected women above, so the selector vector is called “these.female”.</p>
 </div>
-<div id="usefulness-of-selector-vectors" class="section level2">
-<h2><span class="header-section-number">1.3</span> Usefulness of Selector Vectors</h2>
+<div id="usefulness-of-selector-vectors" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Usefulness of Selector Vectors</h2>
 <p>Selector vectors, i.e. logical vectors that were created by defining a group, have three main uses in our analysis.</p>
 <p><strong>ONE</strong>: Logical vectors give us an easy way to count things within defined groups.</p>
 <p>We can apply a <strong>sum()</strong> function to a logical vector, and the result will be a tally of all of the TRUE cases. The <strong>mean()</strong> function will give us the proportion of the sample that belongs to our defined group.</p>
@@ -518,7 +582,7 @@ name[ these.female ]</code></pre>
 </table>
 </div>
 </div>
-<div id="subsets" class="section level1">
+<div id="subsets" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Subsets</h1>
 <p>The subset operators <strong>[ ]</strong> are one of the most common you will use in R.</p>
 <p>The primary rule of subsets is to use a data operator to create a logical selector vector, and use that to generate subsets. Any observation that corresponds to TRUE will be retained, any observation that corresponds to FALSE will be dropped.</p>
@@ -641,12 +705,12 @@ dat.women</code></pre>
 <div data-datacamp-exercise="" data-height="300" data-encoded="true">
 eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6Im5hbWUgPC0gYyhcImZyYW5rXCIsXCJ3YW5kYVwiLFwic2FuamF5XCIsXCJuYW5jeVwiKVxuZ3JvdXAgPC0gYyhcInRyZWF0XCIsXCJ0cmVhdFwiLFwiY29udHJvbFwiLFwiY29udHJvbFwiKVxuZ2VuZGVyIDwtIGMoXCJtYWxlXCIsXCJmZW1hbGVcIixcIm1hbGVcIixcImZlbWFsZVwiKVxuc3RyZW5ndGggPC0gYygyNyw0MywxOSw1OClcbmRhdCA8LSBkYXRhLmZyYW1lKCBuYW1lLCBnZW5kZXIsIGdyb3VwLCBzdHJlbmd0aCApIiwic2FtcGxlIjoiIyBhbGwgd29tZW5cbnRoZXNlLndvbWVuIDwtIGRhdCRnZW5kZXIgPT0gXCJmZW1hbGVcIlxuZGF0WyB0aGVzZS53b21lbiAsIF1cblxuIyBhbGwgd29tZW4gaW4gdGhlIGNvbnRyb2wgZ3JvdXBcblxuIyBldmVyeW9uZSB0aGF0IHNjb3JlZCBvdmVyIDIwIG9uIHRoZSBzdHJlbmd0aCB0ZXN0XG5cbiMgb25seSB0aGUgc3R1ZHkgZ3JvdXAgYW5kIHN0cmVuZ3RoIGNvbHVtbnMgZnJvbSB0aGUgZGF0YXNldCJ9
 </div>
-<div id="compound-logical-statements" class="section level2">
+<div id="compound-logical-statements" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Compound Logical Statements</h2>
 <p>We can combine multiple logical statements using the AND, OR, and NOT operators ( &amp;, |, ! ). This functionality gives us an incredible ability to specify very granular groups within our analysis. This will be important as we begin to construct analysis in a way that we search for apples to apples comparisons within our data in order to make inferences about program effectiveness.</p>
-<p>These statements require some precision, however. Use care when applying that AND, OR, and NOT operators as to not include unintended data in your sample.</p>
+<p>These statements require some precision, however. Use care when applying the AND, OR, and NOT operators as to not include unintended data in your sample.</p>
 </div>
-<div id="the-opposite-of-operator" class="section level2">
+<div id="the-opposite-of-operator" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> The Opposite-Of Operator</h2>
 <p>The <strong>!</strong> operator is a special case, where it is not used to define a new logical vector, but rather it swaps the values of an existing logical vector.</p>
 <pre class="r"><code>! TRUE</code></pre>
@@ -753,14 +817,14 @@ dat[ these , ]</code></pre>
 ## 4 control female</code></pre>
 </div>
 </div>
-<div id="care-with-logical-statements" class="section level1">
+<div id="care-with-logical-statements" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Care With Logical Statements</h1>
-<p>A common mistake you will make when you first start constructing logical statements is define a group, and then since you are in a hurry you flip the logic and think you are making a valid comparison.</p>
+<p>A common mistake you will make when you first start constructing logical statements is to define a group, and then since you are in a hurry you flip the logic and think you are making a valid comparison.</p>
 <blockquote>
 <p>Do bearded men earn more than men without beards?</p>
 </blockquote>
 <p>The <strong>opposite-of</strong> “men with beards” (“male” &amp; “beards”) is not men without beards, it is men without beards OR women (with or without beards).</p>
-<div class="figure"><span id="fig:unnamed-chunk-35"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-35"></span>
 <img src="figures/bearded_men.png" alt="Compound statements can be tricky" width="60%" />
 <p class="caption">
 Figure 3.1: Compound statements can be tricky
@@ -770,7 +834,7 @@ Figure 3.1: Compound statements can be tricky
 <p>Also note that parentheses matter. Compare this statement to the statement above:</p>
 <pre><code>! gender == &quot;male&quot; &amp; beard == TRUE</code></pre>
 <p>Because we excluded the parentheses this statement now defines the group “NOT men AND with beards”, or bearded women.</p>
-<div class="figure"><span id="fig:unnamed-chunk-36"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-36"></span>
 <img src="figures/compound_logical_statements.png" alt="Examples of group construction with compound statements" width="90%" />
 <p class="caption">
 Figure 3.2: Examples of group construction with compound statements
@@ -782,7 +846,7 @@ Figure 3.2: Examples of group construction with compound statements
 <pre class="r"><code>! ( group == &quot;treat&quot; &amp; gender == &quot;male&quot;  )</code></pre>
 <pre><code>## [1] FALSE  TRUE  TRUE  TRUE</code></pre>
 <p>Pay close attention to the order of operations when constructing logical statements.</p>
-<p>Since all logical operators have the same precedence, the <strong>opposite-of</strong> operator will be applied first here, then the **and* operator. Thus these are not the same:</p>
+<p>Since all logical operators have the same precedence, the <strong>opposite-of</strong> operator will be applied first here, then the <strong>and</strong> operator. Thus these are not the same:</p>
 <table style="width:28%;">
 <colgroup>
 <col width="13%" />
@@ -870,9 +934,9 @@ dat[ these , ]</code></pre>
 </tbody>
 </table>
 </div>
-<div id="advanced-operations-with-logical-vectors" class="section level1">
+<div id="advanced-operations-with-logical-vectors" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> Advanced Operations with Logical Vectors</h1>
-<div id="find-and-replace" class="section level2">
+<div id="find-and-replace" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Find and Replace</h2>
 <p>We can use selector variables to replace observations with new values using the assignment operator. This is similar to a find and replace operation.</p>
 <pre class="r"><code>animals &lt;- c( &quot;mole&quot;, &quot;mouse&quot;, &quot;shrew&quot;, &quot;mouse&quot;, &quot;rat&quot;, &quot;shrew&quot; )
@@ -922,7 +986,7 @@ study.group[ name == &quot;linda&quot; ] &lt;- NA
 study.group</code></pre>
 <pre><code>## [1] &quot;treatment&quot; &quot;control&quot;   NA          &quot;control&quot;</code></pre>
 </div>
-<div id="nas-in-logical-statements" class="section level2">
+<div id="nas-in-logical-statements" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> NAs in Logical Statements</h2>
 <p>Recall that missing values are an extremely important concept in statistics. If one-third of our survey sample reports that they never smoked pot, one-third reports they have smoked pot, and one-third did not answer the question, then what do we report for the proportion of the population that has smoked pot?</p>
 <p>We might prefer to be cautious and count only the people that have confirmed they have smoked pot, resulting in an estimate of 33.3%.</p>
@@ -976,17 +1040,17 @@ dat[ keep.these , ]</code></pre>
 <pre><code>##    group gender
 ## 1  treat   male
 ## NA  &lt;NA&gt;   &lt;NA&gt;</code></pre>
-<p>To remove these rows with missing values in your selector vector, replace all NAs with FALSE:</p>
+<p>To remove the rows with missing values in your selector vector, replace all NAs with FALSE:</p>
 <pre class="r"><code>keep.these[ is.na(keep.these) ] &lt;- FALSE
 dat[ keep.these , ]</code></pre>
 <pre><code>##   group gender
 ## 1 treat   male</code></pre>
 </div>
 </div>
-<div id="subsets-with-factors" class="section level1">
+<div id="subsets-with-factors" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Subsets with Factors</h1>
 <p>Note the rules listed above about subsetting factors. After applying a subset, they will retain all of the original levels, even when they are not longer useful. You need to drop the unused levels if you would like them to be omitted from functions that use the factor levels for analysis.</p>
-<pre class="r"><code>df &lt;- data.frame( letters=LETTERS[1:5], numbers=seq(1:5) )
+<pre class="r"><code>df &lt;- data.frame( letters=factor( LETTERS[1:5] ), numbers=seq(1:5) )
 
 levels( df$letters )</code></pre>
 <pre><code>## [1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot;</code></pre>
@@ -1024,7 +1088,7 @@ sub.df$letters</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1032,6 +1096,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

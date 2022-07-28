@@ -80,7 +80,7 @@ Most data analysis require us to split our data into groups or segments so that 
 
 <br>
 
-To be an effective data analyst we need to know how to translate question from our native human language into phrases a computer will understand.
+To be an effective data analyst we need to know how to translate a question from our native human language into phrases a computer will understand.
  
 **Group of Interest:**
 
