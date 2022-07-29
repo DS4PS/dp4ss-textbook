@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>p-062-customized-graphics.utf8.md</title>
+<title>p-062-customized-graphics.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -43,38 +57,11 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="textbook.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -82,13 +69,8 @@ h6 {
   margin-left: auto;
   margin-right: auto;
 }
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -102,40 +84,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -163,7 +118,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -175,7 +130,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -186,14 +141,25 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
 
@@ -203,7 +169,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -239,6 +204,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -251,20 +217,17 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -285,8 +248,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
-    <span class="fa fa-sun fa-2x"></span>
+  <a href="https://ds4ps.org/dp4ss/">
+    <span class="fa fa-university fa-2x"></span>
      
   </a>
 </li>
@@ -295,7 +258,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -304,23 +267,25 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#customizing-plots"><span class="toc-section-number">1</span> Customizing Plots</a><ul>
-<li><a href="#packages-used-in-this-chapter"><span class="toc-section-number">1.1</span> Packages Used in This Chapter</a></li>
-<li><a href="#core-graphic-functions"><span class="toc-section-number">1.2</span> Core Graphic Functions</a></li>
-<li><a href="#layering-approach"><span class="toc-section-number">1.3</span> Layering Approach</a></li>
-<li><a href="#highlighting-cases"><span class="toc-section-number">1.4</span> Highlighting Cases</a></li>
-<li><a href="#using-text-as-plot-points"><span class="toc-section-number">1.5</span> Using Text as Plot Points</a></li>
+<li><a href="#customizing-plots" id="toc-customizing-plots"><span class="toc-section-number">1</span> Customizing Plots</a>
+<ul>
+<li><a href="#packages-used-in-this-chapter" id="toc-packages-used-in-this-chapter"><span class="toc-section-number">1.1</span> Packages Used in This Chapter</a></li>
+<li><a href="#core-graphic-functions" id="toc-core-graphic-functions"><span class="toc-section-number">1.2</span> Core Graphic Functions</a></li>
+<li><a href="#layering-approach" id="toc-layering-approach"><span class="toc-section-number">1.3</span> Layering Approach</a></li>
+<li><a href="#highlighting-cases" id="toc-highlighting-cases"><span class="toc-section-number">1.4</span> Highlighting Cases</a></li>
+<li><a href="#using-text-as-plot-points" id="toc-using-text-as-plot-points"><span class="toc-section-number">1.5</span> Using Text as Plot Points</a></li>
 </ul></li>
-<li><a href="#additional-parameters"><span class="toc-section-number">2</span> Additional Parameters</a><ul>
-<li><a href="#margins"><span class="toc-section-number">2.1</span> Margins</a></li>
+<li><a href="#additional-parameters" id="toc-additional-parameters"><span class="toc-section-number">2</span> Additional Parameters</a>
+<ul>
+<li><a href="#margins" id="toc-margins"><span class="toc-section-number">2.1</span> Margins</a></li>
 </ul></li>
 </ul>
 </div>
 
-<div id="customizing-plots" class="section level1">
+<div id="customizing-plots" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Customizing Plots</h1>
-<div class="tip">
-<h3 id="key-concepts"><span class="header-section-number">1</span> Key Concepts</h3>
+<div id="key-concepts" class="section level3 tip" number="1.0.1">
+<h3><span class="header-section-number">1.0.1</span> Key Concepts</h3>
 <p>We can create almost any customized visualization using a small number of functions from the Core R graphics engine.</p>
 <p>Creating a new canvas:</p>
 <ul>
@@ -354,7 +319,7 @@ $(document).ready(function () {
 <br>
 <br></p>
 </div>
-<div id="packages-used-in-this-chapter" class="section level2">
+<div id="packages-used-in-this-chapter" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Packages Used in This Chapter</h2>
 <p>We will use some data from the <strong>Lahman</strong> baseball data package for examples in this chapter.</p>
 <p>The <strong>Master</strong> data frame contains information about professional baseball players. We will focus on the relationship between height and weight of the players using the Body Mass Index (bmi) measure.</p>
@@ -365,7 +330,7 @@ Mark McGuire before and after alleged steroid use.
 </center>
 <p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-4-1.png" width="960" /><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-4-2.png" width="960" /><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-4-3.png" width="960" /></p>
 </div>
-<div id="core-graphic-functions" class="section level2">
+<div id="core-graphic-functions" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Core Graphic Functions</h2>
 <pre class="r"><code>points(
   x=x, y=y,              # plots points at the x,y positions 
@@ -413,7 +378,7 @@ axis(
   labels=c(&quot;S&quot;,&quot;M&quot;,&quot;L&quot;)    # labels for tick marks 
 )</code></pre>
 </div>
-<div id="layering-approach" class="section level2">
+<div id="layering-approach" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Layering Approach</h2>
 <p>Graphs in R are created by layering elements on top of each other. The easiest way to understand this is to build a plot from piece by piece.</p>
 <p>The following graph is comprised of six components:</p>
@@ -426,7 +391,7 @@ axis(
 <li>y-label</li>
 </ul>
 <p>Many other elements can be added to the plot, but you will see below the flexibility that is gained by mastering even the basic plotting functions.</p>
-<div id="load-player-data" class="section level3">
+<div id="load-player-data" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> Load Player Data</h3>
 <p>The Lahman package is an example of a data package in R - one that does not include new functions or analytical tools. Rather, it contains player and team statistics stored as a collection of data frames to make it easy to share and deploy for any analytics involving player or team performance.</p>
 <p>Datasets are loaded from R packages using the <strong>data()</strong> function.</p>
@@ -434,7 +399,8 @@ axis(
 # install.packages( &quot;Lahman&quot; )
 library( dplyr )   # data wrangling
 library( Lahman )  # baseball data
-data( Master )</code></pre>
+data( People ) # load the player information
+Master &lt;- People # define an object to work with</code></pre>
 <table style="width:74%;">
 <colgroup>
 <col width="16%" />
@@ -491,8 +457,8 @@ data( Master )</code></pre>
 <tr class="even">
 <td align="center">Fernando</td>
 <td align="center">Abad</td>
-<td align="center">73</td>
-<td align="center">220</td>
+<td align="center">74</td>
+<td align="center">235</td>
 <td align="center">1985</td>
 </tr>
 </tbody>
@@ -501,19 +467,19 @@ data( Master )</code></pre>
 <pre class="r"><code>Master &lt;- select( Master, height, weight, birthState )
 Master &lt;- na.omit( Master )</code></pre>
 </div>
-<div id="building-the-canvas" class="section level3">
+<div id="building-the-canvas" class="section level3" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> Building the Canvas</h3>
 <p>Custom graphics in R allow you to create a blank canvas upon which you will add your data and your data narrative.</p>
 <p>The canvas is the Cartesian coordinate system upon which you will place the data. You need to define the coordinate system before plotting any data using the <strong>xlim=</strong> and <strong>ylim=</strong> arguments.</p>
 <p>The <strong>plot.new()</strong> function launches a new graphics window. The <strong>plot.window()</strong> function sets the coordinates.</p>
 <pre class="r"><code>plot.new()
 plot.window( xlim=c( 1, 10 ), ylim=c( 1, 5 ) )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-10-1.png" width="480" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-11-1.png" width="480" /></p>
 <center>
 <em>New canvas with the grid defined by <strong>xlim</strong> and <strong>ylim</strong> values.</em>
 </center>
 <p>Note that data can only be plotted on the canvas, but graphs also contain margins around the canvas used for titles, text, and axes.</p>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-12-1.png" width="960" /></p>
 <p>We need to pick a grid that suits our data. Since we will examine the relationship between <strong>height</strong> and <strong>weight</strong> we will use the min and max values of these variables to create the bounding box for our canvas.</p>
 <pre class="r"><code># find max and min values for each variable
 xmin &lt;- min( Master$height )
@@ -527,9 +493,9 @@ plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
 box( col=&quot;black&quot; )
 box( &quot;outer&quot;, col=&quot;gray&quot; )
 text( 64, 200, &quot;(Empty Canvas)&quot;, cex=2 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-12-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-13-1.png" width="960" /></p>
 </div>
-<div id="add-points" class="section level3">
+<div id="add-points" class="section level3" number="1.3.3">
 <h3><span class="header-section-number">1.3.3</span> Add Points</h3>
 <p>We can now add some data to the canvas:</p>
 <pre class="r"><code>plot.new()
@@ -537,9 +503,9 @@ plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
 box( col=&quot;black&quot; )
 box( &quot;outer&quot;, col=&quot;gray&quot; )
 points( Master$height, Master$weight, pch=19 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-13-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-14-1.png" width="960" /></p>
 </div>
-<div id="add-axes" class="section level3">
+<div id="add-axes" class="section level3" number="1.3.4">
 <h3><span class="header-section-number">1.3.4</span> Add axes</h3>
 <pre class="r"><code># add an x-axis and y-axis
 plot.new()
@@ -548,9 +514,9 @@ box( &quot;outer&quot;, col=&quot;gray&quot; )
 points( Master$height, Master$weight, pch=19 )
 axis( side=1 )
 axis( side=2, las=1 )   # las turns the y-axis tick mark numbers </code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-14-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-15-1.png" width="960" /></p>
 </div>
-<div id="add-axis-labels" class="section level3">
+<div id="add-axis-labels" class="section level3" number="1.3.5">
 <h3><span class="header-section-number">1.3.5</span> Add Axis Labels</h3>
 <pre class="r"><code># add axis labels
 plot.new()
@@ -560,9 +526,9 @@ axis( side=1 )
 axis( side=2, las=1 )
 title( xlab=&quot;Height (inches)&quot;, ylab=&quot;Weight (lbs)&quot; )
 title( main=&quot;Relationship Between Height and Weight of MLB Players&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-15-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
 </div>
-<div id="improving-aesthetics" class="section level3">
+<div id="improving-aesthetics" class="section level3" number="1.3.6">
 <h3><span class="header-section-number">1.3.6</span> Improving Aesthetics</h3>
 <p>Now let’s see if we can improve the look and feel of the graph to make the narrative pop.</p>
 <p>This is pretty dense data, so let’s see if we can use some color transparency to get a sense of typical players versus outliers.</p>
@@ -581,12 +547,12 @@ axis( side=1 )
 axis( side=2 )
 title( xlab=&quot;Height (inches)&quot;, ylab=&quot;Weight (lbs)&quot;,
        main=&quot;Relationship Between Height and Weight of MLB Players&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
 </div>
-<div id="highlighting-groups" class="section level3">
+<div id="highlighting-groups" class="section level3" number="1.3.7">
 <h3><span class="header-section-number">1.3.7</span> Highlighting Groups</h3>
 <p>This is helpful, but maybe we want to highlight a group within the data.</p>
-<p>Perhaps we have a theory that corn-fed players that grew up in Iowa</p>
+<p>Perhaps we have a theory that corn-fed players that grew up in Iowa are taller and weigh more.</p>
 <pre class="r"><code>plot.new()
 plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
 axis( side=1 )
@@ -610,8 +576,8 @@ points( height.jitter[ these.iowa ],
 points( 63, 250, pch=19, col=&quot;firebrick&quot; )
 text( 63, 250, &quot;Players form Iowa&quot;, 
       pos=4, cex=1.5, col=&quot;darkgray&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
-<p>Let’s add another layer with only that data that falls within the 25th to 75th percentiles of BMI, what we might consider “averaged” sized players relative to their height.</p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
+<p>Let’s add another layer with only the data that falls within the 25th to 75th percentiles of BMI, what we might consider “averaged” sized players relative to their height.</p>
 <pre class="r"><code>plot.new()
 plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
 axis( side=1 )
@@ -634,16 +600,15 @@ bmi.75th &lt;- quantile( bmi, 0.75, na.rm=T )
 points( height.jitter[ bmi &gt; bmi.25th &amp; bmi &lt; bmi.75th ], 
         weight.jitter[ bmi &gt; bmi.25th &amp; bmi &lt; bmi.75th ], 
         pch=19, cex=0.1, col=&quot;firebrick3&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-19-1.png" width="960" /></p>
 </div>
 </div>
-<div id="highlighting-cases" class="section level2">
+<div id="highlighting-cases" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Highlighting Cases</h2>
 <p>Let’s look back at the original plot. Do you see anything strange?</p>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-19-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-20-1.png" width="960" /></p>
 <p>The smallest data point in the dataset seems to represent a baseball player that is 40 inches tall and weighs 80 pounds. That <em>must</em> be some sort of data entry error, right?</p>
-<pre class="r"><code>data( Master) 
-Master[ which.min(Master$height) , c(14,15,17:20,2) ] %&gt;% pander()</code></pre>
+<pre class="r"><code>Master[ which.min(Master$height) , c(14,15,17:20,2) ] %&gt;% pander()</code></pre>
 <table>
 <colgroup>
 <col width="13%" />
@@ -669,7 +634,7 @@ Master[ which.min(Master$height) , c(14,15,17:20,2) ] %&gt;% pander()</code></pr
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><strong>5989</strong></td>
+<td align="center"><strong>6211</strong></td>
 <td align="center">Eddie</td>
 <td align="center">Gaedel</td>
 <td align="center">65</td>
@@ -696,68 +661,12 @@ plot.window( xlim=c(0,1), ylim=c(0,1) )
 points( 0.5, 0.5, pch=19, col=&quot;gray&quot;, cex=3 )
 points( 0.5, 0.5, pch=1, cex=5, col=&quot;firebrick&quot; )
 title( main=&quot;Large Hollow Point Plotted \nOver Solid Point&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-23-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-24-1.png" width="960" /></p>
 <pre class="r"><code>this.shortest &lt;- which.min(Master$height)
 this.tallest  &lt;- which.max(Master$height)
 this.heaviest &lt;- which.max(Master$weight)
 
 Master[ c(this.shortest,this.tallest,this.heaviest), c(14,15,17:20,2) ] %&gt;% pander()</code></pre>
-<table>
-<colgroup>
-<col width="14%" />
-<col width="14%" />
-<col width="13%" />
-<col width="11%" />
-<col width="11%" />
-<col width="8%" />
-<col width="11%" />
-<col width="14%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="center"> </th>
-<th align="center">nameFirst</th>
-<th align="center">nameLast</th>
-<th align="center">weight</th>
-<th align="center">height</th>
-<th align="center">bats</th>
-<th align="center">throws</th>
-<th align="center">birthYear</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><strong>5989</strong></td>
-<td align="center">Eddie</td>
-<td align="center">Gaedel</td>
-<td align="center">65</td>
-<td align="center">43</td>
-<td align="center">R</td>
-<td align="center">L</td>
-<td align="center">1925</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>14497</strong></td>
-<td align="center">Jon</td>
-<td align="center">Rauch</td>
-<td align="center">290</td>
-<td align="center">83</td>
-<td align="center">R</td>
-<td align="center">R</td>
-<td align="center">1978</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>19516</strong></td>
-<td align="center">Walter</td>
-<td align="center">Young</td>
-<td align="center">320</td>
-<td align="center">77</td>
-<td align="center">L</td>
-<td align="center">R</td>
-<td align="center">1980</td>
-</tr>
-</tbody>
-</table>
 <p>Let’s highlight the three outliers in our dataset.</p>
 <pre class="r"><code>plot( Master$height, Master$weight, 
       pch=19, col=&quot;gray&quot;,
@@ -781,7 +690,7 @@ points( Master$height[ this.heaviest ],
 text( Master$height[ this.shortest ], 
       Master$weight[ this.shortest ], 
       &quot;Some Text Here&quot;, col=&quot;firebrick&quot;, pos=3 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-26-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-27-1.png" width="960" /></p>
 <p>We add text to the graph through the x,y coordinate for the text, the text itself, and the <strong>pos=</strong> argument is used to specify where the text should go.</p>
 <ul>
 <li>pos=1: below</li>
@@ -791,7 +700,7 @@ text( Master$height[ this.shortest ],
 <li>no pos: on the point</li>
 </ul>
 <p>You can see that we have a problem above. Our text above Eddie Gaedel is lopped off because it wanders outside of the plot window. We can add additional real estate by expanding plot window with the <strong>xlim=</strong> and <strong>ylim=</strong> arguments.</p>
-<p>You can add a line break to a string by including the carriage return symbol “”.</p>
+<p>You can add a line break to a string by including the carriage return symbol ‘’ in the string.</p>
 <pre class="r"><code>data( Master) 
 
 plot( Master$height, Master$weight, 
@@ -822,9 +731,9 @@ text( Master$height[ this.heaviest ],
       Master$weight[ this.heaviest ], 
       &quot;Walter Young \nHeight: 77 Inches \nWeight: 320 Lbs&quot;, 
       col=&quot;firebrick&quot;, cex=0.8, pos=3, offset=1 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-27-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-28-1.png" width="960" /></p>
 </div>
-<div id="using-text-as-plot-points" class="section level2">
+<div id="using-text-as-plot-points" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Using Text as Plot Points</h2>
 <p>As you can see, the <strong>text()</strong> function can be used to add narrative to a graphic. It can also be used in place of plotting points.</p>
 <p>Let’s think about testing the hypothesis that players have gotten larger over time. When we look at the basic relationship between height and weight we see the distribution of player sizes, but this plot has no information about the time-periods in which they played so we can’t tell if they are growing larger over time. What if we replace the plotting points with birth years?</p>
@@ -834,14 +743,14 @@ plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
 text( x=Master$height, 
       y=Master$weight, 
       labels=Master$birthYear )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-28-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-29-1.png" width="960" /></p>
 <p>This is too dense to be meaningful. Maybe we can try to make the text smaller?</p>
 <pre class="r"><code>plot.new()
 plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
 text( x=Master$height, 
       y=Master$weight, 
       labels=Master$birthYear, cex=0.5 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-29-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-30-1.png" width="960" /></p>
 <p>Still not very insightful. We have over 19,000 players in the database, which appears to be too many for this graphic. Let’s thin the data out by taking a random sample of the full dataset.</p>
 <pre class="r"><code>par( mar=c(0,0,0,0) )
 m.sample &lt;- sample_n( Master, 100 ) 
@@ -852,7 +761,7 @@ text( x=m.sample$height,
       labels=m.sample$birthYear, cex=0.8 )
 axis( side=1, line=-2 )
 axis( side=2, line=-2 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-30-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-31-1.png" width="960" /></p>
 <p>This is a big improvement. We can eyeball the data and start to pull out some trends. The people born in the 1800’s tend to be near the bottom of each pile of years, for example.</p>
 <p>Perhaps we can improve our visual hypothesis testing if we add some color coding. Let’s identify all of the individuals born since 1980 and color their birth years red to highlight the youngest cohort in the data. If people have gotten larger over time, we would expect this group to cluster near the top of the distribution.</p>
 <pre class="r"><code>red.gray &lt;- ifelse( m.sample$birthYear &gt;= 1980, &quot;firebrick&quot;, &quot;gray&quot; )
@@ -861,25 +770,25 @@ text( x=m.sample$height,
       y=m.sample$weight, 
       labels=m.sample$birthYear,
       col=red.gray )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-32-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-33-1.png" width="960" /></p>
 <p>And we in fact see the pattern emerge. The youngest cohort, highlighted in red, seems to cluster near the top right, which suggests they have grown both taller and heavier over time.</p>
 <p>This hypothesis can be test more rigorously in other ways, but the demonstration at least gives an idea about how we might explore the data efficiently using flexible R graphing functions.</p>
 </div>
 </div>
-<div id="additional-parameters" class="section level1">
+<div id="additional-parameters" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Additional Parameters</h1>
 <p>The small number of functions introduced here in these chapters on data visualization can be used to make highly-customizable graphics that help you discover important patterns in the data and share the story with others.</p>
 <p>We are only scratching the surface on the options available within plotting functions. To see the default list of parameter settings in the R <strong>plot()</strong> function, type:</p>
 <pre class="r"><code>par()
 help( par )</code></pre>
-<p>These chapters show how core R graphics can be used to create highly-customized graphics. You can see that you have fine-tuned access to all aspects of the figures you create. You don’t have to become familiar with all of the options to develop solid visualization skills. Rather, you will likely focus on a few specific functions. A little time invested in learning the arguments for plot(), points(), lines(), text(), title(), and axis() goes a long way.</p>
-<div id="margins" class="section level2">
+<p>These chapters show how core R graphics can be used to create highly-customized graphics. You can see that you have fine-tuned access to all aspects of the figures you create. You don’t have to become familiar with all of the options to develop solid visualization skills. Rather, you will likely focus on a few specific functions. A little time invested in learning the arguments for <strong>plot()</strong>, <strong>points()</strong>, <strong>lines()</strong>, <strong>text()</strong>, <strong>title()</strong>, and <strong>axis()</strong> goes a long way.</p>
+<div id="margins" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Margins</h2>
-<p>It is sometimes helpful to include narrative in the margins instead of on actual graph. In these cases you need to expand your margins and use the <strong>title()</strong>, <strong>axis()</strong> and <strong>mtext()</strong> functions. The margins themselves are controlled by the inner margin <strong>mar=c</strong> argument and outer margin <strong>oma=</strong> arguments in the graphical parameters function <strong>par()</strong>, which is called prior to your plot function to change how a new plot will be laid out.</p>
-<p>Similar to other parameters, the four argument values refer to the bottom, left, top and right regions on the graph.</p>
+<p>It is sometimes helpful to include narrative in the margins instead of on actual graph. In these cases you need to expand your margins and use the <strong>title()</strong>, <strong>axis()</strong> and <strong>mtext()</strong> functions. The margins themselves are controlled by the inner margin <strong>mar=c</strong> argument and outer margin <strong>oma=c</strong> arguments in the graphical parameters function <strong>par()</strong>, which is called prior to your plot function to change how a new plot will be laid out.</p>
+<p>Similar to other parameters, the four argument values refer to the bottom, left, top, and right regions on the graph.</p>
 <pre class="r"><code>par( mar=c(5,4,4,2), oma=c(3,3,3,3) )
 plot( ... )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-36-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-37-1.png" width="960" /></p>
 </div>
 </div>
 
@@ -904,7 +813,7 @@ plot( ... )</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -912,6 +821,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

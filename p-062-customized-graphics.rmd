@@ -84,7 +84,8 @@ Mark McGuire before and after alleged steroid use.
 # install.packages( "Lahman" )
 library( dplyr )   # data wrangling
 library( Lahman )  # baseball data
-data( Master )
+data( People )
+Master <- People
 ```
 
 
@@ -200,7 +201,12 @@ Datasets are loaded from R packages using the **data()** function.
 # install.packages( "Lahman" )
 library( dplyr )   # data wrangling
 library( Lahman )  # baseball data
-data( Master )
+data( People ) # load the player information
+Master <- People # define an object to work with
+```
+
+```{r, echo=FALSE, eval=TRUE}
+Master <- People # define an object to work with
 ```
 
 ```{r, echo=F}
@@ -503,8 +509,12 @@ text( Master$height[which.min(Master$height)]+1,
 
 The smallest data point in the dataset seems to represent a baseball player that is 40 inches tall and weighs 80 pounds. That *must* be some sort of data entry error, right? 
 
+```{r, redefine-master, echo=FALSE, eval=TRUE }
+data( People ) # load the player information
+Master <- People # define an object to work with
+```
+
 ```{r}
-data( Master) 
 Master[ which.min(Master$height) , c(14,15,17:20,2) ] %>% pander()
 ```
 
@@ -544,14 +554,13 @@ points( 0.5, 0.5, pch=1, cex=5, col="firebrick" )
 title( main="Large Hollow Point Plotted \nOver Solid Point" )
 ```
 
-
-
-```{r, echo=F}
-data( Master )
+```{r, echo=FALSE, eval=TRUE}
+this.shortest <- which.min(Master$height)
+this.tallest  <- which.max(Master$height)
+this.heaviest <- which.max(Master$weight)
 ```
 
-
-```{r}
+```{r, echo=TRUE, eval=FALSE}
 this.shortest <- which.min(Master$height)
 this.tallest  <- which.max(Master$height)
 this.heaviest <- which.max(Master$weight)
@@ -860,17 +869,3 @@ mtext( 'mtext( "This is mtext", side=2, outer=T, line=1 )',
        side=3, outer=T, line=1, cex=1, col="navy", family="mono" )
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
