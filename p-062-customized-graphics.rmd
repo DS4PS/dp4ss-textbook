@@ -186,7 +186,7 @@ The following graph is comprised of six components:
 * x-label
 * y-label
 
-Many other elements can be added to the plot, but you will see below the flexibility that is gained by Peopleing even the basic plotting functions. 
+Many other elements can be added to the plot, but you will see below the flexibility that is gained by mastering even the basic plotting functions. 
 
 
 ### Load Player Data
