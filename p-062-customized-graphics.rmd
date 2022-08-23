@@ -68,7 +68,7 @@ Annotating the canvas:
 
 We will use some data from the **Lahman** baseball data package for examples in this chapter.
 
-The **Master** data frame contains information about professional baseball players. We will focus on the relationship between height and weight of the players using the Body Mass Index (bmi) measure. 
+The **People** data frame contains information about professional baseball players. We will focus on the relationship between height and weight of the players using the Body Mass Index (bmi) measure. 
 
 The data is interesting because it is easy to detect an abrubt and significant increase in baseball player size starting in the 1980's when the the abuse of steroids began.
 
@@ -85,14 +85,13 @@ Mark McGuire before and after alleged steroid use.
 library( dplyr )   # data wrangling
 library( Lahman )  # baseball data
 data( People )
-Master <- People
 ```
 
 
 ```{r, echo=F}
-Master <- filter( Master, birthYear > 1849 & birthYear < 1996 )
+People <- filter( People, birthYear > 1849 & birthYear < 1996 )
 
-t1 <- tapply( Master$height, Master$birthYear, mean, na.rm=T )
+t1 <- tapply( People$height, People$birthYear, mean, na.rm=T )
 t2 <- as.numeric( names( t1 ) )
 plot( t2, t1, pch=19, type="b",
       frame.plot=F,
@@ -100,7 +99,7 @@ plot( t2, t1, pch=19, type="b",
       ylab="Average Height (inches)",
       main="Height of MLB Players Over Time" )
 
-t1 <- tapply( Master$weight, Master$birthYear, mean, na.rm=T )
+t1 <- tapply( People$weight, People$birthYear, mean, na.rm=T )
 t2 <- as.numeric( names( t1 ) )
 plot( t2, t1, pch=19, type="b",
       frame.plot=F,
@@ -110,8 +109,8 @@ plot( t2, t1, pch=19, type="b",
 arrows( x0=1985, y0=180, y1=200, col="darkorange", lwd=3 )
 text( x=1985, y=180, "Steroids!", pos=1, cex=1.5, col="darkorange" )
 
-bmi <- (Master$weight * 0.45359237) / (Master$height / 39.370)^2 
-t1 <- tapply( bmi, Master$birthYear, mean, na.rm=T )
+bmi <- (People$weight * 0.45359237) / (People$height / 39.370)^2 
+t1 <- tapply( bmi, People$birthYear, mean, na.rm=T )
 t2 <- as.numeric( names( t1 ) )
 plot( t2, t1, pch=19, type="b",
       frame.plot=F,
@@ -187,7 +186,7 @@ The following graph is comprised of six components:
 * x-label
 * y-label
 
-Many other elements can be added to the plot, but you will see below the flexibility that is gained by mastering even the basic plotting functions. 
+Many other elements can be added to the plot, but you will see below the flexibility that is gained by Peopleing even the basic plotting functions. 
 
 
 ### Load Player Data
@@ -201,24 +200,19 @@ Datasets are loaded from R packages using the **data()** function.
 # install.packages( "Lahman" )
 library( dplyr )   # data wrangling
 library( Lahman )  # baseball data
-data( People ) # load the player information
-Master <- People # define an object to work with
-```
-
-```{r, echo=FALSE, eval=TRUE}
-Master <- People # define an object to work with
+data( People )
 ```
 
 ```{r, echo=F}
 preview.these <- c("nameFirst", "nameLast", "height", "weight", "birthYear")
-head( Master[ preview.these ] ) %>% pander()
+head( People[ preview.these ] ) %>% pander()
 ```
 
 Remove players that are missing height or weight measures:
 
 ```{r}
-Master <- select( Master, height, weight, birthState )
-Master <- na.omit( Master )
+People <- select( People, height, weight, birthState )
+People <- na.omit( People )
 ```
 
 ### Building the Canvas
@@ -340,10 +334,10 @@ We need to pick a grid that suits our data. Since we will examine the relationsh
 
 ```{r}
 # find max and min values for each variable
-xmin <- min( Master$height )
-xmax <- max( Master$height )
-ymin <- min( Master$weight )
-ymax <- max( Master$weight )
+xmin <- min( People$height )
+xmax <- max( People$height )
+ymin <- min( People$weight )
+ymax <- max( People$weight )
 
 # empty plot
 plot.new()
@@ -364,7 +358,7 @@ plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
 box( col="black" )
 box( "outer", col="gray" )
-points( Master$height, Master$weight, pch=19 )
+points( People$height, People$weight, pch=19 )
 ```
 
 ### Add axes
@@ -374,7 +368,7 @@ points( Master$height, Master$weight, pch=19 )
 plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
 box( "outer", col="gray" )
-points( Master$height, Master$weight, pch=19 )
+points( People$height, People$weight, pch=19 )
 axis( side=1 )
 axis( side=2, las=1 )   # las turns the y-axis tick mark numbers 
 ```
@@ -386,7 +380,7 @@ axis( side=2, las=1 )   # las turns the y-axis tick mark numbers
 # add axis labels
 plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
-points( Master$height, Master$weight, pch=19 )
+points( People$height, People$weight, pch=19 )
 axis( side=1 )
 axis( side=2, las=1 )
 title( xlab="Height (inches)", ylab="Weight (lbs)" )
@@ -409,8 +403,8 @@ We can also jitter them a bit (a tiny amount of random error to each data point)
 
 ```{r, fig.height=6}
 # rnorm() adds random noise to a data point
-height.jitter <- Master$height + rnorm( nrow(Master) )
-weight.jitter <- Master$weight + rnorm( nrow(Master) )
+height.jitter <- People$height + rnorm( nrow(People) )
+weight.jitter <- People$weight + rnorm( nrow(People) )
 
 plot.new()
 plot.window( xlim=c(62,xmax), ylim=c(110,ymax) )
@@ -442,7 +436,7 @@ points( height.jitter, weight.jitter,
 
 # highlight players from Iowa
 
-these.iowa <- Master$birthState == "IA"
+these.iowa <- People$birthState == "IA"
 
 # use our selection vector to subset the data used in overplotting
 
@@ -472,7 +466,7 @@ points( height.jitter, weight.jitter,
 
 # highlight average-sized players
 
-bmi <- (Master$weight * 0.45359237) / (Master$height / 39.370)^2 
+bmi <- (People$weight * 0.45359237) / (People$height / 39.370)^2 
 
 bmi.25th <- quantile( bmi, 0.25, na.rm=T )
 bmi.75th <- quantile( bmi, 0.75, na.rm=T )
@@ -493,29 +487,25 @@ Let's look back at the original plot. Do you see anything strange?
 # add axis labels
 plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
-points( Master$height, Master$weight, pch=19 )
+points( People$height, People$weight, pch=19 )
 axis( side=1 )
 axis( side=2 )
 title( xlab="Height (inches)", ylab="Weight (lbs)" )
 title( main="Relationship Between Height and Weight of MLB Players" )
-points( Master$height[which.min(Master$height)], 
-        Master$weight[which.min(Master$weight)], 
+points( People$height[which.min(People$height)], 
+        People$weight[which.min(People$weight)], 
         col="firebrick", cex=2, lwd=2 )
-text( Master$height[which.min(Master$height)]+1, 
-      Master$weight[which.min(Master$weight)]+20, 
+text( People$height[which.min(People$height)]+1, 
+      People$weight[which.min(People$weight)]+20, 
       "Is This an Error?", col="firebrick", pos=4, cex=1.5 )
 ```
 
 
 The smallest data point in the dataset seems to represent a baseball player that is 40 inches tall and weighs 80 pounds. That *must* be some sort of data entry error, right? 
 
-```{r, redefine-master, echo=FALSE, eval=TRUE }
-data( People ) # load the player information
-Master <- People # define an object to work with
-```
-
 ```{r}
-Master[ which.min(Master$height) , c(14,15,17:20,2) ] %>% pander()
+data( People) 
+People[ which.min(People$height) , c(14,15,17:20,2) ] %>% pander()
 ```
 
 
@@ -554,45 +544,46 @@ points( 0.5, 0.5, pch=1, cex=5, col="firebrick" )
 title( main="Large Hollow Point Plotted \nOver Solid Point" )
 ```
 
-```{r, echo=FALSE, eval=TRUE}
-this.shortest <- which.min(Master$height)
-this.tallest  <- which.max(Master$height)
-this.heaviest <- which.max(Master$weight)
+
+
+```{r, echo=F}
+data( People )
 ```
 
-```{r, echo=TRUE, eval=FALSE}
-this.shortest <- which.min(Master$height)
-this.tallest  <- which.max(Master$height)
-this.heaviest <- which.max(Master$weight)
 
-Master[ c(this.shortest,this.tallest,this.heaviest), c(14,15,17:20,2) ] %>% pander()
+```{r}
+this.shortest <- which.min(People$height)
+this.tallest  <- which.max(People$height)
+this.heaviest <- which.max(People$weight)
+
+People[ c(this.shortest,this.tallest,this.heaviest), c(14,15,17:20,2) ] %>% pander()
 ```
 
 
 Let's highlight the three outliers in our dataset. 
 
 ```{r}
-plot( Master$height, Master$weight, 
+plot( People$height, People$weight, 
       pch=19, col="gray",
       frame.plot=FALSE,
       xlab="Height (inches)", 
       ylab="Weight (lbs)", 
       main="Relationship Between Height and Weight of MLB Players" )
 
-points( Master$height[ this.shortest ], 
-        Master$weight[ this.shortest ], 
+points( People$height[ this.shortest ], 
+        People$weight[ this.shortest ], 
         col="firebrick", cex=2, lwd=2 )
 
-points( Master$height[ this.tallest ], 
-        Master$weight[ this.tallest ], 
+points( People$height[ this.tallest ], 
+        People$weight[ this.tallest ], 
         col="firebrick", cex=2, lwd=2 )
 
-points( Master$height[ this.heaviest ], 
-        Master$weight[ this.heaviest], 
+points( People$height[ this.heaviest ], 
+        People$weight[ this.heaviest], 
         col="firebrick", cex=2, lwd=2 )
 
-text( Master$height[ this.shortest ], 
-      Master$weight[ this.shortest ], 
+text( People$height[ this.shortest ], 
+      People$weight[ this.shortest ], 
       "Some Text Here", col="firebrick", pos=3 )
 ```
 
@@ -609,9 +600,9 @@ You can see that we have a problem above. Our text above Eddie Gaedel is lopped 
 You can add a line break to a string by including the carriage return symbol '\n' in the string. 
 
 ```{r, fig.height=5}
-data( Master) 
+data( People) 
 
-plot( Master$height, Master$weight, 
+plot( People$height, People$weight, 
       pch=19, col="gray", cex=0.8,
       xlim=c(30,100), ylim=c(50,450),
       frame.plot=FALSE,
@@ -619,24 +610,24 @@ plot( Master$height, Master$weight,
       ylab="Weight (lbs)", 
       main="Relationship Between Height and Weight of MLB Players" )
 
-d.small <- Master[ c(this.shortest,this.tallest,this.heaviest), c(14,15,17:20,2) ]
+d.small <- People[ c(this.shortest,this.tallest,this.heaviest), c(14,15,17:20,2) ]
 
 points( d.small$height, 
         d.small$weight, 
         col="firebrick", cex=2, lwd=2 )
 
-text( Master$height[ this.shortest ], 
-      Master$weight[ this.shortest ], 
+text( People$height[ this.shortest ], 
+      People$weight[ this.shortest ], 
       "Eddie Gaedel \nHeight: 43 Inches \nWeight: 65 Lbs", 
       col="firebrick", cex=0.8, pos=3, offset=1 )
 
-text( Master$height[ this.tallest ], 
-      Master$weight[ this.tallest ], 
+text( People$height[ this.tallest ], 
+      People$weight[ this.tallest ], 
       "Jon Rauch \nHeight: 83 Inches \nWeight: 290 Lbs", 
       col="firebrick", cex=0.8, pos=4, offset=1 )
 
-text( Master$height[ this.heaviest ], 
-      Master$weight[ this.heaviest ], 
+text( People$height[ this.heaviest ], 
+      People$weight[ this.heaviest ], 
       "Walter Young \nHeight: 77 Inches \nWeight: 320 Lbs", 
       col="firebrick", cex=0.8, pos=3, offset=1 )
 ```
@@ -653,9 +644,9 @@ Let's think about testing the hypothesis that players have gotten larger over ti
 plot.new()
 plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
 
-text( x=Master$height, 
-      y=Master$weight, 
-      labels=Master$birthYear )
+text( x=People$height, 
+      y=People$weight, 
+      labels=People$birthYear )
 ```
 
 
@@ -665,9 +656,9 @@ This is too dense to be meaningful. Maybe we can try to make the text smaller?
 ```{r}
 plot.new()
 plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
-text( x=Master$height, 
-      y=Master$weight, 
-      labels=Master$birthYear, cex=0.5 )
+text( x=People$height, 
+      y=People$weight, 
+      labels=People$birthYear, cex=0.5 )
 ```
 
 
@@ -675,7 +666,7 @@ Still not very insightful. We have over 19,000 players in the database, which ap
 
 ```{r, fig.height=6}
 par( mar=c(0,0,0,0) )
-m.sample <- sample_n( Master, 100 ) 
+m.sample <- sample_n( People, 100 ) 
 plot.new()
 plot.window( xlim=c(65,78), ylim=c(130,280) )
 text( x=m.sample$height, 
@@ -869,3 +860,17 @@ mtext( 'mtext( "This is mtext", side=2, outer=T, line=1 )',
        side=3, outer=T, line=1, cex=1, col="navy", family="mono" )
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+

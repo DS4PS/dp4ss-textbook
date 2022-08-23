@@ -322,7 +322,7 @@ $(document).ready(function () {
 <div id="packages-used-in-this-chapter" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Packages Used in This Chapter</h2>
 <p>We will use some data from the <strong>Lahman</strong> baseball data package for examples in this chapter.</p>
-<p>The <strong>Master</strong> data frame contains information about professional baseball players. We will focus on the relationship between height and weight of the players using the Body Mass Index (bmi) measure.</p>
+<p>The <strong>People</strong> data frame contains information about professional baseball players. We will focus on the relationship between height and weight of the players using the Body Mass Index (bmi) measure.</p>
 <p>The data is interesting because it is easy to detect an abrubt and significant increase in baseball player size starting in the 1980’s when the the abuse of steroids began.</p>
 <p><img src="http://2.bp.blogspot.com/_VM2gyxxMdEI/SucFZwYpWMI/AAAAAAAAABE/ToFDxoPFpbw/s400/jurystillout.JPG" /></p>
 <center>
@@ -390,7 +390,7 @@ axis(
 <li>x-label</li>
 <li>y-label</li>
 </ul>
-<p>Many other elements can be added to the plot, but you will see below the flexibility that is gained by mastering even the basic plotting functions.</p>
+<p>Many other elements can be added to the plot, but you will see below the flexibility that is gained by Peopleing even the basic plotting functions.</p>
 <div id="load-player-data" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> Load Player Data</h3>
 <p>The Lahman package is an example of a data package in R - one that does not include new functions or analytical tools. Rather, it contains player and team statistics stored as a collection of data frames to make it easy to share and deploy for any analytics involving player or team performance.</p>
@@ -399,8 +399,7 @@ axis(
 # install.packages( &quot;Lahman&quot; )
 library( dplyr )   # data wrangling
 library( Lahman )  # baseball data
-data( People ) # load the player information
-Master &lt;- People # define an object to work with</code></pre>
+data( People )</code></pre>
 <table style="width:74%;">
 <colgroup>
 <col width="16%" />
@@ -464,8 +463,8 @@ Master &lt;- People # define an object to work with</code></pre>
 </tbody>
 </table>
 <p>Remove players that are missing height or weight measures:</p>
-<pre class="r"><code>Master &lt;- select( Master, height, weight, birthState )
-Master &lt;- na.omit( Master )</code></pre>
+<pre class="r"><code>People &lt;- select( People, height, weight, birthState )
+People &lt;- na.omit( People )</code></pre>
 </div>
 <div id="building-the-canvas" class="section level3" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> Building the Canvas</h3>
@@ -474,18 +473,18 @@ Master &lt;- na.omit( Master )</code></pre>
 <p>The <strong>plot.new()</strong> function launches a new graphics window. The <strong>plot.window()</strong> function sets the coordinates.</p>
 <pre class="r"><code>plot.new()
 plot.window( xlim=c( 1, 10 ), ylim=c( 1, 5 ) )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-11-1.png" width="480" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-10-1.png" width="480" /></p>
 <center>
 <em>New canvas with the grid defined by <strong>xlim</strong> and <strong>ylim</strong> values.</em>
 </center>
 <p>Note that data can only be plotted on the canvas, but graphs also contain margins around the canvas used for titles, text, and axes.</p>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-12-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-11-1.png" width="960" /></p>
 <p>We need to pick a grid that suits our data. Since we will examine the relationship between <strong>height</strong> and <strong>weight</strong> we will use the min and max values of these variables to create the bounding box for our canvas.</p>
 <pre class="r"><code># find max and min values for each variable
-xmin &lt;- min( Master$height )
-xmax &lt;- max( Master$height )
-ymin &lt;- min( Master$weight )
-ymax &lt;- max( Master$weight )
+xmin &lt;- min( People$height )
+xmax &lt;- max( People$height )
+ymin &lt;- min( People$weight )
+ymax &lt;- max( People$weight )
 
 # empty plot
 plot.new()
@@ -493,7 +492,7 @@ plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
 box( col=&quot;black&quot; )
 box( &quot;outer&quot;, col=&quot;gray&quot; )
 text( 64, 200, &quot;(Empty Canvas)&quot;, cex=2 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-13-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-12-1.png" width="960" /></p>
 </div>
 <div id="add-points" class="section level3" number="1.3.3">
 <h3><span class="header-section-number">1.3.3</span> Add Points</h3>
@@ -502,8 +501,8 @@ text( 64, 200, &quot;(Empty Canvas)&quot;, cex=2 )</code></pre>
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
 box( col=&quot;black&quot; )
 box( &quot;outer&quot;, col=&quot;gray&quot; )
-points( Master$height, Master$weight, pch=19 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-14-1.png" width="960" /></p>
+points( People$height, People$weight, pch=19 )</code></pre>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-13-1.png" width="960" /></p>
 </div>
 <div id="add-axes" class="section level3" number="1.3.4">
 <h3><span class="header-section-number">1.3.4</span> Add axes</h3>
@@ -511,22 +510,22 @@ points( Master$height, Master$weight, pch=19 )</code></pre>
 plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
 box( &quot;outer&quot;, col=&quot;gray&quot; )
-points( Master$height, Master$weight, pch=19 )
+points( People$height, People$weight, pch=19 )
 axis( side=1 )
 axis( side=2, las=1 )   # las turns the y-axis tick mark numbers </code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-15-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-14-1.png" width="960" /></p>
 </div>
 <div id="add-axis-labels" class="section level3" number="1.3.5">
 <h3><span class="header-section-number">1.3.5</span> Add Axis Labels</h3>
 <pre class="r"><code># add axis labels
 plot.new()
 plot.window( xlim=c(xmin,xmax), ylim=c(ymin,ymax) )
-points( Master$height, Master$weight, pch=19 )
+points( People$height, People$weight, pch=19 )
 axis( side=1 )
 axis( side=2, las=1 )
 title( xlab=&quot;Height (inches)&quot;, ylab=&quot;Weight (lbs)&quot; )
 title( main=&quot;Relationship Between Height and Weight of MLB Players&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-15-1.png" width="960" /></p>
 </div>
 <div id="improving-aesthetics" class="section level3" number="1.3.6">
 <h3><span class="header-section-number">1.3.6</span> Improving Aesthetics</h3>
@@ -536,8 +535,8 @@ title( main=&quot;Relationship Between Height and Weight of MLB Players&quot; )<
 <p>The first argument of the <strong>gray()</strong> function is a value between 0 and 1 specifying how dark you want the gray (0 being white, 1 being black), and the second argument is another value between 0 and 1 specifying the transparency of the points (0 being invisible and 1 being no transparency).</p>
 <p>We can also jitter them a bit (a tiny amount of random error to each data point) so they are not all plotted on top of each other since height and weight only take integer values.</p>
 <pre class="r"><code># rnorm() adds random noise to a data point
-height.jitter &lt;- Master$height + rnorm( nrow(Master) )
-weight.jitter &lt;- Master$weight + rnorm( nrow(Master) )
+height.jitter &lt;- People$height + rnorm( nrow(People) )
+weight.jitter &lt;- People$weight + rnorm( nrow(People) )
 
 plot.new()
 plot.window( xlim=c(62,xmax), ylim=c(110,ymax) )
@@ -547,7 +546,7 @@ axis( side=1 )
 axis( side=2 )
 title( xlab=&quot;Height (inches)&quot;, ylab=&quot;Weight (lbs)&quot;,
        main=&quot;Relationship Between Height and Weight of MLB Players&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-16-1.png" width="960" /></p>
 </div>
 <div id="highlighting-groups" class="section level3" number="1.3.7">
 <h3><span class="header-section-number">1.3.7</span> Highlighting Groups</h3>
@@ -565,7 +564,7 @@ points( height.jitter, weight.jitter,
 
 # highlight players from Iowa
 
-these.iowa &lt;- Master$birthState == &quot;IA&quot;
+these.iowa &lt;- People$birthState == &quot;IA&quot;
 
 # use our selection vector to subset the data used in overplotting
 
@@ -576,7 +575,7 @@ points( height.jitter[ these.iowa ],
 points( 63, 250, pch=19, col=&quot;firebrick&quot; )
 text( 63, 250, &quot;Players form Iowa&quot;, 
       pos=4, cex=1.5, col=&quot;darkgray&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-17-1.png" width="960" /></p>
 <p>Let’s add another layer with only the data that falls within the 25th to 75th percentiles of BMI, what we might consider “averaged” sized players relative to their height.</p>
 <pre class="r"><code>plot.new()
 plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
@@ -590,7 +589,7 @@ points( height.jitter, weight.jitter,
 
 # highlight average-sized players
 
-bmi &lt;- (Master$weight * 0.45359237) / (Master$height / 39.370)^2 
+bmi &lt;- (People$weight * 0.45359237) / (People$height / 39.370)^2 
 
 bmi.25th &lt;- quantile( bmi, 0.25, na.rm=T )
 bmi.75th &lt;- quantile( bmi, 0.75, na.rm=T )
@@ -600,15 +599,16 @@ bmi.75th &lt;- quantile( bmi, 0.75, na.rm=T )
 points( height.jitter[ bmi &gt; bmi.25th &amp; bmi &lt; bmi.75th ], 
         weight.jitter[ bmi &gt; bmi.25th &amp; bmi &lt; bmi.75th ], 
         pch=19, cex=0.1, col=&quot;firebrick3&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-19-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
 </div>
 </div>
 <div id="highlighting-cases" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Highlighting Cases</h2>
 <p>Let’s look back at the original plot. Do you see anything strange?</p>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-20-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-19-1.png" width="960" /></p>
 <p>The smallest data point in the dataset seems to represent a baseball player that is 40 inches tall and weighs 80 pounds. That <em>must</em> be some sort of data entry error, right?</p>
-<pre class="r"><code>Master[ which.min(Master$height) , c(14,15,17:20,2) ] %&gt;% pander()</code></pre>
+<pre class="r"><code>data( People) 
+People[ which.min(People$height) , c(14,15,17:20,2) ] %&gt;% pander()</code></pre>
 <table>
 <colgroup>
 <col width="13%" />
@@ -661,36 +661,92 @@ plot.window( xlim=c(0,1), ylim=c(0,1) )
 points( 0.5, 0.5, pch=19, col=&quot;gray&quot;, cex=3 )
 points( 0.5, 0.5, pch=1, cex=5, col=&quot;firebrick&quot; )
 title( main=&quot;Large Hollow Point Plotted \nOver Solid Point&quot; )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-24-1.png" width="960" /></p>
-<pre class="r"><code>this.shortest &lt;- which.min(Master$height)
-this.tallest  &lt;- which.max(Master$height)
-this.heaviest &lt;- which.max(Master$weight)
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-23-1.png" width="960" /></p>
+<pre class="r"><code>this.shortest &lt;- which.min(People$height)
+this.tallest  &lt;- which.max(People$height)
+this.heaviest &lt;- which.max(People$weight)
 
-Master[ c(this.shortest,this.tallest,this.heaviest), c(14,15,17:20,2) ] %&gt;% pander()</code></pre>
+People[ c(this.shortest,this.tallest,this.heaviest), c(14,15,17:20,2) ] %&gt;% pander()</code></pre>
+<table>
+<colgroup>
+<col width="14%" />
+<col width="14%" />
+<col width="13%" />
+<col width="11%" />
+<col width="11%" />
+<col width="8%" />
+<col width="11%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"> </th>
+<th align="center">nameFirst</th>
+<th align="center">nameLast</th>
+<th align="center">weight</th>
+<th align="center">height</th>
+<th align="center">bats</th>
+<th align="center">throws</th>
+<th align="center">birthYear</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>6211</strong></td>
+<td align="center">Eddie</td>
+<td align="center">Gaedel</td>
+<td align="center">65</td>
+<td align="center">43</td>
+<td align="center">R</td>
+<td align="center">L</td>
+<td align="center">1925</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>15046</strong></td>
+<td align="center">Jon</td>
+<td align="center">Rauch</td>
+<td align="center">290</td>
+<td align="center">83</td>
+<td align="center">R</td>
+<td align="center">R</td>
+<td align="center">1978</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>20263</strong></td>
+<td align="center">Walter</td>
+<td align="center">Young</td>
+<td align="center">320</td>
+<td align="center">77</td>
+<td align="center">L</td>
+<td align="center">R</td>
+<td align="center">1980</td>
+</tr>
+</tbody>
+</table>
 <p>Let’s highlight the three outliers in our dataset.</p>
-<pre class="r"><code>plot( Master$height, Master$weight, 
+<pre class="r"><code>plot( People$height, People$weight, 
       pch=19, col=&quot;gray&quot;,
       frame.plot=FALSE,
       xlab=&quot;Height (inches)&quot;, 
       ylab=&quot;Weight (lbs)&quot;, 
       main=&quot;Relationship Between Height and Weight of MLB Players&quot; )
 
-points( Master$height[ this.shortest ], 
-        Master$weight[ this.shortest ], 
+points( People$height[ this.shortest ], 
+        People$weight[ this.shortest ], 
         col=&quot;firebrick&quot;, cex=2, lwd=2 )
 
-points( Master$height[ this.tallest ], 
-        Master$weight[ this.tallest ], 
+points( People$height[ this.tallest ], 
+        People$weight[ this.tallest ], 
         col=&quot;firebrick&quot;, cex=2, lwd=2 )
 
-points( Master$height[ this.heaviest ], 
-        Master$weight[ this.heaviest], 
+points( People$height[ this.heaviest ], 
+        People$weight[ this.heaviest], 
         col=&quot;firebrick&quot;, cex=2, lwd=2 )
 
-text( Master$height[ this.shortest ], 
-      Master$weight[ this.shortest ], 
+text( People$height[ this.shortest ], 
+      People$weight[ this.shortest ], 
       &quot;Some Text Here&quot;, col=&quot;firebrick&quot;, pos=3 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-27-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-26-1.png" width="960" /></p>
 <p>We add text to the graph through the x,y coordinate for the text, the text itself, and the <strong>pos=</strong> argument is used to specify where the text should go.</p>
 <ul>
 <li>pos=1: below</li>
@@ -701,9 +757,9 @@ text( Master$height[ this.shortest ],
 </ul>
 <p>You can see that we have a problem above. Our text above Eddie Gaedel is lopped off because it wanders outside of the plot window. We can add additional real estate by expanding plot window with the <strong>xlim=</strong> and <strong>ylim=</strong> arguments.</p>
 <p>You can add a line break to a string by including the carriage return symbol ‘’ in the string.</p>
-<pre class="r"><code>data( Master) 
+<pre class="r"><code>data( People) 
 
-plot( Master$height, Master$weight, 
+plot( People$height, People$weight, 
       pch=19, col=&quot;gray&quot;, cex=0.8,
       xlim=c(30,100), ylim=c(50,450),
       frame.plot=FALSE,
@@ -711,27 +767,27 @@ plot( Master$height, Master$weight,
       ylab=&quot;Weight (lbs)&quot;, 
       main=&quot;Relationship Between Height and Weight of MLB Players&quot; )
 
-d.small &lt;- Master[ c(this.shortest,this.tallest,this.heaviest), c(14,15,17:20,2) ]
+d.small &lt;- People[ c(this.shortest,this.tallest,this.heaviest), c(14,15,17:20,2) ]
 
 points( d.small$height, 
         d.small$weight, 
         col=&quot;firebrick&quot;, cex=2, lwd=2 )
 
-text( Master$height[ this.shortest ], 
-      Master$weight[ this.shortest ], 
+text( People$height[ this.shortest ], 
+      People$weight[ this.shortest ], 
       &quot;Eddie Gaedel \nHeight: 43 Inches \nWeight: 65 Lbs&quot;, 
       col=&quot;firebrick&quot;, cex=0.8, pos=3, offset=1 )
 
-text( Master$height[ this.tallest ], 
-      Master$weight[ this.tallest ], 
+text( People$height[ this.tallest ], 
+      People$weight[ this.tallest ], 
       &quot;Jon Rauch \nHeight: 83 Inches \nWeight: 290 Lbs&quot;, 
       col=&quot;firebrick&quot;, cex=0.8, pos=4, offset=1 )
 
-text( Master$height[ this.heaviest ], 
-      Master$weight[ this.heaviest ], 
+text( People$height[ this.heaviest ], 
+      People$weight[ this.heaviest ], 
       &quot;Walter Young \nHeight: 77 Inches \nWeight: 320 Lbs&quot;, 
       col=&quot;firebrick&quot;, cex=0.8, pos=3, offset=1 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-28-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-27-1.png" width="960" /></p>
 </div>
 <div id="using-text-as-plot-points" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Using Text as Plot Points</h2>
@@ -740,20 +796,20 @@ text( Master$height[ this.heaviest ],
 <pre class="r"><code>plot.new()
 plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
 
-text( x=Master$height, 
-      y=Master$weight, 
-      labels=Master$birthYear )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-29-1.png" width="960" /></p>
+text( x=People$height, 
+      y=People$weight, 
+      labels=People$birthYear )</code></pre>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-28-1.png" width="960" /></p>
 <p>This is too dense to be meaningful. Maybe we can try to make the text smaller?</p>
 <pre class="r"><code>plot.new()
 plot.window( xlim=c(60,xmax), ylim=c(110,ymax) )
-text( x=Master$height, 
-      y=Master$weight, 
-      labels=Master$birthYear, cex=0.5 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-30-1.png" width="960" /></p>
+text( x=People$height, 
+      y=People$weight, 
+      labels=People$birthYear, cex=0.5 )</code></pre>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-29-1.png" width="960" /></p>
 <p>Still not very insightful. We have over 19,000 players in the database, which appears to be too many for this graphic. Let’s thin the data out by taking a random sample of the full dataset.</p>
 <pre class="r"><code>par( mar=c(0,0,0,0) )
-m.sample &lt;- sample_n( Master, 100 ) 
+m.sample &lt;- sample_n( People, 100 ) 
 plot.new()
 plot.window( xlim=c(65,78), ylim=c(130,280) )
 text( x=m.sample$height, 
@@ -761,7 +817,7 @@ text( x=m.sample$height,
       labels=m.sample$birthYear, cex=0.8 )
 axis( side=1, line=-2 )
 axis( side=2, line=-2 )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-31-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-30-1.png" width="960" /></p>
 <p>This is a big improvement. We can eyeball the data and start to pull out some trends. The people born in the 1800’s tend to be near the bottom of each pile of years, for example.</p>
 <p>Perhaps we can improve our visual hypothesis testing if we add some color coding. Let’s identify all of the individuals born since 1980 and color their birth years red to highlight the youngest cohort in the data. If people have gotten larger over time, we would expect this group to cluster near the top of the distribution.</p>
 <pre class="r"><code>red.gray &lt;- ifelse( m.sample$birthYear &gt;= 1980, &quot;firebrick&quot;, &quot;gray&quot; )
@@ -770,7 +826,7 @@ text( x=m.sample$height,
       y=m.sample$weight, 
       labels=m.sample$birthYear,
       col=red.gray )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-33-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-32-1.png" width="960" /></p>
 <p>And we in fact see the pattern emerge. The youngest cohort, highlighted in red, seems to cluster near the top right, which suggests they have grown both taller and heavier over time.</p>
 <p>This hypothesis can be test more rigorously in other ways, but the demonstration at least gives an idea about how we might explore the data efficiently using flexible R graphing functions.</p>
 </div>
@@ -788,7 +844,7 @@ help( par )</code></pre>
 <p>Similar to other parameters, the four argument values refer to the bottom, left, top, and right regions on the graph.</p>
 <pre class="r"><code>par( mar=c(5,4,4,2), oma=c(3,3,3,3) )
 plot( ... )</code></pre>
-<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-37-1.png" width="960" /></p>
+<p><img src="p-062-customized-graphics_files/figure-html/unnamed-chunk-36-1.png" width="960" /></p>
 </div>
 </div>
 
