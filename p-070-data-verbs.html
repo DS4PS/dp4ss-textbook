@@ -1,37 +1,50 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>p-070-data-verbs.utf8.md</title>
+<title>p-070-data-verbs.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -44,32 +57,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="textbook.css" type="text/css" />
 
@@ -80,10 +68,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -100,40 +84,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -161,7 +118,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -173,7 +130,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -184,10 +141,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -199,7 +169,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -235,6 +204,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -288,7 +258,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -297,36 +267,37 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#data-verbs"><span class="toc-section-number">1</span> DATA VERBS</a></li>
-<li><a href="#the-dplyr-package"><span class="toc-section-number">2</span> The <strong>dplyr</strong> Package</a><ul>
-<li><a href="#packages-used-in-this-chapter"><span class="toc-section-number">2.1</span> Packages Used in This Chapter</a></li>
-<li><a href="#key-concepts"><span class="toc-section-number">2.2</span> Key Concepts</a></li>
-<li><a href="#the-dplyr-package-1"><span class="toc-section-number">2.3</span> The <strong>dplyr</strong> Package</a></li>
-<li><a href="#use-filter-to-subset-rows"><span class="toc-section-number">2.4</span> Use <strong>filter()</strong> to Subset Rows</a></li>
-<li><a href="#select-columns"><span class="toc-section-number">2.5</span> <strong>select()</strong> Columns</a></li>
-<li><a href="#arrange-sorts-data"><span class="toc-section-number">2.6</span> <strong>arrange()</strong> Sorts Data</a></li>
-<li><a href="#variable-transforms-with-mutate"><span class="toc-section-number">2.7</span> Variable Transforms with <strong>mutate()</strong></a></li>
-<li><a href="#rename-variables"><span class="toc-section-number">2.8</span> <strong>rename()</strong> Variables</a></li>
-<li><a href="#summarize-variables"><span class="toc-section-number">2.9</span> <strong>summarize()</strong> Variables</a></li>
+<li><a href="#data-verbs" id="toc-data-verbs"><span class="toc-section-number">1</span> DATA VERBS</a></li>
+<li><a href="#the-dplyr-package" id="toc-the-dplyr-package"><span class="toc-section-number">2</span> The <strong>dplyr</strong> Package</a>
+<ul>
+<li><a href="#packages-used-in-this-chapter" id="toc-packages-used-in-this-chapter"><span class="toc-section-number">2.1</span> Packages Used in This Chapter</a></li>
+<li><a href="#key-concepts" id="toc-key-concepts"><span class="toc-section-number">2.2</span> Key Concepts</a></li>
+<li><a href="#the-dplyr-package-1" id="toc-the-dplyr-package-1"><span class="toc-section-number">2.3</span> The <strong>dplyr</strong> Package</a></li>
+<li><a href="#use-filter-to-subset-rows" id="toc-use-filter-to-subset-rows"><span class="toc-section-number">2.4</span> Use <strong>filter()</strong> to Subset Rows</a></li>
+<li><a href="#select-columns" id="toc-select-columns"><span class="toc-section-number">2.5</span> <strong>select()</strong> Columns</a></li>
+<li><a href="#arrange-sorts-data" id="toc-arrange-sorts-data"><span class="toc-section-number">2.6</span> <strong>arrange()</strong> Sorts Data</a></li>
+<li><a href="#variable-transforms-with-mutate" id="toc-variable-transforms-with-mutate"><span class="toc-section-number">2.7</span> Variable Transforms with <strong>mutate()</strong></a></li>
+<li><a href="#rename-variables" id="toc-rename-variables"><span class="toc-section-number">2.8</span> <strong>rename()</strong> Variables</a></li>
+<li><a href="#summarize-variables" id="toc-summarize-variables"><span class="toc-section-number">2.9</span> <strong>summarize()</strong> Variables</a></li>
 </ul></li>
 </ul>
 </div>
 
-<div id="data-verbs" class="section level1">
+<div id="data-verbs" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> DATA VERBS</h1>
 <p>In this section we are shifting the focus from vector operations to dataset operations.</p>
 <p>Some of the most popular packages for building and manipulating datasets come from what is affectionately referred to as the “tidyverse”, a set of packages developed by Hadley Wickam and the R Studio team. They are designed to make basic dataset operations more intuitive and robust.</p>
 <p>These packages were created with a common framework for data design called “tidy data”. When datasets are built as or wrangled into the tidy format they are much easier to analyze, and they will play nicely with a large set of packages the follow the same philosophy of data design.</p>
 <p>The core R packages contain all of the functions necessary to wrangle datasets, but they are sometimes counter-intuitive or clumbsy in the sense that they might start with a data frame and return a table or a list, making them hard to use in data recipes. All of the “data verbs” that we will cover in this section start with a data frame and return a data frame, making them easier to use as data steps within a larger project.</p>
 <p>We will begin with some extremely useful verbs contained within the <code>dplyr</code> package.</p>
-<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-2"></span>
 <img src="figures/data_verbs.png" alt="A data verb requires a dataset as input, and returns a transformed dataset." width="60%" />
 <p class="caption">
 Figure 1.1: A data verb requires a dataset as input, and returns a transformed dataset.
 </p>
 </div>
 </div>
-<div id="the-dplyr-package" class="section level1">
+<div id="the-dplyr-package" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> The <strong>dplyr</strong> Package</h1>
 <style>
 th {
@@ -336,22 +307,22 @@ td {
     text-align: left;
 }
 </style>
-<div id="packages-used-in-this-chapter" class="section level2">
+<div id="packages-used-in-this-chapter" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Packages Used in This Chapter</h2>
 <pre class="r"><code>library( dplyr )
 library( pander )</code></pre>
 </div>
-<div id="key-concepts" class="section level2">
+<div id="key-concepts" class="section level2" number="2.2">
 <h2><span class="header-section-number">2.2</span> Key Concepts</h2>
-<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
 <img src="figures/dataset_verbs.png" alt="Data verbs are functions that require a dataframe as the primary argument, perform some transformation on the data, then return a new dataframe." width="60%" />
 <p class="caption">
 Figure 2.1: Data verbs are functions that require a dataframe as the primary argument, perform some transformation on the data, then return a new dataframe.
 </p>
 </div>
-<p>For a nice overview of all of the dataset verbs in <code>dplyr</code> check out <a href="https://ugoproto.github.io/ugo_r_doc/dplyr.pdf">The <code>dplyr</code> Cheatsheet</a>.</p>
+<p>For a nice overview of all of the dataset verbs in <code>dplyr</code> check out <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">The <code>dplyr</code> Cheatsheet</a>.</p>
 </div>
-<div id="the-dplyr-package-1" class="section level2">
+<div id="the-dplyr-package-1" class="section level2" number="2.3">
 <h2><span class="header-section-number">2.3</span> The <strong>dplyr</strong> Package</h2>
 <p>This chapter will demonstrate a few basic dataset functions contained within the <strong>dplyr</strong> package. There are a few things to note as you get started:</p>
 <ul>
@@ -372,7 +343,7 @@ Figure 2.1: Data verbs are functions that require a dataframe as the primary arg
 ## 9    5.33  ctrl
 ## 10   5.14  ctrl</code></pre>
 <p>The tibble will print the first few rows and columns of a dataset, and includes dataset dimensions and vector classes:</p>
-<pre><code>## # A tibble: 30 x 2
+<pre><code>## # A tibble: 30 × 2
 ##    weight group
 ##     &lt;dbl&gt; &lt;fct&gt;
 ##  1   4.17 ctrl 
@@ -385,7 +356,7 @@ Figure 2.1: Data verbs are functions that require a dataframe as the primary arg
 ##  8   4.53 ctrl 
 ##  9   5.33 ctrl 
 ## 10   5.14 ctrl 
-## # ... with 20 more rows</code></pre>
+## # … with 20 more rows</code></pre>
 <p>We will cover the following <strong><em>dplyr</em></strong> functions in this section of the textbook:</p>
 <table>
 <colgroup>
@@ -408,7 +379,7 @@ Figure 2.1: Data verbs are functions that require a dataframe as the primary arg
 <td>Select columns</td>
 </tr>
 <tr class="odd">
-<td>arrage()</td>
+<td>arrange()</td>
 <td>Sort the dataset by one or more columns</td>
 </tr>
 <tr class="even">
@@ -426,7 +397,7 @@ Figure 2.1: Data verbs are functions that require a dataframe as the primary arg
 </tbody>
 </table>
 </div>
-<div id="use-filter-to-subset-rows" class="section level2">
+<div id="use-filter-to-subset-rows" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Use <strong>filter()</strong> to Subset Rows</h2>
 <p><img src="figures/filter.png" width="60%" /></p>
 <p>In the last chapter we learned how to use operators to translate from plain English questions to data queries.</p>
@@ -510,7 +481,7 @@ overdue.amounts</code></pre>
 ## 5     12        1366</code></pre>
 <p>Note that we do not need to reference the dat$ references inside <strong>dplyr</strong> functions.</p>
 </div>
-<div id="select-columns" class="section level2">
+<div id="select-columns" class="section level2" number="2.5">
 <h2><span class="header-section-number">2.5</span> <strong>select()</strong> Columns</h2>
 <p><img src="figures/select.png" width="60%" /></p>
 <p>In the core R operators, we select colums from a dataset using the subset function:</p>
@@ -624,7 +595,7 @@ overdue.amounts</code></pre>
 </tr>
 </tbody>
 </table>
-<p>The <strong><em>select()</em></strong> function converts this oeration into a data verb:</p>
+<p>The <strong><em>select()</em></strong> function converts this operation into a data verb:</p>
 <pre class="r"><code>select( USArrests, Murder, Assault )</code></pre>
 <table style="width:50%;">
 <colgroup>
@@ -959,7 +930,7 @@ overdue.amounts</code></pre>
 </tbody>
 </table>
 </div>
-<div id="arrange-sorts-data" class="section level2">
+<div id="arrange-sorts-data" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> <strong>arrange()</strong> Sorts Data</h2>
 <p><img src="figures/arrange.png" width="60%" /></p>
 <p>The <strong><em>arrange()</em></strong> function sorts a dataset by one or more columns. By default, it sorts from smallest to largest.</p>
@@ -1142,7 +1113,7 @@ overdue.amounts</code></pre>
 </table>
 <p>As you can see, the <code>dplyr</code> versions are typically more intuitive and concise!</p>
 </div>
-<div id="variable-transforms-with-mutate" class="section level2">
+<div id="variable-transforms-with-mutate" class="section level2" number="2.7">
 <h2><span class="header-section-number">2.7</span> Variable Transforms with <strong>mutate()</strong></h2>
 <p>One of the most common operations in data analysis is to create a new variable from one or more existing variables, a “variable transformation”. Some examples include:</p>
 <pre class="r"><code>x_squared &lt;-  x * x
@@ -1152,7 +1123,7 @@ celsius &lt;-  ( fereinheit - 32 ) * ( 5/9 )
 body.mass.index &lt;-  kg / meters^2
 
 per.capita.income &lt;-  income / population</code></pre>
-<p>The <strong><em>mutate()</em></strong> function creates a new transformed variable from the forumala you specify and adds it to the original dataset.</p>
+<p>The <strong><em>mutate()</em></strong> function creates a new transformed variable from the formula you specify and adds it to the original dataset.</p>
 <p>As an example, perhaps we have data on the number of nonprofits located in each US city. If we look at the raw count of nonprofits, it makes it look as though the large cities have the most vibrant nonprofit sectors:</p>
 <table style="width:40%;">
 <colgroup>
@@ -1265,7 +1236,7 @@ per.capita.income &lt;-  income / population</code></pre>
 </tbody>
 </table>
 </div>
-<div id="rename-variables" class="section level2">
+<div id="rename-variables" class="section level2" number="2.8">
 <h2><span class="header-section-number">2.8</span> <strong>rename()</strong> Variables</h2>
 <p>More often than not you will read in a dataset that has strange or meaningless variable names:</p>
 <pre class="r"><code>x1 &lt;- c(&quot;male&quot;,&quot;male&quot;,&quot;female&quot;,&quot;female&quot;)
@@ -1336,7 +1307,7 @@ dat &lt;- data.frame( x1, x2 )</code></pre>
 <p>The <strong>rename()</strong> function provides a more intuitive syntax:</p>
 <pre class="r"><code>rename( dat, gender=x1, study.group=x2 )</code></pre>
 </div>
-<div id="summarize-variables" class="section level2">
+<div id="summarize-variables" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> <strong>summarize()</strong> Variables</h2>
 <p>The next chapter will cover descriptive statistics in more depth, including some useful packages and functions for generating statistics for a variety of variable types and and reporting nice tables.</p>
 <p>Most descriptive functions, however, are not data verbs in the sense that they accept a data frame as the input and return a transformed data frame or tibble. The <strong>dplyr</strong> function <strong>summarize()</strong> is the primary function that will be used in data recipes (see the next chapter).</p>
@@ -1356,49 +1327,47 @@ dat &lt;- data.frame( x1, x2 )</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center">control</td>
-<td align="center">male</td>
-<td align="center">72</td>
-</tr>
-<tr class="even">
-<td align="center">control</td>
-<td align="center">female</td>
-<td align="center">115</td>
-</tr>
-<tr class="odd">
 <td align="center">treatment</td>
 <td align="center">male</td>
-<td align="center">124</td>
+<td align="center">106</td>
 </tr>
 <tr class="even">
 <td align="center">control</td>
-<td align="center">female</td>
-<td align="center">91</td>
+<td align="center">male</td>
+<td align="center">107</td>
 </tr>
 <tr class="odd">
 <td align="center">treatment</td>
 <td align="center">female</td>
-<td align="center">113</td>
+<td align="center">125</td>
 </tr>
 <tr class="even">
 <td align="center">treatment</td>
+<td align="center">male</td>
+<td align="center">70</td>
+</tr>
+<tr class="odd">
+<td align="center">treatment</td>
 <td align="center">female</td>
-<td align="center">122</td>
+<td align="center">97</td>
+</tr>
+<tr class="even">
+<td align="center">control</td>
+<td align="center">female</td>
+<td align="center">83</td>
 </tr>
 </tbody>
 </table>
 <pre class="r"><code>summarize( dat, n=n(), min=min(strength), mean=mean(strength), max=max(strength) )</code></pre>
-<pre><code>##     n min  mean max
-## 1 100  54 98.28 151</code></pre>
+<pre><code>##     n min mean max
+## 1 100  50 97.7 155</code></pre>
 <p>Similarly, the native <strong>table()</strong> function is useful, but returns a table object. The <strong>dplyr</strong> <strong>count()</strong> function will function almost identically, but it will return a data frame.</p>
 <pre class="r"><code>dplyr::count( dat, group, gender )</code></pre>
-<pre><code>## # A tibble: 4 x 3
-##   group     gender     n
-##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt;
-## 1 control   female    20
-## 2 control   male      29
-## 3 treatment female    25
-## 4 treatment male      26</code></pre>
+<pre><code>##       group gender  n
+## 1   control female 18
+## 2   control   male 26
+## 3 treatment female 29
+## 4 treatment   male 27</code></pre>
 <p>The real power of this function is the ability to use it with the <strong>group_by()</strong> function to analyze outcomes for many data subsets at once.</p>
 <pre class="r"><code>grouped.dat &lt;- group_by( dat, group, gender )
 dplyr::summarize( grouped.dat, 
@@ -1406,14 +1375,14 @@ dplyr::summarize( grouped.dat,
                   min=min(strength), 
                   mean=round( mean(strength), 1 ), 
                   max=max(strength) ) </code></pre>
-<pre><code>## # A tibble: 4 x 6
+<pre><code>## # A tibble: 4 × 6
 ## # Groups:   group [2]
 ##   group     gender     n   min  mean   max
 ##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 control   female    20    82 110.    134
-## 2 control   male      29    54  79.5   117
-## 3 treatment female    25    91 117     151
-## 4 treatment male      26    62  92.1   125</code></pre>
+## 1 control   female    18    77 104.    128
+## 2 control   male      26    50  79.2   107
+## 3 treatment female    29    81 117.    155
+## 4 treatment male      27    70  90.6   110</code></pre>
 <p>We will discuss this functionality in-depth two chapters from now.</p>
 </div>
 </div>
@@ -1439,7 +1408,7 @@ dplyr::summarize( grouped.dat,
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1457,7 +1426,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

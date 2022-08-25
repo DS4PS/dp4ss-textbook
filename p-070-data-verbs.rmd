@@ -67,7 +67,7 @@ knitr::include_graphics( "figures/dataset_verbs.png" )
 ```
 
 
-For a nice overview of all of the dataset verbs in `dplyr` check out [The `dplyr` Cheatsheet](https://ugoproto.github.io/ugo_r_doc/dplyr.pdf).
+For a nice overview of all of the dataset verbs in `dplyr` check out [The `dplyr` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf).
 
 
 ## The **dplyr** Package
