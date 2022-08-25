@@ -262,7 +262,7 @@ PlantGrowth %>%
   pander()
 ```
 
-If we prefer the dataset be sorted from largest to smallest, we can applyr the descending function **desc()** to the sort variable.
+If we prefer the dataset be sorted from largest to smallest, we can apply the descending function **desc()** to the sort variable.
 
 ```{r, eval=F}
 arrange( PlantGrowth, desc(weight) ) 
@@ -320,7 +320,7 @@ One of the most common operations in data analysis is to create a new variable f
 ```{r, eval=F}
 x_squared <-  x * x
 
-celsius <-  ( fereinheit - 32 ) * ( 5/9 )
+celsius <-  ( fahrenheit - 32 ) * ( 5/9 )
 
 body.mass.index <-  kg / meters^2
 
@@ -583,7 +583,7 @@ rename( dat, gender=x1, study.group=x2 )
 
 ## **summarize()** Variables
 
-The next chapter will cover descriptive statistics in more depth, including some useful packages and functions for generating statistics for a variety of variable types and and reporting nice tables.
+The next chapter will cover descriptive statistics in more depth, including some useful packages and functions for generating statistics for a variety of variable types and reporting nice tables.
 
 Most descriptive functions, however, are not data verbs in the sense that they accept a data frame as the input and return a transformed data frame or tibble. The **dplyr** function **summarize()** is the primary function that will be used in data recipes (see the next chapter). 
 

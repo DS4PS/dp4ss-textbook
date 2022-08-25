@@ -969,7 +969,7 @@ overdue.amounts</code></pre>
 </tr>
 </tbody>
 </table>
-<p>If we prefer the dataset be sorted from largest to smallest, we can applyr the descending function <strong>desc()</strong> to the sort variable.</p>
+<p>If we prefer the dataset be sorted from largest to smallest, we can apply the descending function <strong>desc()</strong> to the sort variable.</p>
 <pre class="r"><code>arrange( PlantGrowth, desc(weight) ) </code></pre>
 <table style="width:25%;">
 <colgroup>
@@ -1118,7 +1118,7 @@ overdue.amounts</code></pre>
 <p>One of the most common operations in data analysis is to create a new variable from one or more existing variables, a “variable transformation”. Some examples include:</p>
 <pre class="r"><code>x_squared &lt;-  x * x
 
-celsius &lt;-  ( fereinheit - 32 ) * ( 5/9 )
+celsius &lt;-  ( fahrenheit - 32 ) * ( 5/9 )
 
 body.mass.index &lt;-  kg / meters^2
 
@@ -1309,7 +1309,7 @@ dat &lt;- data.frame( x1, x2 )</code></pre>
 </div>
 <div id="summarize-variables" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> <strong>summarize()</strong> Variables</h2>
-<p>The next chapter will cover descriptive statistics in more depth, including some useful packages and functions for generating statistics for a variety of variable types and and reporting nice tables.</p>
+<p>The next chapter will cover descriptive statistics in more depth, including some useful packages and functions for generating statistics for a variety of variable types and reporting nice tables.</p>
 <p>Most descriptive functions, however, are not data verbs in the sense that they accept a data frame as the input and return a transformed data frame or tibble. The <strong>dplyr</strong> function <strong>summarize()</strong> is the primary function that will be used in data recipes (see the next chapter).</p>
 <p>Like other data verbs, the first argument will be the input dataset. In this case, there is no pre-determined set of descriptive statistics. The user needs to specify the desired metrics.</p>
 <table style="width:44%;">
@@ -1329,45 +1329,45 @@ dat &lt;- data.frame( x1, x2 )</code></pre>
 <tr class="odd">
 <td align="center">treatment</td>
 <td align="center">male</td>
-<td align="center">106</td>
+<td align="center">101</td>
 </tr>
 <tr class="even">
 <td align="center">control</td>
 <td align="center">male</td>
-<td align="center">107</td>
+<td align="center">91</td>
 </tr>
 <tr class="odd">
-<td align="center">treatment</td>
-<td align="center">female</td>
-<td align="center">125</td>
+<td align="center">control</td>
+<td align="center">male</td>
+<td align="center">89</td>
 </tr>
 <tr class="even">
 <td align="center">treatment</td>
-<td align="center">male</td>
-<td align="center">70</td>
+<td align="center">female</td>
+<td align="center">112</td>
 </tr>
 <tr class="odd">
-<td align="center">treatment</td>
-<td align="center">female</td>
-<td align="center">97</td>
+<td align="center">control</td>
+<td align="center">male</td>
+<td align="center">86</td>
 </tr>
 <tr class="even">
 <td align="center">control</td>
-<td align="center">female</td>
-<td align="center">83</td>
+<td align="center">male</td>
+<td align="center">87</td>
 </tr>
 </tbody>
 </table>
 <pre class="r"><code>summarize( dat, n=n(), min=min(strength), mean=mean(strength), max=max(strength) )</code></pre>
-<pre><code>##     n min mean max
-## 1 100  50 97.7 155</code></pre>
+<pre><code>##     n min   mean max
+## 1 100  52 100.66 151</code></pre>
 <p>Similarly, the native <strong>table()</strong> function is useful, but returns a table object. The <strong>dplyr</strong> <strong>count()</strong> function will function almost identically, but it will return a data frame.</p>
 <pre class="r"><code>dplyr::count( dat, group, gender )</code></pre>
 <pre><code>##       group gender  n
-## 1   control female 18
+## 1   control female 27
 ## 2   control   male 26
-## 3 treatment female 29
-## 4 treatment   male 27</code></pre>
+## 3 treatment female 24
+## 4 treatment   male 23</code></pre>
 <p>The real power of this function is the ability to use it with the <strong>group_by()</strong> function to analyze outcomes for many data subsets at once.</p>
 <pre class="r"><code>grouped.dat &lt;- group_by( dat, group, gender )
 dplyr::summarize( grouped.dat, 
@@ -1379,10 +1379,10 @@ dplyr::summarize( grouped.dat,
 ## # Groups:   group [2]
 ##   group     gender     n   min  mean   max
 ##   &lt;fct&gt;     &lt;fct&gt;  &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1 control   female    18    77 104.    128
-## 2 control   male      26    50  79.2   107
-## 3 treatment female    29    81 117.    155
-## 4 treatment male      27    70  90.6   110</code></pre>
+## 1 control   female    27    89 116.    151
+## 2 control   male      26    52  79.6   125
+## 3 treatment female    24    93 115.    144
+## 4 treatment male      23    65  91.3   118</code></pre>
 <p>We will discuss this functionality in-depth two chapters from now.</p>
 </div>
 </div>
