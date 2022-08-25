@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>p-072-data-recipes.utf8.md</title>
+<title>p-072-data-recipes.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -29,18 +39,21 @@
 <script src="site_libs/vega-1.4.3/vega.min.js"></script>
 <script src="site_libs/lodash-2.2.1/lodash.min.js"></script>
 <script>var lodash = _.noConflict();</script>
-<link href="site_libs/ggvis-0.4.4/css/ggvis.css" rel="stylesheet" />
-<script src="site_libs/ggvis-0.4.4/js/ggvis.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/ggvis-0.4.7/css/ggvis.css" rel="stylesheet" />
+<script src="site_libs/ggvis-0.4.7/js/ggvis.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -53,38 +66,11 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="textbook.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -92,13 +78,8 @@ h6 {
   margin-left: auto;
   margin-right: auto;
 }
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -109,44 +90,56 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
+.dropdown-submenu {
+  position: relative;
 }
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
 }
-
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
 }
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
 }
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
 }
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu.pull-left {
+  float: none;
 }
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -157,26 +150,93 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
-
-
-<div class="container-fluid main-container">
 
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -197,8 +257,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://ds4ps.org/cpp-526-fall-2019/textbook/">
-    <span class="fa fa-sun fa-2x"></span>
+  <a href="https://ds4ps.org/dp4ss/">
+    <span class="fa fa-university fa-2x"></span>
      
   </a>
 </li>
@@ -207,7 +267,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -216,17 +276,18 @@ $(document).ready(function () {
 
 <div id="TOC">
 <ul>
-<li><a href="#data-recipes"><span class="toc-section-number">1</span> Data Recipes</a><ul>
-<li><a href="#packages-used-in-this-chapter"><span class="toc-section-number">1.1</span> Packages Used in This Chapter</a></li>
-<li><a href="#key-concepts"><span class="toc-section-number">1.2</span> Key Concepts</a></li>
-<li><a href="#the-pipe-operator"><span class="toc-section-number">1.3</span> The Pipe Operator <strong>%&gt;%</strong></a></li>
-<li><a href="#building-data-recipes"><span class="toc-section-number">1.4</span> Building Data Recipes</a></li>
-<li><a href="#conclusion"><span class="toc-section-number">1.5</span> Conclusion</a></li>
+<li><a href="#data-recipes" id="toc-data-recipes"><span class="toc-section-number">1</span> Data Recipes</a>
+<ul>
+<li><a href="#packages-used-in-this-chapter" id="toc-packages-used-in-this-chapter"><span class="toc-section-number">1.1</span> Packages Used in This Chapter</a></li>
+<li><a href="#key-concepts" id="toc-key-concepts"><span class="toc-section-number">1.2</span> Key Concepts</a></li>
+<li><a href="#the-pipe-operator" id="toc-the-pipe-operator"><span class="toc-section-number">1.3</span> The Pipe Operator <strong>%&gt;%</strong></a></li>
+<li><a href="#building-data-recipes" id="toc-building-data-recipes"><span class="toc-section-number">1.4</span> Building Data Recipes</a></li>
+<li><a href="#conclusion" id="toc-conclusion"><span class="toc-section-number">1.5</span> Conclusion</a></li>
 </ul></li>
 </ul>
 </div>
 
-<div id="data-recipes" class="section level1">
+<div id="data-recipes" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Data Recipes</h1>
 <style>
 th {
@@ -236,47 +297,47 @@ td {
     text-align: left;
 }
 </style>
-<div id="packages-used-in-this-chapter" class="section level2">
+<div id="packages-used-in-this-chapter" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> Packages Used in This Chapter</h2>
 <pre class="r"><code>library( dplyr )
 library( pander )
 library( ggvis )</code></pre>
 </div>
-<div id="key-concepts" class="section level2">
+<div id="key-concepts" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Key Concepts</h2>
-<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-3"></span>
 <img src="figures/data_recipe.png" alt="Data recipes are written using a series of data steps. We can simplify this process using pipes" width="80%" />
 <p class="caption">
 Figure 1.1: Data recipes are written using a series of data steps. We can simplify this process using pipes
 </p>
 </div>
 <p><br><br></p>
-<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-4"></span>
 <img src="figures/data_verb_input_output.png" alt="Recall, data verbs use data frames as the primary input and the output value." width="80%" />
 <p class="caption">
 Figure 1.2: Recall, data verbs use data frames as the primary input and the output value.
 </p>
 </div>
 <p><br><br></p>
-<div class="figure"><span id="fig:unnamed-chunk-5"></span>
-<img src="figures/chaining_data_verbs.png" alt="The pipe operator passes a data frame forward through a chain of data vergs. We only reference the dataset name once, and all other times it's implicitly called through through piping." width="90%" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-5"></span>
+<img src="figures/chaining_data_verbs.png" alt="The pipe operator passes a data frame forward through a chain of data verbs. We only reference the dataset name once, and all other times it's implicitly called through piping." width="90%" />
 <p class="caption">
-Figure 1.3: The pipe operator passes a data frame forward through a chain of data vergs. We only reference the dataset name once, and all other times it’s implicitly called through through piping.
+Figure 1.3: The pipe operator passes a data frame forward through a chain of data verbs. We only reference the dataset name once, and all other times it’s implicitly called through piping.
 </p>
 </div>
 </div>
-<div id="the-pipe-operator" class="section level2">
+<div id="the-pipe-operator" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> The Pipe Operator <strong>%&gt;%</strong></h2>
 <p>The idea of functions() was first introduced using a metaphor of a cookie recipe that has ingredients (data and arguments) and requires that each step of the process building on the results of the previous step.</p>
 <p>The pipe operator allows us to follow this same model to build “data recipes”, a stylized way of writing a program as a series of data verbs chained together to wrangle and analyze the data. The pipe operator passes the data from one verb to the next without having to name it directly.</p>
-<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-6"></span>
 <img src="figures/chaining_data_verbs.png" alt="The pipe operator allows us to pass a transformed dataset forward in the recipe." width="80%" />
 <p class="caption">
 Figure 1.4: The pipe operator allows us to pass a transformed dataset forward in the recipe.
 </p>
 </div>
 </div>
-<div id="building-data-recipes" class="section level2">
+<div id="building-data-recipes" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Building Data Recipes</h2>
 <p>Data recipes are simple scripts that follow a series of steps, just like a recipe.</p>
 <p>This chapter demonstrates how data verbs and pipe operators can be used to write recipes to generate interesting insights.</p>
@@ -633,27 +694,27 @@ names %&gt;%
   select (Name, Year, Count) %&gt;%
   ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
   layer_lines()</code></pre>
-<div id="plot_id267155377-container" class="ggvis-output-container">
-<div id="plot_id267155377" class="ggvis-output"></div>
+<div id="plot_id378617165-container" class="ggvis-output-container">
+<div id="plot_id378617165" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id267155377_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id267155377" data-renderer="svg">SVG</a>
+<a id="plot_id378617165_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id378617165" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id267155377_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id267155377" data-renderer="canvas">Canvas</a>
+<a id="plot_id378617165_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id378617165" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id267155377_download" class="ggvis-download" data-plot-id="plot_id267155377">Download</a>
+<a id="plot_id378617165_download" class="ggvis-download" data-plot-id="plot_id378617165">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id267155377_spec = {
+var plot_id378617165_spec = {
   "data": [
     {
       "name": ".0/group_by1/arrange2_flat",
@@ -814,14 +875,14 @@ var plot_id267155377_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id267155377").parseSpec(plot_id267155377_spec);
+ggvis.getPlot("plot_id378617165").parseSpec(plot_id378617165_spec);
 </script>
 <pre class="r"><code>top.five.1920 &lt;- 
   filter( peak.years, Year == 1920 ) %&gt;% 
   top_n( 5, Count ) 
 
 top.five.1920</code></pre>
-<pre><code>## # A tibble: 5 x 5
+<pre><code>## # A tibble: 5 × 5
 ##       Id Name     Year Gender Count
 ##    &lt;int&gt; &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;  &lt;int&gt;
 ## 1 169464 Ruth     1920 F      26100
@@ -834,27 +895,27 @@ top.five.1920</code></pre>
   select (Name, Year, Count) %&gt;%
   ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
   layer_lines()</code></pre>
-<div id="plot_id139711977-container" class="ggvis-output-container">
-<div id="plot_id139711977" class="ggvis-output"></div>
+<div id="plot_id202764353-container" class="ggvis-output-container">
+<div id="plot_id202764353" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id139711977_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id139711977" data-renderer="svg">SVG</a>
+<a id="plot_id202764353_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id202764353" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id139711977_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id139711977" data-renderer="canvas">Canvas</a>
+<a id="plot_id202764353_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id202764353" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id139711977_download" class="ggvis-download" data-plot-id="plot_id139711977">Download</a>
+<a id="plot_id202764353_download" class="ggvis-download" data-plot-id="plot_id202764353">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id139711977_spec = {
+var plot_id202764353_spec = {
   "data": [
     {
       "name": ".0/group_by1/arrange2_flat",
@@ -1015,7 +1076,7 @@ var plot_id139711977_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id139711977").parseSpec(plot_id139711977_spec);
+ggvis.getPlot("plot_id202764353").parseSpec(plot_id202764353_spec);
 </script>
 <pre class="r"><code>top.five.1975 &lt;- 
   filter( peak.years, Year == 1975 ) %&gt;% 
@@ -1026,27 +1087,27 @@ names %&gt;%
   select (Name, Year, Count) %&gt;%
   ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
   layer_lines()</code></pre>
-<div id="plot_id198781676-container" class="ggvis-output-container">
-<div id="plot_id198781676" class="ggvis-output"></div>
+<div id="plot_id533931726-container" class="ggvis-output-container">
+<div id="plot_id533931726" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id198781676_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id198781676" data-renderer="svg">SVG</a>
+<a id="plot_id533931726_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id533931726" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id198781676_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id198781676" data-renderer="canvas">Canvas</a>
+<a id="plot_id533931726_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id533931726" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id198781676_download" class="ggvis-download" data-plot-id="plot_id198781676">Download</a>
+<a id="plot_id533931726_download" class="ggvis-download" data-plot-id="plot_id533931726">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id198781676_spec = {
+var plot_id533931726_spec = {
   "data": [
     {
       "name": ".0/group_by1/arrange2_flat",
@@ -1207,7 +1268,7 @@ var plot_id198781676_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id198781676").parseSpec(plot_id198781676_spec);
+ggvis.getPlot("plot_id533931726").parseSpec(plot_id533931726_spec);
 </script>
 <pre class="r"><code>top.five.2000 &lt;- 
   filter( peak.years, Year == 2000 ) %&gt;% 
@@ -1218,27 +1279,27 @@ names %&gt;%
   select (Name, Year, Count) %&gt;%
   ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
   layer_lines()</code></pre>
-<div id="plot_id239506692-container" class="ggvis-output-container">
-<div id="plot_id239506692" class="ggvis-output"></div>
+<div id="plot_id390388963-container" class="ggvis-output-container">
+<div id="plot_id390388963" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id239506692_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id239506692" data-renderer="svg">SVG</a>
+<a id="plot_id390388963_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id390388963" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id239506692_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id239506692" data-renderer="canvas">Canvas</a>
+<a id="plot_id390388963_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id390388963" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id239506692_download" class="ggvis-download" data-plot-id="plot_id239506692">Download</a>
+<a id="plot_id390388963_download" class="ggvis-download" data-plot-id="plot_id390388963">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id239506692_spec = {
+var plot_id390388963_spec = {
   "data": [
     {
       "name": ".0/group_by1/arrange2_flat",
@@ -1399,12 +1460,12 @@ var plot_id239506692_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id239506692").parseSpec(plot_id239506692_spec);
+ggvis.getPlot("plot_id390388963").parseSpec(plot_id390388963_spec);
 </script>
 <p>Ryan Burge posted a <a href="https://www.kaggle.com/ryanburge/hipster-names/notebook">fun project on Kaggle</a> about how to find hipster names using this historical data. He defines hipster names as those meeting the following criteria:</p>
 <ul>
 <li>They were popular when your grandmother was young.</li>
-<li>They were unpopular when your parent were young.</li>
+<li>They were unpopular when your parents were young.</li>
 <li>They have recently become popular again.</li>
 </ul>
 <p>Let’s stick with women’s names.</p>
@@ -1426,27 +1487,27 @@ names %&gt;%
   select (Name, Year, Count) %&gt;%
   ggvis( ~Year, ~Count, stroke = ~Name ) %&gt;%
   layer_lines()</code></pre>
-<div id="plot_id701418714-container" class="ggvis-output-container">
-<div id="plot_id701418714" class="ggvis-output"></div>
+<div id="plot_id158804293-container" class="ggvis-output-container">
+<div id="plot_id158804293" class="ggvis-output"></div>
 <div class="plot-gear-icon">
 <nav class="ggvis-control">
 <a class="ggvis-dropdown-toggle" title="Controls" onclick="return false;"></a>
 <ul class="ggvis-dropdown">
 <li>
 Renderer: 
-<a id="plot_id701418714_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id701418714" data-renderer="svg">SVG</a>
+<a id="plot_id158804293_renderer_svg" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id158804293" data-renderer="svg">SVG</a>
  | 
-<a id="plot_id701418714_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id701418714" data-renderer="canvas">Canvas</a>
+<a id="plot_id158804293_renderer_canvas" class="ggvis-renderer-button" onclick="return false;" data-plot-id="plot_id158804293" data-renderer="canvas">Canvas</a>
 </li>
 <li>
-<a id="plot_id701418714_download" class="ggvis-download" data-plot-id="plot_id701418714">Download</a>
+<a id="plot_id158804293_download" class="ggvis-download" data-plot-id="plot_id158804293">Download</a>
 </li>
 </ul>
 </nav>
 </div>
 </div>
 <script type="text/javascript">
-var plot_id701418714_spec = {
+var plot_id158804293_spec = {
   "data": [
     {
       "name": ".0/group_by1/arrange2_flat",
@@ -1607,7 +1668,7 @@ var plot_id701418714_spec = {
   },
   "handlers": null
 };
-ggvis.getPlot("plot_id701418714").parseSpec(plot_id701418714_spec);
+ggvis.getPlot("plot_id158804293").parseSpec(plot_id158804293_spec);
 </script>
 <p>And the full list:</p>
 <pre class="r"><code>hipster.names %&gt;% pander()</code></pre>
@@ -1713,7 +1774,7 @@ ggvis.getPlot("plot_id701418714").parseSpec(plot_id701418714_spec);
 </tbody>
 </table>
 </div>
-<div id="conclusion" class="section level2">
+<div id="conclusion" class="section level2" number="1.5">
 <h2><span class="header-section-number">1.5</span> Conclusion</h2>
 <p>The pipe operator is a little confusing when you first encounter it, but you will find that using data verbs contained in the <strong>dplyr</strong> package and the pipe operator will speed up your analysis and make your code more readable.</p>
 <p>In the next chapter we focus more on the use of groups in data science, and the applications of the <strong>group_by()</strong> function to make your job easier.</p>
@@ -1741,7 +1802,7 @@ ggvis.getPlot("plot_id701418714").parseSpec(plot_id701418714_spec);
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -1749,6 +1810,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
