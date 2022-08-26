@@ -137,9 +137,9 @@ dat <- d
 
 ```
 
-We might be interested in simple groups (treatment cases versus control cases), or complex groups (does the treatment effect women and men differently?). 
+We might be interested in simple groups (treatment cases versus control cases) or complex groups (does the treatment effect women and men differently?). 
 
-In previous lectures you have learned to identify a group with a logical statement, and analyze that group discretely.
+In previous lectures you have learned to identify a group with a logical statement and analyze that group discretely.
 
 ```{r}
 
@@ -210,9 +210,9 @@ dat %>%
 
 Let's think about a study looking at reading speed. The treatment is a workshop that teaches some speed-reading techniques. In this study we have data on:
 
-* gender (male,female)
-* race (black,white,asian)
-* blood.type (A,B)
+* gender (male, female)
+* race (black, white, asian)
+* blood.type (A, B)
 * age (from 18 to 93)
 
 ```{r, echo=F}
@@ -294,7 +294,7 @@ If we think about the overall group structure, then, we have unique groups defin
 
 This group design is problematic for two reasons. From a pragmatic standpoint, we can't report results from 1,500 groups in a table. From a more substantive perspective, although we have 1,500 distinct cells in our grid, many may not include observations that represent the unique combination of all factors. So this group design is not very practical.
 
-A similar problem arises if our data includes time. If our data includes the time of events recorded by hours, days of the week, months, and years, we can have generate complicated group structures if we try to analyze every unique combination.
+A similar problem arises if our data includes time. If our data includes the time of events recorded by hours, days of the week, months, and years, we can have complicated group structures if we try to analyze every unique combination.
 
 We can simplify our analysis by thinking about age ranges instead of ages, or in other words by binning our continuous data. If we split it into five-year ranges, for example, we have gone from 65 distinct ages to 12 distinct age groups. 
 
@@ -428,7 +428,7 @@ Which country has produced the highest paid baseball players?
 
 ```{r}
 
-merge( Salaries, Master ) %>%
+merge( Salaries, People ) %>%
   filter( yearID == 2016 ) %>%
   group_by( birthCountry ) %>%
   summarize( Mean_Salary = dollar( mean(salary) ) ) %>% 
